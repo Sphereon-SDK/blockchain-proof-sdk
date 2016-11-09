@@ -21,11 +21,11 @@ Create a new existence chain
 ### Example
 ```java
 // Import classes:
-//import com.sphereon.blockchain.proof.handler.ApiClient;
-//import com.sphereon.blockchain.proof.handler.ApiException;
-//import com.sphereon.blockchain.proof.handler.Configuration;
-//import com.sphereon.blockchain.proof.handler.auth.*;
-//import com.sphereon.blockchain.proof.api.ProofOfExistenceApi;
+//import com.sphereon.sdk.blockchain.proof.handler.ApiClient;
+//import com.sphereon.sdk.blockchain.proof.handler.ApiException;
+//import com.sphereon.sdk.blockchain.proof.handler.Configuration;
+//import com.sphereon.sdk.blockchain.proof.handler.auth.*;
+//import com.sphereon.sdk.blockchain.proof.api.ProofOfExistenceApi;
 
 ApiClient defaultClient = Configuration.getDefaultApiClient();
 
@@ -72,11 +72,11 @@ Register content
 ### Example
 ```java
 // Import classes:
-//import com.sphereon.blockchain.proof.handler.ApiClient;
-//import com.sphereon.blockchain.proof.handler.ApiException;
-//import com.sphereon.blockchain.proof.handler.Configuration;
-//import com.sphereon.blockchain.proof.handler.auth.*;
-//import com.sphereon.blockchain.proof.api.ProofOfExistenceApi;
+//import com.sphereon.sdk.blockchain.proof.handler.ApiClient;
+//import com.sphereon.sdk.blockchain.proof.handler.ApiException;
+//import com.sphereon.sdk.blockchain.proof.handler.Configuration;
+//import com.sphereon.sdk.blockchain.proof.handler.auth.*;
+//import com.sphereon.sdk.blockchain.proof.api.ProofOfExistenceApi;
 
 ApiClient defaultClient = Configuration.getDefaultApiClient();
 
@@ -127,11 +127,11 @@ Register content by supplying a file or some other binary data. Hashing will be 
 ### Example
 ```java
 // Import classes:
-//import com.sphereon.blockchain.proof.handler.ApiClient;
-//import com.sphereon.blockchain.proof.handler.ApiException;
-//import com.sphereon.blockchain.proof.handler.Configuration;
-//import com.sphereon.blockchain.proof.handler.auth.*;
-//import com.sphereon.blockchain.proof.api.ProofOfExistenceApi;
+//import com.sphereon.sdk.blockchain.proof.handler.ApiClient;
+//import com.sphereon.sdk.blockchain.proof.handler.ApiException;
+//import com.sphereon.sdk.blockchain.proof.handler.Configuration;
+//import com.sphereon.sdk.blockchain.proof.handler.auth.*;
+//import com.sphereon.sdk.blockchain.proof.api.ProofOfExistenceApi;
 
 ApiClient defaultClient = Configuration.getDefaultApiClient();
 
@@ -182,11 +182,11 @@ Verify content
 ### Example
 ```java
 // Import classes:
-//import com.sphereon.blockchain.proof.handler.ApiClient;
-//import com.sphereon.blockchain.proof.handler.ApiException;
-//import com.sphereon.blockchain.proof.handler.Configuration;
-//import com.sphereon.blockchain.proof.handler.auth.*;
-//import com.sphereon.blockchain.proof.api.ProofOfExistenceApi;
+//import com.sphereon.sdk.blockchain.proof.handler.ApiClient;
+//import com.sphereon.sdk.blockchain.proof.handler.ApiException;
+//import com.sphereon.sdk.blockchain.proof.handler.Configuration;
+//import com.sphereon.sdk.blockchain.proof.handler.auth.*;
+//import com.sphereon.sdk.blockchain.proof.api.ProofOfExistenceApi;
 
 ApiClient defaultClient = Configuration.getDefaultApiClient();
 
@@ -235,11 +235,11 @@ Verify content by hash
 ### Example
 ```java
 // Import classes:
-//import com.sphereon.blockchain.proof.handler.ApiClient;
-//import com.sphereon.blockchain.proof.handler.ApiException;
-//import com.sphereon.blockchain.proof.handler.Configuration;
-//import com.sphereon.blockchain.proof.handler.auth.*;
-//import com.sphereon.blockchain.proof.api.ProofOfExistenceApi;
+//import com.sphereon.sdk.blockchain.proof.handler.ApiClient;
+//import com.sphereon.sdk.blockchain.proof.handler.ApiException;
+//import com.sphereon.sdk.blockchain.proof.handler.Configuration;
+//import com.sphereon.sdk.blockchain.proof.handler.auth.*;
+//import com.sphereon.sdk.blockchain.proof.api.ProofOfExistenceApi;
 
 ApiClient defaultClient = Configuration.getDefaultApiClient();
 
@@ -292,11 +292,11 @@ Register content by supplying a file or some other binary data. Hashing will be 
 ### Example
 ```java
 // Import classes:
-//import com.sphereon.blockchain.proof.handler.ApiClient;
-//import com.sphereon.blockchain.proof.handler.ApiException;
-//import com.sphereon.blockchain.proof.handler.Configuration;
-//import com.sphereon.blockchain.proof.handler.auth.*;
-//import com.sphereon.blockchain.proof.api.ProofOfExistenceApi;
+//import com.sphereon.sdk.blockchain.proof.handler.ApiClient;
+//import com.sphereon.sdk.blockchain.proof.handler.ApiException;
+//import com.sphereon.sdk.blockchain.proof.handler.Configuration;
+//import com.sphereon.sdk.blockchain.proof.handler.auth.*;
+//import com.sphereon.sdk.blockchain.proof.api.ProofOfExistenceApi;
 
 ApiClient defaultClient = Configuration.getDefaultApiClient();
 

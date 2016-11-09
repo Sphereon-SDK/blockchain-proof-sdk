@@ -19,8 +19,8 @@
         <maven-plugin-version>1.0.0</maven-plugin-version>
         <junit-version>4.12</junit-version>
         <api-version>0.1.5</api-version>
-        <sdk-package>com.sphereon.blockchain.proof</sdk-package>
-	<sdk-package-javascript>Sphereon-SDK-Blockchain-Proof</sdk-package-javascript>
+        <sdk-package>com.sphereon.sdk.blockchain.proof</sdk-package>
+	<sdk-package-javascript>SphereonSDKBlockchainProof</sdk-package-javascript>
         <sdk-package-csharp>Sphereon.SDK.Blockchain.Proof</sdk-package-csharp>
     </properties>
 
