@@ -1,0 +1,447 @@
+{
+  "basePath": "/",
+  "paths": {
+    "/blockchain/proof/0.1.0/existence/{chainId}/stream": {
+      "post": {
+        "summary": "Register content using a bytestream/file",
+        "security": [{"oauth2schema": ["global"]}],
+        "produces": ["application/json;charset=UTF-8"],
+        "description": "Register content by supplying a file or some other binary data. Hashing will be done on the server side",
+        "operationId": "registerStream",
+        "responses": {
+          "200": {
+            "schema": {"$ref": "#/definitions/RegisterContentResponse"},
+            "description": "Chain already exists"
+          },
+          "400": {
+            "schema": {"$ref": "#/definitions/VndErrors"},
+            "description": "Invalid registration request"
+          },
+          "202": {
+            "schema": {"$ref": "#/definitions/RegisterContentResponse"},
+            "description": "Registration request received"
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "chainId",
+            "description": "The chain where the content will be registered",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "formData",
+            "name": "settings",
+            "description": "settings",
+            "type": "file",
+            "required": false
+          },
+          {
+            "in": "formData",
+            "name": "stream",
+            "description": "The binary data (not hashed). Hashing will be done on the server side. The binary data will not be stored",
+            "type": "file",
+            "required": true
+          }
+        ],
+        "tags": ["Proof of Existence"],
+        "consumes": ["multipart/form-data"]
+      },
+      "get": {
+        "summary": "Verify content using a bytestream/file",
+        "security": [{"oauth2schema": ["global"]}],
+        "produces": ["application/json;charset=UTF-8"],
+        "description": "Register content by supplying a file or some other binary data. Hashing will be done on the server side",
+        "operationId": "verifyStream",
+        "responses": {
+          "200": {
+            "schema": {"$ref": "#/definitions/VerifyContentResponse"},
+            "description": "Verified content exists"
+          },
+          "400": {
+            "schema": {"$ref": "#/definitions/VndErrors"},
+            "description": "Invalid verification request"
+          },
+          "404": {
+            "schema": {"$ref": "#/definitions/VerifyContentResponse"},
+            "description": "Verified content exists"
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "chainId",
+            "description": "The chain where the content will be registered",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "formData",
+            "name": "settings",
+            "description": "settings",
+            "type": "file",
+            "required": false
+          },
+          {
+            "in": "formData",
+            "name": "stream",
+            "description": "The binary data (not hashed). Hashing will be done on the server side. The binary data will not be stored",
+            "type": "file",
+            "required": true
+          }
+        ],
+        "tags": ["Proof of Existence"],
+        "consumes": ["multipart/form-data"]
+      }
+    },
+    "/blockchain/proof/0.1.0/existence": {"post": {
+      "summary": "Create a new existence chain",
+      "security": [{"oauth2schema": ["global"]}],
+      "produces": ["application/json;charset=UTF-8"],
+      "operationId": "createChain",
+      "responses": {
+        "200": {
+          "schema": {"$ref": "#/definitions/CreateChainResponse"},
+          "description": "Chain already exists"
+        },
+        "400": {
+          "schema": {"$ref": "#/definitions/VndErrors"},
+          "description": "Invalid registration request"
+        },
+        "202": {
+          "schema": {"$ref": "#/definitions/CreateChainResponse"},
+          "description": "Registration request received"
+        }
+      },
+      "parameters": [{
+        "schema": {"$ref": "#/definitions/CreateChainRequest"},
+        "in": "body",
+        "name": "request",
+        "description": "Create a new Proof of Existence chain using the provided existence settings",
+        "required": true
+      }],
+      "tags": ["Proof of Existence"],
+      "consumes": ["application/json;charset=UTF-8"]
+    }},
+    "/blockchain/proof/0.1.0/existence/{chainId}": {
+      "post": {
+        "summary": "Register content",
+        "security": [{"oauth2schema": ["global"]}],
+        "produces": ["application/json;charset=UTF-8"],
+        "operationId": "registerContent",
+        "responses": {
+          "200": {
+            "schema": {"$ref": "#/definitions/RegisterContentResponse"},
+            "description": "Chain already exists"
+          },
+          "400": {
+            "schema": {"$ref": "#/definitions/VndErrors"},
+            "description": "Invalid registration request"
+          },
+          "202": {
+            "schema": {"$ref": "#/definitions/RegisterContentResponse"},
+            "description": "Registration request received"
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "chainId",
+            "description": "The chain where the content will be registered",
+            "type": "string",
+            "required": true
+          },
+          {
+            "schema": {"$ref": "#/definitions/ContentRequest"},
+            "in": "body",
+            "name": "existence",
+            "description": "Register content using the current existence settings",
+            "required": true
+          }
+        ],
+        "tags": ["Proof of Existence"],
+        "consumes": ["application/json;charset=UTF-8"]
+      },
+      "get": {
+        "summary": "Verify content",
+        "security": [{"oauth2schema": ["global"]}],
+        "produces": ["application/json;charset=UTF-8"],
+        "operationId": "verifyContent",
+        "responses": {
+          "200": {
+            "schema": {"$ref": "#/definitions/VerifyContentResponse"},
+            "description": "Verified content exists"
+          },
+          "400": {
+            "schema": {"$ref": "#/definitions/VndErrors"},
+            "description": "Invalid verification request"
+          },
+          "404": {
+            "schema": {"$ref": "#/definitions/VerifyContentResponse"},
+            "description": "Verified content exists"
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "chainId",
+            "description": "The chain where the content was registered",
+            "type": "string",
+            "required": true
+          },
+          {
+            "schema": {"$ref": "#/definitions/ContentRequest"},
+            "in": "body",
+            "name": "existence",
+            "description": "Verify content using the current existence settings",
+            "required": true
+          }
+        ],
+        "tags": ["Proof of Existence"],
+        "consumes": ["application/json;charset=UTF-8"]
+      }
+    },
+    "/blockchain/proof/0.1.0/existence/{chainId}/{hash}": {"get": {
+      "summary": "Verify content by hash",
+      "security": [{"oauth2schema": ["global"]}],
+      "produces": ["application/json;charset=UTF-8"],
+      "operationId": "verifyContentByHash",
+      "responses": {
+        "200": {
+          "schema": {"$ref": "#/definitions/VerifyContentResponse"},
+          "description": "Verified content exists"
+        },
+        "400": {
+          "schema": {"$ref": "#/definitions/VndErrors"},
+          "description": "Invalid verification request"
+        },
+        "404": {
+          "schema": {"$ref": "#/definitions/VerifyContentResponse"},
+          "description": "Verified content exists"
+        }
+      },
+      "parameters": [
+        {
+          "in": "path",
+          "name": "chainId",
+          "description": "The chain where the content was registered",
+          "type": "string",
+          "required": true
+        },
+        {
+          "in": "path",
+          "name": "hash",
+          "description": "The client generated hash",
+          "type": "string",
+          "required": true
+        },
+        {
+          "schema": {"$ref": "#/definitions/ContentRequest"},
+          "in": "body",
+          "name": "existence",
+          "description": "Verify content using the current existence settings",
+          "required": false
+        }
+      ],
+      "tags": ["Proof of Existence"],
+      "consumes": ["application/json;charset=UTF-8"]
+    }}
+  },
+  "host": "gw.api.cloud.sphereon.com",
+  "schemes": ["https"],
+  "securityDefinitions": {"oauth2schema": {
+    "tokenUrl": "https://gw.api.cloud.sphereon.com/token",
+    "scopes": {"global": "accessEverything"},
+    "type": "oauth2",
+    "flow": "application"
+  }},
+  "definitions": {
+    "VerifyContentResponse": {
+      "description": "Verify Content response",
+      "type": "object",
+      "required": [
+        "contentRequest",
+        "proofChain",
+        "registrationState"
+      ],
+      "properties": {
+        "registrationTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "contentRequest": {"$ref": "#/definitions/ContentRequest"},
+        "proofChain": {"$ref": "#/definitions/CommittedChain"},
+        "registrationState": {
+          "type": "string",
+          "enum": [
+            "PENDING",
+            "REGISTERED",
+            "NOT_REGISTERED"
+          ]
+        }
+      }
+    },
+    "CommittedChain": {
+      "description": "Commited Chain",
+      "type": "object",
+      "properties": {"id": {
+        "description": "Chain ID",
+        "readOnly": true,
+        "type": "string"
+      }}
+    },
+    "CreateChainRequest": {
+      "description": "Create chain for Proof of Existence request",
+      "type": "object",
+      "required": [
+        "defaultSettings",
+        "name"
+      ],
+      "properties": {
+        "metadata": {
+          "format": "byte",
+          "description": "Metadata for this chain.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Unique name for this chain.",
+          "type": "string"
+        },
+        "defaultSettings": {"$ref": "#/definitions/Settings"}
+      }
+    },
+    "ContentRequest": {
+      "description": "Content existence request",
+      "type": "object",
+      "required": [
+        "content",
+        "hashProvider"
+      ],
+      "properties": {
+        "settings": {"$ref": "#/definitions/Settings"},
+        "hashProvider": {
+          "description": "When CLIENT is supplied the content should already have been hashed by you. When SERVER is supplied we will hash the content according to the supplied settings",
+          "type": "string",
+          "enum": [
+            "SERVER",
+            "CLIENT"
+          ]
+        },
+        "content": {
+          "format": "byte",
+          "description": "The content to register.",
+          "type": "string"
+        }
+      }
+    },
+    "VndError": {
+      "type": "object",
+      "properties": {
+        "_links": {
+          "additionalProperties": {"$ref": "#/definitions/Link"},
+          "type": "object"
+        },
+        "logref": {"type": "string"},
+        "message": {"type": "string"}
+      }
+    },
+    "RegisterContentResponse": {
+      "description": "Committed Content response",
+      "type": "object",
+      "required": [
+        "contentRequest",
+        "proofChain",
+        "registrationState"
+      ],
+      "properties": {
+        "contentRequest": {"$ref": "#/definitions/ContentRequest"},
+        "proofChain": {"$ref": "#/definitions/CommittedChain"},
+        "registrationState": {
+          "type": "string",
+          "enum": [
+            "PENDING",
+            "REGISTERED",
+            "NOT_REGISTERED"
+          ]
+        }
+      }
+    },
+    "CreateChainResponse": {
+      "description": "Committed Chain response",
+      "type": "object",
+      "required": [
+        "chainRequest",
+        "proofChain",
+        "settingsChain"
+      ],
+      "properties": {
+        "settingsChain": {"$ref": "#/definitions/CommittedChain"},
+        "chainRequest": {"$ref": "#/definitions/CreateChainRequest"},
+        "proofChain": {"$ref": "#/definitions/CommittedChain"}
+      }
+    },
+    "Settings": {
+      "description": "Existence Settings",
+      "type": "object",
+      "required": [
+        "includeContentSize",
+        "version"
+      ],
+      "properties": {
+        "includeContentSize": {
+          "description": "Include the content size in the hash calculation.",
+          "type": "boolean",
+          "example": false
+        },
+        "version": {
+          "format": "byte",
+          "description": "The settings version (only 1 for now)",
+          "type": "string",
+          "enum": ["1"]
+        },
+        "hashAlgorithm": {
+          "description": "The hashing method used (CLIENT) or to use (SERVER) for the content",
+          "type": "string",
+          "enum": [
+            "PLAIN",
+            "SHA_256",
+            "SHA_512"
+          ]
+        }
+      }
+    },
+    "Link": {
+      "type": "object",
+      "properties": {"href": {"type": "string"}}
+    },
+    "VndErrors": {
+      "description": "The error response",
+      "type": "object",
+      "properties": {"errors": {
+        "type": "array",
+        "items": {"$ref": "#/definitions/VndError"}
+      }}
+    }
+  },
+  "swagger": "2.0",
+  "info": {
+    "license": {
+      "name": "Apache License Version 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    "contact": {
+      "name": "Sphereon DevOps Team",
+      "url": "https://sphereon.com",
+      "email": "dev@sphereon.com"
+    },
+    "description": "<b>The Blockchain Proof API is an easy to prove existence of (binary) data at a certain point in time. Behinde the scenes it stores entries using the Factom (bitcoin) blockchain by means of our generic blockchain API.<\/b>\r\n\r\nThe flow is generally as follows:\r\n1. Make sure a Proof chain has been created using the /chain POST endpoint beforehand. Normally you only need one or a handful of chains, during the entiry lifetime of your proof solution. This is a relative expensive operation in terms of money.\r\n2. Store proof entries on the proof chain from step 1. The entries will contain the content and metadata you want to store forever on the specified chain.\r\n3. Retrieve an existing entry from the chain to verify or retrieve data\r\n\r\n\r\n<b>Interactive testing: <\/b>A web based test console is available in the <a href=\"https://store.sphereon.com\">Sphereon API Store<\/a>",
+    "termsOfService": "https://sphereon.com",
+    "title": "Sphereon :: BLOCKCHAIN :: PROOF API",
+    "version": "0.1.0"
+  },
+  "tags": [{
+    "name": "Proof of Existence",
+    "description": "Blockchain Proof of Existence API"
+  }]
+}
