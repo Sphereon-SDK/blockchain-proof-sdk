@@ -1,9 +1,10 @@
-# SphereonBlockchainProofApi.VerifyContentResponse
+# BlockchainProof.VerifyContentResponse
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **registrationTime** | **Date** |  | [optional] 
+**contentId** | **String** |  | 
 **contentRequest** | [**ContentRequest**](ContentRequest.md) |  | 
 **proofChain** | [**CommittedChain**](CommittedChain.md) |  | 
 **registrationState** | **String** |  | 

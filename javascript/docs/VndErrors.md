@@ -1,4 +1,4 @@
-# SphereonBlockchainProofApi.VndErrors
+# BlockchainProof.VndErrors
 
 ## Properties
 Name | Type | Description | Notes

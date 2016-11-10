@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **registrationTime** | [**OffsetDateTime**](OffsetDateTime.md) |  |  [optional]
+**contentId** | **String** |  | 
 **contentRequest** | [**ContentRequest**](ContentRequest.md) |  | 
 **proofChain** | [**CommittedChain**](CommittedChain.md) |  | 
 **registrationState** | [**RegistrationStateEnum**](#RegistrationStateEnum) |  | 

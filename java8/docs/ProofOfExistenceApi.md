@@ -4,64 +4,12 @@ All URIs are relative to *https://gw.api.cloud.sphereon.com/*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**createChain**](ProofOfExistenceApi.md#createChain) | **POST** /blockchain/proof/0.1.0/existence | Create a new existence chain
 [**registerContent**](ProofOfExistenceApi.md#registerContent) | **POST** /blockchain/proof/0.1.0/existence/{chainId} | Register content
 [**registerStream**](ProofOfExistenceApi.md#registerStream) | **POST** /blockchain/proof/0.1.0/existence/{chainId}/stream | Register content using a bytestream/file
 [**verifyContent**](ProofOfExistenceApi.md#verifyContent) | **GET** /blockchain/proof/0.1.0/existence/{chainId} | Verify content
 [**verifyContentByHash**](ProofOfExistenceApi.md#verifyContentByHash) | **GET** /blockchain/proof/0.1.0/existence/{chainId}/{hash} | Verify content by hash
 [**verifyStream**](ProofOfExistenceApi.md#verifyStream) | **GET** /blockchain/proof/0.1.0/existence/{chainId}/stream | Verify content using a bytestream/file
 
-
-<a name="createChain"></a>
-# **createChain**
-> CreateChainResponse createChain(request)
-
-Create a new existence chain
-
-### Example
-```java
-// Import classes:
-//import com.sphereon.sdk.blockchain.proof.handler.ApiClient;
-//import com.sphereon.sdk.blockchain.proof.handler.ApiException;
-//import com.sphereon.sdk.blockchain.proof.handler.Configuration;
-//import com.sphereon.sdk.blockchain.proof.handler.auth.*;
-//import com.sphereon.sdk.blockchain.proof.api.ProofOfExistenceApi;
-
-ApiClient defaultClient = Configuration.getDefaultApiClient();
-
-// Configure OAuth2 access token for authorization: oauth2schema
-OAuth oauth2schema = (OAuth) defaultClient.getAuthentication("oauth2schema");
-oauth2schema.setAccessToken("YOUR ACCESS TOKEN");
-
-ProofOfExistenceApi apiInstance = new ProofOfExistenceApi();
-CreateChainRequest request = new CreateChainRequest(); // CreateChainRequest | Create a new Proof of Existence chain using the provided existence settings
-try {
-    CreateChainResponse result = apiInstance.createChain(request);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling ProofOfExistenceApi#createChain");
-    e.printStackTrace();
-}
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **request** | [**CreateChainRequest**](CreateChainRequest.md)| Create a new Proof of Existence chain using the provided existence settings |
-
-### Return type
-
-[**CreateChainResponse**](CreateChainResponse.md)
-
-### Authorization
-
-[oauth2schema](../README.md#oauth2schema)
-
-### HTTP request headers
-
- - **Content-Type**: application/json;charset=UTF-8
- - **Accept**: application/json;charset=UTF-8
 
 <a name="registerContent"></a>
 # **registerContent**

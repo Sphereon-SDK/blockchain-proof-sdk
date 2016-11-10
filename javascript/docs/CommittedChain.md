@@ -1,4 +1,4 @@
-# SphereonBlockchainProofApi.CommittedChain
+# BlockchainProof.CommittedChain
 
 ## Properties
 Name | Type | Description | Notes

@@ -1,7 +1,7 @@
 /* 
- * Sphereon :: BLOCKCHAIN :: PROOF API
+ * Blockchain Proof
  *
- * <b>The Blockchain Proof API is an easy to prove existence of (binary) data at a certain point in time. Behinde the scenes it stores entries using the Factom (bitcoin) blockchain by means of our generic blockchain API.</b>    The flow is generally as follows:  1. Make sure a Proof chain has been created using the /chain POST endpoint beforehand. Normally you only need one or a handful of chains, during the entiry lifetime of your proof solution. This is a relative expensive operation in terms of money.  2. Store proof entries on the proof chain from step 1. The entries will contain the content and metadata you want to store forever on the specified chain.  3. Retrieve an existing entry from the chain to verify or retrieve data      <b>Interactive testing: </b>A web based test console is available in the <a href=\"https://store.sphereon.com\">Sphereon API Store</a>
+ * <b>With the Blockchain Proof API it is easy to prove existence of (binary) data at a certain point in time. Behind the scenes it stores entries using the Factom (bitcoin) blockchain by means of our generic blockchain API.</b>    The flow is generally as follows:  1. Make sure a Proof chain has been created using the /chain POST endpoint beforehand. Normally you only need one or a handful of chains, during the entiry lifetime of your proof solution. This is a relative expensive operation in terms of money.  2. Store proof entries on the proof chain from step 1. The entries will contain the content and metadata you want to store forever on the specified chain.  3. Retrieve an existing entry from the chain to verify or retrieve data      <b>Interactive testing: </b>A web based test console is available in the <a href=\"https://store.sphereon.com\">Sphereon API Store</a>
  *
  * OpenAPI spec version: 0.1.0
  * Contact: dev@sphereon.com
@@ -48,9 +48,11 @@ namespace Sphereon.SDK.Blockchain.Proof.Model
         /// Initializes a new instance of the <see cref="CreateChainRequest" /> class.
         /// </summary>
         /// <param name="Metadata">Metadata for this chain..</param>
+        /// <param name="SettingsChainId">Supply an existing settings chain. When not supplied a new settings chain will be created automatically..</param>
         /// <param name="Name">Unique name for this chain. (required).</param>
+        /// <param name="PreviousChainId">When this chain is a continuation of another chain you need to supply the previous chainId here..</param>
         /// <param name="DefaultSettings">DefaultSettings (required).</param>
-        public CreateChainRequest(byte[] Metadata = null, string Name = null, Settings DefaultSettings = null)
+        public CreateChainRequest(byte[] Metadata = null, string SettingsChainId = null, string Name = null, string PreviousChainId = null, Settings DefaultSettings = null)
         {
             // to ensure "Name" is required (not null)
             if (Name == null)
@@ -71,6 +73,8 @@ namespace Sphereon.SDK.Blockchain.Proof.Model
                 this.DefaultSettings = DefaultSettings;
             }
             this.Metadata = Metadata;
+            this.SettingsChainId = SettingsChainId;
+            this.PreviousChainId = PreviousChainId;
         }
         
         /// <summary>
@@ -80,11 +84,23 @@ namespace Sphereon.SDK.Blockchain.Proof.Model
         [DataMember(Name="metadata", EmitDefaultValue=false)]
         public byte[] Metadata { get; set; }
         /// <summary>
+        /// Supply an existing settings chain. When not supplied a new settings chain will be created automatically.
+        /// </summary>
+        /// <value>Supply an existing settings chain. When not supplied a new settings chain will be created automatically.</value>
+        [DataMember(Name="settingsChainId", EmitDefaultValue=false)]
+        public string SettingsChainId { get; set; }
+        /// <summary>
         /// Unique name for this chain.
         /// </summary>
         /// <value>Unique name for this chain.</value>
         [DataMember(Name="name", EmitDefaultValue=false)]
         public string Name { get; set; }
+        /// <summary>
+        /// When this chain is a continuation of another chain you need to supply the previous chainId here.
+        /// </summary>
+        /// <value>When this chain is a continuation of another chain you need to supply the previous chainId here.</value>
+        [DataMember(Name="previousChainId", EmitDefaultValue=false)]
+        public string PreviousChainId { get; set; }
         /// <summary>
         /// Gets or Sets DefaultSettings
         /// </summary>
@@ -99,7 +115,9 @@ namespace Sphereon.SDK.Blockchain.Proof.Model
             var sb = new StringBuilder();
             sb.Append("class CreateChainRequest {\n");
             sb.Append("  Metadata: ").Append(Metadata).Append("\n");
+            sb.Append("  SettingsChainId: ").Append(SettingsChainId).Append("\n");
             sb.Append("  Name: ").Append(Name).Append("\n");
+            sb.Append("  PreviousChainId: ").Append(PreviousChainId).Append("\n");
             sb.Append("  DefaultSettings: ").Append(DefaultSettings).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -143,9 +161,19 @@ namespace Sphereon.SDK.Blockchain.Proof.Model
                     this.Metadata.Equals(other.Metadata)
                 ) && 
                 (
+                    this.SettingsChainId == other.SettingsChainId ||
+                    this.SettingsChainId != null &&
+                    this.SettingsChainId.Equals(other.SettingsChainId)
+                ) && 
+                (
                     this.Name == other.Name ||
                     this.Name != null &&
                     this.Name.Equals(other.Name)
+                ) && 
+                (
+                    this.PreviousChainId == other.PreviousChainId ||
+                    this.PreviousChainId != null &&
+                    this.PreviousChainId.Equals(other.PreviousChainId)
                 ) && 
                 (
                     this.DefaultSettings == other.DefaultSettings ||
@@ -167,8 +195,12 @@ namespace Sphereon.SDK.Blockchain.Proof.Model
                 // Suitable nullity checks etc, of course :)
                 if (this.Metadata != null)
                     hash = hash * 59 + this.Metadata.GetHashCode();
+                if (this.SettingsChainId != null)
+                    hash = hash * 59 + this.SettingsChainId.GetHashCode();
                 if (this.Name != null)
                     hash = hash * 59 + this.Name.GetHashCode();
+                if (this.PreviousChainId != null)
+                    hash = hash * 59 + this.PreviousChainId.GetHashCode();
                 if (this.DefaultSettings != null)
                     hash = hash * 59 + this.DefaultSettings.GetHashCode();
                 return hash;

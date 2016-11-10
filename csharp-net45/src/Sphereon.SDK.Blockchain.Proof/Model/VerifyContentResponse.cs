@@ -1,7 +1,7 @@
 /* 
- * Sphereon :: BLOCKCHAIN :: PROOF API
+ * Blockchain Proof
  *
- * <b>The Blockchain Proof API is an easy to prove existence of (binary) data at a certain point in time. Behinde the scenes it stores entries using the Factom (bitcoin) blockchain by means of our generic blockchain API.</b>    The flow is generally as follows:  1. Make sure a Proof chain has been created using the /chain POST endpoint beforehand. Normally you only need one or a handful of chains, during the entiry lifetime of your proof solution. This is a relative expensive operation in terms of money.  2. Store proof entries on the proof chain from step 1. The entries will contain the content and metadata you want to store forever on the specified chain.  3. Retrieve an existing entry from the chain to verify or retrieve data      <b>Interactive testing: </b>A web based test console is available in the <a href=\"https://store.sphereon.com\">Sphereon API Store</a>
+ * <b>With the Blockchain Proof API it is easy to prove existence of (binary) data at a certain point in time. Behind the scenes it stores entries using the Factom (bitcoin) blockchain by means of our generic blockchain API.</b>    The flow is generally as follows:  1. Make sure a Proof chain has been created using the /chain POST endpoint beforehand. Normally you only need one or a handful of chains, during the entiry lifetime of your proof solution. This is a relative expensive operation in terms of money.  2. Store proof entries on the proof chain from step 1. The entries will contain the content and metadata you want to store forever on the specified chain.  3. Retrieve an existing entry from the chain to verify or retrieve data      <b>Interactive testing: </b>A web based test console is available in the <a href=\"https://store.sphereon.com\">Sphereon API Store</a>
  *
  * OpenAPI spec version: 0.1.0
  * Contact: dev@sphereon.com
@@ -79,11 +79,21 @@ namespace Sphereon.SDK.Blockchain.Proof.Model
         /// Initializes a new instance of the <see cref="VerifyContentResponse" /> class.
         /// </summary>
         /// <param name="RegistrationTime">RegistrationTime.</param>
+        /// <param name="ContentId">ContentId (required).</param>
         /// <param name="ContentRequest">ContentRequest (required).</param>
         /// <param name="ProofChain">ProofChain (required).</param>
         /// <param name="RegistrationState">RegistrationState (required).</param>
-        public VerifyContentResponse(DateTime? RegistrationTime = null, ContentRequest ContentRequest = null, CommittedChain ProofChain = null, RegistrationStateEnum? RegistrationState = null)
+        public VerifyContentResponse(DateTime? RegistrationTime = null, string ContentId = null, ContentRequest ContentRequest = null, CommittedChain ProofChain = null, RegistrationStateEnum? RegistrationState = null)
         {
+            // to ensure "ContentId" is required (not null)
+            if (ContentId == null)
+            {
+                throw new InvalidDataException("ContentId is a required property for VerifyContentResponse and cannot be null");
+            }
+            else
+            {
+                this.ContentId = ContentId;
+            }
             // to ensure "ContentRequest" is required (not null)
             if (ContentRequest == null)
             {
@@ -120,6 +130,11 @@ namespace Sphereon.SDK.Blockchain.Proof.Model
         [DataMember(Name="registrationTime", EmitDefaultValue=false)]
         public DateTime? RegistrationTime { get; set; }
         /// <summary>
+        /// Gets or Sets ContentId
+        /// </summary>
+        [DataMember(Name="contentId", EmitDefaultValue=false)]
+        public string ContentId { get; set; }
+        /// <summary>
         /// Gets or Sets ContentRequest
         /// </summary>
         [DataMember(Name="contentRequest", EmitDefaultValue=false)]
@@ -138,6 +153,7 @@ namespace Sphereon.SDK.Blockchain.Proof.Model
             var sb = new StringBuilder();
             sb.Append("class VerifyContentResponse {\n");
             sb.Append("  RegistrationTime: ").Append(RegistrationTime).Append("\n");
+            sb.Append("  ContentId: ").Append(ContentId).Append("\n");
             sb.Append("  ContentRequest: ").Append(ContentRequest).Append("\n");
             sb.Append("  ProofChain: ").Append(ProofChain).Append("\n");
             sb.Append("  RegistrationState: ").Append(RegistrationState).Append("\n");
@@ -183,6 +199,11 @@ namespace Sphereon.SDK.Blockchain.Proof.Model
                     this.RegistrationTime.Equals(other.RegistrationTime)
                 ) && 
                 (
+                    this.ContentId == other.ContentId ||
+                    this.ContentId != null &&
+                    this.ContentId.Equals(other.ContentId)
+                ) && 
+                (
                     this.ContentRequest == other.ContentRequest ||
                     this.ContentRequest != null &&
                     this.ContentRequest.Equals(other.ContentRequest)
@@ -212,6 +233,8 @@ namespace Sphereon.SDK.Blockchain.Proof.Model
                 // Suitable nullity checks etc, of course :)
                 if (this.RegistrationTime != null)
                     hash = hash * 59 + this.RegistrationTime.GetHashCode();
+                if (this.ContentId != null)
+                    hash = hash * 59 + this.ContentId.GetHashCode();
                 if (this.ContentRequest != null)
                     hash = hash * 59 + this.ContentRequest.GetHashCode();
                 if (this.ProofChain != null)

@@ -1,4 +1,4 @@
-# SphereonBlockchainProofApi.RegisterContentResponse
+# BlockchainProof.RegisterContentResponse
 
 ## Properties
 Name | Type | Description | Notes

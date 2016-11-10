@@ -45,7 +45,10 @@
             "required": true
           }
         ],
-        "tags": ["Proof of Existence"],
+        "tags": [
+          "Proof of Existence",
+          "All"
+        ],
         "consumes": ["multipart/form-data"]
       },
       "get": {
@@ -91,7 +94,10 @@
             "required": true
           }
         ],
-        "tags": ["Proof of Existence"],
+        "tags": [
+          "Proof of Existence",
+          "All"
+        ],
         "consumes": ["multipart/form-data"]
       }
     },
@@ -121,7 +127,10 @@
         "description": "Create a new Proof of Existence chain using the provided existence settings",
         "required": true
       }],
-      "tags": ["Proof of Existence"],
+      "tags": [
+        "Chain",
+        "All"
+      ],
       "consumes": ["application/json;charset=UTF-8"]
     }},
     "/blockchain/proof/0.1.0/existence/{chainId}": {
@@ -160,7 +169,10 @@
             "required": true
           }
         ],
-        "tags": ["Proof of Existence"],
+        "tags": [
+          "Proof of Existence",
+          "All"
+        ],
         "consumes": ["application/json;charset=UTF-8"]
       },
       "get": {
@@ -198,7 +210,10 @@
             "required": true
           }
         ],
-        "tags": ["Proof of Existence"],
+        "tags": [
+          "Proof of Existence",
+          "All"
+        ],
         "consumes": ["application/json;charset=UTF-8"]
       }
     },
@@ -244,7 +259,10 @@
           "required": false
         }
       ],
-      "tags": ["Proof of Existence"],
+      "tags": [
+        "Proof of Existence",
+        "All"
+      ],
       "consumes": ["application/json;charset=UTF-8"]
     }}
   },
@@ -261,6 +279,7 @@
       "description": "Verify Content response",
       "type": "object",
       "required": [
+        "contentId",
         "contentRequest",
         "proofChain",
         "registrationState"
@@ -270,6 +289,7 @@
           "format": "date-time",
           "type": "string"
         },
+        "contentId": {"type": "string"},
         "contentRequest": {"$ref": "#/definitions/ContentRequest"},
         "proofChain": {"$ref": "#/definitions/CommittedChain"},
         "registrationState": {
@@ -304,8 +324,16 @@
           "description": "Metadata for this chain.",
           "type": "string"
         },
+        "settingsChainId": {
+          "description": "Supply an existing settings chain. When not supplied a new settings chain will be created automatically.",
+          "type": "string"
+        },
         "name": {
           "description": "Unique name for this chain.",
+          "type": "string"
+        },
+        "previousChainId": {
+          "description": "When this chain is a continuation of another chain you need to supply the previous chainId here.",
           "type": "string"
         },
         "defaultSettings": {"$ref": "#/definitions/Settings"}
@@ -435,13 +463,23 @@
       "url": "https://sphereon.com",
       "email": "dev@sphereon.com"
     },
-    "description": "<b>The Blockchain Proof API is an easy to prove existence of (binary) data at a certain point in time. Behinde the scenes it stores entries using the Factom (bitcoin) blockchain by means of our generic blockchain API.<\/b>\r\n\r\nThe flow is generally as follows:\r\n1. Make sure a Proof chain has been created using the /chain POST endpoint beforehand. Normally you only need one or a handful of chains, during the entiry lifetime of your proof solution. This is a relative expensive operation in terms of money.\r\n2. Store proof entries on the proof chain from step 1. The entries will contain the content and metadata you want to store forever on the specified chain.\r\n3. Retrieve an existing entry from the chain to verify or retrieve data\r\n\r\n\r\n<b>Interactive testing: <\/b>A web based test console is available in the <a href=\"https://store.sphereon.com\">Sphereon API Store<\/a>",
+    "description": "<b>With the Blockchain Proof API it is easy to prove existence of (binary) data at a certain point in time. Behind the scenes it stores entries using the Factom (bitcoin) blockchain by means of our generic blockchain API.<\/b>\r\n\r\nThe flow is generally as follows:\r\n1. Make sure a Proof chain has been created using the /chain POST endpoint beforehand. Normally you only need one or a handful of chains, during the entiry lifetime of your proof solution. This is a relative expensive operation in terms of money.\r\n2. Store proof entries on the proof chain from step 1. The entries will contain the content and metadata you want to store forever on the specified chain.\r\n3. Retrieve an existing entry from the chain to verify or retrieve data\r\n\r\n\r\n<b>Interactive testing: <\/b>A web based test console is available in the <a href=\"https://store.sphereon.com\">Sphereon API Store<\/a>",
     "termsOfService": "https://sphereon.com",
-    "title": "Sphereon :: BLOCKCHAIN :: PROOF API",
+    "title": "Blockchain Proof",
     "version": "0.1.0"
   },
-  "tags": [{
-    "name": "Proof of Existence",
-    "description": "Blockchain Proof of Existence API"
-  }]
+  "tags": [
+    {
+      "name": "Proof of Existence",
+      "description": "Blockchain Proof of Existence API"
+    },
+    {
+      "name": "Chain",
+      "description": "The proof and settings chains"
+    },
+    {
+      "name": "All",
+      "description": "All API operations"
+    }
+  ]
 }

@@ -13,6 +13,12 @@ model.VerifyContentResponse = function() {}
 model.VerifyContentResponse.prototype.registrationTime;
 
 /**
+ * @type {!string}
+ * @export
+ */
+model.VerifyContentResponse.prototype.contentId;
+
+/**
  * @type {!api.ContentRequest}
  * @export
  */

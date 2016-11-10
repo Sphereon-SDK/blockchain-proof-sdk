@@ -1,4 +1,4 @@
-# SphereonBlockchainProofApi.ContentRequest
+# BlockchainProof.ContentRequest
 
 ## Properties
 Name | Type | Description | Notes

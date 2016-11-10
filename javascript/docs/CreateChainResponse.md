@@ -1,4 +1,4 @@
-# SphereonBlockchainProofApi.CreateChainResponse
+# BlockchainProof.CreateChainResponse
 
 ## Properties
 Name | Type | Description | Notes

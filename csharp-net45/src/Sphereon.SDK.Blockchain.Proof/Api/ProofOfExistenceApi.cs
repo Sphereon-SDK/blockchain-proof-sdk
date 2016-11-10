@@ -1,7 +1,7 @@
 /* 
- * Sphereon :: BLOCKCHAIN :: PROOF API
+ * Blockchain Proof
  *
- * <b>The Blockchain Proof API is an easy to prove existence of (binary) data at a certain point in time. Behinde the scenes it stores entries using the Factom (bitcoin) blockchain by means of our generic blockchain API.</b>    The flow is generally as follows:  1. Make sure a Proof chain has been created using the /chain POST endpoint beforehand. Normally you only need one or a handful of chains, during the entiry lifetime of your proof solution. This is a relative expensive operation in terms of money.  2. Store proof entries on the proof chain from step 1. The entries will contain the content and metadata you want to store forever on the specified chain.  3. Retrieve an existing entry from the chain to verify or retrieve data      <b>Interactive testing: </b>A web based test console is available in the <a href=\"https://store.sphereon.com\">Sphereon API Store</a>
+ * <b>With the Blockchain Proof API it is easy to prove existence of (binary) data at a certain point in time. Behind the scenes it stores entries using the Factom (bitcoin) blockchain by means of our generic blockchain API.</b>    The flow is generally as follows:  1. Make sure a Proof chain has been created using the /chain POST endpoint beforehand. Normally you only need one or a handful of chains, during the entiry lifetime of your proof solution. This is a relative expensive operation in terms of money.  2. Store proof entries on the proof chain from step 1. The entries will contain the content and metadata you want to store forever on the specified chain.  3. Retrieve an existing entry from the chain to verify or retrieve data      <b>Interactive testing: </b>A web based test console is available in the <a href=\"https://store.sphereon.com\">Sphereon API Store</a>
  *
  * OpenAPI spec version: 0.1.0
  * Contact: dev@sphereon.com
@@ -36,27 +36,6 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
     public interface IProofOfExistenceApi : IApiAccessor
     {
         #region Synchronous Operations
-        /// <summary>
-        /// Create a new existence chain
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="Sphereon.SDK.Blockchain.Proof.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="request">Create a new Proof of Existence chain using the provided existence settings</param>
-        /// <returns>CreateChainResponse</returns>
-        CreateChainResponse CreateChain (CreateChainRequest request);
-
-        /// <summary>
-        /// Create a new existence chain
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="Sphereon.SDK.Blockchain.Proof.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="request">Create a new Proof of Existence chain using the provided existence settings</param>
-        /// <returns>ApiResponse of CreateChainResponse</returns>
-        ApiResponse<CreateChainResponse> CreateChainWithHttpInfo (CreateChainRequest request);
         /// <summary>
         /// Register content
         /// </summary>
@@ -180,27 +159,6 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
         ApiResponse<VerifyContentResponse> VerifyStreamWithHttpInfo (string chainId, System.IO.Stream stream, System.IO.Stream settings = null);
         #endregion Synchronous Operations
         #region Asynchronous Operations
-        /// <summary>
-        /// Create a new existence chain
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="Sphereon.SDK.Blockchain.Proof.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="request">Create a new Proof of Existence chain using the provided existence settings</param>
-        /// <returns>Task of CreateChainResponse</returns>
-        System.Threading.Tasks.Task<CreateChainResponse> CreateChainAsync (CreateChainRequest request);
-
-        /// <summary>
-        /// Create a new existence chain
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="Sphereon.SDK.Blockchain.Proof.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="request">Create a new Proof of Existence chain using the provided existence settings</param>
-        /// <returns>Task of ApiResponse (CreateChainResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<CreateChainResponse>> CreateChainAsyncWithHttpInfo (CreateChainRequest request);
         /// <summary>
         /// Register content
         /// </summary>
@@ -432,175 +390,6 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
         public void AddDefaultHeader(string key, string value)
         {
             this.Configuration.AddDefaultHeader(key, value);
-        }
-
-        /// <summary>
-        /// Create a new existence chain 
-        /// </summary>
-        /// <exception cref="Sphereon.SDK.Blockchain.Proof.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="request">Create a new Proof of Existence chain using the provided existence settings</param>
-        /// <returns>CreateChainResponse</returns>
-        public CreateChainResponse CreateChain (CreateChainRequest request)
-        {
-             ApiResponse<CreateChainResponse> localVarResponse = CreateChainWithHttpInfo(request);
-             return localVarResponse.Data;
-        }
-
-        /// <summary>
-        /// Create a new existence chain 
-        /// </summary>
-        /// <exception cref="Sphereon.SDK.Blockchain.Proof.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="request">Create a new Proof of Existence chain using the provided existence settings</param>
-        /// <returns>ApiResponse of CreateChainResponse</returns>
-        public ApiResponse< CreateChainResponse > CreateChainWithHttpInfo (CreateChainRequest request)
-        {
-            // verify the required parameter 'request' is set
-            if (request == null)
-                throw new ApiException(400, "Missing required parameter 'request' when calling ProofOfExistenceApi->CreateChain");
-
-            var localVarPath = "/blockchain/proof/0.1.0/existence";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new Dictionary<String, String>();
-            var localVarHeaderParams = new Dictionary<String, String>(Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-                "application/json;charset=UTF-8"
-            };
-            String localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json;charset=UTF-8"
-            };
-            String localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null)
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-            // set "format" to json by default
-            // e.g. /pet/{petId}.{format} becomes /pet/{petId}.json
-            localVarPathParams.Add("format", "json");
-            if (request != null && request.GetType() != typeof(byte[]))
-            {
-                localVarPostBody = Configuration.ApiClient.Serialize(request); // http body (model) parameter
-            }
-            else
-            {
-                localVarPostBody = request; // byte array
-            }
-
-            // authentication (oauth2schema) required
-            // oauth required
-            if (!String.IsNullOrEmpty(Configuration.AccessToken))
-            {
-                localVarHeaderParams["Authorization"] = "Bearer " + Configuration.AccessToken;
-            }
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) Configuration.ApiClient.CallApi(localVarPath,
-                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("CreateChain", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return new ApiResponse<CreateChainResponse>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (CreateChainResponse) Configuration.ApiClient.Deserialize(localVarResponse, typeof(CreateChainResponse)));
-            
-        }
-
-        /// <summary>
-        /// Create a new existence chain 
-        /// </summary>
-        /// <exception cref="Sphereon.SDK.Blockchain.Proof.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="request">Create a new Proof of Existence chain using the provided existence settings</param>
-        /// <returns>Task of CreateChainResponse</returns>
-        public async System.Threading.Tasks.Task<CreateChainResponse> CreateChainAsync (CreateChainRequest request)
-        {
-             ApiResponse<CreateChainResponse> localVarResponse = await CreateChainAsyncWithHttpInfo(request);
-             return localVarResponse.Data;
-
-        }
-
-        /// <summary>
-        /// Create a new existence chain 
-        /// </summary>
-        /// <exception cref="Sphereon.SDK.Blockchain.Proof.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="request">Create a new Proof of Existence chain using the provided existence settings</param>
-        /// <returns>Task of ApiResponse (CreateChainResponse)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<CreateChainResponse>> CreateChainAsyncWithHttpInfo (CreateChainRequest request)
-        {
-            // verify the required parameter 'request' is set
-            if (request == null)
-                throw new ApiException(400, "Missing required parameter 'request' when calling ProofOfExistenceApi->CreateChain");
-
-            var localVarPath = "/blockchain/proof/0.1.0/existence";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new Dictionary<String, String>();
-            var localVarHeaderParams = new Dictionary<String, String>(Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-                "application/json;charset=UTF-8"
-            };
-            String localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json;charset=UTF-8"
-            };
-            String localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null)
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-            // set "format" to json by default
-            // e.g. /pet/{petId}.{format} becomes /pet/{petId}.json
-            localVarPathParams.Add("format", "json");
-            if (request != null && request.GetType() != typeof(byte[]))
-            {
-                localVarPostBody = Configuration.ApiClient.Serialize(request); // http body (model) parameter
-            }
-            else
-            {
-                localVarPostBody = request; // byte array
-            }
-
-            // authentication (oauth2schema) required
-            // oauth required
-            if (!String.IsNullOrEmpty(Configuration.AccessToken))
-            {
-                localVarHeaderParams["Authorization"] = "Bearer " + Configuration.AccessToken;
-            }
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) await Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("CreateChain", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return new ApiResponse<CreateChainResponse>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (CreateChainResponse) Configuration.ApiClient.Deserialize(localVarResponse, typeof(CreateChainResponse)));
-            
         }
 
         /// <summary>

@@ -1,4 +1,4 @@
-# SphereonBlockchainProofApi.Link
+# BlockchainProof.Link
 
 ## Properties
 Name | Type | Description | Notes

@@ -4,6 +4,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **RegistrationTime** | **DateTime?** |  | [optional] 
+**ContentId** | **string** |  | 
 **ContentRequest** | [**ContentRequest**](ContentRequest.md) |  | 
 **ProofChain** | [**CommittedChain**](CommittedChain.md) |  | 
 **RegistrationState** | **string** |  | 
