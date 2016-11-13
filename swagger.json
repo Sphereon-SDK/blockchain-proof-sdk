@@ -1,6 +1,48 @@
 {
   "basePath": "/",
   "paths": {
+    "/blockchain/proof/0.1.0/existence/{chainId}/verify/stream": {"post": {
+      "summary": "Verify content using a bytestream/file",
+      "security": [{"oauth2schema": ["global"]}],
+      "produces": ["application/json;charset=UTF-8"],
+      "description": "Verify content by supplying a file or some other binary data. Hashing will be done on the server side",
+      "operationId": "verifyStream",
+      "responses": {
+        "200": {
+          "schema": {"$ref": "#/definitions/VerifyContentResponse"},
+          "description": "Content exists"
+        },
+        "400": {
+          "schema": {"$ref": "#/definitions/VndErrors"},
+          "description": "Invalid verification request"
+        },
+        "404": {
+          "schema": {"$ref": "#/definitions/VerifyContentResponse"},
+          "description": "Content does not exist"
+        }
+      },
+      "parameters": [
+        {
+          "in": "path",
+          "name": "chainId",
+          "description": "The chain where the content will be verified",
+          "type": "string",
+          "required": true
+        },
+        {
+          "in": "formData",
+          "name": "stream",
+          "description": "The binary data (not hashed). Hashing will be done on the server side. The binary data will not be stored",
+          "type": "file",
+          "required": true
+        }
+      ],
+      "tags": [
+        "Proof of Existence",
+        "All"
+      ],
+      "consumes": ["multipart/form-data"]
+    }},
     "/blockchain/proof/0.1.0/existence/{chainId}/settings": {"get": {
       "summary": "Get the settings for registration/verification",
       "security": [{"oauth2schema": ["global"]}],
@@ -31,96 +73,10 @@
         "Settings",
         "All"
       ],
-      "consumes": ["application/json;charset=UTF-8"]
+      "consumes": ["application/json"]
     }},
-    "/blockchain/proof/0.1.0/existence/{chainId}/stream": {
-      "post": {
-        "summary": "Register content using a bytestream/file",
-        "security": [{"oauth2schema": ["global"]}],
-        "produces": ["application/json;charset=UTF-8"],
-        "description": "Register content by supplying a file or some other binary data. Hashing will be done on the server side",
-        "operationId": "registerStream",
-        "responses": {
-          "200": {
-            "schema": {"$ref": "#/definitions/RegisterContentResponse"},
-            "description": "Chain already exists"
-          },
-          "400": {
-            "schema": {"$ref": "#/definitions/VndErrors"},
-            "description": "Invalid registration request"
-          },
-          "202": {
-            "schema": {"$ref": "#/definitions/RegisterContentResponse"},
-            "description": "Registration request received"
-          }
-        },
-        "parameters": [
-          {
-            "in": "path",
-            "name": "chainId",
-            "description": "The chain where the content will be registered",
-            "type": "string",
-            "required": true
-          },
-          {
-            "in": "formData",
-            "name": "stream",
-            "description": "The binary data (not hashed). Hashing will be done on the server side. The binary data will not be stored",
-            "type": "file",
-            "required": true
-          }
-        ],
-        "tags": [
-          "Proof of Existence",
-          "All"
-        ],
-        "consumes": ["multipart/form-data"]
-      },
-      "get": {
-        "summary": "Verify content using a bytestream/file",
-        "security": [{"oauth2schema": ["global"]}],
-        "produces": ["application/json;charset=UTF-8"],
-        "description": "Register content by supplying a file or some other binary data. Hashing will be done on the server side",
-        "operationId": "verifyStream",
-        "responses": {
-          "200": {
-            "schema": {"$ref": "#/definitions/VerifyContentResponse"},
-            "description": "Content exists"
-          },
-          "400": {
-            "schema": {"$ref": "#/definitions/VndErrors"},
-            "description": "Invalid verification request"
-          },
-          "404": {
-            "schema": {"$ref": "#/definitions/VerifyContentResponse"},
-            "description": "Content does not exist"
-          }
-        },
-        "parameters": [
-          {
-            "in": "path",
-            "name": "chainId",
-            "description": "The chain where the content will be registered",
-            "type": "string",
-            "required": true
-          },
-          {
-            "in": "formData",
-            "name": "stream",
-            "description": "The binary data (not hashed). Hashing will be done on the server side. The binary data will not be stored",
-            "type": "file",
-            "required": true
-          }
-        ],
-        "tags": [
-          "Proof of Existence",
-          "All"
-        ],
-        "consumes": ["multipart/form-data"]
-      }
-    },
     "/blockchain/proof/0.1.0/existence": {"post": {
-      "summary": "Create a new existence chain",
+      "summary": "Create a new entity chain",
       "security": [{"oauth2schema": ["global"]}],
       "produces": ["application/json;charset=UTF-8"],
       "operationId": "createChain",
@@ -142,7 +98,7 @@
         "schema": {"$ref": "#/definitions/CreateChainRequest"},
         "in": "body",
         "name": "request",
-        "description": "Create a new Proof of Existence chain using the provided existence settings",
+        "description": "Create a new Proof of Existence chain using the provided entity settings",
         "required": true
       }],
       "tags": [
@@ -151,90 +107,126 @@
       ],
       "consumes": ["application/json;charset=UTF-8"]
     }},
-    "/blockchain/proof/0.1.0/existence/{chainId}/content": {
-      "post": {
-        "summary": "Register content",
-        "security": [{"oauth2schema": ["global"]}],
-        "produces": ["application/json;charset=UTF-8"],
-        "operationId": "registerContent",
-        "responses": {
-          "200": {
-            "schema": {"$ref": "#/definitions/RegisterContentResponse"},
-            "description": "Chain already exists"
-          },
-          "400": {
-            "schema": {"$ref": "#/definitions/VndErrors"},
-            "description": "Invalid registration request"
-          },
-          "202": {
-            "schema": {"$ref": "#/definitions/RegisterContentResponse"},
-            "description": "Registration request received"
-          }
+    "/blockchain/proof/0.1.0/existence/{chainId}/verify/content": {"post": {
+      "summary": "Verify content",
+      "security": [{"oauth2schema": ["global"]}],
+      "produces": ["application/json;charset=UTF-8"],
+      "operationId": "verifyContent",
+      "responses": {
+        "200": {
+          "schema": {"$ref": "#/definitions/VerifyContentResponse"},
+          "description": "Content exists or not"
         },
-        "parameters": [
-          {
-            "in": "path",
-            "name": "chainId",
-            "description": "The chain where the content will be registered",
-            "type": "string",
-            "required": true
-          },
-          {
-            "schema": {"$ref": "#/definitions/ContentRequest"},
-            "in": "body",
-            "name": "existence",
-            "description": "Register content using the current existence settings",
-            "required": true
-          }
-        ],
-        "tags": [
-          "Proof of Existence",
-          "All"
-        ],
-        "consumes": ["application/json;charset=UTF-8"]
+        "400": {
+          "schema": {"$ref": "#/definitions/VndErrors"},
+          "description": "Invalid verification request"
+        }
       },
-      "get": {
-        "summary": "Verify content",
-        "security": [{"oauth2schema": ["global"]}],
-        "produces": ["application/json;charset=UTF-8"],
-        "operationId": "verifyContent",
-        "responses": {
-          "200": {
-            "schema": {"$ref": "#/definitions/VerifyContentResponse"},
-            "description": "Content exists"
-          },
-          "400": {
-            "schema": {"$ref": "#/definitions/VndErrors"},
-            "description": "Invalid verification request"
-          },
-          "404": {
-            "schema": {"$ref": "#/definitions/VerifyContentResponse"},
-            "description": "Content does not exist"
-          }
+      "parameters": [
+        {
+          "in": "path",
+          "name": "chainId",
+          "description": "The chain where the content was registered",
+          "type": "string",
+          "required": true
         },
-        "parameters": [
-          {
-            "in": "path",
-            "name": "chainId",
-            "description": "The chain where the content was registered",
-            "type": "string",
-            "required": true
-          },
-          {
-            "schema": {"$ref": "#/definitions/ContentRequest"},
-            "in": "body",
-            "name": "existence",
-            "description": "Verify content using the current existence settings",
-            "required": true
-          }
-        ],
-        "tags": [
-          "Proof of Existence",
-          "All"
-        ],
-        "consumes": ["application/json;charset=UTF-8"]
-      }
-    }
+        {
+          "schema": {"$ref": "#/definitions/ContentRequest"},
+          "in": "body",
+          "name": "existence",
+          "description": "Verify content using the current entity settings",
+          "required": true
+        }
+      ],
+      "tags": [
+        "Proof of Existence",
+        "All"
+      ],
+      "consumes": ["application/json;charset=UTF-8"]
+    }},
+    "/blockchain/proof/0.1.0/existence/{chainId}/register/stream": {"post": {
+      "summary": "Register content using a bytestream/file",
+      "security": [{"oauth2schema": ["global"]}],
+      "produces": ["application/json;charset=UTF-8"],
+      "description": "Register content by supplying a file or some other binary data. Hashing will be done on the server side",
+      "operationId": "registerStream",
+      "responses": {
+        "200": {
+          "schema": {"$ref": "#/definitions/RegisterContentResponse"},
+          "description": "Content already registered"
+        },
+        "400": {
+          "schema": {"$ref": "#/definitions/VndErrors"},
+          "description": "Invalid registration request"
+        },
+        "202": {
+          "schema": {"$ref": "#/definitions/RegisterContentResponse"},
+          "description": "Registration request received"
+        }
+      },
+      "parameters": [
+        {
+          "in": "path",
+          "name": "chainId",
+          "description": "The chain where the content will be registered",
+          "type": "string",
+          "required": true
+        },
+        {
+          "in": "formData",
+          "name": "stream",
+          "description": "The binary data (not hashed). Hashing will be done on the server side. The binary data will not be stored",
+          "type": "file",
+          "required": true
+        }
+      ],
+      "tags": [
+        "Proof of Existence",
+        "All"
+      ],
+      "consumes": ["multipart/form-data"]
+    }},
+    "/blockchain/proof/0.1.0/existence/{chainId}/register/content": {"post": {
+      "summary": "Register content",
+      "security": [{"oauth2schema": ["global"]}],
+      "produces": ["application/json;charset=UTF-8"],
+      "operationId": "registerContent",
+      "responses": {
+        "200": {
+          "schema": {"$ref": "#/definitions/RegisterContentResponse"},
+          "description": "Content already registereds"
+        },
+        "400": {
+          "schema": {"$ref": "#/definitions/VndErrors"},
+          "description": "Invalid registration request"
+        },
+        "202": {
+          "schema": {"$ref": "#/definitions/RegisterContentResponse"},
+          "description": "Registration request received"
+        }
+      },
+      "parameters": [
+        {
+          "in": "path",
+          "name": "chainId",
+          "description": "The chain where the content will be registered",
+          "type": "string",
+          "required": true
+        },
+        {
+          "schema": {"$ref": "#/definitions/ContentRequest"},
+          "in": "body",
+          "name": "existence",
+          "description": "Register content using the current entity settings",
+          "required": true
+        }
+      ],
+      "tags": [
+        "Proof of Existence",
+        "All"
+      ],
+      "consumes": ["application/json;charset=UTF-8"]
+    }}
   },
   "host": "gw.api.cloud.sphereon.com",
   "schemes": ["https"],

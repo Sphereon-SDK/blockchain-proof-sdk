@@ -4,10 +4,10 @@ All URIs are relative to *https://gw.api.cloud.sphereon.com/*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**registerContent**](ProofOfExistenceApi.md#registerContent) | **POST** /blockchain/proof/0.1.0/existence/{chainId}/content | Register content
-[**registerStream**](ProofOfExistenceApi.md#registerStream) | **POST** /blockchain/proof/0.1.0/existence/{chainId}/stream | Register content using a bytestream/file
-[**verifyContent**](ProofOfExistenceApi.md#verifyContent) | **GET** /blockchain/proof/0.1.0/existence/{chainId}/content | Verify content
-[**verifyStream**](ProofOfExistenceApi.md#verifyStream) | **GET** /blockchain/proof/0.1.0/existence/{chainId}/stream | Verify content using a bytestream/file
+[**registerContent**](ProofOfExistenceApi.md#registerContent) | **POST** /blockchain/proof/0.1.0/existence/{chainId}/register/content | Register content
+[**registerStream**](ProofOfExistenceApi.md#registerStream) | **POST** /blockchain/proof/0.1.0/existence/{chainId}/register/stream | Register content using a bytestream/file
+[**verifyContent**](ProofOfExistenceApi.md#verifyContent) | **POST** /blockchain/proof/0.1.0/existence/{chainId}/verify/content | Verify content
+[**verifyStream**](ProofOfExistenceApi.md#verifyStream) | **POST** /blockchain/proof/0.1.0/existence/{chainId}/verify/stream | Verify content using a bytestream/file
 
 
 <a name="registerContent"></a>
@@ -29,7 +29,7 @@ var apiInstance = new BlockchainProof.ProofOfExistenceApi();
 
 var chainId = "chainId_example"; // String | The chain where the content will be registered
 
-var existence = new BlockchainProof.ContentRequest(); // ContentRequest | Register content using the current existence settings
+var existence = new BlockchainProof.ContentRequest(); // ContentRequest | Register content using the current entity settings
 
 
 var callback = function(error, data, response) {
@@ -47,7 +47,7 @@ apiInstance.registerContent(chainId, existence, callback);
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **chainId** | **String**| The chain where the content will be registered | 
- **existence** | [**ContentRequest**](ContentRequest.md)| Register content using the current existence settings | 
+ **existence** | [**ContentRequest**](ContentRequest.md)| Register content using the current entity settings | 
 
 ### Return type
 
@@ -135,7 +135,7 @@ var apiInstance = new BlockchainProof.ProofOfExistenceApi();
 
 var chainId = "chainId_example"; // String | The chain where the content was registered
 
-var existence = new BlockchainProof.ContentRequest(); // ContentRequest | Verify content using the current existence settings
+var existence = new BlockchainProof.ContentRequest(); // ContentRequest | Verify content using the current entity settings
 
 
 var callback = function(error, data, response) {
@@ -153,7 +153,7 @@ apiInstance.verifyContent(chainId, existence, callback);
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **chainId** | **String**| The chain where the content was registered | 
- **existence** | [**ContentRequest**](ContentRequest.md)| Verify content using the current existence settings | 
+ **existence** | [**ContentRequest**](ContentRequest.md)| Verify content using the current entity settings | 
 
 ### Return type
 
@@ -174,7 +174,7 @@ Name | Type | Description  | Notes
 
 Verify content using a bytestream/file
 
-Register content by supplying a file or some other binary data. Hashing will be done on the server side
+Verify content by supplying a file or some other binary data. Hashing will be done on the server side
 
 ### Example
 ```javascript
@@ -187,7 +187,7 @@ oauth2schema.accessToken = 'YOUR ACCESS TOKEN';
 
 var apiInstance = new BlockchainProof.ProofOfExistenceApi();
 
-var chainId = "chainId_example"; // String | The chain where the content will be registered
+var chainId = "chainId_example"; // String | The chain where the content will be verified
 
 var stream = "/path/to/file.txt"; // File | The binary data (not hashed). Hashing will be done on the server side. The binary data will not be stored
 
@@ -206,7 +206,7 @@ apiInstance.verifyStream(chainId, stream, callback);
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **chainId** | **String**| The chain where the content will be registered | 
+ **chainId** | **String**| The chain where the content will be verified | 
  **stream** | **File**| The binary data (not hashed). Hashing will be done on the server side. The binary data will not be stored | 
 
 ### Return type

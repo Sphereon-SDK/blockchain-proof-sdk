@@ -37,47 +37,47 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
     {
         #region Synchronous Operations
         /// <summary>
-        /// Create a new existence chain
+        /// Create a new entity chain
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="Sphereon.SDK.Blockchain.Proof.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="request">Create a new Proof of Existence chain using the provided existence settings</param>
+        /// <param name="request">Create a new Proof of Existence chain using the provided entity settings</param>
         /// <returns>CreateChainResponse</returns>
         CreateChainResponse CreateChain (CreateChainRequest request);
 
         /// <summary>
-        /// Create a new existence chain
+        /// Create a new entity chain
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="Sphereon.SDK.Blockchain.Proof.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="request">Create a new Proof of Existence chain using the provided existence settings</param>
+        /// <param name="request">Create a new Proof of Existence chain using the provided entity settings</param>
         /// <returns>ApiResponse of CreateChainResponse</returns>
         ApiResponse<CreateChainResponse> CreateChainWithHttpInfo (CreateChainRequest request);
         #endregion Synchronous Operations
         #region Asynchronous Operations
         /// <summary>
-        /// Create a new existence chain
+        /// Create a new entity chain
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="Sphereon.SDK.Blockchain.Proof.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="request">Create a new Proof of Existence chain using the provided existence settings</param>
+        /// <param name="request">Create a new Proof of Existence chain using the provided entity settings</param>
         /// <returns>Task of CreateChainResponse</returns>
         System.Threading.Tasks.Task<CreateChainResponse> CreateChainAsync (CreateChainRequest request);
 
         /// <summary>
-        /// Create a new existence chain
+        /// Create a new entity chain
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="Sphereon.SDK.Blockchain.Proof.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="request">Create a new Proof of Existence chain using the provided existence settings</param>
+        /// <param name="request">Create a new Proof of Existence chain using the provided entity settings</param>
         /// <returns>Task of ApiResponse (CreateChainResponse)</returns>
         System.Threading.Tasks.Task<ApiResponse<CreateChainResponse>> CreateChainAsyncWithHttpInfo (CreateChainRequest request);
         #endregion Asynchronous Operations
@@ -193,10 +193,10 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
         }
 
         /// <summary>
-        /// Create a new existence chain 
+        /// Create a new entity chain 
         /// </summary>
         /// <exception cref="Sphereon.SDK.Blockchain.Proof.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="request">Create a new Proof of Existence chain using the provided existence settings</param>
+        /// <param name="request">Create a new Proof of Existence chain using the provided entity settings</param>
         /// <returns>CreateChainResponse</returns>
         public CreateChainResponse CreateChain (CreateChainRequest request)
         {
@@ -205,10 +205,10 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
         }
 
         /// <summary>
-        /// Create a new existence chain 
+        /// Create a new entity chain 
         /// </summary>
         /// <exception cref="Sphereon.SDK.Blockchain.Proof.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="request">Create a new Proof of Existence chain using the provided existence settings</param>
+        /// <param name="request">Create a new Proof of Existence chain using the provided entity settings</param>
         /// <returns>ApiResponse of CreateChainResponse</returns>
         public ApiResponse< CreateChainResponse > CreateChainWithHttpInfo (CreateChainRequest request)
         {
@@ -277,10 +277,10 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
         }
 
         /// <summary>
-        /// Create a new existence chain 
+        /// Create a new entity chain 
         /// </summary>
         /// <exception cref="Sphereon.SDK.Blockchain.Proof.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="request">Create a new Proof of Existence chain using the provided existence settings</param>
+        /// <param name="request">Create a new Proof of Existence chain using the provided entity settings</param>
         /// <returns>Task of CreateChainResponse</returns>
         public async System.Threading.Tasks.Task<CreateChainResponse> CreateChainAsync (CreateChainRequest request)
         {
@@ -290,10 +290,10 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
         }
 
         /// <summary>
-        /// Create a new existence chain 
+        /// Create a new entity chain 
         /// </summary>
         /// <exception cref="Sphereon.SDK.Blockchain.Proof.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="request">Create a new Proof of Existence chain using the provided existence settings</param>
+        /// <param name="request">Create a new Proof of Existence chain using the provided entity settings</param>
         /// <returns>Task of ApiResponse (CreateChainResponse)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<CreateChainResponse>> CreateChainAsyncWithHttpInfo (CreateChainRequest request)
         {

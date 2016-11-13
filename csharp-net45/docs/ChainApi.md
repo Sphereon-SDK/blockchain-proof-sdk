@@ -4,14 +4,14 @@ All URIs are relative to *https://gw.api.cloud.sphereon.com/*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CreateChain**](ChainApi.md#createchain) | **POST** /blockchain/proof/0.1.0/existence | Create a new existence chain
+[**CreateChain**](ChainApi.md#createchain) | **POST** /blockchain/proof/0.1.0/existence | Create a new entity chain
 
 
 <a name="createchain"></a>
 # **CreateChain**
 > CreateChainResponse CreateChain (CreateChainRequest request)
 
-Create a new existence chain
+Create a new entity chain
 
 ### Example
 ```csharp
@@ -32,11 +32,11 @@ namespace Example
             Configuration.Default.AccessToken = "YOUR_ACCESS_TOKEN";
 
             var apiInstance = new ChainApi();
-            var request = new CreateChainRequest(); // CreateChainRequest | Create a new Proof of Existence chain using the provided existence settings
+            var request = new CreateChainRequest(); // CreateChainRequest | Create a new Proof of Existence chain using the provided entity settings
 
             try
             {
-                // Create a new existence chain
+                // Create a new entity chain
                 CreateChainResponse result = apiInstance.CreateChain(request);
                 Debug.WriteLine(result);
             }
@@ -53,7 +53,7 @@ namespace Example
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **request** | [**CreateChainRequest**](CreateChainRequest.md)| Create a new Proof of Existence chain using the provided existence settings | 
+ **request** | [**CreateChainRequest**](CreateChainRequest.md)| Create a new Proof of Existence chain using the provided entity settings | 
 
 ### Return type
 

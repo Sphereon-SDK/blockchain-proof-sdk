@@ -4,14 +4,14 @@ All URIs are relative to *https://gw.api.cloud.sphereon.com/*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**createChain**](ChainApi.md#createChain) | **POST** /blockchain/proof/0.1.0/existence | Create a new existence chain
+[**createChain**](ChainApi.md#createChain) | **POST** /blockchain/proof/0.1.0/existence | Create a new entity chain
 
 
 <a name="createChain"></a>
 # **createChain**
 > CreateChainResponse createChain(request)
 
-Create a new existence chain
+Create a new entity chain
 
 ### Example
 ```javascript
@@ -24,7 +24,7 @@ oauth2schema.accessToken = 'YOUR ACCESS TOKEN';
 
 var apiInstance = new BlockchainProof.ChainApi();
 
-var request = new BlockchainProof.CreateChainRequest(); // CreateChainRequest | Create a new Proof of Existence chain using the provided existence settings
+var request = new BlockchainProof.CreateChainRequest(); // CreateChainRequest | Create a new Proof of Existence chain using the provided entity settings
 
 
 var callback = function(error, data, response) {
@@ -41,7 +41,7 @@ apiInstance.createChain(request, callback);
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **request** | [**CreateChainRequest**](CreateChainRequest.md)| Create a new Proof of Existence chain using the provided existence settings | 
+ **request** | [**CreateChainRequest**](CreateChainRequest.md)| Create a new Proof of Existence chain using the provided entity settings | 
 
 ### Return type
 

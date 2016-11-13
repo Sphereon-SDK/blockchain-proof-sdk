@@ -65,8 +65,8 @@
      */
 
     /**
-     * Create a new existence chain
-     * @param {module:SphereonSDKBlockchainProof/model/CreateChainRequest} request Create a new Proof of Existence chain using the provided existence settings
+     * Create a new entity chain
+     * @param {module:SphereonSDKBlockchainProof/model/CreateChainRequest} request Create a new Proof of Existence chain using the provided entity settings
      * @param {module:SphereonSDKBlockchainProof/api/ChainApi~createChainCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {@link module:SphereonSDKBlockchainProof/model/CreateChainResponse}
      */

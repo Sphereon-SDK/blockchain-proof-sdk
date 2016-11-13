@@ -4,10 +4,10 @@ All URIs are relative to *https://gw.api.cloud.sphereon.com/*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**RegisterContent**](ProofOfExistenceApi.md#registercontent) | **POST** /blockchain/proof/0.1.0/existence/{chainId}/content | Register content
-[**RegisterStream**](ProofOfExistenceApi.md#registerstream) | **POST** /blockchain/proof/0.1.0/existence/{chainId}/stream | Register content using a bytestream/file
-[**VerifyContent**](ProofOfExistenceApi.md#verifycontent) | **GET** /blockchain/proof/0.1.0/existence/{chainId}/content | Verify content
-[**VerifyStream**](ProofOfExistenceApi.md#verifystream) | **GET** /blockchain/proof/0.1.0/existence/{chainId}/stream | Verify content using a bytestream/file
+[**RegisterContent**](ProofOfExistenceApi.md#registercontent) | **POST** /blockchain/proof/0.1.0/existence/{chainId}/register/content | Register content
+[**RegisterStream**](ProofOfExistenceApi.md#registerstream) | **POST** /blockchain/proof/0.1.0/existence/{chainId}/register/stream | Register content using a bytestream/file
+[**VerifyContent**](ProofOfExistenceApi.md#verifycontent) | **POST** /blockchain/proof/0.1.0/existence/{chainId}/verify/content | Verify content
+[**VerifyStream**](ProofOfExistenceApi.md#verifystream) | **POST** /blockchain/proof/0.1.0/existence/{chainId}/verify/stream | Verify content using a bytestream/file
 
 
 <a name="registercontent"></a>
@@ -36,7 +36,7 @@ namespace Example
 
             var apiInstance = new ProofOfExistenceApi();
             var chainId = chainId_example;  // string | The chain where the content will be registered
-            var existence = new ContentRequest(); // ContentRequest | Register content using the current existence settings
+            var existence = new ContentRequest(); // ContentRequest | Register content using the current entity settings
 
             try
             {
@@ -58,7 +58,7 @@ namespace Example
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **chainId** | **string**| The chain where the content will be registered | 
- **existence** | [**ContentRequest**](ContentRequest.md)| Register content using the current existence settings | 
+ **existence** | [**ContentRequest**](ContentRequest.md)| Register content using the current entity settings | 
 
 ### Return type
 
@@ -168,7 +168,7 @@ namespace Example
 
             var apiInstance = new ProofOfExistenceApi();
             var chainId = chainId_example;  // string | The chain where the content was registered
-            var existence = new ContentRequest(); // ContentRequest | Verify content using the current existence settings
+            var existence = new ContentRequest(); // ContentRequest | Verify content using the current entity settings
 
             try
             {
@@ -190,7 +190,7 @@ namespace Example
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **chainId** | **string**| The chain where the content was registered | 
- **existence** | [**ContentRequest**](ContentRequest.md)| Verify content using the current existence settings | 
+ **existence** | [**ContentRequest**](ContentRequest.md)| Verify content using the current entity settings | 
 
 ### Return type
 
@@ -213,7 +213,7 @@ Name | Type | Description  | Notes
 
 Verify content using a bytestream/file
 
-Register content by supplying a file or some other binary data. Hashing will be done on the server side
+Verify content by supplying a file or some other binary data. Hashing will be done on the server side
 
 ### Example
 ```csharp
@@ -234,7 +234,7 @@ namespace Example
             Configuration.Default.AccessToken = "YOUR_ACCESS_TOKEN";
 
             var apiInstance = new ProofOfExistenceApi();
-            var chainId = chainId_example;  // string | The chain where the content will be registered
+            var chainId = chainId_example;  // string | The chain where the content will be verified
             var stream = new System.IO.Stream(); // System.IO.Stream | The binary data (not hashed). Hashing will be done on the server side. The binary data will not be stored
 
             try
@@ -256,7 +256,7 @@ namespace Example
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **chainId** | **string**| The chain where the content will be registered | 
+ **chainId** | **string**| The chain where the content will be verified | 
  **stream** | **System.IO.Stream**| The binary data (not hashed). Hashing will be done on the server side. The binary data will not be stored | 
 
 ### Return type

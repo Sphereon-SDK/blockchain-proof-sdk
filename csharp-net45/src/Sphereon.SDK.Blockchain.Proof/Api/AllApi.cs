@@ -37,24 +37,24 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
     {
         #region Synchronous Operations
         /// <summary>
-        /// Create a new existence chain
+        /// Create a new entity chain
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="Sphereon.SDK.Blockchain.Proof.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="request">Create a new Proof of Existence chain using the provided existence settings</param>
+        /// <param name="request">Create a new Proof of Existence chain using the provided entity settings</param>
         /// <returns>CreateChainResponse</returns>
         CreateChainResponse CreateChain (CreateChainRequest request);
 
         /// <summary>
-        /// Create a new existence chain
+        /// Create a new entity chain
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="Sphereon.SDK.Blockchain.Proof.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="request">Create a new Proof of Existence chain using the provided existence settings</param>
+        /// <param name="request">Create a new Proof of Existence chain using the provided entity settings</param>
         /// <returns>ApiResponse of CreateChainResponse</returns>
         ApiResponse<CreateChainResponse> CreateChainWithHttpInfo (CreateChainRequest request);
         /// <summary>
@@ -65,7 +65,7 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
         /// </remarks>
         /// <exception cref="Sphereon.SDK.Blockchain.Proof.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="chainId">The chain where the content will be registered</param>
-        /// <param name="existence">Register content using the current existence settings</param>
+        /// <param name="existence">Register content using the current entity settings</param>
         /// <returns>RegisterContentResponse</returns>
         RegisterContentResponse RegisterContent (string chainId, ContentRequest existence);
 
@@ -77,7 +77,7 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
         /// </remarks>
         /// <exception cref="Sphereon.SDK.Blockchain.Proof.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="chainId">The chain where the content will be registered</param>
-        /// <param name="existence">Register content using the current existence settings</param>
+        /// <param name="existence">Register content using the current entity settings</param>
         /// <returns>ApiResponse of RegisterContentResponse</returns>
         ApiResponse<RegisterContentResponse> RegisterContentWithHttpInfo (string chainId, ContentRequest existence);
         /// <summary>
@@ -132,7 +132,7 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
         /// </remarks>
         /// <exception cref="Sphereon.SDK.Blockchain.Proof.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="chainId">The chain where the content was registered</param>
-        /// <param name="existence">Verify content using the current existence settings</param>
+        /// <param name="existence">Verify content using the current entity settings</param>
         /// <returns>VerifyContentResponse</returns>
         VerifyContentResponse VerifyContent (string chainId, ContentRequest existence);
 
@@ -144,17 +144,17 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
         /// </remarks>
         /// <exception cref="Sphereon.SDK.Blockchain.Proof.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="chainId">The chain where the content was registered</param>
-        /// <param name="existence">Verify content using the current existence settings</param>
+        /// <param name="existence">Verify content using the current entity settings</param>
         /// <returns>ApiResponse of VerifyContentResponse</returns>
         ApiResponse<VerifyContentResponse> VerifyContentWithHttpInfo (string chainId, ContentRequest existence);
         /// <summary>
         /// Verify content using a bytestream/file
         /// </summary>
         /// <remarks>
-        /// Register content by supplying a file or some other binary data. Hashing will be done on the server side
+        /// Verify content by supplying a file or some other binary data. Hashing will be done on the server side
         /// </remarks>
         /// <exception cref="Sphereon.SDK.Blockchain.Proof.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="chainId">The chain where the content will be registered</param>
+        /// <param name="chainId">The chain where the content will be verified</param>
         /// <param name="stream">The binary data (not hashed). Hashing will be done on the server side. The binary data will not be stored</param>
         /// <returns>VerifyContentResponse</returns>
         VerifyContentResponse VerifyStream (string chainId, System.IO.Stream stream);
@@ -163,34 +163,34 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
         /// Verify content using a bytestream/file
         /// </summary>
         /// <remarks>
-        /// Register content by supplying a file or some other binary data. Hashing will be done on the server side
+        /// Verify content by supplying a file or some other binary data. Hashing will be done on the server side
         /// </remarks>
         /// <exception cref="Sphereon.SDK.Blockchain.Proof.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="chainId">The chain where the content will be registered</param>
+        /// <param name="chainId">The chain where the content will be verified</param>
         /// <param name="stream">The binary data (not hashed). Hashing will be done on the server side. The binary data will not be stored</param>
         /// <returns>ApiResponse of VerifyContentResponse</returns>
         ApiResponse<VerifyContentResponse> VerifyStreamWithHttpInfo (string chainId, System.IO.Stream stream);
         #endregion Synchronous Operations
         #region Asynchronous Operations
         /// <summary>
-        /// Create a new existence chain
+        /// Create a new entity chain
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="Sphereon.SDK.Blockchain.Proof.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="request">Create a new Proof of Existence chain using the provided existence settings</param>
+        /// <param name="request">Create a new Proof of Existence chain using the provided entity settings</param>
         /// <returns>Task of CreateChainResponse</returns>
         System.Threading.Tasks.Task<CreateChainResponse> CreateChainAsync (CreateChainRequest request);
 
         /// <summary>
-        /// Create a new existence chain
+        /// Create a new entity chain
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="Sphereon.SDK.Blockchain.Proof.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="request">Create a new Proof of Existence chain using the provided existence settings</param>
+        /// <param name="request">Create a new Proof of Existence chain using the provided entity settings</param>
         /// <returns>Task of ApiResponse (CreateChainResponse)</returns>
         System.Threading.Tasks.Task<ApiResponse<CreateChainResponse>> CreateChainAsyncWithHttpInfo (CreateChainRequest request);
         /// <summary>
@@ -201,7 +201,7 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
         /// </remarks>
         /// <exception cref="Sphereon.SDK.Blockchain.Proof.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="chainId">The chain where the content will be registered</param>
-        /// <param name="existence">Register content using the current existence settings</param>
+        /// <param name="existence">Register content using the current entity settings</param>
         /// <returns>Task of RegisterContentResponse</returns>
         System.Threading.Tasks.Task<RegisterContentResponse> RegisterContentAsync (string chainId, ContentRequest existence);
 
@@ -213,7 +213,7 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
         /// </remarks>
         /// <exception cref="Sphereon.SDK.Blockchain.Proof.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="chainId">The chain where the content will be registered</param>
-        /// <param name="existence">Register content using the current existence settings</param>
+        /// <param name="existence">Register content using the current entity settings</param>
         /// <returns>Task of ApiResponse (RegisterContentResponse)</returns>
         System.Threading.Tasks.Task<ApiResponse<RegisterContentResponse>> RegisterContentAsyncWithHttpInfo (string chainId, ContentRequest existence);
         /// <summary>
@@ -268,7 +268,7 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
         /// </remarks>
         /// <exception cref="Sphereon.SDK.Blockchain.Proof.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="chainId">The chain where the content was registered</param>
-        /// <param name="existence">Verify content using the current existence settings</param>
+        /// <param name="existence">Verify content using the current entity settings</param>
         /// <returns>Task of VerifyContentResponse</returns>
         System.Threading.Tasks.Task<VerifyContentResponse> VerifyContentAsync (string chainId, ContentRequest existence);
 
@@ -280,17 +280,17 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
         /// </remarks>
         /// <exception cref="Sphereon.SDK.Blockchain.Proof.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="chainId">The chain where the content was registered</param>
-        /// <param name="existence">Verify content using the current existence settings</param>
+        /// <param name="existence">Verify content using the current entity settings</param>
         /// <returns>Task of ApiResponse (VerifyContentResponse)</returns>
         System.Threading.Tasks.Task<ApiResponse<VerifyContentResponse>> VerifyContentAsyncWithHttpInfo (string chainId, ContentRequest existence);
         /// <summary>
         /// Verify content using a bytestream/file
         /// </summary>
         /// <remarks>
-        /// Register content by supplying a file or some other binary data. Hashing will be done on the server side
+        /// Verify content by supplying a file or some other binary data. Hashing will be done on the server side
         /// </remarks>
         /// <exception cref="Sphereon.SDK.Blockchain.Proof.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="chainId">The chain where the content will be registered</param>
+        /// <param name="chainId">The chain where the content will be verified</param>
         /// <param name="stream">The binary data (not hashed). Hashing will be done on the server side. The binary data will not be stored</param>
         /// <returns>Task of VerifyContentResponse</returns>
         System.Threading.Tasks.Task<VerifyContentResponse> VerifyStreamAsync (string chainId, System.IO.Stream stream);
@@ -299,10 +299,10 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
         /// Verify content using a bytestream/file
         /// </summary>
         /// <remarks>
-        /// Register content by supplying a file or some other binary data. Hashing will be done on the server side
+        /// Verify content by supplying a file or some other binary data. Hashing will be done on the server side
         /// </remarks>
         /// <exception cref="Sphereon.SDK.Blockchain.Proof.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="chainId">The chain where the content will be registered</param>
+        /// <param name="chainId">The chain where the content will be verified</param>
         /// <param name="stream">The binary data (not hashed). Hashing will be done on the server side. The binary data will not be stored</param>
         /// <returns>Task of ApiResponse (VerifyContentResponse)</returns>
         System.Threading.Tasks.Task<ApiResponse<VerifyContentResponse>> VerifyStreamAsyncWithHttpInfo (string chainId, System.IO.Stream stream);
@@ -419,10 +419,10 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
         }
 
         /// <summary>
-        /// Create a new existence chain 
+        /// Create a new entity chain 
         /// </summary>
         /// <exception cref="Sphereon.SDK.Blockchain.Proof.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="request">Create a new Proof of Existence chain using the provided existence settings</param>
+        /// <param name="request">Create a new Proof of Existence chain using the provided entity settings</param>
         /// <returns>CreateChainResponse</returns>
         public CreateChainResponse CreateChain (CreateChainRequest request)
         {
@@ -431,10 +431,10 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
         }
 
         /// <summary>
-        /// Create a new existence chain 
+        /// Create a new entity chain 
         /// </summary>
         /// <exception cref="Sphereon.SDK.Blockchain.Proof.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="request">Create a new Proof of Existence chain using the provided existence settings</param>
+        /// <param name="request">Create a new Proof of Existence chain using the provided entity settings</param>
         /// <returns>ApiResponse of CreateChainResponse</returns>
         public ApiResponse< CreateChainResponse > CreateChainWithHttpInfo (CreateChainRequest request)
         {
@@ -503,10 +503,10 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
         }
 
         /// <summary>
-        /// Create a new existence chain 
+        /// Create a new entity chain 
         /// </summary>
         /// <exception cref="Sphereon.SDK.Blockchain.Proof.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="request">Create a new Proof of Existence chain using the provided existence settings</param>
+        /// <param name="request">Create a new Proof of Existence chain using the provided entity settings</param>
         /// <returns>Task of CreateChainResponse</returns>
         public async System.Threading.Tasks.Task<CreateChainResponse> CreateChainAsync (CreateChainRequest request)
         {
@@ -516,10 +516,10 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
         }
 
         /// <summary>
-        /// Create a new existence chain 
+        /// Create a new entity chain 
         /// </summary>
         /// <exception cref="Sphereon.SDK.Blockchain.Proof.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="request">Create a new Proof of Existence chain using the provided existence settings</param>
+        /// <param name="request">Create a new Proof of Existence chain using the provided entity settings</param>
         /// <returns>Task of ApiResponse (CreateChainResponse)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<CreateChainResponse>> CreateChainAsyncWithHttpInfo (CreateChainRequest request)
         {
@@ -592,7 +592,7 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
         /// </summary>
         /// <exception cref="Sphereon.SDK.Blockchain.Proof.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="chainId">The chain where the content will be registered</param>
-        /// <param name="existence">Register content using the current existence settings</param>
+        /// <param name="existence">Register content using the current entity settings</param>
         /// <returns>RegisterContentResponse</returns>
         public RegisterContentResponse RegisterContent (string chainId, ContentRequest existence)
         {
@@ -605,7 +605,7 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
         /// </summary>
         /// <exception cref="Sphereon.SDK.Blockchain.Proof.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="chainId">The chain where the content will be registered</param>
-        /// <param name="existence">Register content using the current existence settings</param>
+        /// <param name="existence">Register content using the current entity settings</param>
         /// <returns>ApiResponse of RegisterContentResponse</returns>
         public ApiResponse< RegisterContentResponse > RegisterContentWithHttpInfo (string chainId, ContentRequest existence)
         {
@@ -616,7 +616,7 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
             if (existence == null)
                 throw new ApiException(400, "Missing required parameter 'existence' when calling AllApi->RegisterContent");
 
-            var localVarPath = "/blockchain/proof/0.1.0/existence/{chainId}/content";
+            var localVarPath = "/blockchain/proof/0.1.0/existence/{chainId}/register/content";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new Dictionary<String, String>();
             var localVarHeaderParams = new Dictionary<String, String>(Configuration.DefaultHeader);
@@ -682,7 +682,7 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
         /// </summary>
         /// <exception cref="Sphereon.SDK.Blockchain.Proof.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="chainId">The chain where the content will be registered</param>
-        /// <param name="existence">Register content using the current existence settings</param>
+        /// <param name="existence">Register content using the current entity settings</param>
         /// <returns>Task of RegisterContentResponse</returns>
         public async System.Threading.Tasks.Task<RegisterContentResponse> RegisterContentAsync (string chainId, ContentRequest existence)
         {
@@ -696,7 +696,7 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
         /// </summary>
         /// <exception cref="Sphereon.SDK.Blockchain.Proof.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="chainId">The chain where the content will be registered</param>
-        /// <param name="existence">Register content using the current existence settings</param>
+        /// <param name="existence">Register content using the current entity settings</param>
         /// <returns>Task of ApiResponse (RegisterContentResponse)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<RegisterContentResponse>> RegisterContentAsyncWithHttpInfo (string chainId, ContentRequest existence)
         {
@@ -707,7 +707,7 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
             if (existence == null)
                 throw new ApiException(400, "Missing required parameter 'existence' when calling AllApi->RegisterContent");
 
-            var localVarPath = "/blockchain/proof/0.1.0/existence/{chainId}/content";
+            var localVarPath = "/blockchain/proof/0.1.0/existence/{chainId}/register/content";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new Dictionary<String, String>();
             var localVarHeaderParams = new Dictionary<String, String>(Configuration.DefaultHeader);
@@ -797,7 +797,7 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
             if (stream == null)
                 throw new ApiException(400, "Missing required parameter 'stream' when calling AllApi->RegisterStream");
 
-            var localVarPath = "/blockchain/proof/0.1.0/existence/{chainId}/stream";
+            var localVarPath = "/blockchain/proof/0.1.0/existence/{chainId}/register/stream";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new Dictionary<String, String>();
             var localVarHeaderParams = new Dictionary<String, String>(Configuration.DefaultHeader);
@@ -881,7 +881,7 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
             if (stream == null)
                 throw new ApiException(400, "Missing required parameter 'stream' when calling AllApi->RegisterStream");
 
-            var localVarPath = "/blockchain/proof/0.1.0/existence/{chainId}/stream";
+            var localVarPath = "/blockchain/proof/0.1.0/existence/{chainId}/register/stream";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new Dictionary<String, String>();
             var localVarHeaderParams = new Dictionary<String, String>(Configuration.DefaultHeader);
@@ -969,7 +969,7 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
 
             // to determine the Content-Type header
             String[] localVarHttpContentTypes = new String[] {
-                "application/json;charset=UTF-8"
+                "application/json"
             };
             String localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
@@ -1047,7 +1047,7 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
 
             // to determine the Content-Type header
             String[] localVarHttpContentTypes = new String[] {
-                "application/json;charset=UTF-8"
+                "application/json"
             };
             String localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
@@ -1095,7 +1095,7 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
         /// </summary>
         /// <exception cref="Sphereon.SDK.Blockchain.Proof.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="chainId">The chain where the content was registered</param>
-        /// <param name="existence">Verify content using the current existence settings</param>
+        /// <param name="existence">Verify content using the current entity settings</param>
         /// <returns>VerifyContentResponse</returns>
         public VerifyContentResponse VerifyContent (string chainId, ContentRequest existence)
         {
@@ -1108,7 +1108,7 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
         /// </summary>
         /// <exception cref="Sphereon.SDK.Blockchain.Proof.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="chainId">The chain where the content was registered</param>
-        /// <param name="existence">Verify content using the current existence settings</param>
+        /// <param name="existence">Verify content using the current entity settings</param>
         /// <returns>ApiResponse of VerifyContentResponse</returns>
         public ApiResponse< VerifyContentResponse > VerifyContentWithHttpInfo (string chainId, ContentRequest existence)
         {
@@ -1119,7 +1119,7 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
             if (existence == null)
                 throw new ApiException(400, "Missing required parameter 'existence' when calling AllApi->VerifyContent");
 
-            var localVarPath = "/blockchain/proof/0.1.0/existence/{chainId}/content";
+            var localVarPath = "/blockchain/proof/0.1.0/existence/{chainId}/verify/content";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new Dictionary<String, String>();
             var localVarHeaderParams = new Dictionary<String, String>(Configuration.DefaultHeader);
@@ -1163,7 +1163,7 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
 
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) Configuration.ApiClient.CallApi(localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
@@ -1185,7 +1185,7 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
         /// </summary>
         /// <exception cref="Sphereon.SDK.Blockchain.Proof.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="chainId">The chain where the content was registered</param>
-        /// <param name="existence">Verify content using the current existence settings</param>
+        /// <param name="existence">Verify content using the current entity settings</param>
         /// <returns>Task of VerifyContentResponse</returns>
         public async System.Threading.Tasks.Task<VerifyContentResponse> VerifyContentAsync (string chainId, ContentRequest existence)
         {
@@ -1199,7 +1199,7 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
         /// </summary>
         /// <exception cref="Sphereon.SDK.Blockchain.Proof.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="chainId">The chain where the content was registered</param>
-        /// <param name="existence">Verify content using the current existence settings</param>
+        /// <param name="existence">Verify content using the current entity settings</param>
         /// <returns>Task of ApiResponse (VerifyContentResponse)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<VerifyContentResponse>> VerifyContentAsyncWithHttpInfo (string chainId, ContentRequest existence)
         {
@@ -1210,7 +1210,7 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
             if (existence == null)
                 throw new ApiException(400, "Missing required parameter 'existence' when calling AllApi->VerifyContent");
 
-            var localVarPath = "/blockchain/proof/0.1.0/existence/{chainId}/content";
+            var localVarPath = "/blockchain/proof/0.1.0/existence/{chainId}/verify/content";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new Dictionary<String, String>();
             var localVarHeaderParams = new Dictionary<String, String>(Configuration.DefaultHeader);
@@ -1254,7 +1254,7 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
 
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
@@ -1272,10 +1272,10 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
         }
 
         /// <summary>
-        /// Verify content using a bytestream/file Register content by supplying a file or some other binary data. Hashing will be done on the server side
+        /// Verify content using a bytestream/file Verify content by supplying a file or some other binary data. Hashing will be done on the server side
         /// </summary>
         /// <exception cref="Sphereon.SDK.Blockchain.Proof.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="chainId">The chain where the content will be registered</param>
+        /// <param name="chainId">The chain where the content will be verified</param>
         /// <param name="stream">The binary data (not hashed). Hashing will be done on the server side. The binary data will not be stored</param>
         /// <returns>VerifyContentResponse</returns>
         public VerifyContentResponse VerifyStream (string chainId, System.IO.Stream stream)
@@ -1285,10 +1285,10 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
         }
 
         /// <summary>
-        /// Verify content using a bytestream/file Register content by supplying a file or some other binary data. Hashing will be done on the server side
+        /// Verify content using a bytestream/file Verify content by supplying a file or some other binary data. Hashing will be done on the server side
         /// </summary>
         /// <exception cref="Sphereon.SDK.Blockchain.Proof.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="chainId">The chain where the content will be registered</param>
+        /// <param name="chainId">The chain where the content will be verified</param>
         /// <param name="stream">The binary data (not hashed). Hashing will be done on the server side. The binary data will not be stored</param>
         /// <returns>ApiResponse of VerifyContentResponse</returns>
         public ApiResponse< VerifyContentResponse > VerifyStreamWithHttpInfo (string chainId, System.IO.Stream stream)
@@ -1300,7 +1300,7 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
             if (stream == null)
                 throw new ApiException(400, "Missing required parameter 'stream' when calling AllApi->VerifyStream");
 
-            var localVarPath = "/blockchain/proof/0.1.0/existence/{chainId}/stream";
+            var localVarPath = "/blockchain/proof/0.1.0/existence/{chainId}/verify/stream";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new Dictionary<String, String>();
             var localVarHeaderParams = new Dictionary<String, String>(Configuration.DefaultHeader);
@@ -1337,7 +1337,7 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
 
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) Configuration.ApiClient.CallApi(localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
@@ -1355,10 +1355,10 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
         }
 
         /// <summary>
-        /// Verify content using a bytestream/file Register content by supplying a file or some other binary data. Hashing will be done on the server side
+        /// Verify content using a bytestream/file Verify content by supplying a file or some other binary data. Hashing will be done on the server side
         /// </summary>
         /// <exception cref="Sphereon.SDK.Blockchain.Proof.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="chainId">The chain where the content will be registered</param>
+        /// <param name="chainId">The chain where the content will be verified</param>
         /// <param name="stream">The binary data (not hashed). Hashing will be done on the server side. The binary data will not be stored</param>
         /// <returns>Task of VerifyContentResponse</returns>
         public async System.Threading.Tasks.Task<VerifyContentResponse> VerifyStreamAsync (string chainId, System.IO.Stream stream)
@@ -1369,10 +1369,10 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
         }
 
         /// <summary>
-        /// Verify content using a bytestream/file Register content by supplying a file or some other binary data. Hashing will be done on the server side
+        /// Verify content using a bytestream/file Verify content by supplying a file or some other binary data. Hashing will be done on the server side
         /// </summary>
         /// <exception cref="Sphereon.SDK.Blockchain.Proof.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="chainId">The chain where the content will be registered</param>
+        /// <param name="chainId">The chain where the content will be verified</param>
         /// <param name="stream">The binary data (not hashed). Hashing will be done on the server side. The binary data will not be stored</param>
         /// <returns>Task of ApiResponse (VerifyContentResponse)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<VerifyContentResponse>> VerifyStreamAsyncWithHttpInfo (string chainId, System.IO.Stream stream)
@@ -1384,7 +1384,7 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
             if (stream == null)
                 throw new ApiException(400, "Missing required parameter 'stream' when calling AllApi->VerifyStream");
 
-            var localVarPath = "/blockchain/proof/0.1.0/existence/{chainId}/stream";
+            var localVarPath = "/blockchain/proof/0.1.0/existence/{chainId}/verify/stream";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new Dictionary<String, String>();
             var localVarHeaderParams = new Dictionary<String, String>(Configuration.DefaultHeader);
@@ -1421,7 +1421,7 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
 
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;

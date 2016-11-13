@@ -65,8 +65,8 @@
      */
 
     /**
-     * Create a new existence chain
-     * @param {module:SphereonSDKBlockchainProof/model/CreateChainRequest} request Create a new Proof of Existence chain using the provided existence settings
+     * Create a new entity chain
+     * @param {module:SphereonSDKBlockchainProof/model/CreateChainRequest} request Create a new Proof of Existence chain using the provided entity settings
      * @param {module:SphereonSDKBlockchainProof/api/AllApi~createChainCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {@link module:SphereonSDKBlockchainProof/model/CreateChainResponse}
      */
@@ -111,7 +111,7 @@
     /**
      * Register content
      * @param {String} chainId The chain where the content will be registered
-     * @param {module:SphereonSDKBlockchainProof/model/ContentRequest} existence Register content using the current existence settings
+     * @param {module:SphereonSDKBlockchainProof/model/ContentRequest} existence Register content using the current entity settings
      * @param {module:SphereonSDKBlockchainProof/api/AllApi~registerContentCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {@link module:SphereonSDKBlockchainProof/model/RegisterContentResponse}
      */
@@ -145,7 +145,7 @@
       var returnType = RegisterContentResponse;
 
       return this.apiClient.callApi(
-        '/blockchain/proof/0.1.0/existence/{chainId}/content', 'POST',
+        '/blockchain/proof/0.1.0/existence/{chainId}/register/content', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, callback
       );
@@ -198,7 +198,7 @@
       var returnType = RegisterContentResponse;
 
       return this.apiClient.callApi(
-        '/blockchain/proof/0.1.0/existence/{chainId}/stream', 'POST',
+        '/blockchain/proof/0.1.0/existence/{chainId}/register/stream', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, callback
       );
@@ -238,7 +238,7 @@
       };
 
       var authNames = ['oauth2schema'];
-      var contentTypes = ['application/json;charset=UTF-8'];
+      var contentTypes = ['application/json'];
       var accepts = ['application/json;charset=UTF-8'];
       var returnType = SettingsResponse;
 
@@ -260,7 +260,7 @@
     /**
      * Verify content
      * @param {String} chainId The chain where the content was registered
-     * @param {module:SphereonSDKBlockchainProof/model/ContentRequest} existence Verify content using the current existence settings
+     * @param {module:SphereonSDKBlockchainProof/model/ContentRequest} existence Verify content using the current entity settings
      * @param {module:SphereonSDKBlockchainProof/api/AllApi~verifyContentCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {@link module:SphereonSDKBlockchainProof/model/VerifyContentResponse}
      */
@@ -294,7 +294,7 @@
       var returnType = VerifyContentResponse;
 
       return this.apiClient.callApi(
-        '/blockchain/proof/0.1.0/existence/{chainId}/content', 'GET',
+        '/blockchain/proof/0.1.0/existence/{chainId}/verify/content', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, callback
       );
@@ -310,8 +310,8 @@
 
     /**
      * Verify content using a bytestream/file
-     * Register content by supplying a file or some other binary data. Hashing will be done on the server side
-     * @param {String} chainId The chain where the content will be registered
+     * Verify content by supplying a file or some other binary data. Hashing will be done on the server side
+     * @param {String} chainId The chain where the content will be verified
      * @param {File} stream The binary data (not hashed). Hashing will be done on the server side. The binary data will not be stored
      * @param {module:SphereonSDKBlockchainProof/api/AllApi~verifyStreamCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {@link module:SphereonSDKBlockchainProof/model/VerifyContentResponse}
@@ -347,7 +347,7 @@
       var returnType = VerifyContentResponse;
 
       return this.apiClient.callApi(
-        '/blockchain/proof/0.1.0/existence/{chainId}/stream', 'GET',
+        '/blockchain/proof/0.1.0/existence/{chainId}/verify/stream', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, callback
       );
