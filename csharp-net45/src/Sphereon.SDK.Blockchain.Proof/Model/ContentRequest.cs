@@ -40,9 +40,9 @@ namespace Sphereon.SDK.Blockchain.Proof.Model
     public partial class ContentRequest :  IEquatable<ContentRequest>
     {
         /// <summary>
-        /// When CLIENT is supplied the content should already have been hashed by you. When SERVER is supplied we will hash the content according to the supplied settings
+        /// When CLIENT is supplied the content should already have been hashed by you. When SERVER is supplied we will hash the content
         /// </summary>
-        /// <value>When CLIENT is supplied the content should already have been hashed by you. When SERVER is supplied we will hash the content according to the supplied settings</value>
+        /// <value>When CLIENT is supplied the content should already have been hashed by you. When SERVER is supplied we will hash the content</value>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum HashProviderEnum
         {
@@ -61,9 +61,9 @@ namespace Sphereon.SDK.Blockchain.Proof.Model
         }
 
         /// <summary>
-        /// When CLIENT is supplied the content should already have been hashed by you. When SERVER is supplied we will hash the content according to the supplied settings
+        /// When CLIENT is supplied the content should already have been hashed by you. When SERVER is supplied we will hash the content
         /// </summary>
-        /// <value>When CLIENT is supplied the content should already have been hashed by you. When SERVER is supplied we will hash the content according to the supplied settings</value>
+        /// <value>When CLIENT is supplied the content should already have been hashed by you. When SERVER is supplied we will hash the content</value>
         [DataMember(Name="hashProvider", EmitDefaultValue=false)]
         public HashProviderEnum? HashProvider { get; set; }
         /// <summary>
@@ -74,10 +74,9 @@ namespace Sphereon.SDK.Blockchain.Proof.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="ContentRequest" /> class.
         /// </summary>
-        /// <param name="Settings">Settings.</param>
-        /// <param name="HashProvider">When CLIENT is supplied the content should already have been hashed by you. When SERVER is supplied we will hash the content according to the supplied settings (required).</param>
+        /// <param name="HashProvider">When CLIENT is supplied the content should already have been hashed by you. When SERVER is supplied we will hash the content (required).</param>
         /// <param name="Content">The content to register. (required).</param>
-        public ContentRequest(Settings Settings = null, HashProviderEnum? HashProvider = null, byte[] Content = null)
+        public ContentRequest(HashProviderEnum? HashProvider = null, byte[] Content = null)
         {
             // to ensure "HashProvider" is required (not null)
             if (HashProvider == null)
@@ -97,14 +96,8 @@ namespace Sphereon.SDK.Blockchain.Proof.Model
             {
                 this.Content = Content;
             }
-            this.Settings = Settings;
         }
         
-        /// <summary>
-        /// Gets or Sets Settings
-        /// </summary>
-        [DataMember(Name="settings", EmitDefaultValue=false)]
-        public Settings Settings { get; set; }
         /// <summary>
         /// The content to register.
         /// </summary>
@@ -119,7 +112,6 @@ namespace Sphereon.SDK.Blockchain.Proof.Model
         {
             var sb = new StringBuilder();
             sb.Append("class ContentRequest {\n");
-            sb.Append("  Settings: ").Append(Settings).Append("\n");
             sb.Append("  HashProvider: ").Append(HashProvider).Append("\n");
             sb.Append("  Content: ").Append(Content).Append("\n");
             sb.Append("}\n");
@@ -159,11 +151,6 @@ namespace Sphereon.SDK.Blockchain.Proof.Model
 
             return 
                 (
-                    this.Settings == other.Settings ||
-                    this.Settings != null &&
-                    this.Settings.Equals(other.Settings)
-                ) && 
-                (
                     this.HashProvider == other.HashProvider ||
                     this.HashProvider != null &&
                     this.HashProvider.Equals(other.HashProvider)
@@ -186,8 +173,6 @@ namespace Sphereon.SDK.Blockchain.Proof.Model
             {
                 int hash = 41;
                 // Suitable nullity checks etc, of course :)
-                if (this.Settings != null)
-                    hash = hash * 59 + this.Settings.GetHashCode();
                 if (this.HashProvider != null)
                     hash = hash * 59 + this.HashProvider.GetHashCode();
                 if (this.Content != null)

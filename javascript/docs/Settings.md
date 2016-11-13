@@ -3,9 +3,17 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**includeContentSize** | **Boolean** | Include the content size in the hash calculation. | 
-**version** | **String** | The settings version (only 1 for now) | 
+**version** | **Integer** | The settings version (only 1 for now) | 
 **hashAlgorithm** | **String** | The hashing method used (CLIENT) or to use (SERVER) for the content | [optional] 
+
+
+<a name="VersionEnum"></a>
+## Enum: VersionEnum
+
+
+* `1` (value: `1`)
+
+
 
 
 <a name="HashAlgorithmEnum"></a>

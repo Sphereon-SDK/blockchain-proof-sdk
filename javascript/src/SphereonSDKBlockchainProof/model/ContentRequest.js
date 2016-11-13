@@ -25,18 +25,18 @@
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
-    define(['SphereonSDKBlockchainProof/ApiClient', 'SphereonSDKBlockchainProof/model/Settings'], factory);
+    define(['SphereonSDKBlockchainProof/ApiClient'], factory);
   } else if (typeof module === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('./Settings'));
+    module.exports = factory(require('../ApiClient'));
   } else {
     // Browser globals (root is window)
     if (!root.BlockchainProof) {
       root.BlockchainProof = {};
     }
-    root.BlockchainProof.ContentRequest = factory(root.BlockchainProof.ApiClient, root.BlockchainProof.Settings);
+    root.BlockchainProof.ContentRequest = factory(root.BlockchainProof.ApiClient);
   }
-}(this, function(ApiClient, Settings) {
+}(this, function(ApiClient) {
   'use strict';
 
 
@@ -53,12 +53,11 @@
    * Content existence request
    * @alias module:SphereonSDKBlockchainProof/model/ContentRequest
    * @class
-   * @param hashProvider {module:SphereonSDKBlockchainProof/model/ContentRequest.HashProviderEnum} When CLIENT is supplied the content should already have been hashed by you. When SERVER is supplied we will hash the content according to the supplied settings
+   * @param hashProvider {module:SphereonSDKBlockchainProof/model/ContentRequest.HashProviderEnum} When CLIENT is supplied the content should already have been hashed by you. When SERVER is supplied we will hash the content
    * @param content {String} The content to register.
    */
   var exports = function(hashProvider, content) {
     var _this = this;
-
 
     _this['hashProvider'] = hashProvider;
     _this['content'] = content;
@@ -75,9 +74,6 @@
     if (data) {
       obj = obj || new exports();
 
-      if (data.hasOwnProperty('settings')) {
-        obj['settings'] = Settings.constructFromObject(data['settings']);
-      }
       if (data.hasOwnProperty('hashProvider')) {
         obj['hashProvider'] = ApiClient.convertToType(data['hashProvider'], 'String');
       }
@@ -89,11 +85,7 @@
   }
 
   /**
-   * @member {module:SphereonSDKBlockchainProof/model/Settings} settings
-   */
-  exports.prototype['settings'] = undefined;
-  /**
-   * When CLIENT is supplied the content should already have been hashed by you. When SERVER is supplied we will hash the content according to the supplied settings
+   * When CLIENT is supplied the content should already have been hashed by you. When SERVER is supplied we will hash the content
    * @member {module:SphereonSDKBlockchainProof/model/ContentRequest.HashProviderEnum} hashProvider
    */
   exports.prototype['hashProvider'] = undefined;

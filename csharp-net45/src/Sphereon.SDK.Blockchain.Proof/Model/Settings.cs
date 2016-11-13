@@ -34,11 +34,26 @@ using Newtonsoft.Json.Converters;
 namespace Sphereon.SDK.Blockchain.Proof.Model
 {
     /// <summary>
-    /// Existence Settings
+    /// Existence Settings. Normally you only supply them once during chain creation or during a settings update. You can also supply them during a content request, but then it is up to you to also supply the correct setting during verify
     /// </summary>
     [DataContract]
     public partial class Settings :  IEquatable<Settings>
     {
+        /// <summary>
+        /// The settings version (only 1 for now)
+        /// </summary>
+        /// <value>The settings version (only 1 for now)</value>
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum VersionEnum
+        {
+            
+            /// <summary>
+            /// Enum NUMBER_1 for 1
+            /// </summary>
+            [EnumMember(Value = "1")]
+            NUMBER_1 = 1
+        }
+
         /// <summary>
         /// The hashing method used (CLIENT) or to use (SERVER) for the content
         /// </summary>
@@ -67,6 +82,12 @@ namespace Sphereon.SDK.Blockchain.Proof.Model
         }
 
         /// <summary>
+        /// The settings version (only 1 for now)
+        /// </summary>
+        /// <value>The settings version (only 1 for now)</value>
+        [DataMember(Name="version", EmitDefaultValue=false)]
+        public VersionEnum? Version { get; set; }
+        /// <summary>
         /// The hashing method used (CLIENT) or to use (SERVER) for the content
         /// </summary>
         /// <value>The hashing method used (CLIENT) or to use (SERVER) for the content</value>
@@ -80,20 +101,10 @@ namespace Sphereon.SDK.Blockchain.Proof.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="Settings" /> class.
         /// </summary>
-        /// <param name="IncludeContentSize">Include the content size in the hash calculation. (required).</param>
         /// <param name="Version">The settings version (only 1 for now) (required).</param>
         /// <param name="HashAlgorithm">The hashing method used (CLIENT) or to use (SERVER) for the content.</param>
-        public Settings(bool? IncludeContentSize = null, byte[] Version = null, HashAlgorithmEnum? HashAlgorithm = null)
+        public Settings(VersionEnum? Version = null, HashAlgorithmEnum? HashAlgorithm = null)
         {
-            // to ensure "IncludeContentSize" is required (not null)
-            if (IncludeContentSize == null)
-            {
-                throw new InvalidDataException("IncludeContentSize is a required property for Settings and cannot be null");
-            }
-            else
-            {
-                this.IncludeContentSize = IncludeContentSize;
-            }
             // to ensure "Version" is required (not null)
             if (Version == null)
             {
@@ -107,18 +118,6 @@ namespace Sphereon.SDK.Blockchain.Proof.Model
         }
         
         /// <summary>
-        /// Include the content size in the hash calculation.
-        /// </summary>
-        /// <value>Include the content size in the hash calculation.</value>
-        [DataMember(Name="includeContentSize", EmitDefaultValue=false)]
-        public bool? IncludeContentSize { get; set; }
-        /// <summary>
-        /// The settings version (only 1 for now)
-        /// </summary>
-        /// <value>The settings version (only 1 for now)</value>
-        [DataMember(Name="version", EmitDefaultValue=false)]
-        public byte[] Version { get; set; }
-        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -126,7 +125,6 @@ namespace Sphereon.SDK.Blockchain.Proof.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Settings {\n");
-            sb.Append("  IncludeContentSize: ").Append(IncludeContentSize).Append("\n");
             sb.Append("  Version: ").Append(Version).Append("\n");
             sb.Append("  HashAlgorithm: ").Append(HashAlgorithm).Append("\n");
             sb.Append("}\n");
@@ -166,11 +164,6 @@ namespace Sphereon.SDK.Blockchain.Proof.Model
 
             return 
                 (
-                    this.IncludeContentSize == other.IncludeContentSize ||
-                    this.IncludeContentSize != null &&
-                    this.IncludeContentSize.Equals(other.IncludeContentSize)
-                ) && 
-                (
                     this.Version == other.Version ||
                     this.Version != null &&
                     this.Version.Equals(other.Version)
@@ -193,8 +186,6 @@ namespace Sphereon.SDK.Blockchain.Proof.Model
             {
                 int hash = 41;
                 // Suitable nullity checks etc, of course :)
-                if (this.IncludeContentSize != null)
-                    hash = hash * 59 + this.IncludeContentSize.GetHashCode();
                 if (this.Version != null)
                     hash = hash * 59 + this.Version.GetHashCode();
                 if (this.HashAlgorithm != null)

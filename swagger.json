@@ -1,6 +1,38 @@
 {
   "basePath": "/",
   "paths": {
+    "/blockchain/proof/0.1.0/existence/{chainId}/settings": {"get": {
+      "summary": "Get the settings for registration/verification",
+      "security": [{"oauth2schema": ["global"]}],
+      "produces": ["application/json;charset=UTF-8"],
+      "operationId": "settings",
+      "responses": {
+        "200": {
+          "schema": {"$ref": "#/definitions/SettingsResponse"},
+          "description": "The settings for the proof chain"
+        },
+        "400": {
+          "schema": {"$ref": "#/definitions/VndErrors"},
+          "description": "Invalid  request"
+        },
+        "404": {
+          "schema": {"$ref": "#/definitions/VndErrors"},
+          "description": "Settings not found"
+        }
+      },
+      "parameters": [{
+        "in": "path",
+        "name": "chainId",
+        "description": "This is the chain where the content is registered/verified",
+        "type": "string",
+        "required": true
+      }],
+      "tags": [
+        "Settings",
+        "All"
+      ],
+      "consumes": ["application/json;charset=UTF-8"]
+    }},
     "/blockchain/proof/0.1.0/existence/{chainId}/stream": {
       "post": {
         "summary": "Register content using a bytestream/file",
@@ -32,13 +64,6 @@
           },
           {
             "in": "formData",
-            "name": "settings",
-            "description": "settings",
-            "type": "file",
-            "required": false
-          },
-          {
-            "in": "formData",
             "name": "stream",
             "description": "The binary data (not hashed). Hashing will be done on the server side. The binary data will not be stored",
             "type": "file",
@@ -60,7 +85,7 @@
         "responses": {
           "200": {
             "schema": {"$ref": "#/definitions/VerifyContentResponse"},
-            "description": "Verified content exists"
+            "description": "Content exists"
           },
           "400": {
             "schema": {"$ref": "#/definitions/VndErrors"},
@@ -68,7 +93,7 @@
           },
           "404": {
             "schema": {"$ref": "#/definitions/VerifyContentResponse"},
-            "description": "Verified content exists"
+            "description": "Content does not exist"
           }
         },
         "parameters": [
@@ -78,13 +103,6 @@
             "description": "The chain where the content will be registered",
             "type": "string",
             "required": true
-          },
-          {
-            "in": "formData",
-            "name": "settings",
-            "description": "settings",
-            "type": "file",
-            "required": false
           },
           {
             "in": "formData",
@@ -133,7 +151,7 @@
       ],
       "consumes": ["application/json;charset=UTF-8"]
     }},
-    "/blockchain/proof/0.1.0/existence/{chainId}": {
+    "/blockchain/proof/0.1.0/existence/{chainId}/content": {
       "post": {
         "summary": "Register content",
         "security": [{"oauth2schema": ["global"]}],
@@ -183,7 +201,7 @@
         "responses": {
           "200": {
             "schema": {"$ref": "#/definitions/VerifyContentResponse"},
-            "description": "Verified content exists"
+            "description": "Content exists"
           },
           "400": {
             "schema": {"$ref": "#/definitions/VndErrors"},
@@ -191,7 +209,7 @@
           },
           "404": {
             "schema": {"$ref": "#/definitions/VerifyContentResponse"},
-            "description": "Verified content exists"
+            "description": "Content does not exist"
           }
         },
         "parameters": [
@@ -216,55 +234,7 @@
         ],
         "consumes": ["application/json;charset=UTF-8"]
       }
-    },
-    "/blockchain/proof/0.1.0/existence/{chainId}/{hash}": {"get": {
-      "summary": "Verify content by hash",
-      "security": [{"oauth2schema": ["global"]}],
-      "produces": ["application/json;charset=UTF-8"],
-      "operationId": "verifyContentByHash",
-      "responses": {
-        "200": {
-          "schema": {"$ref": "#/definitions/VerifyContentResponse"},
-          "description": "Verified content exists"
-        },
-        "400": {
-          "schema": {"$ref": "#/definitions/VndErrors"},
-          "description": "Invalid verification request"
-        },
-        "404": {
-          "schema": {"$ref": "#/definitions/VerifyContentResponse"},
-          "description": "Verified content exists"
-        }
-      },
-      "parameters": [
-        {
-          "in": "path",
-          "name": "chainId",
-          "description": "The chain where the content was registered",
-          "type": "string",
-          "required": true
-        },
-        {
-          "in": "path",
-          "name": "hash",
-          "description": "The client generated hash",
-          "type": "string",
-          "required": true
-        },
-        {
-          "schema": {"$ref": "#/definitions/ContentRequest"},
-          "in": "body",
-          "name": "existence",
-          "description": "Verify content using the current existence settings",
-          "required": false
-        }
-      ],
-      "tags": [
-        "Proof of Existence",
-        "All"
-      ],
-      "consumes": ["application/json;charset=UTF-8"]
-    }}
+    }
   },
   "host": "gw.api.cloud.sphereon.com",
   "schemes": ["https"],
@@ -311,6 +281,28 @@
         "type": "string"
       }}
     },
+    "StoredSettings": {
+      "description": "The stored settings from the settings chain",
+      "type": "object",
+      "required": [
+        "settings",
+        "settingsChain",
+        "signature",
+        "validFrom"
+      ],
+      "properties": {
+        "settings": {"$ref": "#/definitions/Settings"},
+        "settingsChain": {"$ref": "#/definitions/CommittedChain"},
+        "signature": {
+          "format": "byte",
+          "type": "string"
+        },
+        "validFrom": {
+          "format": "date-time",
+          "type": "string"
+        }
+      }
+    },
     "CreateChainRequest": {
       "description": "Create chain for Proof of Existence request",
       "type": "object",
@@ -339,6 +331,25 @@
         "defaultSettings": {"$ref": "#/definitions/Settings"}
       }
     },
+    "SettingsResponse": {
+      "description": "The settings from the settings chain",
+      "type": "object",
+      "required": [
+        "allSettings",
+        "currentSettings",
+        "proofChain",
+        "settingsChain"
+      ],
+      "properties": {
+        "settingsChain": {"$ref": "#/definitions/CommittedChain"},
+        "currentSettings": {"$ref": "#/definitions/StoredSettings"},
+        "allSettings": {
+          "type": "array",
+          "items": {"$ref": "#/definitions/StoredSettings"}
+        },
+        "proofChain": {"$ref": "#/definitions/CommittedChain"}
+      }
+    },
     "ContentRequest": {
       "description": "Content existence request",
       "type": "object",
@@ -347,9 +358,8 @@
         "hashProvider"
       ],
       "properties": {
-        "settings": {"$ref": "#/definitions/Settings"},
         "hashProvider": {
-          "description": "When CLIENT is supplied the content should already have been hashed by you. When SERVER is supplied we will hash the content according to the supplied settings",
+          "description": "When CLIENT is supplied the content should already have been hashed by you. When SERVER is supplied we will hash the content",
           "type": "string",
           "enum": [
             "SERVER",
@@ -410,23 +420,15 @@
       }
     },
     "Settings": {
-      "description": "Existence Settings",
+      "description": "Existence Settings. Normally you only supply them once during chain creation or during a settings update. You can also supply them during a content request, but then it is up to you to also supply the correct setting during verify",
       "type": "object",
-      "required": [
-        "includeContentSize",
-        "version"
-      ],
+      "required": ["version"],
       "properties": {
-        "includeContentSize": {
-          "description": "Include the content size in the hash calculation.",
-          "type": "boolean",
-          "example": false
-        },
         "version": {
-          "format": "byte",
+          "format": "int32",
           "description": "The settings version (only 1 for now)",
-          "type": "string",
-          "enum": ["1"]
+          "type": "integer",
+          "enum": [1]
         },
         "hashAlgorithm": {
           "description": "The hashing method used (CLIENT) or to use (SERVER) for the content",
@@ -476,6 +478,10 @@
     {
       "name": "Chain",
       "description": "The proof and settings chains"
+    },
+    {
+      "name": "Settings",
+      "description": "The settings"
     },
     {
       "name": "All",

@@ -4,9 +4,8 @@
     <groupId>com.sphereon.sdk</groupId>
     <artifactId>blockchain-proof-sdk-generator</artifactId>
     <packaging>jar</packaging>
-    <version>0.1.0-SNAPSHOT</version>
+    <version>0.1.0</version>
     <name>Blockchain Proof API SDK Generator</name>
-
 
 
     <properties>
@@ -18,16 +17,77 @@
         <jodatime-version>2.9.3</jodatime-version>
         <maven-plugin-version>1.0.0</maven-plugin-version>
         <junit-version>4.12</junit-version>
-        <api-version>0.1.5</api-version>
+        <jersey-version>2.22.2</jersey-version>
+        <jackson-version>2.7.5</jackson-version>
+        <api-version>0.1.0</api-version>
         <sdk-package>com.sphereon.sdk.blockchain.proof</sdk-package>
-	<sdk-package-javascript>SphereonSDKBlockchainProof</sdk-package-javascript>
+        <sdk-package-javascript>SphereonSDKBlockchainProof</sdk-package-javascript>
         <sdk-package-csharp>Sphereon.SDK.Blockchain.Proof</sdk-package-csharp>
     </properties>
 
+    <distributionManagement>
+        <repository>
+            <id>sphereon-sdk</id>
+            <url>http://nexus.qa.sphereon.com/nexus/content/repositories/sphereon-sdk</url>
+        </repository>
+    </distributionManagement>
 
     <profiles>
-        <profile>
+        <!--<profile>
             <id>java8</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <build>
+                <plugins>
+                    &lt;!&ndash; activate the plugin &ndash;&gt;
+                    <plugin>
+                        <groupId>io.swagger</groupId>
+                        <artifactId>swagger-codegen-maven-plugin</artifactId>
+                        <version>2.2.1</version>
+
+                        <executions>
+
+                            <execution>
+                                <goals>
+                                    <goal>generate</goal>
+                                </goals>
+                                <configuration>
+                                    &lt;!&ndash; specify the swagger yaml &ndash;&gt;
+                                    <inputSpec>swagger.json</inputSpec>
+                                    &lt;!&ndash;<inputSpec>https://store.sphereon.com/store/api-docs/admin/PDF/${api-version}</inputSpec>&ndash;&gt;
+
+
+                                    &lt;!&ndash; target to generate &ndash;&gt;
+                                    <language>java</language>
+
+                                    &lt;!&ndash; pass any necessary config options &ndash;&gt;
+                                    <configOptions>
+                                        <dateLibrary>java8</dateLibrary>
+                                    </configOptions>
+
+                                    &lt;!&ndash; override the default library to jersey2 &ndash;&gt;
+                                    <library>okhttp-gson</library>
+                                    <verbose>true</verbose>
+
+                                    <output>${project.basedir}/java8</output>
+                                    <groupId>com.sphereon.sdk</groupId>
+                                    <artifactId>blockchain-proof-sdk-java8</artifactId>
+                                    <artifactVersion>${project.version}</artifactVersion>
+                                    <addCompileSourceRoot>true</addCompileSourceRoot>
+                                    <apiPackage>${sdk-package}.api</apiPackage>
+                                    <modelPackage>${sdk-package}.model</modelPackage>
+                                    <invokerPackage>${sdk-package}.handler</invokerPackage>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        -->
+        <profile>
+            <id>java8-jersey2</id>
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
@@ -60,12 +120,12 @@
                                     </configOptions>
 
                                     <!-- override the default library to jersey2 -->
-                                    <library>okhttp-gson</library>
+                                    <library>jersey2</library>
                                     <verbose>true</verbose>
 
-                                    <output>${project.basedir}/java8</output>
+                                    <output>${project.basedir}/java8-jersey2</output>
                                     <groupId>com.sphereon.sdk</groupId>
-                                    <artifactId>blockchain-proof-sdk-java8</artifactId>
+                                    <artifactId>blockchain-proof-sdk-java8-jersey2</artifactId>
                                     <artifactVersion>${project.version}</artifactVersion>
                                     <addCompileSourceRoot>true</addCompileSourceRoot>
                                     <apiPackage>${sdk-package}.api</apiPackage>
@@ -78,6 +138,8 @@
                 </plugins>
             </build>
         </profile>
+
+
         <profile>
             <id>csharp-net45</id>
             <activation>
@@ -128,7 +190,7 @@
                                     <artifactId>blockchain-proof-sdk-csharp-net45</artifactId>
                                     <artifactVersion>${project.version}</artifactVersion>
                                     <addCompileSourceRoot>true</addCompileSourceRoot>
-                                    
+
                                     <apiPackage>Api</apiPackage>
                                     <modelPackage>Model</modelPackage>
                                     <invokerPackage>Handler</invokerPackage>
@@ -140,58 +202,58 @@
             </build>
         </profile>
 
-	<profile>
-            <id>javascript-angularjs</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-            <build>
-                <plugins>
-                    <!-- activate the plugin -->
-                    <plugin>
-                        <groupId>io.swagger</groupId>
-                        <artifactId>swagger-codegen-maven-plugin</artifactId>
-                        <version>2.2.1</version>
+        <!-- <profile>
+             <id>javascript-angularjs</id>
+             <activation>
+                 <activeByDefault>true</activeByDefault>
+             </activation>
+             <build>
+                 <plugins>
+                     &lt;!&ndash; activate the plugin &ndash;&gt;
+                     <plugin>
+                         <groupId>io.swagger</groupId>
+                         <artifactId>swagger-codegen-maven-plugin</artifactId>
+                         <version>2.2.1</version>
 
-                        <executions>
+                         <executions>
 
-                            <execution>
-                                <goals>
-                                    <goal>generate</goal>
-                                </goals>
-                                <configuration>
-                                    <!-- specify the swagger yaml -->
-                                    <inputSpec>swagger.json</inputSpec>
-                                    <!--<inputSpec>https://store.sphereon.com/store/api-docs/admin/PDF/${api-version}</inputSpec>-->
+                             <execution>
+                                 <goals>
+                                     <goal>generate</goal>
+                                 </goals>
+                                 <configuration>
+                                     &lt;!&ndash; specify the swagger yaml &ndash;&gt;
+                                     <inputSpec>swagger.json</inputSpec>
+                                     &lt;!&ndash;<inputSpec>https://store.sphereon.com/store/api-docs/admin/PDF/${api-version}</inputSpec>&ndash;&gt;
 
 
-                                    <!-- target to generate -->
-                                    <language>javascript-closure-angular</language>
+                                     &lt;!&ndash; target to generate &ndash;&gt;
+                                     <language>javascript-closure-angular</language>
 
-                                    <!-- pass any necessary config options -->
-                                    <configOptions>
-                                        <dateLibrary>java8</dateLibrary>
-                                    </configOptions>
+                                     &lt;!&ndash; pass any necessary config options &ndash;&gt;
+                                     <configOptions>
+                                         <dateLibrary>java8</dateLibrary>
+                                     </configOptions>
 
-                                    <verbose>true</verbose>
+                                     <verbose>true</verbose>
 
-                                    <output>${project.basedir}/javascript-angularjs-closure</output>
-                                    <groupId>com.sphereon.sdk</groupId>
-                                    <artifactId>blockchain-proof-sdk-javascript-angularjs</artifactId>
-                                    <artifactVersion>${project.version}</artifactVersion>
-                                    <addCompileSourceRoot>true</addCompileSourceRoot>
-                                    <apiPackage>api</apiPackage>
-                                    <modelPackage>model</modelPackage>
-                                    <invokerPackage>${sdk-package-javascript}</invokerPackage>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
+                                     <output>${project.basedir}/javascript-angularjs-closure</output>
+                                     <groupId>com.sphereon.sdk</groupId>
+                                     <artifactId>blockchain-proof-sdk-javascript-angularjs</artifactId>
+                                     <artifactVersion>${project.version}</artifactVersion>
+                                     <addCompileSourceRoot>true</addCompileSourceRoot>
+                                     <apiPackage>api</apiPackage>
+                                     <modelPackage>model</modelPackage>
+                                     <invokerPackage>${sdk-package-javascript}</invokerPackage>
+                                 </configuration>
+                             </execution>
+                         </executions>
+                     </plugin>
+                 </plugins>
+             </build>
+         </profile>-->
 
-	<profile>
+        <profile>
             <id>javascript</id>
             <activation>
                 <activeByDefault>true</activeByDefault>
@@ -279,6 +341,48 @@
             <artifactId>migbase64</artifactId>
             <version>2.2</version>
         </dependency>
+
+
+        <!-- HTTP client: jersey-client -->
+        <dependency>
+            <groupId>org.glassfish.jersey.core</groupId>
+            <artifactId>jersey-client</artifactId>
+            <version>${jersey-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jersey.media</groupId>
+            <artifactId>jersey-media-multipart</artifactId>
+            <version>${jersey-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jersey.media</groupId>
+            <artifactId>jersey-media-json-jackson</artifactId>
+            <version>${jersey-version}</version>
+        </dependency>
+
+        <!-- JSON processing: jackson -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>${jackson-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <version>${jackson-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jsr310</artifactId>
+            <version>${jackson-version}</version>
+        </dependency>
+
+
         <!-- test dependencies -->
         <dependency>
             <groupId>junit</groupId>

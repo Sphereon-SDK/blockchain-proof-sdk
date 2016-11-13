@@ -5,10 +5,10 @@ All URIs are relative to *https://gw.api.cloud.sphereon.com/*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**createChain**](AllApi.md#createChain) | **POST** /blockchain/proof/0.1.0/existence | Create a new existence chain
-[**registerContent**](AllApi.md#registerContent) | **POST** /blockchain/proof/0.1.0/existence/{chainId} | Register content
+[**registerContent**](AllApi.md#registerContent) | **POST** /blockchain/proof/0.1.0/existence/{chainId}/content | Register content
 [**registerStream**](AllApi.md#registerStream) | **POST** /blockchain/proof/0.1.0/existence/{chainId}/stream | Register content using a bytestream/file
-[**verifyContent**](AllApi.md#verifyContent) | **GET** /blockchain/proof/0.1.0/existence/{chainId} | Verify content
-[**verifyContentByHash**](AllApi.md#verifyContentByHash) | **GET** /blockchain/proof/0.1.0/existence/{chainId}/{hash} | Verify content by hash
+[**settings**](AllApi.md#settings) | **GET** /blockchain/proof/0.1.0/existence/{chainId}/settings | Get the settings for registration/verification
+[**verifyContent**](AllApi.md#verifyContent) | **GET** /blockchain/proof/0.1.0/existence/{chainId}/content | Verify content
 [**verifyStream**](AllApi.md#verifyStream) | **GET** /blockchain/proof/0.1.0/existence/{chainId}/stream | Verify content using a bytestream/file
 
 
@@ -115,7 +115,7 @@ Name | Type | Description  | Notes
 
 <a name="registerStream"></a>
 # **registerStream**
-> RegisterContentResponse registerStream(chainId, stream, opts)
+> RegisterContentResponse registerStream(chainId, stream)
 
 Register content using a bytestream/file
 
@@ -136,9 +136,6 @@ var chainId = "chainId_example"; // String | The chain where the content will be
 
 var stream = "/path/to/file.txt"; // File | The binary data (not hashed). Hashing will be done on the server side. The binary data will not be stored
 
-var opts = { 
-  'settings': "/path/to/file.txt" // File | settings
-};
 
 var callback = function(error, data, response) {
   if (error) {
@@ -147,7 +144,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.registerStream(chainId, stream, opts, callback);
+apiInstance.registerStream(chainId, stream, callback);
 ```
 
 ### Parameters
@@ -156,7 +153,6 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **chainId** | **String**| The chain where the content will be registered | 
  **stream** | **File**| The binary data (not hashed). Hashing will be done on the server side. The binary data will not be stored | 
- **settings** | **File**| settings | [optional] 
 
 ### Return type
 
@@ -169,6 +165,55 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
  - **Content-Type**: multipart/form-data
+ - **Accept**: application/json;charset=UTF-8
+
+<a name="settings"></a>
+# **settings**
+> SettingsResponse settings(chainId)
+
+Get the settings for registration/verification
+
+### Example
+```javascript
+var BlockchainProof = require('blockchain_proof');
+var defaultClient = BlockchainProof.ApiClient.default;
+
+// Configure OAuth2 access token for authorization: oauth2schema
+var oauth2schema = defaultClient.authentications['oauth2schema'];
+oauth2schema.accessToken = 'YOUR ACCESS TOKEN';
+
+var apiInstance = new BlockchainProof.AllApi();
+
+var chainId = "chainId_example"; // String | This is the chain where the content is registered/verified
+
+
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+};
+apiInstance.settings(chainId, callback);
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **chainId** | **String**| This is the chain where the content is registered/verified | 
+
+### Return type
+
+[**SettingsResponse**](SettingsResponse.md)
+
+### Authorization
+
+[oauth2schema](../README.md#oauth2schema)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json;charset=UTF-8
  - **Accept**: application/json;charset=UTF-8
 
 <a name="verifyContent"></a>
@@ -223,65 +268,9 @@ Name | Type | Description  | Notes
  - **Content-Type**: application/json;charset=UTF-8
  - **Accept**: application/json;charset=UTF-8
 
-<a name="verifyContentByHash"></a>
-# **verifyContentByHash**
-> VerifyContentResponse verifyContentByHash(chainId, hash, opts)
-
-Verify content by hash
-
-### Example
-```javascript
-var BlockchainProof = require('blockchain_proof');
-var defaultClient = BlockchainProof.ApiClient.default;
-
-// Configure OAuth2 access token for authorization: oauth2schema
-var oauth2schema = defaultClient.authentications['oauth2schema'];
-oauth2schema.accessToken = 'YOUR ACCESS TOKEN';
-
-var apiInstance = new BlockchainProof.AllApi();
-
-var chainId = "chainId_example"; // String | The chain where the content was registered
-
-var hash = "hash_example"; // String | The client generated hash
-
-var opts = { 
-  'existence': new BlockchainProof.ContentRequest() // ContentRequest | Verify content using the current existence settings
-};
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.verifyContentByHash(chainId, hash, opts, callback);
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **chainId** | **String**| The chain where the content was registered | 
- **hash** | **String**| The client generated hash | 
- **existence** | [**ContentRequest**](ContentRequest.md)| Verify content using the current existence settings | [optional] 
-
-### Return type
-
-[**VerifyContentResponse**](VerifyContentResponse.md)
-
-### Authorization
-
-[oauth2schema](../README.md#oauth2schema)
-
-### HTTP request headers
-
- - **Content-Type**: application/json;charset=UTF-8
- - **Accept**: application/json;charset=UTF-8
-
 <a name="verifyStream"></a>
 # **verifyStream**
-> VerifyContentResponse verifyStream(chainId, stream, opts)
+> VerifyContentResponse verifyStream(chainId, stream)
 
 Verify content using a bytestream/file
 
@@ -302,9 +291,6 @@ var chainId = "chainId_example"; // String | The chain where the content will be
 
 var stream = "/path/to/file.txt"; // File | The binary data (not hashed). Hashing will be done on the server side. The binary data will not be stored
 
-var opts = { 
-  'settings': "/path/to/file.txt" // File | settings
-};
 
 var callback = function(error, data, response) {
   if (error) {
@@ -313,7 +299,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.verifyStream(chainId, stream, opts, callback);
+apiInstance.verifyStream(chainId, stream, callback);
 ```
 
 ### Parameters
@@ -322,7 +308,6 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **chainId** | **String**| The chain where the content will be registered | 
  **stream** | **File**| The binary data (not hashed). Hashing will be done on the server side. The binary data will not be stored | 
- **settings** | **File**| settings | [optional] 
 
 ### Return type
 

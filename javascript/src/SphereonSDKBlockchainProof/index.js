@@ -25,12 +25,12 @@
 (function(factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
-    define(['SphereonSDKBlockchainProof/ApiClient', 'SphereonSDKBlockchainProof/model/CommittedChain', 'SphereonSDKBlockchainProof/model/ContentRequest', 'SphereonSDKBlockchainProof/model/CreateChainRequest', 'SphereonSDKBlockchainProof/model/CreateChainResponse', 'SphereonSDKBlockchainProof/model/Link', 'SphereonSDKBlockchainProof/model/RegisterContentResponse', 'SphereonSDKBlockchainProof/model/Settings', 'SphereonSDKBlockchainProof/model/VerifyContentResponse', 'SphereonSDKBlockchainProof/model/VndError', 'SphereonSDKBlockchainProof/model/VndErrors', 'SphereonSDKBlockchainProof/api/AllApi', 'SphereonSDKBlockchainProof/api/ChainApi', 'SphereonSDKBlockchainProof/api/ProofOfExistenceApi'], factory);
+    define(['SphereonSDKBlockchainProof/ApiClient', 'SphereonSDKBlockchainProof/model/CommittedChain', 'SphereonSDKBlockchainProof/model/ContentRequest', 'SphereonSDKBlockchainProof/model/CreateChainRequest', 'SphereonSDKBlockchainProof/model/CreateChainResponse', 'SphereonSDKBlockchainProof/model/Link', 'SphereonSDKBlockchainProof/model/RegisterContentResponse', 'SphereonSDKBlockchainProof/model/Settings', 'SphereonSDKBlockchainProof/model/SettingsResponse', 'SphereonSDKBlockchainProof/model/StoredSettings', 'SphereonSDKBlockchainProof/model/VerifyContentResponse', 'SphereonSDKBlockchainProof/model/VndError', 'SphereonSDKBlockchainProof/model/VndErrors', 'SphereonSDKBlockchainProof/api/AllApi', 'SphereonSDKBlockchainProof/api/ChainApi', 'SphereonSDKBlockchainProof/api/ProofOfExistenceApi', 'SphereonSDKBlockchainProof/api/SettingsApi'], factory);
   } else if (typeof module === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('./ApiClient'), require('./model/CommittedChain'), require('./model/ContentRequest'), require('./model/CreateChainRequest'), require('./model/CreateChainResponse'), require('./model/Link'), require('./model/RegisterContentResponse'), require('./model/Settings'), require('./model/VerifyContentResponse'), require('./model/VndError'), require('./model/VndErrors'), require('./api/AllApi'), require('./api/ChainApi'), require('./api/ProofOfExistenceApi'));
+    module.exports = factory(require('./ApiClient'), require('./model/CommittedChain'), require('./model/ContentRequest'), require('./model/CreateChainRequest'), require('./model/CreateChainResponse'), require('./model/Link'), require('./model/RegisterContentResponse'), require('./model/Settings'), require('./model/SettingsResponse'), require('./model/StoredSettings'), require('./model/VerifyContentResponse'), require('./model/VndError'), require('./model/VndErrors'), require('./api/AllApi'), require('./api/ChainApi'), require('./api/ProofOfExistenceApi'), require('./api/SettingsApi'));
   }
-}(function(ApiClient, CommittedChain, ContentRequest, CreateChainRequest, CreateChainResponse, Link, RegisterContentResponse, Settings, VerifyContentResponse, VndError, VndErrors, AllApi, ChainApi, ProofOfExistenceApi) {
+}(function(ApiClient, CommittedChain, ContentRequest, CreateChainRequest, CreateChainResponse, Link, RegisterContentResponse, Settings, SettingsResponse, StoredSettings, VerifyContentResponse, VndError, VndErrors, AllApi, ChainApi, ProofOfExistenceApi, SettingsApi) {
   'use strict';
 
   /**
@@ -106,6 +106,16 @@
      */
     Settings: Settings,
     /**
+     * The SettingsResponse model constructor.
+     * @property {module:SphereonSDKBlockchainProof/model/SettingsResponse}
+     */
+    SettingsResponse: SettingsResponse,
+    /**
+     * The StoredSettings model constructor.
+     * @property {module:SphereonSDKBlockchainProof/model/StoredSettings}
+     */
+    StoredSettings: StoredSettings,
+    /**
      * The VerifyContentResponse model constructor.
      * @property {module:SphereonSDKBlockchainProof/model/VerifyContentResponse}
      */
@@ -134,7 +144,12 @@
      * The ProofOfExistenceApi service constructor.
      * @property {module:SphereonSDKBlockchainProof/api/ProofOfExistenceApi}
      */
-    ProofOfExistenceApi: ProofOfExistenceApi
+    ProofOfExistenceApi: ProofOfExistenceApi,
+    /**
+     * The SettingsApi service constructor.
+     * @property {module:SphereonSDKBlockchainProof/api/SettingsApi}
+     */
+    SettingsApi: SettingsApi
   };
 
   return exports;

@@ -25,18 +25,18 @@
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
-    define(['SphereonSDKBlockchainProof/ApiClient', 'SphereonSDKBlockchainProof/model/CreateChainRequest', 'SphereonSDKBlockchainProof/model/CreateChainResponse', 'SphereonSDKBlockchainProof/model/VndErrors', 'SphereonSDKBlockchainProof/model/ContentRequest', 'SphereonSDKBlockchainProof/model/RegisterContentResponse', 'SphereonSDKBlockchainProof/model/VerifyContentResponse'], factory);
+    define(['SphereonSDKBlockchainProof/ApiClient', 'SphereonSDKBlockchainProof/model/CreateChainRequest', 'SphereonSDKBlockchainProof/model/CreateChainResponse', 'SphereonSDKBlockchainProof/model/VndErrors', 'SphereonSDKBlockchainProof/model/ContentRequest', 'SphereonSDKBlockchainProof/model/RegisterContentResponse', 'SphereonSDKBlockchainProof/model/SettingsResponse', 'SphereonSDKBlockchainProof/model/VerifyContentResponse'], factory);
   } else if (typeof module === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('../model/CreateChainRequest'), require('../model/CreateChainResponse'), require('../model/VndErrors'), require('../model/ContentRequest'), require('../model/RegisterContentResponse'), require('../model/VerifyContentResponse'));
+    module.exports = factory(require('../ApiClient'), require('../model/CreateChainRequest'), require('../model/CreateChainResponse'), require('../model/VndErrors'), require('../model/ContentRequest'), require('../model/RegisterContentResponse'), require('../model/SettingsResponse'), require('../model/VerifyContentResponse'));
   } else {
     // Browser globals (root is window)
     if (!root.BlockchainProof) {
       root.BlockchainProof = {};
     }
-    root.BlockchainProof.AllApi = factory(root.BlockchainProof.ApiClient, root.BlockchainProof.CreateChainRequest, root.BlockchainProof.CreateChainResponse, root.BlockchainProof.VndErrors, root.BlockchainProof.ContentRequest, root.BlockchainProof.RegisterContentResponse, root.BlockchainProof.VerifyContentResponse);
+    root.BlockchainProof.AllApi = factory(root.BlockchainProof.ApiClient, root.BlockchainProof.CreateChainRequest, root.BlockchainProof.CreateChainResponse, root.BlockchainProof.VndErrors, root.BlockchainProof.ContentRequest, root.BlockchainProof.RegisterContentResponse, root.BlockchainProof.SettingsResponse, root.BlockchainProof.VerifyContentResponse);
   }
-}(this, function(ApiClient, CreateChainRequest, CreateChainResponse, VndErrors, ContentRequest, RegisterContentResponse, VerifyContentResponse) {
+}(this, function(ApiClient, CreateChainRequest, CreateChainResponse, VndErrors, ContentRequest, RegisterContentResponse, SettingsResponse, VerifyContentResponse) {
   'use strict';
 
   /**
@@ -145,7 +145,7 @@
       var returnType = RegisterContentResponse;
 
       return this.apiClient.callApi(
-        '/blockchain/proof/0.1.0/existence/{chainId}', 'POST',
+        '/blockchain/proof/0.1.0/existence/{chainId}/content', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, callback
       );
@@ -164,13 +164,10 @@
      * Register content by supplying a file or some other binary data. Hashing will be done on the server side
      * @param {String} chainId The chain where the content will be registered
      * @param {File} stream The binary data (not hashed). Hashing will be done on the server side. The binary data will not be stored
-     * @param {Object} opts Optional parameters
-     * @param {File} opts.settings settings
      * @param {module:SphereonSDKBlockchainProof/api/AllApi~registerStreamCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {@link module:SphereonSDKBlockchainProof/model/RegisterContentResponse}
      */
-    this.registerStream = function(chainId, stream, opts, callback) {
-      opts = opts || {};
+    this.registerStream = function(chainId, stream, callback) {
       var postBody = null;
 
       // verify the required parameter 'chainId' is set
@@ -192,7 +189,6 @@
       var headerParams = {
       };
       var formParams = {
-        'settings': opts['settings'],
         'stream': stream
       };
 
@@ -203,6 +199,51 @@
 
       return this.apiClient.callApi(
         '/blockchain/proof/0.1.0/existence/{chainId}/stream', 'POST',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType, callback
+      );
+    }
+
+    /**
+     * Callback function to receive the result of the settings operation.
+     * @callback module:SphereonSDKBlockchainProof/api/AllApi~settingsCallback
+     * @param {String} error Error message, if any.
+     * @param {module:SphereonSDKBlockchainProof/model/SettingsResponse} data The data returned by the service call.
+     * @param {String} response The complete HTTP response.
+     */
+
+    /**
+     * Get the settings for registration/verification
+     * @param {String} chainId This is the chain where the content is registered/verified
+     * @param {module:SphereonSDKBlockchainProof/api/AllApi~settingsCallback} callback The callback function, accepting three arguments: error, data, response
+     * data is of type: {@link module:SphereonSDKBlockchainProof/model/SettingsResponse}
+     */
+    this.settings = function(chainId, callback) {
+      var postBody = null;
+
+      // verify the required parameter 'chainId' is set
+      if (chainId == undefined || chainId == null) {
+        throw "Missing the required parameter 'chainId' when calling settings";
+      }
+
+
+      var pathParams = {
+        'chainId': chainId
+      };
+      var queryParams = {
+      };
+      var headerParams = {
+      };
+      var formParams = {
+      };
+
+      var authNames = ['oauth2schema'];
+      var contentTypes = ['application/json;charset=UTF-8'];
+      var accepts = ['application/json;charset=UTF-8'];
+      var returnType = SettingsResponse;
+
+      return this.apiClient.callApi(
+        '/blockchain/proof/0.1.0/existence/{chainId}/settings', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, callback
       );
@@ -253,62 +294,7 @@
       var returnType = VerifyContentResponse;
 
       return this.apiClient.callApi(
-        '/blockchain/proof/0.1.0/existence/{chainId}', 'GET',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
-      );
-    }
-
-    /**
-     * Callback function to receive the result of the verifyContentByHash operation.
-     * @callback module:SphereonSDKBlockchainProof/api/AllApi~verifyContentByHashCallback
-     * @param {String} error Error message, if any.
-     * @param {module:SphereonSDKBlockchainProof/model/VerifyContentResponse} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
-     */
-
-    /**
-     * Verify content by hash
-     * @param {String} chainId The chain where the content was registered
-     * @param {String} hash The client generated hash
-     * @param {Object} opts Optional parameters
-     * @param {module:SphereonSDKBlockchainProof/model/ContentRequest} opts.existence Verify content using the current existence settings
-     * @param {module:SphereonSDKBlockchainProof/api/AllApi~verifyContentByHashCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {@link module:SphereonSDKBlockchainProof/model/VerifyContentResponse}
-     */
-    this.verifyContentByHash = function(chainId, hash, opts, callback) {
-      opts = opts || {};
-      var postBody = opts['existence'];
-
-      // verify the required parameter 'chainId' is set
-      if (chainId == undefined || chainId == null) {
-        throw "Missing the required parameter 'chainId' when calling verifyContentByHash";
-      }
-
-      // verify the required parameter 'hash' is set
-      if (hash == undefined || hash == null) {
-        throw "Missing the required parameter 'hash' when calling verifyContentByHash";
-      }
-
-
-      var pathParams = {
-        'chainId': chainId,
-        'hash': hash
-      };
-      var queryParams = {
-      };
-      var headerParams = {
-      };
-      var formParams = {
-      };
-
-      var authNames = ['oauth2schema'];
-      var contentTypes = ['application/json;charset=UTF-8'];
-      var accepts = ['application/json;charset=UTF-8'];
-      var returnType = VerifyContentResponse;
-
-      return this.apiClient.callApi(
-        '/blockchain/proof/0.1.0/existence/{chainId}/{hash}', 'GET',
+        '/blockchain/proof/0.1.0/existence/{chainId}/content', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, callback
       );
@@ -327,13 +313,10 @@
      * Register content by supplying a file or some other binary data. Hashing will be done on the server side
      * @param {String} chainId The chain where the content will be registered
      * @param {File} stream The binary data (not hashed). Hashing will be done on the server side. The binary data will not be stored
-     * @param {Object} opts Optional parameters
-     * @param {File} opts.settings settings
      * @param {module:SphereonSDKBlockchainProof/api/AllApi~verifyStreamCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {@link module:SphereonSDKBlockchainProof/model/VerifyContentResponse}
      */
-    this.verifyStream = function(chainId, stream, opts, callback) {
-      opts = opts || {};
+    this.verifyStream = function(chainId, stream, callback) {
       var postBody = null;
 
       // verify the required parameter 'chainId' is set
@@ -355,7 +338,6 @@
       var headerParams = {
       };
       var formParams = {
-        'settings': opts['settings'],
         'stream': stream
       };
 

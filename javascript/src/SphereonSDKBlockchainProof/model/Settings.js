@@ -50,16 +50,14 @@
 
   /**
    * Constructs a new <code>Settings</code>.
-   * Existence Settings
+   * Existence Settings. Normally you only supply them once during chain creation or during a settings update. You can also supply them during a content request, but then it is up to you to also supply the correct setting during verify
    * @alias module:SphereonSDKBlockchainProof/model/Settings
    * @class
-   * @param includeContentSize {Boolean} Include the content size in the hash calculation.
-   * @param version {String} The settings version (only 1 for now)
+   * @param version {module:SphereonSDKBlockchainProof/model/Settings.VersionEnum} The settings version (only 1 for now)
    */
-  var exports = function(includeContentSize, version) {
+  var exports = function(version) {
     var _this = this;
 
-    _this['includeContentSize'] = includeContentSize;
     _this['version'] = version;
 
   };
@@ -75,11 +73,8 @@
     if (data) {
       obj = obj || new exports();
 
-      if (data.hasOwnProperty('includeContentSize')) {
-        obj['includeContentSize'] = ApiClient.convertToType(data['includeContentSize'], 'Boolean');
-      }
       if (data.hasOwnProperty('version')) {
-        obj['version'] = ApiClient.convertToType(data['version'], 'String');
+        obj['version'] = ApiClient.convertToType(data['version'], 'Integer');
       }
       if (data.hasOwnProperty('hashAlgorithm')) {
         obj['hashAlgorithm'] = ApiClient.convertToType(data['hashAlgorithm'], 'String');
@@ -89,13 +84,8 @@
   }
 
   /**
-   * Include the content size in the hash calculation.
-   * @member {Boolean} includeContentSize
-   */
-  exports.prototype['includeContentSize'] = undefined;
-  /**
    * The settings version (only 1 for now)
-   * @member {String} version
+   * @member {module:SphereonSDKBlockchainProof/model/Settings.VersionEnum} version
    */
   exports.prototype['version'] = undefined;
   /**
@@ -104,6 +94,18 @@
    */
   exports.prototype['hashAlgorithm'] = undefined;
 
+
+  /**
+   * Allowed values for the <code>version</code> property.
+   * @enum {Integer}
+   * @readonly
+   */
+  exports.VersionEnum = {
+    /**
+     * value: 1
+     * @const
+     */
+    "1": 1  };
 
   /**
    * Allowed values for the <code>hashAlgorithm</code> property.
