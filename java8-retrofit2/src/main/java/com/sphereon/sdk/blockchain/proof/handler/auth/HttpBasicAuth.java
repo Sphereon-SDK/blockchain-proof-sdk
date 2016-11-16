@@ -1,12 +1,11 @@
 package com.sphereon.sdk.blockchain.proof.handler.auth;
 
-import java.io.IOException;
-
+import okhttp3.Credentials;
 import okhttp3.Interceptor;
-import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
-import okhttp3.Credentials;
+
+import java.io.IOException;
 
 public class HttpBasicAuth implements Interceptor {
 

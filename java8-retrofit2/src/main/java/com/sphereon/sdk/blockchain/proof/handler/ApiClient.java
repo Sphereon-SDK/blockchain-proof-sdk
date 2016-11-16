@@ -1,40 +1,35 @@
 package com.sphereon.sdk.blockchain.proof.handler;
 
-import java.io.IOException;
-import java.lang.annotation.Annotation;
-import java.lang.reflect.Type;
-import java.util.Date;
-import java.util.LinkedHashMap;
-import java.util.Map;
-
-import org.apache.oltu.oauth2.client.request.OAuthClientRequest.AuthenticationRequestBuilder;
-import org.apache.oltu.oauth2.client.request.OAuthClientRequest.TokenRequestBuilder;
-import java.time.LocalDate;
-import java.time.OffsetDateTime;
-import java.time.format.DateTimeFormatter;
-import retrofit2.Converter;
-import retrofit2.Retrofit;
-
-import retrofit2.converter.gson.GsonConverterFactory;
-import retrofit2.converter.scalars.ScalarsConverterFactory;
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonParseException;
 import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+import com.sphereon.sdk.blockchain.proof.handler.auth.ApiKeyAuth;
+import com.sphereon.sdk.blockchain.proof.handler.auth.HttpBasicAuth;
+import com.sphereon.sdk.blockchain.proof.handler.auth.OAuth;
+import com.sphereon.sdk.blockchain.proof.handler.auth.OAuth.AccessTokenListener;
+import com.sphereon.sdk.blockchain.proof.handler.auth.OAuthFlow;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
+import org.apache.oltu.oauth2.client.request.OAuthClientRequest.AuthenticationRequestBuilder;
+import org.apache.oltu.oauth2.client.request.OAuthClientRequest.TokenRequestBuilder;
+import retrofit2.Converter;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.converter.scalars.ScalarsConverterFactory;
 
-
-import com.sphereon.sdk.blockchain.proof.handler.auth.HttpBasicAuth;
-import com.sphereon.sdk.blockchain.proof.handler.auth.ApiKeyAuth;
-import com.sphereon.sdk.blockchain.proof.handler.auth.OAuth;
-import com.sphereon.sdk.blockchain.proof.handler.auth.OAuth.AccessTokenListener;
-import com.sphereon.sdk.blockchain.proof.handler.auth.OAuthFlow;
+import java.io.IOException;
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Type;
+import java.time.LocalDate;
+import java.time.OffsetDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 
 public class ApiClient {

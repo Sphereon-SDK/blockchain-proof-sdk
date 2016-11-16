@@ -1,23 +1,12 @@
 package com.sphereon.sdk.blockchain.proof.api;
 
 import com.sphereon.sdk.blockchain.proof.handler.CollectionFormats.*;
-
-
-import retrofit2.Call;
-import retrofit2.http.*;
-
-import okhttp3.RequestBody;
-
 import com.sphereon.sdk.blockchain.proof.model.ContentRequest;
 import com.sphereon.sdk.blockchain.proof.model.RegisterContentResponse;
-import com.sphereon.sdk.blockchain.proof.model.VndErrors;
-import java.io.File;
 import com.sphereon.sdk.blockchain.proof.model.VerifyContentResponse;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import okhttp3.RequestBody;
+import retrofit2.Call;
+import retrofit2.http.*;
 
 public interface ProofOfExistenceApi {
   /**

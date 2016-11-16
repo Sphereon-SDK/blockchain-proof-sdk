@@ -36,7 +36,7 @@ import io.swagger.annotations.ApiModelProperty;
  * Commited Chain
  */
 @ApiModel(description = "Commited Chain")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-11-13T11:06:34.429+01:00")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-11-13T19:35:07.820+01:00")
 public class CommittedChain   {
   @JsonProperty("id")
   private String id = null;

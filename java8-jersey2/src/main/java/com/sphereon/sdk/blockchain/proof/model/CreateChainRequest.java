@@ -37,7 +37,7 @@ import io.swagger.annotations.ApiModelProperty;
  * Create chain for Proof of Existence request
  */
 @ApiModel(description = "Create chain for Proof of Existence request")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-11-13T11:06:34.429+01:00")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-11-13T19:35:07.820+01:00")
 public class CreateChainRequest   {
   @JsonProperty("metadata")
   private byte[] metadata = null;

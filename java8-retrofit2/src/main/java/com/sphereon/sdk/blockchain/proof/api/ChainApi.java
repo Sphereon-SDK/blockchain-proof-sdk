@@ -1,21 +1,10 @@
 package com.sphereon.sdk.blockchain.proof.api;
 
 import com.sphereon.sdk.blockchain.proof.handler.CollectionFormats.*;
-
-
-import retrofit2.Call;
-import retrofit2.http.*;
-
-import okhttp3.RequestBody;
-
 import com.sphereon.sdk.blockchain.proof.model.CreateChainRequest;
 import com.sphereon.sdk.blockchain.proof.model.CreateChainResponse;
-import com.sphereon.sdk.blockchain.proof.model.VndErrors;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import retrofit2.Call;
+import retrofit2.http.*;
 
 public interface ChainApi {
   /**

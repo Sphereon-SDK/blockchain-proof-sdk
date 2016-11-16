@@ -25,13 +25,14 @@
 
 package com.sphereon.sdk.blockchain.proof.model;
 
-import java.util.Objects;
 import com.google.gson.annotations.SerializedName;
 import com.sphereon.sdk.blockchain.proof.model.VndError;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * The error response

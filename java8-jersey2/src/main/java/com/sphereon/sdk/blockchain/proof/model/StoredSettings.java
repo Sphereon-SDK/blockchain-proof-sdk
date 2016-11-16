@@ -39,7 +39,7 @@ import java.time.OffsetDateTime;
  * The stored settings from the settings chain
  */
 @ApiModel(description = "The stored settings from the settings chain")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-11-13T11:06:34.429+01:00")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-11-13T19:35:07.820+01:00")
 public class StoredSettings   {
   @JsonProperty("settings")
   private Settings settings = null;

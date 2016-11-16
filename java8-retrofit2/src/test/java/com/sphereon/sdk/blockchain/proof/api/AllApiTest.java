@@ -1,21 +1,12 @@
 package com.sphereon.sdk.blockchain.proof.api;
 
 import com.sphereon.sdk.blockchain.proof.handler.ApiClient;
-import com.sphereon.sdk.blockchain.proof.model.CreateChainRequest;
-import com.sphereon.sdk.blockchain.proof.model.CreateChainResponse;
-import com.sphereon.sdk.blockchain.proof.model.VndErrors;
 import com.sphereon.sdk.blockchain.proof.model.ContentRequest;
-import com.sphereon.sdk.blockchain.proof.model.RegisterContentResponse;
-import java.io.File;
-import com.sphereon.sdk.blockchain.proof.model.SettingsResponse;
-import com.sphereon.sdk.blockchain.proof.model.VerifyContentResponse;
+import com.sphereon.sdk.blockchain.proof.model.CreateChainRequest;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.io.File;
 
 /**
  * API tests for AllApi
