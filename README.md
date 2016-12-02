@@ -2,8 +2,8 @@
 
 ## Introduction
 
-Welcome to the blockchain Proof SDK. This SDK allows you to prove existence of obecsts at a specific point in teime, without having to worry about the low level details of blockchain or cryptocurrencies.
-Actualy the notion of blockchain is hidden away for the most part
+Welcome to the blockchain Proof SDK. This SDK allows you to prove existence of objects at a specific point in time, without having to worry about the low level details of blockchain or cryptocurrencies.
+Actualy the notion of blockchain is hidden away for the most part in this API.
 
 See this page on our website for more information: https://sphereon.com/products/blockchain-api
 
