@@ -406,8 +406,7 @@
                                         <modelPackage>${sdk-package-csharp}.Model</modelPackage>
                                         <invokerPackage>${sdk-package-csharp}.Handler</invokerPackage>
                                         <packageName>${sdk-package-csharp}</packageName>
-
-
+										<targetFramework>v3.5</targetFramework>
                                     </configOptions>
 
                                     <configurationFile>src/main/resources/config/csharp-net35.json</configurationFile>

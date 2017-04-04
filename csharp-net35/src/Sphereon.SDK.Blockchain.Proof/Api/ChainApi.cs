@@ -58,29 +58,6 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
         /// <returns>ApiResponse of CreateChainResponse</returns>
         ApiResponse<CreateChainResponse> CreateChainWithHttpInfo (CreateChainRequest request);
         #endregion Synchronous Operations
-        #region Asynchronous Operations
-        /// <summary>
-        /// Create a new entity chain
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="Sphereon.SDK.Blockchain.Proof.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="request">Create a new Proof of Existence chain using the provided entity settings</param>
-        /// <returns>Task of CreateChainResponse</returns>
-        System.Threading.Tasks.Task<CreateChainResponse> CreateChainAsync (CreateChainRequest request);
-
-        /// <summary>
-        /// Create a new entity chain
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="Sphereon.SDK.Blockchain.Proof.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="request">Create a new Proof of Existence chain using the provided entity settings</param>
-        /// <returns>Task of ApiResponse (CreateChainResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<CreateChainResponse>> CreateChainAsyncWithHttpInfo (CreateChainRequest request);
-        #endregion Asynchronous Operations
     }
 
     /// <summary>
@@ -259,91 +236,6 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
 
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) Configuration.ApiClient.CallApi(localVarPath,
-                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("CreateChain", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return new ApiResponse<CreateChainResponse>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (CreateChainResponse) Configuration.ApiClient.Deserialize(localVarResponse, typeof(CreateChainResponse)));
-            
-        }
-
-        /// <summary>
-        /// Create a new entity chain 
-        /// </summary>
-        /// <exception cref="Sphereon.SDK.Blockchain.Proof.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="request">Create a new Proof of Existence chain using the provided entity settings</param>
-        /// <returns>Task of CreateChainResponse</returns>
-        public async System.Threading.Tasks.Task<CreateChainResponse> CreateChainAsync (CreateChainRequest request)
-        {
-             ApiResponse<CreateChainResponse> localVarResponse = await CreateChainAsyncWithHttpInfo(request);
-             return localVarResponse.Data;
-
-        }
-
-        /// <summary>
-        /// Create a new entity chain 
-        /// </summary>
-        /// <exception cref="Sphereon.SDK.Blockchain.Proof.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="request">Create a new Proof of Existence chain using the provided entity settings</param>
-        /// <returns>Task of ApiResponse (CreateChainResponse)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<CreateChainResponse>> CreateChainAsyncWithHttpInfo (CreateChainRequest request)
-        {
-            // verify the required parameter 'request' is set
-            if (request == null)
-                throw new ApiException(400, "Missing required parameter 'request' when calling ChainApi->CreateChain");
-
-            var localVarPath = "/blockchain/proof/0.1.0/existence";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new Dictionary<String, String>();
-            var localVarHeaderParams = new Dictionary<String, String>(Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-                "application/json;charset=UTF-8"
-            };
-            String localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json;charset=UTF-8"
-            };
-            String localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null)
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-            // set "format" to json by default
-            // e.g. /pet/{petId}.{format} becomes /pet/{petId}.json
-            localVarPathParams.Add("format", "json");
-            if (request != null && request.GetType() != typeof(byte[]))
-            {
-                localVarPostBody = Configuration.ApiClient.Serialize(request); // http body (model) parameter
-            }
-            else
-            {
-                localVarPostBody = request; // byte array
-            }
-
-            // authentication (oauth2schema) required
-            // oauth required
-            if (!String.IsNullOrEmpty(Configuration.AccessToken))
-            {
-                localVarHeaderParams["Authorization"] = "Bearer " + Configuration.AccessToken;
-            }
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) await Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 

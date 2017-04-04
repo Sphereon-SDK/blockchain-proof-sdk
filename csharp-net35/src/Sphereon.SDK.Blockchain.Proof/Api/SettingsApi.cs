@@ -58,29 +58,6 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
         /// <returns>ApiResponse of SettingsResponse</returns>
         ApiResponse<SettingsResponse> SettingsWithHttpInfo (string chainId);
         #endregion Synchronous Operations
-        #region Asynchronous Operations
-        /// <summary>
-        /// Get the settings for registration/verification
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="Sphereon.SDK.Blockchain.Proof.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="chainId">This is the chain where the content is registered/verified</param>
-        /// <returns>Task of SettingsResponse</returns>
-        System.Threading.Tasks.Task<SettingsResponse> SettingsAsync (string chainId);
-
-        /// <summary>
-        /// Get the settings for registration/verification
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="Sphereon.SDK.Blockchain.Proof.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="chainId">This is the chain where the content is registered/verified</param>
-        /// <returns>Task of ApiResponse (SettingsResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<SettingsResponse>> SettingsAsyncWithHttpInfo (string chainId);
-        #endregion Asynchronous Operations
     }
 
     /// <summary>
@@ -252,84 +229,6 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
 
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) Configuration.ApiClient.CallApi(localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("Settings", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return new ApiResponse<SettingsResponse>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (SettingsResponse) Configuration.ApiClient.Deserialize(localVarResponse, typeof(SettingsResponse)));
-            
-        }
-
-        /// <summary>
-        /// Get the settings for registration/verification 
-        /// </summary>
-        /// <exception cref="Sphereon.SDK.Blockchain.Proof.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="chainId">This is the chain where the content is registered/verified</param>
-        /// <returns>Task of SettingsResponse</returns>
-        public async System.Threading.Tasks.Task<SettingsResponse> SettingsAsync (string chainId)
-        {
-             ApiResponse<SettingsResponse> localVarResponse = await SettingsAsyncWithHttpInfo(chainId);
-             return localVarResponse.Data;
-
-        }
-
-        /// <summary>
-        /// Get the settings for registration/verification 
-        /// </summary>
-        /// <exception cref="Sphereon.SDK.Blockchain.Proof.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="chainId">This is the chain where the content is registered/verified</param>
-        /// <returns>Task of ApiResponse (SettingsResponse)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<SettingsResponse>> SettingsAsyncWithHttpInfo (string chainId)
-        {
-            // verify the required parameter 'chainId' is set
-            if (chainId == null)
-                throw new ApiException(400, "Missing required parameter 'chainId' when calling SettingsApi->Settings");
-
-            var localVarPath = "/blockchain/proof/0.1.0/existence/{chainId}/settings";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new Dictionary<String, String>();
-            var localVarHeaderParams = new Dictionary<String, String>(Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-                "application/json"
-            };
-            String localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json;charset=UTF-8"
-            };
-            String localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null)
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-            // set "format" to json by default
-            // e.g. /pet/{petId}.{format} becomes /pet/{petId}.json
-            localVarPathParams.Add("format", "json");
-            if (chainId != null) localVarPathParams.Add("chainId", Configuration.ApiClient.ParameterToString(chainId)); // path parameter
-
-            // authentication (oauth2schema) required
-            // oauth required
-            if (!String.IsNullOrEmpty(Configuration.AccessToken))
-            {
-                localVarHeaderParams["Authorization"] = "Bearer " + Configuration.AccessToken;
-            }
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) await Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
