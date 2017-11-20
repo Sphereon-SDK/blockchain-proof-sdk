@@ -8,17 +8,17 @@ import com.sphereon.sdk.blockchain.proof.handler.Pair;
 import javax.ws.rs.core.GenericType;
 
 import com.sphereon.sdk.blockchain.proof.model.ContentRequest;
-import com.sphereon.sdk.blockchain.proof.model.RegisterContentResponse;
-import com.sphereon.sdk.blockchain.proof.model.VndErrors;
 import java.io.File;
+import com.sphereon.sdk.blockchain.proof.model.RegisterContentResponse;
 import com.sphereon.sdk.blockchain.proof.model.VerifyContentResponse;
+import com.sphereon.sdk.blockchain.proof.model.VndErrors;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-11-13T19:35:07.820+01:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2017-11-13T14:20:43.095+01:00")
 public class ProofOfExistenceApi {
   private ApiClient apiClient;
 
@@ -60,7 +60,7 @@ public class ProofOfExistenceApi {
     }
     
     // create path and map variables
-    String localVarPath = "/blockchain/proof/0.1.0/existence/{chainId}/register/content".replaceAll("\\{format\\}","json")
+    String localVarPath = "/blockchain/proof/0.1.0/existence/{chainId}/register/content"
       .replaceAll("\\{" + "chainId" + "\\}", apiClient.escapeString(chainId.toString()));
 
     // query params
@@ -108,7 +108,7 @@ public class ProofOfExistenceApi {
     }
     
     // create path and map variables
-    String localVarPath = "/blockchain/proof/0.1.0/existence/{chainId}/register/stream".replaceAll("\\{format\\}","json")
+    String localVarPath = "/blockchain/proof/0.1.0/existence/{chainId}/register/stream"
       .replaceAll("\\{" + "chainId" + "\\}", apiClient.escapeString(chainId.toString()));
 
     // query params
@@ -158,7 +158,7 @@ public class ProofOfExistenceApi {
     }
     
     // create path and map variables
-    String localVarPath = "/blockchain/proof/0.1.0/existence/{chainId}/verify/content".replaceAll("\\{format\\}","json")
+    String localVarPath = "/blockchain/proof/0.1.0/existence/{chainId}/verify/content"
       .replaceAll("\\{" + "chainId" + "\\}", apiClient.escapeString(chainId.toString()));
 
     // query params
@@ -206,7 +206,7 @@ public class ProofOfExistenceApi {
     }
     
     // create path and map variables
-    String localVarPath = "/blockchain/proof/0.1.0/existence/{chainId}/verify/stream".replaceAll("\\{format\\}","json")
+    String localVarPath = "/blockchain/proof/0.1.0/existence/{chainId}/verify/stream"
       .replaceAll("\\{" + "chainId" + "\\}", apiClient.escapeString(chainId.toString()));
 
     // query params

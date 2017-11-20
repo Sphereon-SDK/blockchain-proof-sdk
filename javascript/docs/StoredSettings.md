@@ -5,7 +5,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **settings** | [**Settings**](Settings.md) |  | 
 **settingsChain** | [**CommittedChain**](CommittedChain.md) |  | 
-**signature** | **String** |  | 
+**signature** | **Blob** |  | 
 **validFrom** | **Date** |  | 
 
 

@@ -1,6 +1,6 @@
 # BlockchainProof.AllApi
 
-All URIs are relative to *https://gw.api.cloud.sphereon.com/*
+All URIs are relative to *https://gw.api.cloud.sphereon.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -21,7 +21,7 @@ Create a new entity chain
 ### Example
 ```javascript
 var BlockchainProof = require('blockchain_proof');
-var defaultClient = BlockchainProof.ApiClient.default;
+var defaultClient = BlockchainProof.ApiClient.instance;
 
 // Configure OAuth2 access token for authorization: oauth2schema
 var oauth2schema = defaultClient.authentications['oauth2schema'];
@@ -70,7 +70,7 @@ Register content
 ### Example
 ```javascript
 var BlockchainProof = require('blockchain_proof');
-var defaultClient = BlockchainProof.ApiClient.default;
+var defaultClient = BlockchainProof.ApiClient.instance;
 
 // Configure OAuth2 access token for authorization: oauth2schema
 var oauth2schema = defaultClient.authentications['oauth2schema'];
@@ -124,7 +124,7 @@ Register content by supplying a file or some other binary data. Hashing will be 
 ### Example
 ```javascript
 var BlockchainProof = require('blockchain_proof');
-var defaultClient = BlockchainProof.ApiClient.default;
+var defaultClient = BlockchainProof.ApiClient.instance;
 
 // Configure OAuth2 access token for authorization: oauth2schema
 var oauth2schema = defaultClient.authentications['oauth2schema'];
@@ -176,7 +176,7 @@ Get the settings for registration/verification
 ### Example
 ```javascript
 var BlockchainProof = require('blockchain_proof');
-var defaultClient = BlockchainProof.ApiClient.default;
+var defaultClient = BlockchainProof.ApiClient.instance;
 
 // Configure OAuth2 access token for authorization: oauth2schema
 var oauth2schema = defaultClient.authentications['oauth2schema'];
@@ -225,7 +225,7 @@ Verify content
 ### Example
 ```javascript
 var BlockchainProof = require('blockchain_proof');
-var defaultClient = BlockchainProof.ApiClient.default;
+var defaultClient = BlockchainProof.ApiClient.instance;
 
 // Configure OAuth2 access token for authorization: oauth2schema
 var oauth2schema = defaultClient.authentications['oauth2schema'];
@@ -279,7 +279,7 @@ Verify content by supplying a file or some other binary data. Hashing will be do
 ### Example
 ```javascript
 var BlockchainProof = require('blockchain_proof');
-var defaultClient = BlockchainProof.ApiClient.default;
+var defaultClient = BlockchainProof.ApiClient.instance;
 
 // Configure OAuth2 access token for authorization: oauth2schema
 var oauth2schema = defaultClient.authentications['oauth2schema'];

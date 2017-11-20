@@ -1,10 +1,28 @@
 package com.sphereon.sdk.blockchain.proof.api;
 
 import com.sphereon.sdk.blockchain.proof.handler.CollectionFormats.*;
-import com.sphereon.sdk.blockchain.proof.model.*;
-import okhttp3.RequestBody;
+
+
+
 import retrofit2.Call;
 import retrofit2.http.*;
+
+import okhttp3.RequestBody;
+
+import com.sphereon.sdk.blockchain.proof.model.ContentRequest;
+import com.sphereon.sdk.blockchain.proof.model.CreateChainRequest;
+import com.sphereon.sdk.blockchain.proof.model.CreateChainResponse;
+import java.io.File;
+import com.sphereon.sdk.blockchain.proof.model.RegisterContentResponse;
+import com.sphereon.sdk.blockchain.proof.model.SettingsResponse;
+import com.sphereon.sdk.blockchain.proof.model.VerifyContentResponse;
+import com.sphereon.sdk.blockchain.proof.model.VndErrors;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 
 public interface AllApi {
   /**
@@ -13,9 +31,8 @@ public interface AllApi {
    * @param request Create a new Proof of Existence chain using the provided entity settings (required)
    * @return Call&lt;CreateChainResponse&gt;
    */
-  
   @Headers({
-  	"Content-Type:application/json;charset&#x3D;UTF-8" 
+    "Content-Type:application/json;charset&#x3D;UTF-8"
   })
   @POST("blockchain/proof/0.1.0/existence")
   Call<CreateChainResponse> createChain(
@@ -29,9 +46,8 @@ public interface AllApi {
    * @param existence Register content using the current entity settings (required)
    * @return Call&lt;RegisterContentResponse&gt;
    */
-  
   @Headers({
-  	"Content-Type:application/json;charset&#x3D;UTF-8" 
+    "Content-Type:application/json;charset&#x3D;UTF-8"
   })
   @POST("blockchain/proof/0.1.0/existence/{chainId}/register/content")
   Call<RegisterContentResponse> registerContent(
@@ -45,7 +61,6 @@ public interface AllApi {
    * @param stream The binary data (not hashed). Hashing will be done on the server side. The binary data will not be stored (required)
    * @return Call&lt;RegisterContentResponse&gt;
    */
-  
   @retrofit2.http.Multipart
   @POST("blockchain/proof/0.1.0/existence/{chainId}/register/stream")
   Call<RegisterContentResponse> registerStream(
@@ -58,9 +73,8 @@ public interface AllApi {
    * @param chainId This is the chain where the content is registered/verified (required)
    * @return Call&lt;SettingsResponse&gt;
    */
-  
   @Headers({
-  	"Content-Type:application/json" 
+    "Content-Type:application/json"
   })
   @GET("blockchain/proof/0.1.0/existence/{chainId}/settings")
   Call<SettingsResponse> settings(
@@ -74,9 +88,8 @@ public interface AllApi {
    * @param existence Verify content using the current entity settings (required)
    * @return Call&lt;VerifyContentResponse&gt;
    */
-  
   @Headers({
-  	"Content-Type:application/json;charset&#x3D;UTF-8" 
+    "Content-Type:application/json;charset&#x3D;UTF-8"
   })
   @POST("blockchain/proof/0.1.0/existence/{chainId}/verify/content")
   Call<VerifyContentResponse> verifyContent(
@@ -90,7 +103,6 @@ public interface AllApi {
    * @param stream The binary data (not hashed). Hashing will be done on the server side. The binary data will not be stored (required)
    * @return Call&lt;VerifyContentResponse&gt;
    */
-  
   @retrofit2.http.Multipart
   @POST("blockchain/proof/0.1.0/existence/{chainId}/verify/stream")
   Call<VerifyContentResponse> verifyStream(
