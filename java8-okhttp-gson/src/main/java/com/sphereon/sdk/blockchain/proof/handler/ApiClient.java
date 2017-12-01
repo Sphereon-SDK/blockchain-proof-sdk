@@ -1027,11 +1027,16 @@ public class ApiClient {
                 T result;
                 try {
                     result = (T) handleResponse(response, returnType);
-                } catch (Throwable e) {
+                    callback.onSuccess(result, response.code(), response.headers().toMultimap());
+                }
+                catch (ApiException e) {
                     callback.onFailure(e, response.code(), response.headers().toMultimap());
                     return;
                 }
-                callback.onSuccess(result, response.code(), response.headers().toMultimap());
+                catch (Throwable t) {
+                    callback.onFailure(new ApiException(t), response.code(), response.headers().toMultimap());
+                    return;
+                }
             }
         });
     }
