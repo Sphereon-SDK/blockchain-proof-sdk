@@ -3,9 +3,12 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**settings** | [**Settings**](Settings.md) |  | 
 **settingsChain** | [**CommittedChain**](CommittedChain.md) |  | 
-**signature** | **Blob** |  | 
+**chainSettings** | [**ChainSettings**](ChainSettings.md) |  | 
+**context** | **String** |  | 
+**chainConfiguration** | [**ChainConfiguration**](ChainConfiguration.md) |  | 
 **validFrom** | **Date** |  | 
+**metaDataChain** | [**CommittedChain**](CommittedChain.md) |  | [optional] 
+**proofChain** | [**CommittedChain**](CommittedChain.md) |  | [optional] 
 
 

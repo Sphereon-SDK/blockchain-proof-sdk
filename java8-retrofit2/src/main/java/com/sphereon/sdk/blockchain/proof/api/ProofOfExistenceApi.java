@@ -10,10 +10,10 @@ import retrofit2.http.*;
 import okhttp3.RequestBody;
 
 import com.sphereon.sdk.blockchain.proof.model.ContentRequest;
+import com.sphereon.sdk.blockchain.proof.model.ErrorResponse;
 import java.io.File;
-import com.sphereon.sdk.blockchain.proof.model.RegisterContentResponse;
+import com.sphereon.sdk.blockchain.proof.model.StreamLocation;
 import com.sphereon.sdk.blockchain.proof.model.VerifyContentResponse;
-import com.sphereon.sdk.blockchain.proof.model.VndErrors;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -23,59 +23,43 @@ import java.util.Map;
 
 public interface ProofOfExistenceApi {
   /**
-   * Register content
-   * 
-   * @param chainId The chain where the content will be registered (required)
-   * @param existence Register content using the current entity settings (required)
-   * @return Call&lt;RegisterContentResponse&gt;
-   */
-  @Headers({
-    "Content-Type:application/json;charset&#x3D;UTF-8"
-  })
-  @POST("blockchain/proof/0.1.0/existence/{chainId}/register/content")
-  Call<RegisterContentResponse> registerContent(
-    @retrofit2.http.Path("chainId") String chainId, @retrofit2.http.Body ContentRequest existence
-  );
-
-  /**
-   * Register content using a bytestream/file
-   * Register content by supplying a file or some other binary data. Hashing will be done on the server side
-   * @param chainId The chain where the content will be registered (required)
-   * @param stream The binary data (not hashed). Hashing will be done on the server side. The binary data will not be stored (required)
-   * @return Call&lt;RegisterContentResponse&gt;
-   */
-  @retrofit2.http.Multipart
-  @POST("blockchain/proof/0.1.0/existence/{chainId}/register/stream")
-  Call<RegisterContentResponse> registerStream(
-    @retrofit2.http.Path("chainId") String chainId, @retrofit2.http.Part("stream\"; filename=\"stream") RequestBody stream
-  );
-
-  /**
    * Verify content
    * 
-   * @param chainId The chain where the content was registered (required)
-   * @param existence Verify content using the current entity settings (required)
+   * @param configName The configName for this operation (required)
+   * @param existence Verify content using the current settings (required)
    * @return Call&lt;VerifyContentResponse&gt;
    */
   @Headers({
     "Content-Type:application/json;charset&#x3D;UTF-8"
   })
-  @POST("blockchain/proof/0.1.0/existence/{chainId}/verify/content")
+  @POST("blockchain/proof/0.9.0-SNAPSHOT/existence/{configName}/content")
   Call<VerifyContentResponse> verifyContent(
-    @retrofit2.http.Path("chainId") String chainId, @retrofit2.http.Body ContentRequest existence
+    @retrofit2.http.Path("configName") String configName, @retrofit2.http.Body ContentRequest existence
   );
 
   /**
    * Verify content using a bytestream/file
    * Verify content by supplying a file or some other binary data. Hashing will be done on the server side
-   * @param chainId The chain where the content will be verified (required)
+   * @param configName The configuration name this operation (required)
    * @param stream The binary data (not hashed). Hashing will be done on the server side. The binary data will not be stored (required)
    * @return Call&lt;VerifyContentResponse&gt;
    */
   @retrofit2.http.Multipart
-  @POST("blockchain/proof/0.1.0/existence/{chainId}/verify/stream")
+  @POST("blockchain/proof/0.9.0-SNAPSHOT/existence/{configName}/streams/multipart")
   Call<VerifyContentResponse> verifyStream(
-    @retrofit2.http.Path("chainId") String chainId, @retrofit2.http.Part("stream\"; filename=\"stream") RequestBody stream
+    @retrofit2.http.Path("configName") String configName, @retrofit2.http.Part("stream\"; filename=\"stream") RequestBody stream
+  );
+
+  /**
+   * Verify content using a bytestream/file
+   * Verify content by supplying a file or some other binary data. Hashing will be done on the server side
+   * @param configName The context for this operation (required)
+   * @param streamLocations The stream locations on storage (required)
+   * @return Call&lt;VerifyContentResponse&gt;
+   */
+  @POST("blockchain/proof/0.9.0-SNAPSHOT/existence/{configName}/streams/location")
+  Call<VerifyContentResponse> verifyStreamsOnStorage(
+    @retrofit2.http.Path("configName") String configName, @retrofit2.http.Body List<StreamLocation> streamLocations
   );
 
 }

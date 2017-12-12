@@ -4,10 +4,13 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**settings** | [**Settings**](Settings.md) |  | 
 **settingsChain** | [**CommittedChain**](CommittedChain.md) |  | 
-**signature** | **byte[]** |  | 
+**chainSettings** | [**ChainSettings**](ChainSettings.md) |  | 
+**context** | **String** |  | 
+**chainConfiguration** | [**ChainConfiguration**](ChainConfiguration.md) |  | 
 **validFrom** | [**OffsetDateTime**](OffsetDateTime.md) |  | 
+**metaDataChain** | [**CommittedChain**](CommittedChain.md) |  |  [optional]
+**proofChain** | [**CommittedChain**](CommittedChain.md) |  |  [optional]
 
 
 

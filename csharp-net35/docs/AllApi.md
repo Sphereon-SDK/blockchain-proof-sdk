@@ -4,19 +4,21 @@ All URIs are relative to *https://gw.api.cloud.sphereon.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CreateChain**](AllApi.md#createchain) | **POST** /blockchain/proof/0.1.0/existence | Create a new entity chain
-[**RegisterContent**](AllApi.md#registercontent) | **POST** /blockchain/proof/0.1.0/existence/{chainId}/register/content | Register content
-[**RegisterStream**](AllApi.md#registerstream) | **POST** /blockchain/proof/0.1.0/existence/{chainId}/register/stream | Register content using a bytestream/file
-[**Settings**](AllApi.md#settings) | **GET** /blockchain/proof/0.1.0/existence/{chainId}/settings | Get the settings for registration/verification
-[**VerifyContent**](AllApi.md#verifycontent) | **POST** /blockchain/proof/0.1.0/existence/{chainId}/verify/content | Verify content
-[**VerifyStream**](AllApi.md#verifystream) | **POST** /blockchain/proof/0.1.0/existence/{chainId}/verify/stream | Verify content using a bytestream/file
+[**CreateConfiguration**](AllApi.md#createconfiguration) | **POST** /blockchain/proof/0.9.0-SNAPSHOT/existence/config | Create a new configuration
+[**GetCurrentConfiguration**](AllApi.md#getcurrentconfiguration) | **GET** /blockchain/proof/0.9.0-SNAPSHOT/existence/config/{configName} | Get the settings for registration/verification
+[**RegisterContent**](AllApi.md#registercontent) | **PUT** /blockchain/proof/0.9.0-SNAPSHOT/existence/{configName}/content | Register content
+[**RegisterStream**](AllApi.md#registerstream) | **PUT** /blockchain/proof/0.9.0-SNAPSHOT/existence/{configName}/streams/multipart | Register content using a bytestream/file
+[**RegisterStreamOnStorage**](AllApi.md#registerstreamonstorage) | **PUT** /blockchain/proof/0.9.0-SNAPSHOT/existence/{configName}/streams/location | Register content using a bytestream/file
+[**VerifyContent**](AllApi.md#verifycontent) | **POST** /blockchain/proof/0.9.0-SNAPSHOT/existence/{configName}/content | Verify content
+[**VerifyStream**](AllApi.md#verifystream) | **POST** /blockchain/proof/0.9.0-SNAPSHOT/existence/{configName}/streams/multipart | Verify content using a bytestream/file
+[**VerifyStreamsOnStorage**](AllApi.md#verifystreamsonstorage) | **POST** /blockchain/proof/0.9.0-SNAPSHOT/existence/{configName}/streams/location | Verify content using a bytestream/file
 
 
-<a name="createchain"></a>
-# **CreateChain**
-> CreateChainResponse CreateChain (CreateChainRequest request)
+<a name="createconfiguration"></a>
+# **CreateConfiguration**
+> ConfigurationResponse CreateConfiguration (CreateConfiguration request)
 
-Create a new entity chain
+Create a new configuration
 
 ### Example
 ```csharp
@@ -28,7 +30,7 @@ using Sphereon.SDK.Blockchain.Proof.Model;
 
 namespace Example
 {
-    public class CreateChainExample
+    public class CreateConfigurationExample
     {
         public void main()
         {
@@ -36,17 +38,17 @@ namespace Example
             Configuration.Default.AccessToken = "YOUR_ACCESS_TOKEN";
 
             var apiInstance = new AllApi();
-            var request = new CreateChainRequest(); // CreateChainRequest | Create a new Proof of Existence chain using the provided entity settings
+            var request = new CreateConfiguration(); // CreateConfiguration | Create a new Proof of Existence context using the provided entity settings
 
             try
             {
-                // Create a new entity chain
-                CreateChainResponse result = apiInstance.CreateChain(request);
+                // Create a new configuration
+                ConfigurationResponse result = apiInstance.CreateConfiguration(request);
                 Debug.WriteLine(result);
             }
             catch (Exception e)
             {
-                Debug.Print("Exception when calling AllApi.CreateChain: " + e.Message );
+                Debug.Print("Exception when calling AllApi.CreateConfiguration: " + e.Message );
             }
         }
     }
@@ -57,11 +59,11 @@ namespace Example
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **request** | [**CreateChainRequest**](CreateChainRequest.md)| Create a new Proof of Existence chain using the provided entity settings | 
+ **request** | [**CreateConfiguration**](CreateConfiguration.md)| Create a new Proof of Existence context using the provided entity settings | 
 
 ### Return type
 
-[**CreateChainResponse**](CreateChainResponse.md)
+[**ConfigurationResponse**](ConfigurationResponse.md)
 
 ### Authorization
 
@@ -74,9 +76,71 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+<a name="getcurrentconfiguration"></a>
+# **GetCurrentConfiguration**
+> ConfigurationResponse GetCurrentConfiguration (string configName)
+
+Get the settings for registration/verification
+
+### Example
+```csharp
+using System;
+using System.Diagnostics;
+using Sphereon.SDK.Blockchain.Proof.Api;
+using Sphereon.SDK.Blockchain.Proof.Client;
+using Sphereon.SDK.Blockchain.Proof.Model;
+
+namespace Example
+{
+    public class GetCurrentConfigurationExample
+    {
+        public void main()
+        {
+            // Configure OAuth2 access token for authorization: oauth2schema
+            Configuration.Default.AccessToken = "YOUR_ACCESS_TOKEN";
+
+            var apiInstance = new AllApi();
+            var configName = configName_example;  // string | The configuration name this operation
+
+            try
+            {
+                // Get the settings for registration/verification
+                ConfigurationResponse result = apiInstance.GetCurrentConfiguration(configName);
+                Debug.WriteLine(result);
+            }
+            catch (Exception e)
+            {
+                Debug.Print("Exception when calling AllApi.GetCurrentConfiguration: " + e.Message );
+            }
+        }
+    }
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **configName** | **string**| The configuration name this operation | 
+
+### Return type
+
+[**ConfigurationResponse**](ConfigurationResponse.md)
+
+### Authorization
+
+[oauth2schema](../README.md#oauth2schema)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json;charset=UTF-8
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 <a name="registercontent"></a>
 # **RegisterContent**
-> RegisterContentResponse RegisterContent (string chainId, ContentRequest existence)
+> RegisterContentResponse RegisterContent (string configName, ContentRequest existence)
 
 Register content
 
@@ -98,13 +162,13 @@ namespace Example
             Configuration.Default.AccessToken = "YOUR_ACCESS_TOKEN";
 
             var apiInstance = new AllApi();
-            var chainId = chainId_example;  // string | The chain where the content will be registered
-            var existence = new ContentRequest(); // ContentRequest | Register content using the current entity settings
+            var configName = configName_example;  // string | The configuration name this operation
+            var existence = new ContentRequest(); // ContentRequest | Register content using the current settings
 
             try
             {
                 // Register content
-                RegisterContentResponse result = apiInstance.RegisterContent(chainId, existence);
+                RegisterContentResponse result = apiInstance.RegisterContent(configName, existence);
                 Debug.WriteLine(result);
             }
             catch (Exception e)
@@ -120,8 +184,8 @@ namespace Example
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **chainId** | **string**| The chain where the content will be registered | 
- **existence** | [**ContentRequest**](ContentRequest.md)| Register content using the current entity settings | 
+ **configName** | **string**| The configuration name this operation | 
+ **existence** | [**ContentRequest**](ContentRequest.md)| Register content using the current settings | 
 
 ### Return type
 
@@ -140,7 +204,7 @@ Name | Type | Description  | Notes
 
 <a name="registerstream"></a>
 # **RegisterStream**
-> RegisterContentResponse RegisterStream (string chainId, System.IO.Stream stream)
+> RegisterContentResponse RegisterStream (string configName, System.IO.Stream stream)
 
 Register content using a bytestream/file
 
@@ -164,13 +228,13 @@ namespace Example
             Configuration.Default.AccessToken = "YOUR_ACCESS_TOKEN";
 
             var apiInstance = new AllApi();
-            var chainId = chainId_example;  // string | The chain where the content will be registered
+            var configName = configName_example;  // string | The configuration name this operation
             var stream = new System.IO.Stream(); // System.IO.Stream | The binary data (not hashed). Hashing will be done on the server side. The binary data will not be stored
 
             try
             {
                 // Register content using a bytestream/file
-                RegisterContentResponse result = apiInstance.RegisterStream(chainId, stream);
+                RegisterContentResponse result = apiInstance.RegisterStream(configName, stream);
                 Debug.WriteLine(result);
             }
             catch (Exception e)
@@ -186,7 +250,7 @@ namespace Example
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **chainId** | **string**| The chain where the content will be registered | 
+ **configName** | **string**| The configuration name this operation | 
  **stream** | **System.IO.Stream**| The binary data (not hashed). Hashing will be done on the server side. The binary data will not be stored | 
 
 ### Return type
@@ -204,11 +268,13 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="settings"></a>
-# **Settings**
-> SettingsResponse Settings (string chainId)
+<a name="registerstreamonstorage"></a>
+# **RegisterStreamOnStorage**
+> RegisterContentResponse RegisterStreamOnStorage (string configName, List<StreamLocation> streamLocations)
 
-Get the settings for registration/verification
+Register content using a bytestream/file
+
+Register content by supplying a file or some other binary data. Hashing will be done on the server side
 
 ### Example
 ```csharp
@@ -220,7 +286,7 @@ using Sphereon.SDK.Blockchain.Proof.Model;
 
 namespace Example
 {
-    public class SettingsExample
+    public class RegisterStreamOnStorageExample
     {
         public void main()
         {
@@ -228,17 +294,18 @@ namespace Example
             Configuration.Default.AccessToken = "YOUR_ACCESS_TOKEN";
 
             var apiInstance = new AllApi();
-            var chainId = chainId_example;  // string | This is the chain where the content is registered/verified
+            var configName = configName_example;  // string | The configuration name this operation
+            var streamLocations = new List<StreamLocation>(); // List<StreamLocation> | The stream locations on storage
 
             try
             {
-                // Get the settings for registration/verification
-                SettingsResponse result = apiInstance.Settings(chainId);
+                // Register content using a bytestream/file
+                RegisterContentResponse result = apiInstance.RegisterStreamOnStorage(configName, streamLocations);
                 Debug.WriteLine(result);
             }
             catch (Exception e)
             {
-                Debug.Print("Exception when calling AllApi.Settings: " + e.Message );
+                Debug.Print("Exception when calling AllApi.RegisterStreamOnStorage: " + e.Message );
             }
         }
     }
@@ -249,11 +316,12 @@ namespace Example
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **chainId** | **string**| This is the chain where the content is registered/verified | 
+ **configName** | **string**| The configuration name this operation | 
+ **streamLocations** | [**List&lt;StreamLocation&gt;**](StreamLocation.md)| The stream locations on storage | 
 
 ### Return type
 
-[**SettingsResponse**](SettingsResponse.md)
+[**RegisterContentResponse**](RegisterContentResponse.md)
 
 ### Authorization
 
@@ -261,14 +329,14 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
+ - **Content-Type**: multipart/form-data
  - **Accept**: application/json;charset=UTF-8
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 <a name="verifycontent"></a>
 # **VerifyContent**
-> VerifyContentResponse VerifyContent (string chainId, ContentRequest existence)
+> VerifyContentResponse VerifyContent (string configName, ContentRequest existence)
 
 Verify content
 
@@ -290,13 +358,13 @@ namespace Example
             Configuration.Default.AccessToken = "YOUR_ACCESS_TOKEN";
 
             var apiInstance = new AllApi();
-            var chainId = chainId_example;  // string | The chain where the content was registered
-            var existence = new ContentRequest(); // ContentRequest | Verify content using the current entity settings
+            var configName = configName_example;  // string | The configName for this operation
+            var existence = new ContentRequest(); // ContentRequest | Verify content using the current settings
 
             try
             {
                 // Verify content
-                VerifyContentResponse result = apiInstance.VerifyContent(chainId, existence);
+                VerifyContentResponse result = apiInstance.VerifyContent(configName, existence);
                 Debug.WriteLine(result);
             }
             catch (Exception e)
@@ -312,8 +380,8 @@ namespace Example
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **chainId** | **string**| The chain where the content was registered | 
- **existence** | [**ContentRequest**](ContentRequest.md)| Verify content using the current entity settings | 
+ **configName** | **string**| The configName for this operation | 
+ **existence** | [**ContentRequest**](ContentRequest.md)| Verify content using the current settings | 
 
 ### Return type
 
@@ -332,7 +400,7 @@ Name | Type | Description  | Notes
 
 <a name="verifystream"></a>
 # **VerifyStream**
-> VerifyContentResponse VerifyStream (string chainId, System.IO.Stream stream)
+> VerifyContentResponse VerifyStream (string configName, System.IO.Stream stream)
 
 Verify content using a bytestream/file
 
@@ -356,13 +424,13 @@ namespace Example
             Configuration.Default.AccessToken = "YOUR_ACCESS_TOKEN";
 
             var apiInstance = new AllApi();
-            var chainId = chainId_example;  // string | The chain where the content will be verified
+            var configName = configName_example;  // string | The configuration name this operation
             var stream = new System.IO.Stream(); // System.IO.Stream | The binary data (not hashed). Hashing will be done on the server side. The binary data will not be stored
 
             try
             {
                 // Verify content using a bytestream/file
-                VerifyContentResponse result = apiInstance.VerifyStream(chainId, stream);
+                VerifyContentResponse result = apiInstance.VerifyStream(configName, stream);
                 Debug.WriteLine(result);
             }
             catch (Exception e)
@@ -378,8 +446,74 @@ namespace Example
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **chainId** | **string**| The chain where the content will be verified | 
+ **configName** | **string**| The configuration name this operation | 
  **stream** | **System.IO.Stream**| The binary data (not hashed). Hashing will be done on the server side. The binary data will not be stored | 
+
+### Return type
+
+[**VerifyContentResponse**](VerifyContentResponse.md)
+
+### Authorization
+
+[oauth2schema](../README.md#oauth2schema)
+
+### HTTP request headers
+
+ - **Content-Type**: multipart/form-data
+ - **Accept**: application/json;charset=UTF-8
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+<a name="verifystreamsonstorage"></a>
+# **VerifyStreamsOnStorage**
+> VerifyContentResponse VerifyStreamsOnStorage (string configName, List<StreamLocation> streamLocations)
+
+Verify content using a bytestream/file
+
+Verify content by supplying a file or some other binary data. Hashing will be done on the server side
+
+### Example
+```csharp
+using System;
+using System.Diagnostics;
+using Sphereon.SDK.Blockchain.Proof.Api;
+using Sphereon.SDK.Blockchain.Proof.Client;
+using Sphereon.SDK.Blockchain.Proof.Model;
+
+namespace Example
+{
+    public class VerifyStreamsOnStorageExample
+    {
+        public void main()
+        {
+            // Configure OAuth2 access token for authorization: oauth2schema
+            Configuration.Default.AccessToken = "YOUR_ACCESS_TOKEN";
+
+            var apiInstance = new AllApi();
+            var configName = configName_example;  // string | The context for this operation
+            var streamLocations = new List<StreamLocation>(); // List<StreamLocation> | The stream locations on storage
+
+            try
+            {
+                // Verify content using a bytestream/file
+                VerifyContentResponse result = apiInstance.VerifyStreamsOnStorage(configName, streamLocations);
+                Debug.WriteLine(result);
+            }
+            catch (Exception e)
+            {
+                Debug.Print("Exception when calling AllApi.VerifyStreamsOnStorage: " + e.Message );
+            }
+        }
+    }
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **configName** | **string**| The context for this operation | 
+ **streamLocations** | [**List&lt;StreamLocation&gt;**](StreamLocation.md)| The stream locations on storage | 
 
 ### Return type
 

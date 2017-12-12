@@ -1,231 +1,327 @@
 {
   "basePath": "/",
   "paths": {
-    "/blockchain/proof/0.1.0/existence/{chainId}/verify/stream": {"post": {
-      "summary": "Verify content using a bytestream/file",
+    "/blockchain/proof/0.9.0-SNAPSHOT/existence/{configName}/content": {
+      "post": {
+        "summary": "Verify content",
+        "security": [{"oauth2schema": ["global"]}],
+        "produces": ["application/json;charset=UTF-8"],
+        "operationId": "verifyContent",
+        "responses": {
+          "200": {
+            "schema": {"$ref": "#/definitions/VerifyContentResponse"},
+            "description": "Content exists or not"
+          },
+          "400": {
+            "schema": {"$ref": "#/definitions/ErrorResponse"},
+            "description": "Invalid verification request"
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "configName",
+            "description": "The configName for this operation",
+            "type": "string",
+            "required": true
+          },
+          {
+            "schema": {"$ref": "#/definitions/ContentRequest"},
+            "in": "body",
+            "name": "existence",
+            "description": "Verify content using the current settings",
+            "required": true
+          }
+        ],
+        "tags": [
+          "Proof of Existence",
+          "All"
+        ],
+        "consumes": ["application/json;charset=UTF-8"]
+      },
+      "put": {
+        "summary": "Register content",
+        "security": [{"oauth2schema": ["global"]}],
+        "produces": ["application/json;charset=UTF-8"],
+        "operationId": "registerContent",
+        "responses": {
+          "200": {
+            "schema": {"$ref": "#/definitions/RegisterContentResponse"},
+            "description": "Content already registered"
+          },
+          "400": {
+            "schema": {"$ref": "#/definitions/ErrorResponse"},
+            "description": "Invalid registration request"
+          },
+          "202": {
+            "schema": {"$ref": "#/definitions/RegisterContentResponse"},
+            "description": "Registration request received"
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "configName",
+            "description": "The configuration name this operation",
+            "type": "string",
+            "required": true
+          },
+          {
+            "schema": {"$ref": "#/definitions/ContentRequest"},
+            "in": "body",
+            "name": "existence",
+            "description": "Register content using the current settings",
+            "required": true
+          }
+        ],
+        "tags": [
+          "Registration",
+          "All"
+        ],
+        "consumes": ["application/json;charset=UTF-8"]
+      }
+    },
+    "/blockchain/proof/0.9.0-SNAPSHOT/existence/{configName}/streams/multipart": {
+      "post": {
+        "summary": "Verify content using a bytestream/file",
+        "security": [{"oauth2schema": ["global"]}],
+        "produces": ["application/json;charset=UTF-8"],
+        "description": "Verify content by supplying a file or some other binary data. Hashing will be done on the server side",
+        "operationId": "verifyStream",
+        "responses": {
+          "200": {
+            "schema": {"$ref": "#/definitions/VerifyContentResponse"},
+            "description": "Content exists"
+          },
+          "400": {
+            "schema": {"$ref": "#/definitions/ErrorResponse"},
+            "description": "Invalid verification request"
+          },
+          "404": {
+            "schema": {"$ref": "#/definitions/VerifyContentResponse"},
+            "description": "Content does not exist"
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "configName",
+            "description": "The configuration name this operation",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "formData",
+            "name": "stream",
+            "description": "The binary data (not hashed). Hashing will be done on the server side. The binary data will not be stored",
+            "type": "file",
+            "required": true
+          }
+        ],
+        "tags": [
+          "Proof of Existence",
+          "All"
+        ],
+        "consumes": ["multipart/form-data"]
+      },
+      "put": {
+        "summary": "Register content using a bytestream/file",
+        "security": [{"oauth2schema": ["global"]}],
+        "produces": ["application/json;charset=UTF-8"],
+        "description": "Register content by supplying a file or some other binary data. Hashing will be done on the server side",
+        "operationId": "registerStream",
+        "responses": {
+          "200": {
+            "schema": {"$ref": "#/definitions/RegisterContentResponse"},
+            "description": "Content already registered"
+          },
+          "400": {
+            "schema": {"$ref": "#/definitions/ErrorResponse"},
+            "description": "Invalid registration request"
+          },
+          "202": {
+            "schema": {"$ref": "#/definitions/RegisterContentResponse"},
+            "description": "Registration request received"
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "configName",
+            "description": "The configuration name this operation",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "formData",
+            "name": "stream",
+            "description": "The binary data (not hashed). Hashing will be done on the server side. The binary data will not be stored",
+            "type": "file",
+            "required": true
+          }
+        ],
+        "tags": [
+          "Registration",
+          "All"
+        ],
+        "consumes": ["multipart/form-data"]
+      }
+    },
+    "/blockchain/proof/0.9.0-SNAPSHOT/existence/config": {"post": {
+      "summary": "Create a new configuration",
       "security": [{"oauth2schema": ["global"]}],
       "produces": ["application/json;charset=UTF-8"],
-      "description": "Verify content by supplying a file or some other binary data. Hashing will be done on the server side",
-      "operationId": "verifyStream",
+      "operationId": "createConfiguration",
       "responses": {
         "200": {
-          "schema": {"$ref": "#/definitions/VerifyContentResponse"},
-          "description": "Content exists"
+          "schema": {"$ref": "#/definitions/ConfigurationResponse"},
+          "description": "ChainConfiguration already exists"
         },
         "400": {
-          "schema": {"$ref": "#/definitions/VndErrors"},
-          "description": "Invalid verification request"
+          "schema": {"$ref": "#/definitions/ErrorResponse"},
+          "description": "Invalid registration request"
         },
-        "404": {
-          "schema": {"$ref": "#/definitions/VerifyContentResponse"},
-          "description": "Content does not exist"
+        "202": {
+          "schema": {"$ref": "#/definitions/ConfigurationResponse"},
+          "description": "Registration request received"
         }
       },
-      "parameters": [
-        {
-          "in": "path",
-          "name": "chainId",
-          "description": "The chain where the content will be verified",
-          "type": "string",
-          "required": true
-        },
-        {
-          "in": "formData",
-          "name": "stream",
-          "description": "The binary data (not hashed). Hashing will be done on the server side. The binary data will not be stored",
-          "type": "file",
-          "required": true
-        }
-      ],
+      "parameters": [{
+        "schema": {"$ref": "#/definitions/CreateConfiguration"},
+        "in": "body",
+        "name": "request",
+        "description": "Create a new Proof of Existence context using the provided entity settings",
+        "required": true
+      }],
       "tags": [
-        "Proof of Existence",
+        "Configuration",
         "All"
       ],
-      "consumes": ["multipart/form-data"]
+      "consumes": ["application/json;charset=UTF-8"]
     }},
-    "/blockchain/proof/0.1.0/existence/{chainId}/settings": {"get": {
+    "/blockchain/proof/0.9.0-SNAPSHOT/existence/{configName}/streams/location": {
+      "post": {
+        "summary": "Verify content using a bytestream/file",
+        "security": [{"oauth2schema": ["global"]}],
+        "produces": ["application/json;charset=UTF-8"],
+        "description": "Verify content by supplying a file or some other binary data. Hashing will be done on the server side",
+        "operationId": "verifyStreamsOnStorage",
+        "responses": {
+          "200": {
+            "schema": {"$ref": "#/definitions/VerifyContentResponse"},
+            "description": "Content exists"
+          },
+          "400": {
+            "schema": {"$ref": "#/definitions/ErrorResponse"},
+            "description": "Invalid verification request"
+          },
+          "404": {
+            "schema": {"$ref": "#/definitions/VerifyContentResponse"},
+            "description": "Content does not exist"
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "configName",
+            "description": "The context for this operation",
+            "type": "string",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "array",
+              "items": {"$ref": "#/definitions/StreamLocation"}
+            },
+            "in": "body",
+            "name": "streamLocations",
+            "description": "The stream locations on storage",
+            "required": true
+          }
+        ],
+        "tags": [
+          "Proof of Existence",
+          "All"
+        ],
+        "consumes": ["multipart/form-data"]
+      },
+      "put": {
+        "summary": "Register content using a bytestream/file",
+        "security": [{"oauth2schema": ["global"]}],
+        "produces": ["application/json;charset=UTF-8"],
+        "description": "Register content by supplying a file or some other binary data. Hashing will be done on the server side",
+        "operationId": "registerStreamOnStorage",
+        "responses": {
+          "200": {
+            "schema": {"$ref": "#/definitions/RegisterContentResponse"},
+            "description": "Content already registered"
+          },
+          "400": {
+            "schema": {"$ref": "#/definitions/ErrorResponse"},
+            "description": "Invalid registration request"
+          },
+          "202": {
+            "schema": {"$ref": "#/definitions/RegisterContentResponse"},
+            "description": "Registration request received"
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "configName",
+            "description": "The configuration name this operation",
+            "type": "string",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "array",
+              "items": {"$ref": "#/definitions/StreamLocation"}
+            },
+            "in": "body",
+            "name": "streamLocations",
+            "description": "The stream locations on storage",
+            "required": true
+          }
+        ],
+        "tags": [
+          "Registration",
+          "All"
+        ],
+        "consumes": ["multipart/form-data"]
+      }
+    },
+    "/blockchain/proof/0.9.0-SNAPSHOT/existence/config/{configName}": {"get": {
       "summary": "Get the settings for registration/verification",
       "security": [{"oauth2schema": ["global"]}],
       "produces": ["application/json;charset=UTF-8"],
-      "operationId": "settings",
+      "operationId": "getCurrentConfiguration",
       "responses": {
         "200": {
-          "schema": {"$ref": "#/definitions/SettingsResponse"},
+          "schema": {"$ref": "#/definitions/ConfigurationResponse"},
           "description": "The settings for the proof chain"
         },
         "400": {
-          "schema": {"$ref": "#/definitions/VndErrors"},
+          "schema": {"$ref": "#/definitions/ErrorResponse"},
           "description": "Invalid  request"
         },
         "404": {
-          "schema": {"$ref": "#/definitions/VndErrors"},
-          "description": "Settings not found"
+          "schema": {"$ref": "#/definitions/ErrorResponse"},
+          "description": "ChainSettings not found"
         }
       },
       "parameters": [{
         "in": "path",
-        "name": "chainId",
-        "description": "This is the chain where the content is registered/verified",
+        "name": "configName",
+        "description": "The configuration name this operation",
         "type": "string",
         "required": true
       }],
       "tags": [
-        "Settings",
+        "Configuration",
         "All"
       ],
       "consumes": ["application/json"]
-    }},
-    "/blockchain/proof/0.1.0/existence": {"post": {
-      "summary": "Create a new entity chain",
-      "security": [{"oauth2schema": ["global"]}],
-      "produces": ["application/json;charset=UTF-8"],
-      "operationId": "createChain",
-      "responses": {
-        "200": {
-          "schema": {"$ref": "#/definitions/CreateChainResponse"},
-          "description": "Chain already exists"
-        },
-        "400": {
-          "schema": {"$ref": "#/definitions/VndErrors"},
-          "description": "Invalid registration request"
-        },
-        "202": {
-          "schema": {"$ref": "#/definitions/CreateChainResponse"},
-          "description": "Registration request received"
-        }
-      },
-      "parameters": [{
-        "schema": {"$ref": "#/definitions/CreateChainRequest"},
-        "in": "body",
-        "name": "request",
-        "description": "Create a new Proof of Existence chain using the provided entity settings",
-        "required": true
-      }],
-      "tags": [
-        "Chain",
-        "All"
-      ],
-      "consumes": ["application/json;charset=UTF-8"]
-    }},
-    "/blockchain/proof/0.1.0/existence/{chainId}/verify/content": {"post": {
-      "summary": "Verify content",
-      "security": [{"oauth2schema": ["global"]}],
-      "produces": ["application/json;charset=UTF-8"],
-      "operationId": "verifyContent",
-      "responses": {
-        "200": {
-          "schema": {"$ref": "#/definitions/VerifyContentResponse"},
-          "description": "Content exists or not"
-        },
-        "400": {
-          "schema": {"$ref": "#/definitions/VndErrors"},
-          "description": "Invalid verification request"
-        }
-      },
-      "parameters": [
-        {
-          "in": "path",
-          "name": "chainId",
-          "description": "The chain where the content was registered",
-          "type": "string",
-          "required": true
-        },
-        {
-          "schema": {"$ref": "#/definitions/ContentRequest"},
-          "in": "body",
-          "name": "existence",
-          "description": "Verify content using the current entity settings",
-          "required": true
-        }
-      ],
-      "tags": [
-        "Proof of Existence",
-        "All"
-      ],
-      "consumes": ["application/json;charset=UTF-8"]
-    }},
-    "/blockchain/proof/0.1.0/existence/{chainId}/register/stream": {"post": {
-      "summary": "Register content using a bytestream/file",
-      "security": [{"oauth2schema": ["global"]}],
-      "produces": ["application/json;charset=UTF-8"],
-      "description": "Register content by supplying a file or some other binary data. Hashing will be done on the server side",
-      "operationId": "registerStream",
-      "responses": {
-        "200": {
-          "schema": {"$ref": "#/definitions/RegisterContentResponse"},
-          "description": "Content already registered"
-        },
-        "400": {
-          "schema": {"$ref": "#/definitions/VndErrors"},
-          "description": "Invalid registration request"
-        },
-        "202": {
-          "schema": {"$ref": "#/definitions/RegisterContentResponse"},
-          "description": "Registration request received"
-        }
-      },
-      "parameters": [
-        {
-          "in": "path",
-          "name": "chainId",
-          "description": "The chain where the content will be registered",
-          "type": "string",
-          "required": true
-        },
-        {
-          "in": "formData",
-          "name": "stream",
-          "description": "The binary data (not hashed). Hashing will be done on the server side. The binary data will not be stored",
-          "type": "file",
-          "required": true
-        }
-      ],
-      "tags": [
-        "Proof of Existence",
-        "All"
-      ],
-      "consumes": ["multipart/form-data"]
-    }},
-    "/blockchain/proof/0.1.0/existence/{chainId}/register/content": {"post": {
-      "summary": "Register content",
-      "security": [{"oauth2schema": ["global"]}],
-      "produces": ["application/json;charset=UTF-8"],
-      "operationId": "registerContent",
-      "responses": {
-        "200": {
-          "schema": {"$ref": "#/definitions/RegisterContentResponse"},
-          "description": "Content already registereds"
-        },
-        "400": {
-          "schema": {"$ref": "#/definitions/VndErrors"},
-          "description": "Invalid registration request"
-        },
-        "202": {
-          "schema": {"$ref": "#/definitions/RegisterContentResponse"},
-          "description": "Registration request received"
-        }
-      },
-      "parameters": [
-        {
-          "in": "path",
-          "name": "chainId",
-          "description": "The chain where the content will be registered",
-          "type": "string",
-          "required": true
-        },
-        {
-          "schema": {"$ref": "#/definitions/ContentRequest"},
-          "in": "body",
-          "name": "existence",
-          "description": "Register content using the current entity settings",
-          "required": true
-        }
-      ],
-      "tags": [
-        "Proof of Existence",
-        "All"
-      ],
-      "consumes": ["application/json;charset=UTF-8"]
     }}
   },
   "host": "gw.api.cloud.sphereon.com",
@@ -242,7 +338,8 @@
       "type": "object",
       "required": [
         "contentId",
-        "contentRequest",
+        "contextName",
+        "fileChain",
         "proofChain",
         "registrationState"
       ],
@@ -251,8 +348,9 @@
           "format": "date-time",
           "type": "string"
         },
+        "contextName": {"type": "string"},
+        "requestId": {"type": "string"},
         "contentId": {"type": "string"},
-        "contentRequest": {"$ref": "#/definitions/ContentRequest"},
         "proofChain": {"$ref": "#/definitions/CommittedChain"},
         "registrationState": {
           "type": "string",
@@ -261,86 +359,69 @@
             "REGISTERED",
             "NOT_REGISTERED"
           ]
-        }
+        },
+        "fileChain": {"$ref": "#/definitions/CommittedChain"}
       }
     },
     "CommittedChain": {
       "description": "Commited Chain",
       "type": "object",
-      "properties": {"id": {
-        "description": "Chain ID",
-        "readOnly": true,
-        "type": "string"
-      }}
-    },
-    "StoredSettings": {
-      "description": "The stored settings from the settings chain",
-      "type": "object",
-      "required": [
-        "settings",
-        "settingsChain",
-        "signature",
-        "validFrom"
-      ],
       "properties": {
-        "settings": {"$ref": "#/definitions/Settings"},
-        "settingsChain": {"$ref": "#/definitions/CommittedChain"},
-        "signature": {
-          "format": "byte",
-          "type": "string"
-        },
-        "validFrom": {
-          "format": "date-time",
+        "context": {"type": "string"},
+        "id": {
+          "description": "Chain ID",
+          "readOnly": true,
           "type": "string"
         }
       }
     },
-    "CreateChainRequest": {
-      "description": "Create chain for Proof of Existence request",
+    "StoredSettings": {
+      "description": "The stored chainSettings from the chainSettings chain",
       "type": "object",
       "required": [
-        "defaultSettings",
-        "name"
+        "chainConfiguration",
+        "chainSettings",
+        "context",
+        "settingsChain",
+        "validFrom"
       ],
       "properties": {
-        "metadata": {
-          "format": "byte",
-          "description": "Metadata for this chain.",
+        "settingsChain": {
+          "readOnly": true,
+          "$ref": "#/definitions/CommittedChain"
+        },
+        "chainSettings": {
+          "readOnly": true,
+          "$ref": "#/definitions/ChainSettings"
+        },
+        "context": {
+          "readOnly": true,
           "type": "string"
         },
-        "settingsChainId": {
-          "description": "Supply an existing settings chain. When not supplied a new settings chain will be created automatically.",
+        "chainConfiguration": {
+          "readOnly": true,
+          "$ref": "#/definitions/ChainConfiguration"
+        },
+        "validFrom": {
+          "format": "date-time",
+          "readOnly": true,
           "type": "string"
         },
-        "name": {
-          "description": "Unique name for this chain.",
-          "type": "string"
+        "metaDataChain": {
+          "readOnly": true,
+          "$ref": "#/definitions/CommittedChain"
         },
-        "previousChainId": {
-          "description": "When this chain is a continuation of another chain you need to supply the previous chainId here.",
-          "type": "string"
-        },
-        "defaultSettings": {"$ref": "#/definitions/Settings"}
+        "proofChain": {
+          "readOnly": true,
+          "$ref": "#/definitions/CommittedChain"
+        }
       }
     },
-    "SettingsResponse": {
-      "description": "The settings from the settings chain",
+    "ConfigurationResponse": {
+      "description": "Committed context and settings response",
       "type": "object",
-      "required": [
-        "allSettings",
-        "currentSettings",
-        "proofChain",
-        "settingsChain"
-      ],
-      "properties": {
-        "settingsChain": {"$ref": "#/definitions/CommittedChain"},
-        "currentSettings": {"$ref": "#/definitions/StoredSettings"},
-        "allSettings": {
-          "type": "array",
-          "items": {"$ref": "#/definitions/StoredSettings"}
-        },
-        "proofChain": {"$ref": "#/definitions/CommittedChain"}
-      }
+      "required": ["storedSettings"],
+      "properties": {"storedSettings": {"$ref": "#/definitions/StoredSettings"}}
     },
     "ContentRequest": {
       "description": "Content existence request",
@@ -358,6 +439,10 @@
             "CLIENT"
           ]
         },
+        "requestId": {
+          "description": "An id that will be returned in the response.",
+          "type": "string"
+        },
         "content": {
           "format": "byte",
           "description": "The content to register.",
@@ -365,27 +450,94 @@
         }
       }
     },
-    "VndError": {
+    "ChainSettings": {
+      "description": "Existence ChainSettings. Normally you only supply them once during chain creation or during a settings update. You can also supply them during a content request, but then it is up to you to also supply the correct setting during verify",
       "type": "object",
+      "required": [
+        "signatureHash",
+        "version"
+      ],
       "properties": {
-        "_links": {
-          "additionalProperties": {"$ref": "#/definitions/Link"},
-          "type": "object"
+        "signatureHash": {
+          "format": "byte",
+          "readOnly": true,
+          "type": "string"
         },
-        "logref": {"type": "string"},
-        "message": {"type": "string"}
+        "contentRegistrationChains": {
+          "description": "A set of content registration targets",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "FILE_CHAIN",
+              "PROOF_CHAIN"
+            ]
+          }
+        },
+        "proofChainId": {
+          "description": "The proof chain id linked to the current configuration",
+          "type": "string"
+        },
+        "metadataRegistrationChains": {
+          "description": "A set of metadata registration targets",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "FILE_CHAIN",
+              "PROOF_CHAIN",
+              "METADATA_CHAIN"
+            ]
+          }
+        },
+        "version": {
+          "format": "int32",
+          "description": "The settings version (only 1 for now)",
+          "type": "integer",
+          "enum": [1]
+        },
+        "hashAlgorithm": {
+          "description": "The hashing method used for the content",
+          "type": "string",
+          "enum": [
+            "SHA_256",
+            "SHA_512"
+          ]
+        }
+      }
+    },
+    "ChainConfiguration": {
+      "type": "object",
+      "required": [
+        "context",
+        "id",
+        "name",
+        "settingChainId"
+      ],
+      "properties": {
+        "context": {"type": "string"},
+        "name": {
+          "readOnly": true,
+          "type": "string"
+        },
+        "settingChainId": {"type": "string"},
+        "id": {
+          "readOnly": true,
+          "type": "string"
+        }
       }
     },
     "RegisterContentResponse": {
       "description": "Committed Content response",
       "type": "object",
       "required": [
-        "contentRequest",
+        "contextName",
         "proofChain",
         "registrationState"
       ],
       "properties": {
-        "contentRequest": {"$ref": "#/definitions/ContentRequest"},
+        "contextName": {"type": "string"},
+        "requestId": {"type": "string"},
         "proofChain": {"$ref": "#/definitions/CommittedChain"},
         "registrationState": {
           "type": "string",
@@ -394,55 +546,75 @@
             "REGISTERED",
             "NOT_REGISTERED"
           ]
-        }
+        },
+        "fileChain": {"$ref": "#/definitions/CommittedChain"}
       }
     },
-    "CreateChainResponse": {
-      "description": "Committed Chain response",
+    "Error": {
+      "description": "An error",
       "type": "object",
       "required": [
-        "chainRequest",
-        "proofChain",
-        "settingsChain"
+        "code",
+        "level",
+        "message"
       ],
       "properties": {
-        "settingsChain": {"$ref": "#/definitions/CommittedChain"},
-        "chainRequest": {"$ref": "#/definitions/CreateChainRequest"},
-        "proofChain": {"$ref": "#/definitions/CommittedChain"}
-      }
-    },
-    "Settings": {
-      "description": "Existence Settings. Normally you only supply them once during chain creation or during a settings update. You can also supply them during a content request, but then it is up to you to also supply the correct setting during verify",
-      "type": "object",
-      "required": ["version"],
-      "properties": {
-        "version": {
-          "format": "int32",
-          "description": "The settings version (only 1 for now)",
-          "type": "integer",
-          "enum": [1]
-        },
-        "hashAlgorithm": {
-          "description": "The hashing method used (CLIENT) or to use (SERVER) for the content",
+        "code": {"type": "string"},
+        "level": {
           "type": "string",
           "enum": [
-            "PLAIN",
-            "SHA_256",
-            "SHA_512"
+            "INFO",
+            "WARNING",
+            "FATAL"
           ]
+        },
+        "cause": {"$ref": "#/definitions/Error"},
+        "message": {"type": "string"}
+      }
+    },
+    "StreamLocation": {
+      "description": "Location record of data stream",
+      "type": "object",
+      "properties": {
+        "folderPath": {"type": "string"},
+        "filename": {"type": "string"},
+        "id": {
+          "readOnly": true,
+          "type": "string"
+        },
+        "containerId": {"type": "string"},
+        "originalFilename": {"type": "string"}
+      }
+    },
+    "CreateConfiguration": {
+      "description": "Create a context configuration",
+      "type": "object",
+      "required": [
+        "context",
+        "initialSettings",
+        "name"
+      ],
+      "properties": {
+        "initialSettings": {
+          "description": "The initial context settings.",
+          "$ref": "#/definitions/ChainSettings"
+        },
+        "context": {
+          "description": "The blockchain context.",
+          "type": "string"
+        },
+        "name": {
+          "description": "The configuration name.",
+          "type": "string"
         }
       }
     },
-    "Link": {
-      "type": "object",
-      "properties": {"href": {"type": "string"}}
-    },
-    "VndErrors": {
+    "ErrorResponse": {
       "description": "The error response",
       "type": "object",
       "properties": {"errors": {
         "type": "array",
-        "items": {"$ref": "#/definitions/VndError"}
+        "items": {"$ref": "#/definitions/Error"}
       }}
     }
   },
@@ -460,7 +632,7 @@
     "description": "<b>With the Blockchain Proof API it is easy to prove existence of (binary) data at a certain point in time. Behind the scenes it stores entries using the Factom (bitcoin) blockchain by means of our generic blockchain API.<\/b>\r\n\r\nThe flow is generally as follows:\r\n1. Make sure a Proof chain has been created using the /chain POST endpoint beforehand. Normally you only need one or a handful of chains, during the entiry lifetime of your proof solution. This is a relative expensive operation in terms of money.\r\n2. Store proof entries on the proof chain from step 1. The entries will contain the content and metadata you want to store forever on the specified chain.\r\n3. Retrieve an existing entry from the chain to verify or retrieve data\r\n\r\n\r\n<b>Interactive testing: <\/b>A web based test console is available in the <a href=\"https://store.sphereon.com\">Sphereon API Store<\/a>",
     "termsOfService": "https://sphereon.com",
     "title": "Blockchain Proof",
-    "version": "0.1.0"
+    "version": "0.9.0-SNAPSHOT"
   },
   "tags": [
     {
@@ -472,7 +644,7 @@
       "description": "The proof and settings chains"
     },
     {
-      "name": "Settings",
+      "name": "ChainSettings",
       "description": "The settings"
     },
     {

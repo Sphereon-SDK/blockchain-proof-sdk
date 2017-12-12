@@ -4,145 +4,14 @@ All URIs are relative to *https://gw.api.cloud.sphereon.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**RegisterContent**](ProofOfExistenceApi.md#registercontent) | **POST** /blockchain/proof/0.1.0/existence/{chainId}/register/content | Register content
-[**RegisterStream**](ProofOfExistenceApi.md#registerstream) | **POST** /blockchain/proof/0.1.0/existence/{chainId}/register/stream | Register content using a bytestream/file
-[**VerifyContent**](ProofOfExistenceApi.md#verifycontent) | **POST** /blockchain/proof/0.1.0/existence/{chainId}/verify/content | Verify content
-[**VerifyStream**](ProofOfExistenceApi.md#verifystream) | **POST** /blockchain/proof/0.1.0/existence/{chainId}/verify/stream | Verify content using a bytestream/file
+[**VerifyContent**](ProofOfExistenceApi.md#verifycontent) | **POST** /blockchain/proof/0.9.0-SNAPSHOT/existence/{configName}/content | Verify content
+[**VerifyStream**](ProofOfExistenceApi.md#verifystream) | **POST** /blockchain/proof/0.9.0-SNAPSHOT/existence/{configName}/streams/multipart | Verify content using a bytestream/file
+[**VerifyStreamsOnStorage**](ProofOfExistenceApi.md#verifystreamsonstorage) | **POST** /blockchain/proof/0.9.0-SNAPSHOT/existence/{configName}/streams/location | Verify content using a bytestream/file
 
-
-<a name="registercontent"></a>
-# **RegisterContent**
-> RegisterContentResponse RegisterContent (string chainId, ContentRequest existence)
-
-Register content
-
-### Example
-```csharp
-using System;
-using System.Diagnostics;
-using Sphereon.SDK.Blockchain.Proof.Api;
-using Sphereon.SDK.Blockchain.Proof.Client;
-using Sphereon.SDK.Blockchain.Proof.Model;
-
-namespace Example
-{
-    public class RegisterContentExample
-    {
-        public void main()
-        {
-            // Configure OAuth2 access token for authorization: oauth2schema
-            Configuration.Default.AccessToken = "YOUR_ACCESS_TOKEN";
-
-            var apiInstance = new ProofOfExistenceApi();
-            var chainId = chainId_example;  // string | The chain where the content will be registered
-            var existence = new ContentRequest(); // ContentRequest | Register content using the current entity settings
-
-            try
-            {
-                // Register content
-                RegisterContentResponse result = apiInstance.RegisterContent(chainId, existence);
-                Debug.WriteLine(result);
-            }
-            catch (Exception e)
-            {
-                Debug.Print("Exception when calling ProofOfExistenceApi.RegisterContent: " + e.Message );
-            }
-        }
-    }
-}
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **chainId** | **string**| The chain where the content will be registered | 
- **existence** | [**ContentRequest**](ContentRequest.md)| Register content using the current entity settings | 
-
-### Return type
-
-[**RegisterContentResponse**](RegisterContentResponse.md)
-
-### Authorization
-
-[oauth2schema](../README.md#oauth2schema)
-
-### HTTP request headers
-
- - **Content-Type**: application/json;charset=UTF-8
- - **Accept**: application/json;charset=UTF-8
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-<a name="registerstream"></a>
-# **RegisterStream**
-> RegisterContentResponse RegisterStream (string chainId, System.IO.Stream stream)
-
-Register content using a bytestream/file
-
-Register content by supplying a file or some other binary data. Hashing will be done on the server side
-
-### Example
-```csharp
-using System;
-using System.Diagnostics;
-using Sphereon.SDK.Blockchain.Proof.Api;
-using Sphereon.SDK.Blockchain.Proof.Client;
-using Sphereon.SDK.Blockchain.Proof.Model;
-
-namespace Example
-{
-    public class RegisterStreamExample
-    {
-        public void main()
-        {
-            // Configure OAuth2 access token for authorization: oauth2schema
-            Configuration.Default.AccessToken = "YOUR_ACCESS_TOKEN";
-
-            var apiInstance = new ProofOfExistenceApi();
-            var chainId = chainId_example;  // string | The chain where the content will be registered
-            var stream = new System.IO.Stream(); // System.IO.Stream | The binary data (not hashed). Hashing will be done on the server side. The binary data will not be stored
-
-            try
-            {
-                // Register content using a bytestream/file
-                RegisterContentResponse result = apiInstance.RegisterStream(chainId, stream);
-                Debug.WriteLine(result);
-            }
-            catch (Exception e)
-            {
-                Debug.Print("Exception when calling ProofOfExistenceApi.RegisterStream: " + e.Message );
-            }
-        }
-    }
-}
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **chainId** | **string**| The chain where the content will be registered | 
- **stream** | **System.IO.Stream**| The binary data (not hashed). Hashing will be done on the server side. The binary data will not be stored | 
-
-### Return type
-
-[**RegisterContentResponse**](RegisterContentResponse.md)
-
-### Authorization
-
-[oauth2schema](../README.md#oauth2schema)
-
-### HTTP request headers
-
- - **Content-Type**: multipart/form-data
- - **Accept**: application/json;charset=UTF-8
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 <a name="verifycontent"></a>
 # **VerifyContent**
-> VerifyContentResponse VerifyContent (string chainId, ContentRequest existence)
+> VerifyContentResponse VerifyContent (string configName, ContentRequest existence)
 
 Verify content
 
@@ -164,13 +33,13 @@ namespace Example
             Configuration.Default.AccessToken = "YOUR_ACCESS_TOKEN";
 
             var apiInstance = new ProofOfExistenceApi();
-            var chainId = chainId_example;  // string | The chain where the content was registered
-            var existence = new ContentRequest(); // ContentRequest | Verify content using the current entity settings
+            var configName = configName_example;  // string | The configName for this operation
+            var existence = new ContentRequest(); // ContentRequest | Verify content using the current settings
 
             try
             {
                 // Verify content
-                VerifyContentResponse result = apiInstance.VerifyContent(chainId, existence);
+                VerifyContentResponse result = apiInstance.VerifyContent(configName, existence);
                 Debug.WriteLine(result);
             }
             catch (Exception e)
@@ -186,8 +55,8 @@ namespace Example
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **chainId** | **string**| The chain where the content was registered | 
- **existence** | [**ContentRequest**](ContentRequest.md)| Verify content using the current entity settings | 
+ **configName** | **string**| The configName for this operation | 
+ **existence** | [**ContentRequest**](ContentRequest.md)| Verify content using the current settings | 
 
 ### Return type
 
@@ -206,7 +75,7 @@ Name | Type | Description  | Notes
 
 <a name="verifystream"></a>
 # **VerifyStream**
-> VerifyContentResponse VerifyStream (string chainId, System.IO.Stream stream)
+> VerifyContentResponse VerifyStream (string configName, System.IO.Stream stream)
 
 Verify content using a bytestream/file
 
@@ -230,13 +99,13 @@ namespace Example
             Configuration.Default.AccessToken = "YOUR_ACCESS_TOKEN";
 
             var apiInstance = new ProofOfExistenceApi();
-            var chainId = chainId_example;  // string | The chain where the content will be verified
+            var configName = configName_example;  // string | The configuration name this operation
             var stream = new System.IO.Stream(); // System.IO.Stream | The binary data (not hashed). Hashing will be done on the server side. The binary data will not be stored
 
             try
             {
                 // Verify content using a bytestream/file
-                VerifyContentResponse result = apiInstance.VerifyStream(chainId, stream);
+                VerifyContentResponse result = apiInstance.VerifyStream(configName, stream);
                 Debug.WriteLine(result);
             }
             catch (Exception e)
@@ -252,8 +121,74 @@ namespace Example
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **chainId** | **string**| The chain where the content will be verified | 
+ **configName** | **string**| The configuration name this operation | 
  **stream** | **System.IO.Stream**| The binary data (not hashed). Hashing will be done on the server side. The binary data will not be stored | 
+
+### Return type
+
+[**VerifyContentResponse**](VerifyContentResponse.md)
+
+### Authorization
+
+[oauth2schema](../README.md#oauth2schema)
+
+### HTTP request headers
+
+ - **Content-Type**: multipart/form-data
+ - **Accept**: application/json;charset=UTF-8
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+<a name="verifystreamsonstorage"></a>
+# **VerifyStreamsOnStorage**
+> VerifyContentResponse VerifyStreamsOnStorage (string configName, List<StreamLocation> streamLocations)
+
+Verify content using a bytestream/file
+
+Verify content by supplying a file or some other binary data. Hashing will be done on the server side
+
+### Example
+```csharp
+using System;
+using System.Diagnostics;
+using Sphereon.SDK.Blockchain.Proof.Api;
+using Sphereon.SDK.Blockchain.Proof.Client;
+using Sphereon.SDK.Blockchain.Proof.Model;
+
+namespace Example
+{
+    public class VerifyStreamsOnStorageExample
+    {
+        public void main()
+        {
+            // Configure OAuth2 access token for authorization: oauth2schema
+            Configuration.Default.AccessToken = "YOUR_ACCESS_TOKEN";
+
+            var apiInstance = new ProofOfExistenceApi();
+            var configName = configName_example;  // string | The context for this operation
+            var streamLocations = new List<StreamLocation>(); // List<StreamLocation> | The stream locations on storage
+
+            try
+            {
+                // Verify content using a bytestream/file
+                VerifyContentResponse result = apiInstance.VerifyStreamsOnStorage(configName, streamLocations);
+                Debug.WriteLine(result);
+            }
+            catch (Exception e)
+            {
+                Debug.Print("Exception when calling ProofOfExistenceApi.VerifyStreamsOnStorage: " + e.Message );
+            }
+        }
+    }
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **configName** | **string**| The context for this operation | 
+ **streamLocations** | [**List&lt;StreamLocation&gt;**](StreamLocation.md)| The stream locations on storage | 
 
 ### Return type
 

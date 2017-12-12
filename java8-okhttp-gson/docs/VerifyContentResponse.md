@@ -5,10 +5,12 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **registrationTime** | [**OffsetDateTime**](OffsetDateTime.md) |  |  [optional]
+**contextName** | **String** |  | 
+**requestId** | **String** |  |  [optional]
 **contentId** | **String** |  | 
-**contentRequest** | [**ContentRequest**](ContentRequest.md) |  | 
 **proofChain** | [**CommittedChain**](CommittedChain.md) |  | 
 **registrationState** | [**RegistrationStateEnum**](#RegistrationStateEnum) |  | 
+**fileChain** | [**CommittedChain**](CommittedChain.md) |  | 
 
 
 <a name="RegistrationStateEnum"></a>
