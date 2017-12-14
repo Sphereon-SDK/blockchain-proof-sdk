@@ -29,7 +29,7 @@ import java.time.OffsetDateTime;
  * Verify Content response
  */
 @ApiModel(description = "Verify Content response")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2017-12-14T12:50:21.605+01:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2017-12-14T13:24:27.685+01:00")
 public class VerifyContentResponse {
   @SerializedName("registrationTime")
   private OffsetDateTime registrationTime = null;

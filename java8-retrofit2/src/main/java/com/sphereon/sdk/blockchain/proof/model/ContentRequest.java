@@ -27,7 +27,7 @@ import java.io.IOException;
  * Content existence request
  */
 @ApiModel(description = "Content existence request")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2017-12-14T12:50:21.605+01:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2017-12-14T13:24:27.685+01:00")
 public class ContentRequest {
   /**
    * When CLIENT is supplied the content should already have been hashed by you. When SERVER is supplied we will hash the content

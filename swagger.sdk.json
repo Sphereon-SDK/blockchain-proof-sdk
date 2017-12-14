@@ -509,14 +509,15 @@
     "ChainConfiguration": {
       "type": "object",
       "required": [
+        "accessLevel",
         "context",
         "id",
         "name",
-        "ownerType",
         "settingChainId"
       ],
       "properties": {
-        "ownerType": {
+        "accessLevel": {
+          "readOnly": true,
           "type": "string",
           "enum": [
             "PUBLIC",
@@ -598,6 +599,7 @@
       "description": "Create a context configuration",
       "type": "object",
       "required": [
+        "accessLevel",
         "context",
         "initialSettings",
         "name"
@@ -606,6 +608,13 @@
         "initialSettings": {
           "description": "The initial context settings.",
           "$ref": "#/definitions/ChainSettings"
+        },
+        "accessLevel": {
+          "type": "string",
+          "enum": [
+            "PUBLIC",
+            "PRIVATE"
+          ]
         },
         "context": {
           "description": "The blockchain context.",

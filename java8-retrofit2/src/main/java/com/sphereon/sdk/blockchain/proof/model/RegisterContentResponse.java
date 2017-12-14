@@ -28,7 +28,7 @@ import java.io.IOException;
  * Committed Content response
  */
 @ApiModel(description = "Committed Content response")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2017-12-14T12:50:21.605+01:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2017-12-14T13:24:27.685+01:00")
 public class RegisterContentResponse {
   @SerializedName("contextName")
   private String contextName = null;
