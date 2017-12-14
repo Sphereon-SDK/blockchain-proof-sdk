@@ -49,10 +49,10 @@ import com.sphereon.sdk.blockchain.proof.handler.auth.HttpBasicAuth;
 import com.sphereon.sdk.blockchain.proof.handler.auth.ApiKeyAuth;
 import com.sphereon.sdk.blockchain.proof.handler.auth.OAuth;
 
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2017-12-11T17:14:39.149+01:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2017-12-14T12:50:11.538+01:00")
 public class ApiClient {
   private Map<String, String> defaultHeaderMap = new HashMap<String, String>();
-  private String basePath = "https://gw.api.cloud.sphereon.com";
+  private String basePath = "https://gw-dev.api.cloud.sphereon.com";
   private boolean debugging = false;
   private int connectionTimeout = 0;
 

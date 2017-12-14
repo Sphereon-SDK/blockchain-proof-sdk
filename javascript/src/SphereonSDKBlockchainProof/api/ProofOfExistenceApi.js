@@ -93,7 +93,7 @@
       var returnType = VerifyContentResponse;
 
       return this.apiClient.callApi(
-        '/blockchain/proof/0.9.0-SNAPSHOT/existence/{configName}/content', 'POST',
+        '/blockchain/proof/0.9/existence/{configName}/content', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, callback
       );
@@ -146,7 +146,7 @@
       var returnType = VerifyContentResponse;
 
       return this.apiClient.callApi(
-        '/blockchain/proof/0.9.0-SNAPSHOT/existence/{configName}/streams/multipart', 'POST',
+        '/blockchain/proof/0.9/existence/{configName}/streams/multipart', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, callback
       );
@@ -198,7 +198,7 @@
       var returnType = VerifyContentResponse;
 
       return this.apiClient.callApi(
-        '/blockchain/proof/0.9.0-SNAPSHOT/existence/{configName}/streams/location', 'POST',
+        '/blockchain/proof/0.9/existence/{configName}/streams/location', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, callback
       );

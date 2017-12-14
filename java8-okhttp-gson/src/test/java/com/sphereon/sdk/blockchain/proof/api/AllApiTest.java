@@ -50,7 +50,7 @@ public class AllApiTest {
     @Test
     public void createConfigurationTest() throws ApiException {
         CreateConfiguration request = null;
-        ConfigurationResponse response = api.createConfiguration(request);
+       // ConfigurationResponse response = api.createConfiguration(request);
 
         // TODO: test validations
     }
@@ -66,7 +66,7 @@ public class AllApiTest {
     @Test
     public void getCurrentConfigurationTest() throws ApiException {
         String configName = null;
-        ConfigurationResponse response = api.getCurrentConfiguration(configName);
+     //   ConfigurationResponse response = api.getCurrentConfiguration(configName);
 
         // TODO: test validations
     }
@@ -83,7 +83,7 @@ public class AllApiTest {
     public void registerContentTest() throws ApiException {
         String configName = null;
         ContentRequest existence = null;
-        RegisterContentResponse response = api.registerContent(configName, existence);
+     //   RegisterContentResponse response = api.registerContent(configName, existence);
 
         // TODO: test validations
     }
@@ -100,7 +100,7 @@ public class AllApiTest {
     public void registerStreamTest() throws ApiException {
         String configName = null;
         File stream = null;
-        RegisterContentResponse response = api.registerStream(configName, stream);
+      //  RegisterContentResponse response = api.registerStream(configName, stream);
 
         // TODO: test validations
     }
@@ -117,7 +117,7 @@ public class AllApiTest {
     public void registerStreamOnStorageTest() throws ApiException {
         String configName = null;
         List<StreamLocation> streamLocations = null;
-        RegisterContentResponse response = api.registerStreamOnStorage(configName, streamLocations);
+      //  RegisterContentResponse response = api.registerStreamOnStorage(configName, streamLocations);
 
         // TODO: test validations
     }
@@ -134,7 +134,7 @@ public class AllApiTest {
     public void verifyContentTest() throws ApiException {
         String configName = null;
         ContentRequest existence = null;
-        VerifyContentResponse response = api.verifyContent(configName, existence);
+     //   VerifyContentResponse response = api.verifyContent(configName, existence);
 
         // TODO: test validations
     }
@@ -151,7 +151,7 @@ public class AllApiTest {
     public void verifyStreamTest() throws ApiException {
         String configName = null;
         File stream = null;
-        VerifyContentResponse response = api.verifyStream(configName, stream);
+     //   VerifyContentResponse response = api.verifyStream(configName, stream);
 
         // TODO: test validations
     }
@@ -168,7 +168,7 @@ public class AllApiTest {
     public void verifyStreamsOnStorageTest() throws ApiException {
         String configName = null;
         List<StreamLocation> streamLocations = null;
-        VerifyContentResponse response = api.verifyStreamsOnStorage(configName, streamLocations);
+    //    VerifyContentResponse response = api.verifyStreamsOnStorage(configName, streamLocations);
 
         // TODO: test validations
     }

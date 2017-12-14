@@ -48,7 +48,7 @@ public class ProofOfExistenceApiTest {
     public void verifyContentTest() throws ApiException {
         String configName = null;
         ContentRequest existence = null;
-        VerifyContentResponse response = api.verifyContent(configName, existence);
+       // VerifyContentResponse response = api.verifyContent(configName, existence);
 
         // TODO: test validations
     }
@@ -65,7 +65,7 @@ public class ProofOfExistenceApiTest {
     public void verifyStreamTest() throws ApiException {
         String configName = null;
         File stream = null;
-        VerifyContentResponse response = api.verifyStream(configName, stream);
+     //   VerifyContentResponse response = api.verifyStream(configName, stream);
 
         // TODO: test validations
     }
@@ -82,7 +82,7 @@ public class ProofOfExistenceApiTest {
     public void verifyStreamsOnStorageTest() throws ApiException {
         String configName = null;
         List<StreamLocation> streamLocations = null;
-        VerifyContentResponse response = api.verifyStreamsOnStorage(configName, streamLocations);
+   //     VerifyContentResponse response = api.verifyStreamsOnStorage(configName, streamLocations);
 
         // TODO: test validations
     }

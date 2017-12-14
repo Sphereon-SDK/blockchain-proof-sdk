@@ -32,7 +32,7 @@ public interface ProofOfExistenceApi {
   @Headers({
     "Content-Type:application/json;charset&#x3D;UTF-8"
   })
-  @POST("blockchain/proof/0.9.0-SNAPSHOT/existence/{configName}/content")
+  @POST("blockchain/proof/0.9/existence/{configName}/content")
   Call<VerifyContentResponse> verifyContent(
     @retrofit2.http.Path("configName") String configName, @retrofit2.http.Body ContentRequest existence
   );
@@ -45,7 +45,7 @@ public interface ProofOfExistenceApi {
    * @return Call&lt;VerifyContentResponse&gt;
    */
   @retrofit2.http.Multipart
-  @POST("blockchain/proof/0.9.0-SNAPSHOT/existence/{configName}/streams/multipart")
+  @POST("blockchain/proof/0.9/existence/{configName}/streams/multipart")
   Call<VerifyContentResponse> verifyStream(
     @retrofit2.http.Path("configName") String configName, @retrofit2.http.Part("stream\"; filename=\"stream") RequestBody stream
   );
@@ -57,7 +57,7 @@ public interface ProofOfExistenceApi {
    * @param streamLocations The stream locations on storage (required)
    * @return Call&lt;VerifyContentResponse&gt;
    */
-  @POST("blockchain/proof/0.9.0-SNAPSHOT/existence/{configName}/streams/location")
+  @POST("blockchain/proof/0.9/existence/{configName}/streams/location")
   Call<VerifyContentResponse> verifyStreamsOnStorage(
     @retrofit2.http.Path("configName") String configName, @retrofit2.http.Body List<StreamLocation> streamLocations
   );

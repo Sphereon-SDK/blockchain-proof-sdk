@@ -1,17 +1,17 @@
 # BlockchainProof.AllApi
 
-All URIs are relative to *https://gw.api.cloud.sphereon.com*
+All URIs are relative to *https://gw-dev.api.cloud.sphereon.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**createConfiguration**](AllApi.md#createConfiguration) | **POST** /blockchain/proof/0.9.0-SNAPSHOT/existence/config | Create a new configuration
-[**getCurrentConfiguration**](AllApi.md#getCurrentConfiguration) | **GET** /blockchain/proof/0.9.0-SNAPSHOT/existence/config/{configName} | Get the settings for registration/verification
-[**registerContent**](AllApi.md#registerContent) | **PUT** /blockchain/proof/0.9.0-SNAPSHOT/existence/{configName}/content | Register content
-[**registerStream**](AllApi.md#registerStream) | **PUT** /blockchain/proof/0.9.0-SNAPSHOT/existence/{configName}/streams/multipart | Register content using a bytestream/file
-[**registerStreamOnStorage**](AllApi.md#registerStreamOnStorage) | **PUT** /blockchain/proof/0.9.0-SNAPSHOT/existence/{configName}/streams/location | Register content using a bytestream/file
-[**verifyContent**](AllApi.md#verifyContent) | **POST** /blockchain/proof/0.9.0-SNAPSHOT/existence/{configName}/content | Verify content
-[**verifyStream**](AllApi.md#verifyStream) | **POST** /blockchain/proof/0.9.0-SNAPSHOT/existence/{configName}/streams/multipart | Verify content using a bytestream/file
-[**verifyStreamsOnStorage**](AllApi.md#verifyStreamsOnStorage) | **POST** /blockchain/proof/0.9.0-SNAPSHOT/existence/{configName}/streams/location | Verify content using a bytestream/file
+[**createConfiguration**](AllApi.md#createConfiguration) | **POST** /blockchain/proof/0.9/existence/config | Create a new configuration
+[**getConfiguration**](AllApi.md#getConfiguration) | **GET** /blockchain/proof/0.9/existence/config/{configName} | Get the settings for registration/verification
+[**registerUsingContent**](AllApi.md#registerUsingContent) | **PUT** /blockchain/proof/0.9/existence/{configName}/content | Register content
+[**registerUsingLocation**](AllApi.md#registerUsingLocation) | **PUT** /blockchain/proof/0.9/existence/{configName}/streams/location | Register content using a Stream Location from Storage API
+[**registerUsingStream**](AllApi.md#registerUsingStream) | **PUT** /blockchain/proof/0.9/existence/{configName}/streams/multipart | Register content using a bytestream/file
+[**verifyUsingContent**](AllApi.md#verifyUsingContent) | **POST** /blockchain/proof/0.9/existence/{configName}/content | Verify content
+[**verifyUsingLocation**](AllApi.md#verifyUsingLocation) | **POST** /blockchain/proof/0.9/existence/{configName}/streams/location | Verify content using Stream Locations from the Storage API
+[**verifyUsingStream**](AllApi.md#verifyUsingStream) | **POST** /blockchain/proof/0.9/existence/{configName}/streams/multipart | Verify content using a bytestream/file
 
 
 <a name="createConfiguration"></a>
@@ -63,9 +63,9 @@ Name | Type | Description  | Notes
  - **Content-Type**: application/json;charset=UTF-8
  - **Accept**: application/json;charset=UTF-8
 
-<a name="getCurrentConfiguration"></a>
-# **getCurrentConfiguration**
-> ConfigurationResponse getCurrentConfiguration(configName)
+<a name="getConfiguration"></a>
+# **getConfiguration**
+> ConfigurationResponse getConfiguration(configName)
 
 Get the settings for registration/verification
 
@@ -90,7 +90,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.getCurrentConfiguration(configName, callback);
+apiInstance.getConfiguration(configName, callback);
 ```
 
 ### Parameters
@@ -112,9 +112,9 @@ Name | Type | Description  | Notes
  - **Content-Type**: application/json
  - **Accept**: application/json;charset=UTF-8
 
-<a name="registerContent"></a>
-# **registerContent**
-> RegisterContentResponse registerContent(configName, existence)
+<a name="registerUsingContent"></a>
+# **registerUsingContent**
+> RegisterContentResponse registerUsingContent(configName, existence)
 
 Register content
 
@@ -141,7 +141,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.registerContent(configName, existence, callback);
+apiInstance.registerUsingContent(configName, existence, callback);
 ```
 
 ### Parameters
@@ -164,9 +164,63 @@ Name | Type | Description  | Notes
  - **Content-Type**: application/json;charset=UTF-8
  - **Accept**: application/json;charset=UTF-8
 
-<a name="registerStream"></a>
-# **registerStream**
-> RegisterContentResponse registerStream(configName, stream)
+<a name="registerUsingLocation"></a>
+# **registerUsingLocation**
+> RegisterContentResponse registerUsingLocation(configName, streamLocations)
+
+Register content using a Stream Location from Storage API
+
+Register content by supplying a file or some other binary data. Hashing will be done on the server side
+
+### Example
+```javascript
+var BlockchainProof = require('blockchain_proof');
+var defaultClient = BlockchainProof.ApiClient.instance;
+
+// Configure OAuth2 access token for authorization: oauth2schema
+var oauth2schema = defaultClient.authentications['oauth2schema'];
+oauth2schema.accessToken = 'YOUR ACCESS TOKEN';
+
+var apiInstance = new BlockchainProof.AllApi();
+
+var configName = "configName_example"; // String | The configuration name this operation
+
+var streamLocations = [new BlockchainProof.StreamLocation()]; // [StreamLocation] | The stream locations on storage
+
+
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+};
+apiInstance.registerUsingLocation(configName, streamLocations, callback);
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **configName** | **String**| The configuration name this operation | 
+ **streamLocations** | [**[StreamLocation]**](StreamLocation.md)| The stream locations on storage | 
+
+### Return type
+
+[**RegisterContentResponse**](RegisterContentResponse.md)
+
+### Authorization
+
+[oauth2schema](../README.md#oauth2schema)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json;charset=UTF-8
+ - **Accept**: application/json;charset=UTF-8
+
+<a name="registerUsingStream"></a>
+# **registerUsingStream**
+> RegisterContentResponse registerUsingStream(configName, stream)
 
 Register content using a bytestream/file
 
@@ -195,7 +249,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.registerStream(configName, stream, callback);
+apiInstance.registerUsingStream(configName, stream, callback);
 ```
 
 ### Parameters
@@ -218,63 +272,9 @@ Name | Type | Description  | Notes
  - **Content-Type**: multipart/form-data
  - **Accept**: application/json;charset=UTF-8
 
-<a name="registerStreamOnStorage"></a>
-# **registerStreamOnStorage**
-> RegisterContentResponse registerStreamOnStorage(configName, streamLocations)
-
-Register content using a bytestream/file
-
-Register content by supplying a file or some other binary data. Hashing will be done on the server side
-
-### Example
-```javascript
-var BlockchainProof = require('blockchain_proof');
-var defaultClient = BlockchainProof.ApiClient.instance;
-
-// Configure OAuth2 access token for authorization: oauth2schema
-var oauth2schema = defaultClient.authentications['oauth2schema'];
-oauth2schema.accessToken = 'YOUR ACCESS TOKEN';
-
-var apiInstance = new BlockchainProof.AllApi();
-
-var configName = "configName_example"; // String | The configuration name this operation
-
-var streamLocations = [new BlockchainProof.StreamLocation()]; // [StreamLocation] | The stream locations on storage
-
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.registerStreamOnStorage(configName, streamLocations, callback);
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **configName** | **String**| The configuration name this operation | 
- **streamLocations** | [**[StreamLocation]**](StreamLocation.md)| The stream locations on storage | 
-
-### Return type
-
-[**RegisterContentResponse**](RegisterContentResponse.md)
-
-### Authorization
-
-[oauth2schema](../README.md#oauth2schema)
-
-### HTTP request headers
-
- - **Content-Type**: multipart/form-data
- - **Accept**: application/json;charset=UTF-8
-
-<a name="verifyContent"></a>
-# **verifyContent**
-> VerifyContentResponse verifyContent(configName, existence)
+<a name="verifyUsingContent"></a>
+# **verifyUsingContent**
+> VerifyContentResponse verifyUsingContent(configName, existence)
 
 Verify content
 
@@ -301,7 +301,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.verifyContent(configName, existence, callback);
+apiInstance.verifyUsingContent(configName, existence, callback);
 ```
 
 ### Parameters
@@ -324,9 +324,63 @@ Name | Type | Description  | Notes
  - **Content-Type**: application/json;charset=UTF-8
  - **Accept**: application/json;charset=UTF-8
 
-<a name="verifyStream"></a>
-# **verifyStream**
-> VerifyContentResponse verifyStream(configName, stream)
+<a name="verifyUsingLocation"></a>
+# **verifyUsingLocation**
+> VerifyContentResponse verifyUsingLocation(configName, streamLocations)
+
+Verify content using Stream Locations from the Storage API
+
+Verify content by supplying a file or some other binary data. Hashing will be done on the server side
+
+### Example
+```javascript
+var BlockchainProof = require('blockchain_proof');
+var defaultClient = BlockchainProof.ApiClient.instance;
+
+// Configure OAuth2 access token for authorization: oauth2schema
+var oauth2schema = defaultClient.authentications['oauth2schema'];
+oauth2schema.accessToken = 'YOUR ACCESS TOKEN';
+
+var apiInstance = new BlockchainProof.AllApi();
+
+var configName = "configName_example"; // String | The context for this operation
+
+var streamLocations = [new BlockchainProof.StreamLocation()]; // [StreamLocation] | The stream locations on storage
+
+
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+};
+apiInstance.verifyUsingLocation(configName, streamLocations, callback);
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **configName** | **String**| The context for this operation | 
+ **streamLocations** | [**[StreamLocation]**](StreamLocation.md)| The stream locations on storage | 
+
+### Return type
+
+[**VerifyContentResponse**](VerifyContentResponse.md)
+
+### Authorization
+
+[oauth2schema](../README.md#oauth2schema)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json;charset=UTF-8
+ - **Accept**: application/json;charset=UTF-8
+
+<a name="verifyUsingStream"></a>
+# **verifyUsingStream**
+> VerifyContentResponse verifyUsingStream(configName, stream)
 
 Verify content using a bytestream/file
 
@@ -355,7 +409,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.verifyStream(configName, stream, callback);
+apiInstance.verifyUsingStream(configName, stream, callback);
 ```
 
 ### Parameters
@@ -364,60 +418,6 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **configName** | **String**| The configuration name this operation | 
  **stream** | **File**| The binary data (not hashed). Hashing will be done on the server side. The binary data will not be stored | 
-
-### Return type
-
-[**VerifyContentResponse**](VerifyContentResponse.md)
-
-### Authorization
-
-[oauth2schema](../README.md#oauth2schema)
-
-### HTTP request headers
-
- - **Content-Type**: multipart/form-data
- - **Accept**: application/json;charset=UTF-8
-
-<a name="verifyStreamsOnStorage"></a>
-# **verifyStreamsOnStorage**
-> VerifyContentResponse verifyStreamsOnStorage(configName, streamLocations)
-
-Verify content using a bytestream/file
-
-Verify content by supplying a file or some other binary data. Hashing will be done on the server side
-
-### Example
-```javascript
-var BlockchainProof = require('blockchain_proof');
-var defaultClient = BlockchainProof.ApiClient.instance;
-
-// Configure OAuth2 access token for authorization: oauth2schema
-var oauth2schema = defaultClient.authentications['oauth2schema'];
-oauth2schema.accessToken = 'YOUR ACCESS TOKEN';
-
-var apiInstance = new BlockchainProof.AllApi();
-
-var configName = "configName_example"; // String | The context for this operation
-
-var streamLocations = [new BlockchainProof.StreamLocation()]; // [StreamLocation] | The stream locations on storage
-
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.verifyStreamsOnStorage(configName, streamLocations, callback);
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **configName** | **String**| The context for this operation | 
- **streamLocations** | [**[StreamLocation]**](StreamLocation.md)| The stream locations on storage | 
 
 ### Return type
 

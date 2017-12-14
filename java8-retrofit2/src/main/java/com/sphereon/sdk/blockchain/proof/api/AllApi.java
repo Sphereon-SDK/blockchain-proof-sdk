@@ -34,7 +34,7 @@ public interface AllApi {
   @Headers({
     "Content-Type:application/json;charset&#x3D;UTF-8"
   })
-  @POST("blockchain/proof/0.9.0-SNAPSHOT/existence/config")
+  @POST("blockchain/proof/0.9/existence/config")
   Call<ConfigurationResponse> createConfiguration(
     @retrofit2.http.Body CreateConfiguration request
   );
@@ -48,8 +48,8 @@ public interface AllApi {
   @Headers({
     "Content-Type:application/json"
   })
-  @GET("blockchain/proof/0.9.0-SNAPSHOT/existence/config/{configName}")
-  Call<ConfigurationResponse> getCurrentConfiguration(
+  @GET("blockchain/proof/0.9/existence/config/{configName}")
+  Call<ConfigurationResponse> getConfiguration(
     @retrofit2.http.Path("configName") String configName
   );
 
@@ -63,9 +63,24 @@ public interface AllApi {
   @Headers({
     "Content-Type:application/json;charset&#x3D;UTF-8"
   })
-  @PUT("blockchain/proof/0.9.0-SNAPSHOT/existence/{configName}/content")
-  Call<RegisterContentResponse> registerContent(
+  @PUT("blockchain/proof/0.9/existence/{configName}/content")
+  Call<RegisterContentResponse> registerUsingContent(
     @retrofit2.http.Path("configName") String configName, @retrofit2.http.Body ContentRequest existence
+  );
+
+  /**
+   * Register content using a Stream Location from Storage API
+   * Register content by supplying a file or some other binary data. Hashing will be done on the server side
+   * @param configName The configuration name this operation (required)
+   * @param streamLocations The stream locations on storage (required)
+   * @return Call&lt;RegisterContentResponse&gt;
+   */
+  @Headers({
+    "Content-Type:application/json;charset&#x3D;UTF-8"
+  })
+  @PUT("blockchain/proof/0.9/existence/{configName}/streams/location")
+  Call<RegisterContentResponse> registerUsingLocation(
+    @retrofit2.http.Path("configName") String configName, @retrofit2.http.Body List<StreamLocation> streamLocations
   );
 
   /**
@@ -76,21 +91,9 @@ public interface AllApi {
    * @return Call&lt;RegisterContentResponse&gt;
    */
   @retrofit2.http.Multipart
-  @PUT("blockchain/proof/0.9.0-SNAPSHOT/existence/{configName}/streams/multipart")
-  Call<RegisterContentResponse> registerStream(
+  @PUT("blockchain/proof/0.9/existence/{configName}/streams/multipart")
+  Call<RegisterContentResponse> registerUsingStream(
     @retrofit2.http.Path("configName") String configName, @retrofit2.http.Part("stream\"; filename=\"stream") RequestBody stream
-  );
-
-  /**
-   * Register content using a bytestream/file
-   * Register content by supplying a file or some other binary data. Hashing will be done on the server side
-   * @param configName The configuration name this operation (required)
-   * @param streamLocations The stream locations on storage (required)
-   * @return Call&lt;RegisterContentResponse&gt;
-   */
-  @PUT("blockchain/proof/0.9.0-SNAPSHOT/existence/{configName}/streams/location")
-  Call<RegisterContentResponse> registerStreamOnStorage(
-    @retrofit2.http.Path("configName") String configName, @retrofit2.http.Body List<StreamLocation> streamLocations
   );
 
   /**
@@ -103,9 +106,24 @@ public interface AllApi {
   @Headers({
     "Content-Type:application/json;charset&#x3D;UTF-8"
   })
-  @POST("blockchain/proof/0.9.0-SNAPSHOT/existence/{configName}/content")
-  Call<VerifyContentResponse> verifyContent(
+  @POST("blockchain/proof/0.9/existence/{configName}/content")
+  Call<VerifyContentResponse> verifyUsingContent(
     @retrofit2.http.Path("configName") String configName, @retrofit2.http.Body ContentRequest existence
+  );
+
+  /**
+   * Verify content using Stream Locations from the Storage API
+   * Verify content by supplying a file or some other binary data. Hashing will be done on the server side
+   * @param configName The context for this operation (required)
+   * @param streamLocations The stream locations on storage (required)
+   * @return Call&lt;VerifyContentResponse&gt;
+   */
+  @Headers({
+    "Content-Type:application/json;charset&#x3D;UTF-8"
+  })
+  @POST("blockchain/proof/0.9/existence/{configName}/streams/location")
+  Call<VerifyContentResponse> verifyUsingLocation(
+    @retrofit2.http.Path("configName") String configName, @retrofit2.http.Body List<StreamLocation> streamLocations
   );
 
   /**
@@ -116,21 +134,9 @@ public interface AllApi {
    * @return Call&lt;VerifyContentResponse&gt;
    */
   @retrofit2.http.Multipart
-  @POST("blockchain/proof/0.9.0-SNAPSHOT/existence/{configName}/streams/multipart")
-  Call<VerifyContentResponse> verifyStream(
+  @POST("blockchain/proof/0.9/existence/{configName}/streams/multipart")
+  Call<VerifyContentResponse> verifyUsingStream(
     @retrofit2.http.Path("configName") String configName, @retrofit2.http.Part("stream\"; filename=\"stream") RequestBody stream
-  );
-
-  /**
-   * Verify content using a bytestream/file
-   * Verify content by supplying a file or some other binary data. Hashing will be done on the server side
-   * @param configName The context for this operation (required)
-   * @param streamLocations The stream locations on storage (required)
-   * @return Call&lt;VerifyContentResponse&gt;
-   */
-  @POST("blockchain/proof/0.9.0-SNAPSHOT/existence/{configName}/streams/location")
-  Call<VerifyContentResponse> verifyStreamsOnStorage(
-    @retrofit2.http.Path("configName") String configName, @retrofit2.http.Body List<StreamLocation> streamLocations
   );
 
 }

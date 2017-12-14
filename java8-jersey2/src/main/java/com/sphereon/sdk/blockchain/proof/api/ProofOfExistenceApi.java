@@ -18,7 +18,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2017-12-11T17:14:39.149+01:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2017-12-12T12:50:47.432+01:00")
 public class ProofOfExistenceApi {
   private ApiClient apiClient;
 
@@ -60,7 +60,7 @@ public class ProofOfExistenceApi {
     }
     
     // create path and map variables
-    String localVarPath = "/blockchain/proof/0.9.0-SNAPSHOT/existence/{configName}/content"
+    String localVarPath = "/blockchain/proof/0.9/existence/{configName}/content"
       .replaceAll("\\{" + "configName" + "\\}", apiClient.escapeString(configName.toString()));
 
     // query params
@@ -108,7 +108,7 @@ public class ProofOfExistenceApi {
     }
     
     // create path and map variables
-    String localVarPath = "/blockchain/proof/0.9.0-SNAPSHOT/existence/{configName}/streams/multipart"
+    String localVarPath = "/blockchain/proof/0.9/existence/{configName}/streams/multipart"
       .replaceAll("\\{" + "configName" + "\\}", apiClient.escapeString(configName.toString()));
 
     // query params
@@ -158,7 +158,7 @@ public class ProofOfExistenceApi {
     }
     
     // create path and map variables
-    String localVarPath = "/blockchain/proof/0.9.0-SNAPSHOT/existence/{configName}/streams/location"
+    String localVarPath = "/blockchain/proof/0.9/existence/{configName}/streams/location"
       .replaceAll("\\{" + "configName" + "\\}", apiClient.escapeString(configName.toString()));
 
     // query params

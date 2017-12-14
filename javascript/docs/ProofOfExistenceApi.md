@@ -4,9 +4,9 @@ All URIs are relative to *https://gw.api.cloud.sphereon.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**verifyContent**](ProofOfExistenceApi.md#verifyContent) | **POST** /blockchain/proof/0.9.0-SNAPSHOT/existence/{configName}/content | Verify content
-[**verifyStream**](ProofOfExistenceApi.md#verifyStream) | **POST** /blockchain/proof/0.9.0-SNAPSHOT/existence/{configName}/streams/multipart | Verify content using a bytestream/file
-[**verifyStreamsOnStorage**](ProofOfExistenceApi.md#verifyStreamsOnStorage) | **POST** /blockchain/proof/0.9.0-SNAPSHOT/existence/{configName}/streams/location | Verify content using a bytestream/file
+[**verifyContent**](ProofOfExistenceApi.md#verifyContent) | **POST** /blockchain/proof/0.9/existence/{configName}/content | Verify content
+[**verifyStream**](ProofOfExistenceApi.md#verifyStream) | **POST** /blockchain/proof/0.9/existence/{configName}/streams/multipart | Verify content using a bytestream/file
+[**verifyStreamsOnStorage**](ProofOfExistenceApi.md#verifyStreamsOnStorage) | **POST** /blockchain/proof/0.9/existence/{configName}/streams/location | Verify content using a bytestream/file
 
 
 <a name="verifyContent"></a>

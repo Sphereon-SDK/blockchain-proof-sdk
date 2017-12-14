@@ -50,7 +50,7 @@ public class ApiClient {
     for(String authName : authNames) {
       Interceptor auth;
       if ("oauth2schema".equals(authName)) {
-        auth = new OAuth(OAuthFlow.application, "", "https://gw.api.cloud.sphereon.com/token", "global");
+        auth = new OAuth(OAuthFlow.application, "", "https://gw-dev.api.cloud.sphereon.com/token", "global");
       } else {
         throw new RuntimeException("auth name \"" + authName + "\" not found in available auth names");
       }
@@ -113,7 +113,7 @@ public class ApiClient {
 
     okBuilder = new OkHttpClient.Builder();
 
-    String baseUrl = "https://gw.api.cloud.sphereon.com";
+    String baseUrl = "https://gw-dev.api.cloud.sphereon.com";
     if(!baseUrl.endsWith("/"))
       baseUrl = baseUrl + "/";
 

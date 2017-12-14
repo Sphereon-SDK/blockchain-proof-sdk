@@ -71,7 +71,7 @@ public class ProofOfExistenceApi {
         Object localVarPostBody = existence;
         
         // create path and map variables
-        String localVarPath = "/blockchain/proof/0.9.0-SNAPSHOT/existence/{configName}/content"
+        String localVarPath = "/blockchain/proof/0.9/existence/{configName}/content"
             .replaceAll("\\{" + "configName" + "\\}", apiClient.escapeString(configName.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
@@ -206,7 +206,7 @@ public class ProofOfExistenceApi {
         Object localVarPostBody = null;
         
         // create path and map variables
-        String localVarPath = "/blockchain/proof/0.9.0-SNAPSHOT/existence/{configName}/streams/multipart"
+        String localVarPath = "/blockchain/proof/0.9/existence/{configName}/streams/multipart"
             .replaceAll("\\{" + "configName" + "\\}", apiClient.escapeString(configName.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
@@ -343,7 +343,7 @@ public class ProofOfExistenceApi {
         Object localVarPostBody = streamLocations;
         
         // create path and map variables
-        String localVarPath = "/blockchain/proof/0.9.0-SNAPSHOT/existence/{configName}/streams/location"
+        String localVarPath = "/blockchain/proof/0.9/existence/{configName}/streams/location"
             .replaceAll("\\{" + "configName" + "\\}", apiClient.escapeString(configName.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();

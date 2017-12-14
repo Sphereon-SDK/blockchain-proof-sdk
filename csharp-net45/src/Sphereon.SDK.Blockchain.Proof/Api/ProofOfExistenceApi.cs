@@ -305,7 +305,7 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
             if (existence == null)
                 throw new ApiException(400, "Missing required parameter 'existence' when calling ProofOfExistenceApi->VerifyContent");
 
-            var localVarPath = "/blockchain/proof/0.9.0-SNAPSHOT/existence/{configName}/content";
+            var localVarPath = "/blockchain/proof/0.9/existence/{configName}/content";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new Dictionary<String, String>();
             var localVarHeaderParams = new Dictionary<String, String>(Configuration.DefaultHeader);
@@ -392,7 +392,7 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
             if (existence == null)
                 throw new ApiException(400, "Missing required parameter 'existence' when calling ProofOfExistenceApi->VerifyContent");
 
-            var localVarPath = "/blockchain/proof/0.9.0-SNAPSHOT/existence/{configName}/content";
+            var localVarPath = "/blockchain/proof/0.9/existence/{configName}/content";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new Dictionary<String, String>();
             var localVarHeaderParams = new Dictionary<String, String>(Configuration.DefaultHeader);
@@ -478,7 +478,7 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
             if (stream == null)
                 throw new ApiException(400, "Missing required parameter 'stream' when calling ProofOfExistenceApi->VerifyStream");
 
-            var localVarPath = "/blockchain/proof/0.9.0-SNAPSHOT/existence/{configName}/streams/multipart";
+            var localVarPath = "/blockchain/proof/0.9/existence/{configName}/streams/multipart";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new Dictionary<String, String>();
             var localVarHeaderParams = new Dictionary<String, String>(Configuration.DefaultHeader);
@@ -558,7 +558,7 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
             if (stream == null)
                 throw new ApiException(400, "Missing required parameter 'stream' when calling ProofOfExistenceApi->VerifyStream");
 
-            var localVarPath = "/blockchain/proof/0.9.0-SNAPSHOT/existence/{configName}/streams/multipart";
+            var localVarPath = "/blockchain/proof/0.9/existence/{configName}/streams/multipart";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new Dictionary<String, String>();
             var localVarHeaderParams = new Dictionary<String, String>(Configuration.DefaultHeader);
@@ -637,7 +637,7 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
             if (streamLocations == null)
                 throw new ApiException(400, "Missing required parameter 'streamLocations' when calling ProofOfExistenceApi->VerifyStreamsOnStorage");
 
-            var localVarPath = "/blockchain/proof/0.9.0-SNAPSHOT/existence/{configName}/streams/location";
+            var localVarPath = "/blockchain/proof/0.9/existence/{configName}/streams/location";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new Dictionary<String, String>();
             var localVarHeaderParams = new Dictionary<String, String>(Configuration.DefaultHeader);
@@ -724,7 +724,7 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
             if (streamLocations == null)
                 throw new ApiException(400, "Missing required parameter 'streamLocations' when calling ProofOfExistenceApi->VerifyStreamsOnStorage");
 
-            var localVarPath = "/blockchain/proof/0.9.0-SNAPSHOT/existence/{configName}/streams/location";
+            var localVarPath = "/blockchain/proof/0.9/existence/{configName}/streams/location";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new Dictionary<String, String>();
             var localVarHeaderParams = new Dictionary<String, String>(Configuration.DefaultHeader);

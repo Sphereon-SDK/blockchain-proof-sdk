@@ -1,17 +1,17 @@
 # Sphereon.SDK.Blockchain.Proof.Api.AllApi
 
-All URIs are relative to *https://gw.api.cloud.sphereon.com*
+All URIs are relative to *https://gw-dev.api.cloud.sphereon.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CreateConfiguration**](AllApi.md#createconfiguration) | **POST** /blockchain/proof/0.9.0-SNAPSHOT/existence/config | Create a new configuration
-[**GetCurrentConfiguration**](AllApi.md#getcurrentconfiguration) | **GET** /blockchain/proof/0.9.0-SNAPSHOT/existence/config/{configName} | Get the settings for registration/verification
-[**RegisterContent**](AllApi.md#registercontent) | **PUT** /blockchain/proof/0.9.0-SNAPSHOT/existence/{configName}/content | Register content
-[**RegisterStream**](AllApi.md#registerstream) | **PUT** /blockchain/proof/0.9.0-SNAPSHOT/existence/{configName}/streams/multipart | Register content using a bytestream/file
-[**RegisterStreamOnStorage**](AllApi.md#registerstreamonstorage) | **PUT** /blockchain/proof/0.9.0-SNAPSHOT/existence/{configName}/streams/location | Register content using a bytestream/file
-[**VerifyContent**](AllApi.md#verifycontent) | **POST** /blockchain/proof/0.9.0-SNAPSHOT/existence/{configName}/content | Verify content
-[**VerifyStream**](AllApi.md#verifystream) | **POST** /blockchain/proof/0.9.0-SNAPSHOT/existence/{configName}/streams/multipart | Verify content using a bytestream/file
-[**VerifyStreamsOnStorage**](AllApi.md#verifystreamsonstorage) | **POST** /blockchain/proof/0.9.0-SNAPSHOT/existence/{configName}/streams/location | Verify content using a bytestream/file
+[**CreateConfiguration**](AllApi.md#createconfiguration) | **POST** /blockchain/proof/0.9/existence/config | Create a new configuration
+[**GetConfiguration**](AllApi.md#getconfiguration) | **GET** /blockchain/proof/0.9/existence/config/{configName} | Get the settings for registration/verification
+[**RegisterUsingContent**](AllApi.md#registerusingcontent) | **PUT** /blockchain/proof/0.9/existence/{configName}/content | Register content
+[**RegisterUsingLocation**](AllApi.md#registerusinglocation) | **PUT** /blockchain/proof/0.9/existence/{configName}/streams/location | Register content using a Stream Location from Storage API
+[**RegisterUsingStream**](AllApi.md#registerusingstream) | **PUT** /blockchain/proof/0.9/existence/{configName}/streams/multipart | Register content using a bytestream/file
+[**VerifyUsingContent**](AllApi.md#verifyusingcontent) | **POST** /blockchain/proof/0.9/existence/{configName}/content | Verify content
+[**VerifyUsingLocation**](AllApi.md#verifyusinglocation) | **POST** /blockchain/proof/0.9/existence/{configName}/streams/location | Verify content using Stream Locations from the Storage API
+[**VerifyUsingStream**](AllApi.md#verifyusingstream) | **POST** /blockchain/proof/0.9/existence/{configName}/streams/multipart | Verify content using a bytestream/file
 
 
 <a name="createconfiguration"></a>
@@ -76,9 +76,9 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="getcurrentconfiguration"></a>
-# **GetCurrentConfiguration**
-> ConfigurationResponse GetCurrentConfiguration (string configName)
+<a name="getconfiguration"></a>
+# **GetConfiguration**
+> ConfigurationResponse GetConfiguration (string configName)
 
 Get the settings for registration/verification
 
@@ -92,7 +92,7 @@ using Sphereon.SDK.Blockchain.Proof.Model;
 
 namespace Example
 {
-    public class GetCurrentConfigurationExample
+    public class GetConfigurationExample
     {
         public void main()
         {
@@ -105,12 +105,12 @@ namespace Example
             try
             {
                 // Get the settings for registration/verification
-                ConfigurationResponse result = apiInstance.GetCurrentConfiguration(configName);
+                ConfigurationResponse result = apiInstance.GetConfiguration(configName);
                 Debug.WriteLine(result);
             }
             catch (Exception e)
             {
-                Debug.Print("Exception when calling AllApi.GetCurrentConfiguration: " + e.Message );
+                Debug.Print("Exception when calling AllApi.GetConfiguration: " + e.Message );
             }
         }
     }
@@ -138,9 +138,9 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="registercontent"></a>
-# **RegisterContent**
-> RegisterContentResponse RegisterContent (string configName, ContentRequest existence)
+<a name="registerusingcontent"></a>
+# **RegisterUsingContent**
+> RegisterContentResponse RegisterUsingContent (string configName, ContentRequest existence)
 
 Register content
 
@@ -154,7 +154,7 @@ using Sphereon.SDK.Blockchain.Proof.Model;
 
 namespace Example
 {
-    public class RegisterContentExample
+    public class RegisterUsingContentExample
     {
         public void main()
         {
@@ -168,12 +168,12 @@ namespace Example
             try
             {
                 // Register content
-                RegisterContentResponse result = apiInstance.RegisterContent(configName, existence);
+                RegisterContentResponse result = apiInstance.RegisterUsingContent(configName, existence);
                 Debug.WriteLine(result);
             }
             catch (Exception e)
             {
-                Debug.Print("Exception when calling AllApi.RegisterContent: " + e.Message );
+                Debug.Print("Exception when calling AllApi.RegisterUsingContent: " + e.Message );
             }
         }
     }
@@ -202,9 +202,75 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="registerstream"></a>
-# **RegisterStream**
-> RegisterContentResponse RegisterStream (string configName, System.IO.Stream stream)
+<a name="registerusinglocation"></a>
+# **RegisterUsingLocation**
+> RegisterContentResponse RegisterUsingLocation (string configName, List<StreamLocation> streamLocations)
+
+Register content using a Stream Location from Storage API
+
+Register content by supplying a file or some other binary data. Hashing will be done on the server side
+
+### Example
+```csharp
+using System;
+using System.Diagnostics;
+using Sphereon.SDK.Blockchain.Proof.Api;
+using Sphereon.SDK.Blockchain.Proof.Client;
+using Sphereon.SDK.Blockchain.Proof.Model;
+
+namespace Example
+{
+    public class RegisterUsingLocationExample
+    {
+        public void main()
+        {
+            // Configure OAuth2 access token for authorization: oauth2schema
+            Configuration.Default.AccessToken = "YOUR_ACCESS_TOKEN";
+
+            var apiInstance = new AllApi();
+            var configName = configName_example;  // string | The configuration name this operation
+            var streamLocations = new List<StreamLocation>(); // List<StreamLocation> | The stream locations on storage
+
+            try
+            {
+                // Register content using a Stream Location from Storage API
+                RegisterContentResponse result = apiInstance.RegisterUsingLocation(configName, streamLocations);
+                Debug.WriteLine(result);
+            }
+            catch (Exception e)
+            {
+                Debug.Print("Exception when calling AllApi.RegisterUsingLocation: " + e.Message );
+            }
+        }
+    }
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **configName** | **string**| The configuration name this operation | 
+ **streamLocations** | [**List&lt;StreamLocation&gt;**](StreamLocation.md)| The stream locations on storage | 
+
+### Return type
+
+[**RegisterContentResponse**](RegisterContentResponse.md)
+
+### Authorization
+
+[oauth2schema](../README.md#oauth2schema)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json;charset=UTF-8
+ - **Accept**: application/json;charset=UTF-8
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+<a name="registerusingstream"></a>
+# **RegisterUsingStream**
+> RegisterContentResponse RegisterUsingStream (string configName, System.IO.Stream stream)
 
 Register content using a bytestream/file
 
@@ -220,7 +286,7 @@ using Sphereon.SDK.Blockchain.Proof.Model;
 
 namespace Example
 {
-    public class RegisterStreamExample
+    public class RegisterUsingStreamExample
     {
         public void main()
         {
@@ -234,12 +300,12 @@ namespace Example
             try
             {
                 // Register content using a bytestream/file
-                RegisterContentResponse result = apiInstance.RegisterStream(configName, stream);
+                RegisterContentResponse result = apiInstance.RegisterUsingStream(configName, stream);
                 Debug.WriteLine(result);
             }
             catch (Exception e)
             {
-                Debug.Print("Exception when calling AllApi.RegisterStream: " + e.Message );
+                Debug.Print("Exception when calling AllApi.RegisterUsingStream: " + e.Message );
             }
         }
     }
@@ -268,75 +334,9 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="registerstreamonstorage"></a>
-# **RegisterStreamOnStorage**
-> RegisterContentResponse RegisterStreamOnStorage (string configName, List<StreamLocation> streamLocations)
-
-Register content using a bytestream/file
-
-Register content by supplying a file or some other binary data. Hashing will be done on the server side
-
-### Example
-```csharp
-using System;
-using System.Diagnostics;
-using Sphereon.SDK.Blockchain.Proof.Api;
-using Sphereon.SDK.Blockchain.Proof.Client;
-using Sphereon.SDK.Blockchain.Proof.Model;
-
-namespace Example
-{
-    public class RegisterStreamOnStorageExample
-    {
-        public void main()
-        {
-            // Configure OAuth2 access token for authorization: oauth2schema
-            Configuration.Default.AccessToken = "YOUR_ACCESS_TOKEN";
-
-            var apiInstance = new AllApi();
-            var configName = configName_example;  // string | The configuration name this operation
-            var streamLocations = new List<StreamLocation>(); // List<StreamLocation> | The stream locations on storage
-
-            try
-            {
-                // Register content using a bytestream/file
-                RegisterContentResponse result = apiInstance.RegisterStreamOnStorage(configName, streamLocations);
-                Debug.WriteLine(result);
-            }
-            catch (Exception e)
-            {
-                Debug.Print("Exception when calling AllApi.RegisterStreamOnStorage: " + e.Message );
-            }
-        }
-    }
-}
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **configName** | **string**| The configuration name this operation | 
- **streamLocations** | [**List&lt;StreamLocation&gt;**](StreamLocation.md)| The stream locations on storage | 
-
-### Return type
-
-[**RegisterContentResponse**](RegisterContentResponse.md)
-
-### Authorization
-
-[oauth2schema](../README.md#oauth2schema)
-
-### HTTP request headers
-
- - **Content-Type**: multipart/form-data
- - **Accept**: application/json;charset=UTF-8
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-<a name="verifycontent"></a>
-# **VerifyContent**
-> VerifyContentResponse VerifyContent (string configName, ContentRequest existence)
+<a name="verifyusingcontent"></a>
+# **VerifyUsingContent**
+> VerifyContentResponse VerifyUsingContent (string configName, ContentRequest existence)
 
 Verify content
 
@@ -350,7 +350,7 @@ using Sphereon.SDK.Blockchain.Proof.Model;
 
 namespace Example
 {
-    public class VerifyContentExample
+    public class VerifyUsingContentExample
     {
         public void main()
         {
@@ -364,12 +364,12 @@ namespace Example
             try
             {
                 // Verify content
-                VerifyContentResponse result = apiInstance.VerifyContent(configName, existence);
+                VerifyContentResponse result = apiInstance.VerifyUsingContent(configName, existence);
                 Debug.WriteLine(result);
             }
             catch (Exception e)
             {
-                Debug.Print("Exception when calling AllApi.VerifyContent: " + e.Message );
+                Debug.Print("Exception when calling AllApi.VerifyUsingContent: " + e.Message );
             }
         }
     }
@@ -398,9 +398,75 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="verifystream"></a>
-# **VerifyStream**
-> VerifyContentResponse VerifyStream (string configName, System.IO.Stream stream)
+<a name="verifyusinglocation"></a>
+# **VerifyUsingLocation**
+> VerifyContentResponse VerifyUsingLocation (string configName, List<StreamLocation> streamLocations)
+
+Verify content using Stream Locations from the Storage API
+
+Verify content by supplying a file or some other binary data. Hashing will be done on the server side
+
+### Example
+```csharp
+using System;
+using System.Diagnostics;
+using Sphereon.SDK.Blockchain.Proof.Api;
+using Sphereon.SDK.Blockchain.Proof.Client;
+using Sphereon.SDK.Blockchain.Proof.Model;
+
+namespace Example
+{
+    public class VerifyUsingLocationExample
+    {
+        public void main()
+        {
+            // Configure OAuth2 access token for authorization: oauth2schema
+            Configuration.Default.AccessToken = "YOUR_ACCESS_TOKEN";
+
+            var apiInstance = new AllApi();
+            var configName = configName_example;  // string | The context for this operation
+            var streamLocations = new List<StreamLocation>(); // List<StreamLocation> | The stream locations on storage
+
+            try
+            {
+                // Verify content using Stream Locations from the Storage API
+                VerifyContentResponse result = apiInstance.VerifyUsingLocation(configName, streamLocations);
+                Debug.WriteLine(result);
+            }
+            catch (Exception e)
+            {
+                Debug.Print("Exception when calling AllApi.VerifyUsingLocation: " + e.Message );
+            }
+        }
+    }
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **configName** | **string**| The context for this operation | 
+ **streamLocations** | [**List&lt;StreamLocation&gt;**](StreamLocation.md)| The stream locations on storage | 
+
+### Return type
+
+[**VerifyContentResponse**](VerifyContentResponse.md)
+
+### Authorization
+
+[oauth2schema](../README.md#oauth2schema)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json;charset=UTF-8
+ - **Accept**: application/json;charset=UTF-8
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+<a name="verifyusingstream"></a>
+# **VerifyUsingStream**
+> VerifyContentResponse VerifyUsingStream (string configName, System.IO.Stream stream)
 
 Verify content using a bytestream/file
 
@@ -416,7 +482,7 @@ using Sphereon.SDK.Blockchain.Proof.Model;
 
 namespace Example
 {
-    public class VerifyStreamExample
+    public class VerifyUsingStreamExample
     {
         public void main()
         {
@@ -430,12 +496,12 @@ namespace Example
             try
             {
                 // Verify content using a bytestream/file
-                VerifyContentResponse result = apiInstance.VerifyStream(configName, stream);
+                VerifyContentResponse result = apiInstance.VerifyUsingStream(configName, stream);
                 Debug.WriteLine(result);
             }
             catch (Exception e)
             {
-                Debug.Print("Exception when calling AllApi.VerifyStream: " + e.Message );
+                Debug.Print("Exception when calling AllApi.VerifyUsingStream: " + e.Message );
             }
         }
     }
@@ -448,72 +514,6 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **configName** | **string**| The configuration name this operation | 
  **stream** | **System.IO.Stream**| The binary data (not hashed). Hashing will be done on the server side. The binary data will not be stored | 
-
-### Return type
-
-[**VerifyContentResponse**](VerifyContentResponse.md)
-
-### Authorization
-
-[oauth2schema](../README.md#oauth2schema)
-
-### HTTP request headers
-
- - **Content-Type**: multipart/form-data
- - **Accept**: application/json;charset=UTF-8
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-<a name="verifystreamsonstorage"></a>
-# **VerifyStreamsOnStorage**
-> VerifyContentResponse VerifyStreamsOnStorage (string configName, List<StreamLocation> streamLocations)
-
-Verify content using a bytestream/file
-
-Verify content by supplying a file or some other binary data. Hashing will be done on the server side
-
-### Example
-```csharp
-using System;
-using System.Diagnostics;
-using Sphereon.SDK.Blockchain.Proof.Api;
-using Sphereon.SDK.Blockchain.Proof.Client;
-using Sphereon.SDK.Blockchain.Proof.Model;
-
-namespace Example
-{
-    public class VerifyStreamsOnStorageExample
-    {
-        public void main()
-        {
-            // Configure OAuth2 access token for authorization: oauth2schema
-            Configuration.Default.AccessToken = "YOUR_ACCESS_TOKEN";
-
-            var apiInstance = new AllApi();
-            var configName = configName_example;  // string | The context for this operation
-            var streamLocations = new List<StreamLocation>(); // List<StreamLocation> | The stream locations on storage
-
-            try
-            {
-                // Verify content using a bytestream/file
-                VerifyContentResponse result = apiInstance.VerifyStreamsOnStorage(configName, streamLocations);
-                Debug.WriteLine(result);
-            }
-            catch (Exception e)
-            {
-                Debug.Print("Exception when calling AllApi.VerifyStreamsOnStorage: " + e.Message );
-            }
-        }
-    }
-}
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **configName** | **string**| The context for this operation | 
- **streamLocations** | [**List&lt;StreamLocation&gt;**](StreamLocation.md)| The stream locations on storage | 
 
 ### Return type
 

@@ -1,12 +1,168 @@
 {
   "basePath": "/",
   "paths": {
-    "/blockchain/proof/0.9.0-SNAPSHOT/existence/{configName}/content": {
+    "/blockchain/proof/0.9/existence/config/{configName}": {"get": {
+      "summary": "Get the settings for registration/verification",
+      "security": [{"oauth2schema": ["global"]}],
+      "produces": ["application/json;charset=UTF-8"],
+      "operationId": "getConfiguration",
+      "responses": {
+        "200": {
+          "schema": {"$ref": "#/definitions/ConfigurationResponse"},
+          "description": "The settings for the proof chain"
+        },
+        "400": {
+          "schema": {"$ref": "#/definitions/ErrorResponse"},
+          "description": "Invalid  request"
+        },
+        "404": {
+          "schema": {"$ref": "#/definitions/ErrorResponse"},
+          "description": "ChainSettings not found"
+        }
+      },
+      "parameters": [{
+        "in": "path",
+        "name": "configName",
+        "description": "The configuration name this operation",
+        "type": "string",
+        "required": true
+      }],
+      "tags": [
+        "Configuration",
+        "All"
+      ],
+      "consumes": ["application/json"]
+    }},
+    "/blockchain/proof/0.9/existence/config": {"post": {
+      "summary": "Create a new configuration",
+      "security": [{"oauth2schema": ["global"]}],
+      "produces": ["application/json;charset=UTF-8"],
+      "operationId": "createConfiguration",
+      "responses": {
+        "200": {
+          "schema": {"$ref": "#/definitions/ConfigurationResponse"},
+          "description": "ChainConfiguration already exists"
+        },
+        "400": {
+          "schema": {"$ref": "#/definitions/ErrorResponse"},
+          "description": "Invalid registration request"
+        },
+        "202": {
+          "schema": {"$ref": "#/definitions/ConfigurationResponse"},
+          "description": "Registration request received"
+        }
+      },
+      "parameters": [{
+        "schema": {"$ref": "#/definitions/CreateConfiguration"},
+        "in": "body",
+        "name": "request",
+        "description": "Create a new Proof of Existence context using the provided entity settings",
+        "required": true
+      }],
+      "tags": [
+        "Configuration",
+        "All"
+      ],
+      "consumes": ["application/json;charset=UTF-8"]
+    }},
+    "/blockchain/proof/0.9/existence/{configName}/streams/location": {
+      "post": {
+        "summary": "Verify content using Stream Locations from the Storage API",
+        "security": [{"oauth2schema": ["global"]}],
+        "produces": ["application/json;charset=UTF-8"],
+        "description": "Verify content by supplying a file or some other binary data. Hashing will be done on the server side",
+        "operationId": "verifyUsingLocation",
+        "responses": {
+          "200": {
+            "schema": {"$ref": "#/definitions/VerifyContentResponse"},
+            "description": "Content exists"
+          },
+          "400": {
+            "schema": {"$ref": "#/definitions/ErrorResponse"},
+            "description": "Invalid verification request"
+          },
+          "404": {
+            "schema": {"$ref": "#/definitions/VerifyContentResponse"},
+            "description": "Content does not exist"
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "configName",
+            "description": "The context for this operation",
+            "type": "string",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "array",
+              "items": {"$ref": "#/definitions/StreamLocation"}
+            },
+            "in": "body",
+            "name": "streamLocations",
+            "description": "The stream locations on storage",
+            "required": true
+          }
+        ],
+        "tags": [
+          "Verification",
+          "All"
+        ],
+        "consumes": ["application/json;charset=UTF-8"]
+      },
+      "put": {
+        "summary": "Register content using a Stream Location from Storage API",
+        "security": [{"oauth2schema": ["global"]}],
+        "produces": ["application/json;charset=UTF-8"],
+        "description": "Register content by supplying a file or some other binary data. Hashing will be done on the server side",
+        "operationId": "registerUsingLocation",
+        "responses": {
+          "200": {
+            "schema": {"$ref": "#/definitions/RegisterContentResponse"},
+            "description": "Content already registered"
+          },
+          "400": {
+            "schema": {"$ref": "#/definitions/ErrorResponse"},
+            "description": "Invalid registration request"
+          },
+          "202": {
+            "schema": {"$ref": "#/definitions/RegisterContentResponse"},
+            "description": "Registration request received"
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "configName",
+            "description": "The configuration name this operation",
+            "type": "string",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "array",
+              "items": {"$ref": "#/definitions/StreamLocation"}
+            },
+            "in": "body",
+            "name": "streamLocations",
+            "description": "The stream locations on storage",
+            "required": true
+          }
+        ],
+        "tags": [
+          "Registration",
+          "All"
+        ],
+        "consumes": ["application/json;charset=UTF-8"]
+      }
+    },
+    "/blockchain/proof/0.9/existence/{configName}/content": {
       "post": {
         "summary": "Verify content",
         "security": [{"oauth2schema": ["global"]}],
         "produces": ["application/json;charset=UTF-8"],
-        "operationId": "verifyContent",
+        "operationId": "verifyUsingContent",
         "responses": {
           "200": {
             "schema": {"$ref": "#/definitions/VerifyContentResponse"},
@@ -34,7 +190,7 @@
           }
         ],
         "tags": [
-          "Proof of Existence",
+          "Verification",
           "All"
         ],
         "consumes": ["application/json;charset=UTF-8"]
@@ -43,7 +199,7 @@
         "summary": "Register content",
         "security": [{"oauth2schema": ["global"]}],
         "produces": ["application/json;charset=UTF-8"],
-        "operationId": "registerContent",
+        "operationId": "registerUsingContent",
         "responses": {
           "200": {
             "schema": {"$ref": "#/definitions/RegisterContentResponse"},
@@ -81,13 +237,13 @@
         "consumes": ["application/json;charset=UTF-8"]
       }
     },
-    "/blockchain/proof/0.9.0-SNAPSHOT/existence/{configName}/streams/multipart": {
+    "/blockchain/proof/0.9/existence/{configName}/streams/multipart": {
       "post": {
         "summary": "Verify content using a bytestream/file",
         "security": [{"oauth2schema": ["global"]}],
         "produces": ["application/json;charset=UTF-8"],
         "description": "Verify content by supplying a file or some other binary data. Hashing will be done on the server side",
-        "operationId": "verifyStream",
+        "operationId": "verifyUsingStream",
         "responses": {
           "200": {
             "schema": {"$ref": "#/definitions/VerifyContentResponse"},
@@ -119,7 +275,7 @@
           }
         ],
         "tags": [
-          "Proof of Existence",
+          "Verification",
           "All"
         ],
         "consumes": ["multipart/form-data"]
@@ -129,7 +285,7 @@
         "security": [{"oauth2schema": ["global"]}],
         "produces": ["application/json;charset=UTF-8"],
         "description": "Register content by supplying a file or some other binary data. Hashing will be done on the server side",
-        "operationId": "registerStream",
+        "operationId": "registerUsingStream",
         "responses": {
           "200": {
             "schema": {"$ref": "#/definitions/RegisterContentResponse"},
@@ -166,168 +322,12 @@
         ],
         "consumes": ["multipart/form-data"]
       }
-    },
-    "/blockchain/proof/0.9.0-SNAPSHOT/existence/config": {"post": {
-      "summary": "Create a new configuration",
-      "security": [{"oauth2schema": ["global"]}],
-      "produces": ["application/json;charset=UTF-8"],
-      "operationId": "createConfiguration",
-      "responses": {
-        "200": {
-          "schema": {"$ref": "#/definitions/ConfigurationResponse"},
-          "description": "ChainConfiguration already exists"
-        },
-        "400": {
-          "schema": {"$ref": "#/definitions/ErrorResponse"},
-          "description": "Invalid registration request"
-        },
-        "202": {
-          "schema": {"$ref": "#/definitions/ConfigurationResponse"},
-          "description": "Registration request received"
-        }
-      },
-      "parameters": [{
-        "schema": {"$ref": "#/definitions/CreateConfiguration"},
-        "in": "body",
-        "name": "request",
-        "description": "Create a new Proof of Existence context using the provided entity settings",
-        "required": true
-      }],
-      "tags": [
-        "Configuration",
-        "All"
-      ],
-      "consumes": ["application/json;charset=UTF-8"]
-    }},
-    "/blockchain/proof/0.9.0-SNAPSHOT/existence/{configName}/streams/location": {
-      "post": {
-        "summary": "Verify content using a bytestream/file",
-        "security": [{"oauth2schema": ["global"]}],
-        "produces": ["application/json;charset=UTF-8"],
-        "description": "Verify content by supplying a file or some other binary data. Hashing will be done on the server side",
-        "operationId": "verifyStreamsOnStorage",
-        "responses": {
-          "200": {
-            "schema": {"$ref": "#/definitions/VerifyContentResponse"},
-            "description": "Content exists"
-          },
-          "400": {
-            "schema": {"$ref": "#/definitions/ErrorResponse"},
-            "description": "Invalid verification request"
-          },
-          "404": {
-            "schema": {"$ref": "#/definitions/VerifyContentResponse"},
-            "description": "Content does not exist"
-          }
-        },
-        "parameters": [
-          {
-            "in": "path",
-            "name": "configName",
-            "description": "The context for this operation",
-            "type": "string",
-            "required": true
-          },
-          {
-            "schema": {
-              "type": "array",
-              "items": {"$ref": "#/definitions/StreamLocation"}
-            },
-            "in": "body",
-            "name": "streamLocations",
-            "description": "The stream locations on storage",
-            "required": true
-          }
-        ],
-        "tags": [
-          "Proof of Existence",
-          "All"
-        ],
-        "consumes": ["multipart/form-data"]
-      },
-      "put": {
-        "summary": "Register content using a bytestream/file",
-        "security": [{"oauth2schema": ["global"]}],
-        "produces": ["application/json;charset=UTF-8"],
-        "description": "Register content by supplying a file or some other binary data. Hashing will be done on the server side",
-        "operationId": "registerStreamOnStorage",
-        "responses": {
-          "200": {
-            "schema": {"$ref": "#/definitions/RegisterContentResponse"},
-            "description": "Content already registered"
-          },
-          "400": {
-            "schema": {"$ref": "#/definitions/ErrorResponse"},
-            "description": "Invalid registration request"
-          },
-          "202": {
-            "schema": {"$ref": "#/definitions/RegisterContentResponse"},
-            "description": "Registration request received"
-          }
-        },
-        "parameters": [
-          {
-            "in": "path",
-            "name": "configName",
-            "description": "The configuration name this operation",
-            "type": "string",
-            "required": true
-          },
-          {
-            "schema": {
-              "type": "array",
-              "items": {"$ref": "#/definitions/StreamLocation"}
-            },
-            "in": "body",
-            "name": "streamLocations",
-            "description": "The stream locations on storage",
-            "required": true
-          }
-        ],
-        "tags": [
-          "Registration",
-          "All"
-        ],
-        "consumes": ["multipart/form-data"]
-      }
-    },
-    "/blockchain/proof/0.9.0-SNAPSHOT/existence/config/{configName}": {"get": {
-      "summary": "Get the settings for registration/verification",
-      "security": [{"oauth2schema": ["global"]}],
-      "produces": ["application/json;charset=UTF-8"],
-      "operationId": "getCurrentConfiguration",
-      "responses": {
-        "200": {
-          "schema": {"$ref": "#/definitions/ConfigurationResponse"},
-          "description": "The settings for the proof chain"
-        },
-        "400": {
-          "schema": {"$ref": "#/definitions/ErrorResponse"},
-          "description": "Invalid  request"
-        },
-        "404": {
-          "schema": {"$ref": "#/definitions/ErrorResponse"},
-          "description": "ChainSettings not found"
-        }
-      },
-      "parameters": [{
-        "in": "path",
-        "name": "configName",
-        "description": "The configuration name this operation",
-        "type": "string",
-        "required": true
-      }],
-      "tags": [
-        "Configuration",
-        "All"
-      ],
-      "consumes": ["application/json"]
-    }}
+    }
   },
-  "host": "gw.api.cloud.sphereon.com",
+  "host": "gw-dev.api.cloud.sphereon.com",
   "schemes": ["https"],
   "securityDefinitions": {"oauth2schema": {
-    "tokenUrl": "https://gw.api.cloud.sphereon.com/token",
+    "tokenUrl": "https://gw-dev.api.cloud.sphereon.com/token",
     "scopes": {"global": "accessEverything"},
     "type": "oauth2",
     "flow": "application"
@@ -512,9 +512,17 @@
         "context",
         "id",
         "name",
+        "ownerType",
         "settingChainId"
       ],
       "properties": {
+        "ownerType": {
+          "type": "string",
+          "enum": [
+            "PUBLIC",
+            "PRIVATE"
+          ]
+        },
         "context": {"type": "string"},
         "name": {
           "readOnly": true,
@@ -629,27 +637,27 @@
       "url": "https://sphereon.com",
       "email": "dev@sphereon.com"
     },
-    "description": "<b>With the Blockchain Proof API it is easy to prove existence of (binary) data at a certain point in time. Behind the scenes it stores entries using the Factom (bitcoin) blockchain by means of our generic blockchain API.<\/b>\r\n\r\nThe flow is generally as follows:\r\n1. Make sure a Proof chain has been created using the /chain POST endpoint beforehand. Normally you only need one or a handful of chains, during the entiry lifetime of your proof solution. This is a relative expensive operation in terms of money.\r\n2. Store proof entries on the proof chain from step 1. The entries will contain the content and metadata you want to store forever on the specified chain.\r\n3. Retrieve an existing entry from the chain to verify or retrieve data\r\n\r\n\r\n<b>Interactive testing: <\/b>A web based test console is available in the <a href=\"https://store.sphereon.com\">Sphereon API Store<\/a>",
+    "description": "<b>With the Blockchain Proof API it is easy to prove or disprove existence of (binary) data at a certain point in time. Behind the scenes it stores entries using the Factom (bitcoin), Multichain or Ethereum blockchain by means of our generic blockchain API.<\/b>\r\n\r\nThe flow is generally as follows:\r\n1. Make sure a configuration is present\r\n2. Register content by uploading a file, some content, or providing a Stream Location from the Storage API. When you upload content you have to tell the API whether the data has already been hashed or not. If not, or when uploading a file or stream location, the API will take care of the hashing\r\n3. Verify content by uploading a file, some content, or providing a Stream Location from the Storage API. When you upload content you have to tell the API whether the data has already been hashed or not. If not, or when uploading a file or stream location, the API will take care of the hashing. You will get back whether the content has been registered previously or not\r\n\r\n\r\n<b>Interactive testing: <\/b>A web based test console is available in the <a href=\"https://store.sphereon.com\">Sphereon API Store<\/a>",
     "termsOfService": "https://sphereon.com",
     "title": "Blockchain Proof",
-    "version": "0.9.0-SNAPSHOT"
+    "version": "0.9"
   },
   "tags": [
     {
-      "name": "Proof of Existence",
-      "description": "Blockchain Proof of Existence API"
+      "name": "Configuration",
+      "description": "Configuration API"
     },
     {
-      "name": "Chain",
-      "description": "The proof and settings chains"
-    },
-    {
-      "name": "ChainSettings",
-      "description": "The settings"
+      "name": "Registration",
+      "description": "Register content API"
     },
     {
       "name": "All",
       "description": "All API operations"
+    },
+    {
+      "name": "Verification",
+      "description": "Verify Existence API"
     }
   ]
 }
