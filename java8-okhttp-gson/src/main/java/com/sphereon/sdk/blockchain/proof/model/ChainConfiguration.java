@@ -26,20 +26,20 @@ import java.io.IOException;
 /**
  * ChainConfiguration
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2017-12-14T12:58:11.164+01:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2017-12-14T13:28:04.893+01:00")
 public class ChainConfiguration {
   /**
-   * Gets or Sets ownerType
+   * Gets or Sets accessLevel
    */
-  @JsonAdapter(OwnerTypeEnum.Adapter.class)
-  public enum OwnerTypeEnum {
+  @JsonAdapter(AccessLevelEnum.Adapter.class)
+  public enum AccessLevelEnum {
     PUBLIC("PUBLIC"),
     
     PRIVATE("PRIVATE");
 
     private String value;
 
-    OwnerTypeEnum(String value) {
+    AccessLevelEnum(String value) {
       this.value = value;
     }
 
@@ -52,8 +52,8 @@ public class ChainConfiguration {
       return String.valueOf(value);
     }
 
-    public static OwnerTypeEnum fromValue(String text) {
-      for (OwnerTypeEnum b : OwnerTypeEnum.values()) {
+    public static AccessLevelEnum fromValue(String text) {
+      for (AccessLevelEnum b : AccessLevelEnum.values()) {
         if (String.valueOf(b.value).equals(text)) {
           return b;
         }
@@ -61,22 +61,22 @@ public class ChainConfiguration {
       return null;
     }
 
-    public static class Adapter extends TypeAdapter<OwnerTypeEnum> {
+    public static class Adapter extends TypeAdapter<AccessLevelEnum> {
       @Override
-      public void write(final JsonWriter jsonWriter, final OwnerTypeEnum enumeration) throws IOException {
+      public void write(final JsonWriter jsonWriter, final AccessLevelEnum enumeration) throws IOException {
         jsonWriter.value(enumeration.getValue());
       }
 
       @Override
-      public OwnerTypeEnum read(final JsonReader jsonReader) throws IOException {
+      public AccessLevelEnum read(final JsonReader jsonReader) throws IOException {
         String value = jsonReader.nextString();
-        return OwnerTypeEnum.fromValue(String.valueOf(value));
+        return AccessLevelEnum.fromValue(String.valueOf(value));
       }
     }
   }
 
-  @SerializedName("ownerType")
-  private OwnerTypeEnum ownerType = null;
+  @SerializedName("accessLevel")
+  private AccessLevelEnum accessLevel = null;
 
   @SerializedName("context")
   private String context = null;
@@ -90,22 +90,13 @@ public class ChainConfiguration {
   @SerializedName("id")
   private String id = null;
 
-  public ChainConfiguration ownerType(OwnerTypeEnum ownerType) {
-    this.ownerType = ownerType;
-    return this;
-  }
-
    /**
-   * Get ownerType
-   * @return ownerType
+   * Get accessLevel
+   * @return accessLevel
   **/
   @ApiModelProperty(required = true, value = "")
-  public OwnerTypeEnum getOwnerType() {
-    return ownerType;
-  }
-
-  public void setOwnerType(OwnerTypeEnum ownerType) {
-    this.ownerType = ownerType;
+  public AccessLevelEnum getAccessLevel() {
+    return accessLevel;
   }
 
   public ChainConfiguration context(String context) {
@@ -172,7 +163,7 @@ public class ChainConfiguration {
       return false;
     }
     ChainConfiguration chainConfiguration = (ChainConfiguration) o;
-    return Objects.equals(this.ownerType, chainConfiguration.ownerType) &&
+    return Objects.equals(this.accessLevel, chainConfiguration.accessLevel) &&
         Objects.equals(this.context, chainConfiguration.context) &&
         Objects.equals(this.name, chainConfiguration.name) &&
         Objects.equals(this.settingChainId, chainConfiguration.settingChainId) &&
@@ -181,7 +172,7 @@ public class ChainConfiguration {
 
   @Override
   public int hashCode() {
-    return Objects.hash(ownerType, context, name, settingChainId, id);
+    return Objects.hash(accessLevel, context, name, settingChainId, id);
   }
 
 
@@ -190,7 +181,7 @@ public class ChainConfiguration {
     StringBuilder sb = new StringBuilder();
     sb.append("class ChainConfiguration {\n");
     
-    sb.append("    ownerType: ").append(toIndentedString(ownerType)).append("\n");
+    sb.append("    accessLevel: ").append(toIndentedString(accessLevel)).append("\n");
     sb.append("    context: ").append(toIndentedString(context)).append("\n");
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    settingChainId: ").append(toIndentedString(settingChainId)).append("\n");

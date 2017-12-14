@@ -3,7 +3,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**OwnerType** | **string** |  | 
+**AccessLevel** | **string** |  | 
 **Context** | **string** |  | 
 **Name** | **string** |  | 
 **SettingChainId** | **string** |  | 

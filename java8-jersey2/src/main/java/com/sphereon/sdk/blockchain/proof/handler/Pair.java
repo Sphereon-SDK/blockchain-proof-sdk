@@ -13,7 +13,7 @@
 
 package com.sphereon.sdk.blockchain.proof.handler;
 
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2017-12-14T12:58:01.897+01:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2017-12-14T13:27:54.887+01:00")
 public class Pair {
     private String name = "";
     private String value = "";

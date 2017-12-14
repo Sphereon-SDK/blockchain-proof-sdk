@@ -44,16 +44,16 @@
    * Constructs a new <code>ChainConfiguration</code>.
    * @alias module:SphereonSDKBlockchainProof/model/ChainConfiguration
    * @class
-   * @param ownerType {module:SphereonSDKBlockchainProof/model/ChainConfiguration.OwnerTypeEnum} 
+   * @param accessLevel {module:SphereonSDKBlockchainProof/model/ChainConfiguration.AccessLevelEnum} 
    * @param context {String} 
    * @param name {String} 
    * @param settingChainId {String} 
    * @param id {String} 
    */
-  var exports = function(ownerType, context, name, settingChainId, id) {
+  var exports = function(accessLevel, context, name, settingChainId, id) {
     var _this = this;
 
-    _this['ownerType'] = ownerType;
+    _this['accessLevel'] = accessLevel;
     _this['context'] = context;
     _this['name'] = name;
     _this['settingChainId'] = settingChainId;
@@ -71,8 +71,8 @@
     if (data) {
       obj = obj || new exports();
 
-      if (data.hasOwnProperty('ownerType')) {
-        obj['ownerType'] = ApiClient.convertToType(data['ownerType'], 'String');
+      if (data.hasOwnProperty('accessLevel')) {
+        obj['accessLevel'] = ApiClient.convertToType(data['accessLevel'], 'String');
       }
       if (data.hasOwnProperty('context')) {
         obj['context'] = ApiClient.convertToType(data['context'], 'String');
@@ -91,9 +91,9 @@
   }
 
   /**
-   * @member {module:SphereonSDKBlockchainProof/model/ChainConfiguration.OwnerTypeEnum} ownerType
+   * @member {module:SphereonSDKBlockchainProof/model/ChainConfiguration.AccessLevelEnum} accessLevel
    */
-  exports.prototype['ownerType'] = undefined;
+  exports.prototype['accessLevel'] = undefined;
   /**
    * @member {String} context
    */
@@ -113,11 +113,11 @@
 
 
   /**
-   * Allowed values for the <code>ownerType</code> property.
+   * Allowed values for the <code>accessLevel</code> property.
    * @enum {String}
    * @readonly
    */
-  exports.OwnerTypeEnum = {
+  exports.AccessLevelEnum = {
     /**
      * value: "PUBLIC"
      * @const

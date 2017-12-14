@@ -13,7 +13,7 @@
 
 package com.sphereon.sdk.blockchain.proof.handler;
 
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2017-12-14T12:58:11.164+01:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2017-12-14T13:28:04.893+01:00")
 public class StringUtil {
   /**
    * Check if the given array contains the given value (with case-insensitive comparison).

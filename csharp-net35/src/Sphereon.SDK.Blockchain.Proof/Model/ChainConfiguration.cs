@@ -31,10 +31,10 @@ namespace Sphereon.SDK.Blockchain.Proof.Model
     public partial class ChainConfiguration :  IEquatable<ChainConfiguration>
     {
         /// <summary>
-        /// Gets or Sets OwnerType
+        /// Gets or Sets AccessLevel
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
-        public enum OwnerTypeEnum
+        public enum AccessLevelEnum
         {
             
             /// <summary>
@@ -51,10 +51,10 @@ namespace Sphereon.SDK.Blockchain.Proof.Model
         }
 
         /// <summary>
-        /// Gets or Sets OwnerType
+        /// Gets or Sets AccessLevel
         /// </summary>
-        [DataMember(Name="ownerType", EmitDefaultValue=false)]
-        public OwnerTypeEnum? OwnerType { get; set; }
+        [DataMember(Name="accessLevel", EmitDefaultValue=false)]
+        public AccessLevelEnum? AccessLevel { get; set; }
         /// <summary>
         /// Initializes a new instance of the <see cref="ChainConfiguration" /> class.
         /// </summary>
@@ -63,20 +63,10 @@ namespace Sphereon.SDK.Blockchain.Proof.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="ChainConfiguration" /> class.
         /// </summary>
-        /// <param name="OwnerType">OwnerType (required).</param>
         /// <param name="Context">Context (required).</param>
         /// <param name="SettingChainId">SettingChainId (required).</param>
-        public ChainConfiguration(OwnerTypeEnum? OwnerType = default(OwnerTypeEnum?), string Context = default(string), string SettingChainId = default(string))
+        public ChainConfiguration(string Context = default(string), string SettingChainId = default(string))
         {
-            // to ensure "OwnerType" is required (not null)
-            if (OwnerType == null)
-            {
-                throw new InvalidDataException("OwnerType is a required property for ChainConfiguration and cannot be null");
-            }
-            else
-            {
-                this.OwnerType = OwnerType;
-            }
             // to ensure "Context" is required (not null)
             if (Context == null)
             {
@@ -130,7 +120,7 @@ namespace Sphereon.SDK.Blockchain.Proof.Model
         {
             var sb = new StringBuilder();
             sb.Append("class ChainConfiguration {\n");
-            sb.Append("  OwnerType: ").Append(OwnerType).Append("\n");
+            sb.Append("  AccessLevel: ").Append(AccessLevel).Append("\n");
             sb.Append("  Context: ").Append(Context).Append("\n");
             sb.Append("  Name: ").Append(Name).Append("\n");
             sb.Append("  SettingChainId: ").Append(SettingChainId).Append("\n");
@@ -172,9 +162,9 @@ namespace Sphereon.SDK.Blockchain.Proof.Model
 
             return 
                 (
-                    this.OwnerType == other.OwnerType ||
-                    this.OwnerType != null &&
-                    this.OwnerType.Equals(other.OwnerType)
+                    this.AccessLevel == other.AccessLevel ||
+                    this.AccessLevel != null &&
+                    this.AccessLevel.Equals(other.AccessLevel)
                 ) && 
                 (
                     this.Context == other.Context ||
@@ -209,8 +199,8 @@ namespace Sphereon.SDK.Blockchain.Proof.Model
             {
                 int hash = 41;
                 // Suitable nullity checks etc, of course :)
-                if (this.OwnerType != null)
-                    hash = hash * 59 + this.OwnerType.GetHashCode();
+                if (this.AccessLevel != null)
+                    hash = hash * 59 + this.AccessLevel.GetHashCode();
                 if (this.Context != null)
                     hash = hash * 59 + this.Context.GetHashCode();
                 if (this.Name != null)

@@ -31,6 +31,31 @@ namespace Sphereon.SDK.Blockchain.Proof.Model
     public partial class CreateConfiguration :  IEquatable<CreateConfiguration>, IValidatableObject
     {
         /// <summary>
+        /// Gets or Sets AccessLevel
+        /// </summary>
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum AccessLevelEnum
+        {
+            
+            /// <summary>
+            /// Enum PUBLIC for "PUBLIC"
+            /// </summary>
+            [EnumMember(Value = "PUBLIC")]
+            PUBLIC,
+            
+            /// <summary>
+            /// Enum PRIVATE for "PRIVATE"
+            /// </summary>
+            [EnumMember(Value = "PRIVATE")]
+            PRIVATE
+        }
+
+        /// <summary>
+        /// Gets or Sets AccessLevel
+        /// </summary>
+        [DataMember(Name="accessLevel", EmitDefaultValue=false)]
+        public AccessLevelEnum? AccessLevel { get; set; }
+        /// <summary>
         /// Initializes a new instance of the <see cref="CreateConfiguration" /> class.
         /// </summary>
         [JsonConstructorAttribute]
@@ -39,9 +64,10 @@ namespace Sphereon.SDK.Blockchain.Proof.Model
         /// Initializes a new instance of the <see cref="CreateConfiguration" /> class.
         /// </summary>
         /// <param name="InitialSettings">The initial context settings. (required).</param>
+        /// <param name="AccessLevel">AccessLevel (required).</param>
         /// <param name="Context">The blockchain context. (required).</param>
         /// <param name="Name">The configuration name. (required).</param>
-        public CreateConfiguration(ChainSettings InitialSettings = default(ChainSettings), string Context = default(string), string Name = default(string))
+        public CreateConfiguration(ChainSettings InitialSettings = default(ChainSettings), AccessLevelEnum? AccessLevel = default(AccessLevelEnum?), string Context = default(string), string Name = default(string))
         {
             // to ensure "InitialSettings" is required (not null)
             if (InitialSettings == null)
@@ -51,6 +77,15 @@ namespace Sphereon.SDK.Blockchain.Proof.Model
             else
             {
                 this.InitialSettings = InitialSettings;
+            }
+            // to ensure "AccessLevel" is required (not null)
+            if (AccessLevel == null)
+            {
+                throw new InvalidDataException("AccessLevel is a required property for CreateConfiguration and cannot be null");
+            }
+            else
+            {
+                this.AccessLevel = AccessLevel;
             }
             // to ensure "Context" is required (not null)
             if (Context == null)
@@ -79,6 +114,7 @@ namespace Sphereon.SDK.Blockchain.Proof.Model
         [DataMember(Name="initialSettings", EmitDefaultValue=false)]
         public ChainSettings InitialSettings { get; set; }
 
+
         /// <summary>
         /// The blockchain context.
         /// </summary>
@@ -102,6 +138,7 @@ namespace Sphereon.SDK.Blockchain.Proof.Model
             var sb = new StringBuilder();
             sb.Append("class CreateConfiguration {\n");
             sb.Append("  InitialSettings: ").Append(InitialSettings).Append("\n");
+            sb.Append("  AccessLevel: ").Append(AccessLevel).Append("\n");
             sb.Append("  Context: ").Append(Context).Append("\n");
             sb.Append("  Name: ").Append(Name).Append("\n");
             sb.Append("}\n");
@@ -146,6 +183,11 @@ namespace Sphereon.SDK.Blockchain.Proof.Model
                     this.InitialSettings.Equals(other.InitialSettings)
                 ) && 
                 (
+                    this.AccessLevel == other.AccessLevel ||
+                    this.AccessLevel != null &&
+                    this.AccessLevel.Equals(other.AccessLevel)
+                ) && 
+                (
                     this.Context == other.Context ||
                     this.Context != null &&
                     this.Context.Equals(other.Context)
@@ -170,6 +212,8 @@ namespace Sphereon.SDK.Blockchain.Proof.Model
                 // Suitable nullity checks etc, of course :)
                 if (this.InitialSettings != null)
                     hash = hash * 59 + this.InitialSettings.GetHashCode();
+                if (this.AccessLevel != null)
+                    hash = hash * 59 + this.AccessLevel.GetHashCode();
                 if (this.Context != null)
                     hash = hash * 59 + this.Context.GetHashCode();
                 if (this.Name != null)

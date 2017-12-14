@@ -27,7 +27,7 @@ import java.io.IOException;
  * Location record of data stream
  */
 @ApiModel(description = "Location record of data stream")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2017-12-14T12:58:12.161+01:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2017-12-14T13:28:04.380+01:00")
 public class StreamLocation {
   @SerializedName("folderPath")
   private String folderPath = null;
