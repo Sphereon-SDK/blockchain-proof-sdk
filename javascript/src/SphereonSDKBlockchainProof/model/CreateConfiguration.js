@@ -46,15 +46,13 @@
    * @alias module:SphereonSDKBlockchainProof/model/CreateConfiguration
    * @class
    * @param initialSettings {module:SphereonSDKBlockchainProof/model/ChainSettings} The initial context settings.
-   * @param accessLevel {module:SphereonSDKBlockchainProof/model/CreateConfiguration.AccessLevelEnum} 
    * @param context {String} The blockchain context.
    * @param name {String} The configuration name.
    */
-  var exports = function(initialSettings, accessLevel, context, name) {
+  var exports = function(initialSettings, context, name) {
     var _this = this;
 
     _this['initialSettings'] = initialSettings;
-    _this['accessLevel'] = accessLevel;
     _this['context'] = context;
     _this['name'] = name;
   };
@@ -73,9 +71,6 @@
       if (data.hasOwnProperty('initialSettings')) {
         obj['initialSettings'] = ChainSettings.constructFromObject(data['initialSettings']);
       }
-      if (data.hasOwnProperty('accessLevel')) {
-        obj['accessLevel'] = ApiClient.convertToType(data['accessLevel'], 'String');
-      }
       if (data.hasOwnProperty('context')) {
         obj['context'] = ApiClient.convertToType(data['context'], 'String');
       }
@@ -92,10 +87,6 @@
    */
   exports.prototype['initialSettings'] = undefined;
   /**
-   * @member {module:SphereonSDKBlockchainProof/model/CreateConfiguration.AccessLevelEnum} accessLevel
-   */
-  exports.prototype['accessLevel'] = undefined;
-  /**
    * The blockchain context.
    * @member {String} context
    */
@@ -106,23 +97,6 @@
    */
   exports.prototype['name'] = undefined;
 
-
-  /**
-   * Allowed values for the <code>accessLevel</code> property.
-   * @enum {String}
-   * @readonly
-   */
-  exports.AccessLevelEnum = {
-    /**
-     * value: "PUBLIC"
-     * @const
-     */
-    "PUBLIC": "PUBLIC",
-    /**
-     * value: "PRIVATE"
-     * @const
-     */
-    "PRIVATE": "PRIVATE"  };
 
 
   return exports;

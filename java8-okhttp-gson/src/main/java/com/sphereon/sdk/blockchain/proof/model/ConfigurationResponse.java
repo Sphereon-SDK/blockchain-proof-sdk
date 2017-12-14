@@ -28,7 +28,7 @@ import java.io.IOException;
  * Committed context and settings response
  */
 @ApiModel(description = "Committed context and settings response")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2017-12-14T13:24:28.303+01:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2017-12-14T12:58:11.164+01:00")
 public class ConfigurationResponse {
   @SerializedName("storedSettings")
   private StoredSettings storedSettings = null;

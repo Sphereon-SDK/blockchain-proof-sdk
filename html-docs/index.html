@@ -697,11 +697,10 @@ margin-bottom: 20px;
     var defs = {}
             defs.ChainConfiguration = {
   "type" : "object",
-  "required" : [ "accessLevel", "context", "id", "name", "settingChainId" ],
+  "required" : [ "context", "id", "name", "ownerType", "settingChainId" ],
   "properties" : {
-    "accessLevel" : {
+    "ownerType" : {
       "type" : "string",
-      "readOnly" : true,
       "enum" : [ "PUBLIC", "PRIVATE" ]
     },
     "context" : {
@@ -812,15 +811,11 @@ margin-bottom: 20px;
 };
             defs.CreateConfiguration = {
   "type" : "object",
-  "required" : [ "accessLevel", "context", "initialSettings", "name" ],
+  "required" : [ "context", "initialSettings", "name" ],
   "properties" : {
     "initialSettings" : {
       "description" : "The initial context settings.",
       "$ref" : "#/definitions/ChainSettings"
-    },
-    "accessLevel" : {
-      "type" : "string",
-      "enum" : [ "PUBLIC", "PRIVATE" ]
     },
     "context" : {
       "type" : "string",
@@ -8102,7 +8097,7 @@ except ApiException as e:
           </div>
           <div id="generator">
             <div class="content">
-              Generated 2017-12-14T13:24:28.105+01:00
+              Generated 2017-12-14T12:58:10.710+01:00
             </div>
           </div>
       </div>

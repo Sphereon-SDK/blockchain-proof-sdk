@@ -3,15 +3,15 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**accessLevel** | **String** |  | 
+**ownerType** | **String** |  | 
 **context** | **String** |  | 
 **name** | **String** |  | 
 **settingChainId** | **String** |  | 
 **id** | **String** |  | 
 
 
-<a name="AccessLevelEnum"></a>
-## Enum: AccessLevelEnum
+<a name="OwnerTypeEnum"></a>
+## Enum: OwnerTypeEnum
 
 
 * `PUBLIC` (value: `"PUBLIC"`)

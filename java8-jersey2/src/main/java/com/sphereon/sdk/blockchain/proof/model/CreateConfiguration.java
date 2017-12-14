@@ -25,48 +25,10 @@ import io.swagger.annotations.ApiModelProperty;
  * Create a context configuration
  */
 @ApiModel(description = "Create a context configuration")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2017-12-14T13:24:19.013+01:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2017-12-14T12:58:01.897+01:00")
 public class CreateConfiguration {
   @JsonProperty("initialSettings")
   private ChainSettings initialSettings = null;
-
-  /**
-   * Gets or Sets accessLevel
-   */
-  public enum AccessLevelEnum {
-    PUBLIC("PUBLIC"),
-    
-    PRIVATE("PRIVATE");
-
-    private String value;
-
-    AccessLevelEnum(String value) {
-      this.value = value;
-    }
-
-    @JsonValue
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    @JsonCreator
-    public static AccessLevelEnum fromValue(String text) {
-      for (AccessLevelEnum b : AccessLevelEnum.values()) {
-        if (String.valueOf(b.value).equals(text)) {
-          return b;
-        }
-      }
-      return null;
-    }
-  }
-
-  @JsonProperty("accessLevel")
-  private AccessLevelEnum accessLevel = null;
 
   @JsonProperty("context")
   private String context = null;
@@ -90,24 +52,6 @@ public class CreateConfiguration {
 
   public void setInitialSettings(ChainSettings initialSettings) {
     this.initialSettings = initialSettings;
-  }
-
-  public CreateConfiguration accessLevel(AccessLevelEnum accessLevel) {
-    this.accessLevel = accessLevel;
-    return this;
-  }
-
-   /**
-   * Get accessLevel
-   * @return accessLevel
-  **/
-  @ApiModelProperty(required = true, value = "")
-  public AccessLevelEnum getAccessLevel() {
-    return accessLevel;
-  }
-
-  public void setAccessLevel(AccessLevelEnum accessLevel) {
-    this.accessLevel = accessLevel;
   }
 
   public CreateConfiguration context(String context) {
@@ -157,14 +101,13 @@ public class CreateConfiguration {
     }
     CreateConfiguration createConfiguration = (CreateConfiguration) o;
     return Objects.equals(this.initialSettings, createConfiguration.initialSettings) &&
-        Objects.equals(this.accessLevel, createConfiguration.accessLevel) &&
         Objects.equals(this.context, createConfiguration.context) &&
         Objects.equals(this.name, createConfiguration.name);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(initialSettings, accessLevel, context, name);
+    return Objects.hash(initialSettings, context, name);
   }
 
 
@@ -174,7 +117,6 @@ public class CreateConfiguration {
     sb.append("class CreateConfiguration {\n");
     
     sb.append("    initialSettings: ").append(toIndentedString(initialSettings)).append("\n");
-    sb.append("    accessLevel: ").append(toIndentedString(accessLevel)).append("\n");
     sb.append("    context: ").append(toIndentedString(context)).append("\n");
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("}");

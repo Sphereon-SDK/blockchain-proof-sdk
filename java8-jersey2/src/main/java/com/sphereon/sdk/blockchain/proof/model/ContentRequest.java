@@ -24,7 +24,7 @@ import io.swagger.annotations.ApiModelProperty;
  * Content existence request
  */
 @ApiModel(description = "Content existence request")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2017-12-14T13:24:19.013+01:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2017-12-14T12:58:01.897+01:00")
 public class ContentRequest {
   /**
    * When CLIENT is supplied the content should already have been hashed by you. When SERVER is supplied we will hash the content

@@ -2,7 +2,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 VisualStudioVersion = 12.0.0.0
 MinimumVisualStudioVersion = 10.0.0.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sphereon.SDK.Blockchain.Proof", "src\Sphereon.SDK.Blockchain.Proof\Sphereon.SDK.Blockchain.Proof.csproj", "{82E6C3A4-D273-4D38-9125-F606BE396F69}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sphereon.SDK.Blockchain.Proof", "src\Sphereon.SDK.Blockchain.Proof\Sphereon.SDK.Blockchain.Proof.csproj", "{D07D6A7A-A317-4CF9-8298-F954754B70BF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sphereon.SDK.Blockchain.Proof.Test", "src\Sphereon.SDK.Blockchain.Proof.Test\Sphereon.SDK.Blockchain.Proof.Test.csproj", "{19F1DEBC-DE5E-4517-8062-F000CD499087}"
 EndProject
@@ -12,10 +12,10 @@ Debug|Any CPU = Debug|Any CPU
 Release|Any CPU = Release|Any CPU
 EndGlobalSection
 GlobalSection(ProjectConfigurationPlatforms) = postSolution
-{82E6C3A4-D273-4D38-9125-F606BE396F69}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-{82E6C3A4-D273-4D38-9125-F606BE396F69}.Debug|Any CPU.Build.0 = Debug|Any CPU
-{82E6C3A4-D273-4D38-9125-F606BE396F69}.Release|Any CPU.ActiveCfg = Release|Any CPU
-{82E6C3A4-D273-4D38-9125-F606BE396F69}.Release|Any CPU.Build.0 = Release|Any CPU
+{D07D6A7A-A317-4CF9-8298-F954754B70BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+{D07D6A7A-A317-4CF9-8298-F954754B70BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+{D07D6A7A-A317-4CF9-8298-F954754B70BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+{D07D6A7A-A317-4CF9-8298-F954754B70BF}.Release|Any CPU.Build.0 = Release|Any CPU
 {19F1DEBC-DE5E-4517-8062-F000CD499087}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 {19F1DEBC-DE5E-4517-8062-F000CD499087}.Debug|Any CPU.Build.0 = Debug|Any CPU
 {19F1DEBC-DE5E-4517-8062-F000CD499087}.Release|Any CPU.ActiveCfg = Release|Any CPU

@@ -23,19 +23,19 @@ import io.swagger.annotations.ApiModelProperty;
 /**
  * ChainConfiguration
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2017-12-14T13:24:19.013+01:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2017-12-14T12:58:01.897+01:00")
 public class ChainConfiguration {
   /**
-   * Gets or Sets accessLevel
+   * Gets or Sets ownerType
    */
-  public enum AccessLevelEnum {
+  public enum OwnerTypeEnum {
     PUBLIC("PUBLIC"),
     
     PRIVATE("PRIVATE");
 
     private String value;
 
-    AccessLevelEnum(String value) {
+    OwnerTypeEnum(String value) {
       this.value = value;
     }
 
@@ -50,8 +50,8 @@ public class ChainConfiguration {
     }
 
     @JsonCreator
-    public static AccessLevelEnum fromValue(String text) {
-      for (AccessLevelEnum b : AccessLevelEnum.values()) {
+    public static OwnerTypeEnum fromValue(String text) {
+      for (OwnerTypeEnum b : OwnerTypeEnum.values()) {
         if (String.valueOf(b.value).equals(text)) {
           return b;
         }
@@ -60,8 +60,8 @@ public class ChainConfiguration {
     }
   }
 
-  @JsonProperty("accessLevel")
-  private AccessLevelEnum accessLevel = null;
+  @JsonProperty("ownerType")
+  private OwnerTypeEnum ownerType = null;
 
   @JsonProperty("context")
   private String context = null;
@@ -75,13 +75,22 @@ public class ChainConfiguration {
   @JsonProperty("id")
   private String id = null;
 
+  public ChainConfiguration ownerType(OwnerTypeEnum ownerType) {
+    this.ownerType = ownerType;
+    return this;
+  }
+
    /**
-   * Get accessLevel
-   * @return accessLevel
+   * Get ownerType
+   * @return ownerType
   **/
   @ApiModelProperty(required = true, value = "")
-  public AccessLevelEnum getAccessLevel() {
-    return accessLevel;
+  public OwnerTypeEnum getOwnerType() {
+    return ownerType;
+  }
+
+  public void setOwnerType(OwnerTypeEnum ownerType) {
+    this.ownerType = ownerType;
   }
 
   public ChainConfiguration context(String context) {
@@ -148,7 +157,7 @@ public class ChainConfiguration {
       return false;
     }
     ChainConfiguration chainConfiguration = (ChainConfiguration) o;
-    return Objects.equals(this.accessLevel, chainConfiguration.accessLevel) &&
+    return Objects.equals(this.ownerType, chainConfiguration.ownerType) &&
         Objects.equals(this.context, chainConfiguration.context) &&
         Objects.equals(this.name, chainConfiguration.name) &&
         Objects.equals(this.settingChainId, chainConfiguration.settingChainId) &&
@@ -157,7 +166,7 @@ public class ChainConfiguration {
 
   @Override
   public int hashCode() {
-    return Objects.hash(accessLevel, context, name, settingChainId, id);
+    return Objects.hash(ownerType, context, name, settingChainId, id);
   }
 
 
@@ -166,7 +175,7 @@ public class ChainConfiguration {
     StringBuilder sb = new StringBuilder();
     sb.append("class ChainConfiguration {\n");
     
-    sb.append("    accessLevel: ").append(toIndentedString(accessLevel)).append("\n");
+    sb.append("    ownerType: ").append(toIndentedString(ownerType)).append("\n");
     sb.append("    context: ").append(toIndentedString(context)).append("\n");
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    settingChainId: ").append(toIndentedString(settingChainId)).append("\n");

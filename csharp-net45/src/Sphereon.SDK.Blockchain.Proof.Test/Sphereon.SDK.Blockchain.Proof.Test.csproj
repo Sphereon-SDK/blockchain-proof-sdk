@@ -75,7 +75,7 @@ Contact: dev@sphereon.com
   <Import Project="$(MsBuildToolsPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
       <ProjectReference Include="..\Sphereon.SDK.Blockchain.Proof\Sphereon.SDK.Blockchain.Proof.csproj">
-          <Project>{AAAA04E6-9888-41D8-BBB2-115862F6DE23}</Project>
+          <Project>{BA8C5CCD-6F96-42C9-8FA4-C3522155F514}</Project>
           <Name>Sphereon.SDK.Blockchain.Proof</Name>
       </ProjectReference>
   </ItemGroup>

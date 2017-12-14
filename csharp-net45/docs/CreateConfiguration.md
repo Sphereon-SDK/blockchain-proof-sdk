@@ -4,7 +4,6 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **InitialSettings** | [**ChainSettings**](ChainSettings.md) | The initial context settings. | 
-**AccessLevel** | **string** |  | 
 **Context** | **string** | The blockchain context. | 
 **Name** | **string** | The configuration name. | 
 
