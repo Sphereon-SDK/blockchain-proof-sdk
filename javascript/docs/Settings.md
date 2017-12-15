@@ -3,7 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**version** | **Integer** | The settings version (only 1 for now) | 
+**version** | **Number** | The settings version (only 1 for now) | 
 **hashAlgorithm** | **String** | The hashing method used (CLIENT) or to use (SERVER) for the content | [optional] 
 
 

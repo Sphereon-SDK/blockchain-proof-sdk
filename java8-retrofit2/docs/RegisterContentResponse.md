@@ -4,9 +4,11 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**contentRequest** | [**ContentRequest**](ContentRequest.md) |  | 
+**contextName** | **String** |  | 
+**requestId** | **String** |  |  [optional]
 **proofChain** | [**CommittedChain**](CommittedChain.md) |  | 
 **registrationState** | [**RegistrationStateEnum**](#RegistrationStateEnum) |  | 
+**fileChain** | [**CommittedChain**](CommittedChain.md) |  |  [optional]
 
 
 <a name="RegistrationStateEnum"></a>
