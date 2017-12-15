@@ -1,30 +1,27 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27004.2002
-MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sphereon.SDK.Blockchain.Proof", "src\Sphereon.SDK.Blockchain.Proof\Sphereon.SDK.Blockchain.Proof.csproj", "{63CB9759-3B77-413F-B592-DD56423F267D}"
+# Visual Studio 2012
+VisualStudioVersion = 12.0.0.0
+MinimumVisualStudioVersion = 10.0.0.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sphereon.SDK.Blockchain.Proof", "src\Sphereon.SDK.Blockchain.Proof\Sphereon.SDK.Blockchain.Proof.csproj", "{096D0203-544A-416F-AD8E-FA88F3975CC9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sphereon.SDK.Blockchain.Proof.Test", "src\Sphereon.SDK.Blockchain.Proof.Test\Sphereon.SDK.Blockchain.Proof.Test.csproj", "{19F1DEBC-DE5E-4517-8062-F000CD499087}"
 EndProject
 Global
-	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|Any CPU = Debug|Any CPU
-		Release|Any CPU = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{63CB9759-3B77-413F-B592-DD56423F267D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{63CB9759-3B77-413F-B592-DD56423F267D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{63CB9759-3B77-413F-B592-DD56423F267D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{63CB9759-3B77-413F-B592-DD56423F267D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{19F1DEBC-DE5E-4517-8062-F000CD499087}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{19F1DEBC-DE5E-4517-8062-F000CD499087}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{19F1DEBC-DE5E-4517-8062-F000CD499087}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{19F1DEBC-DE5E-4517-8062-F000CD499087}.Release|Any CPU.Build.0 = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {FA0FBA8C-6E3B-4CD2-8746-DEA6AAFE0781}
-	EndGlobalSection
+GlobalSection(SolutionConfigurationPlatforms) = preSolution
+Debug|Any CPU = Debug|Any CPU
+Release|Any CPU = Release|Any CPU
+EndGlobalSection
+GlobalSection(ProjectConfigurationPlatforms) = postSolution
+{096D0203-544A-416F-AD8E-FA88F3975CC9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+{096D0203-544A-416F-AD8E-FA88F3975CC9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+{096D0203-544A-416F-AD8E-FA88F3975CC9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+{096D0203-544A-416F-AD8E-FA88F3975CC9}.Release|Any CPU.Build.0 = Release|Any CPU
+{19F1DEBC-DE5E-4517-8062-F000CD499087}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+{19F1DEBC-DE5E-4517-8062-F000CD499087}.Debug|Any CPU.Build.0 = Debug|Any CPU
+{19F1DEBC-DE5E-4517-8062-F000CD499087}.Release|Any CPU.ActiveCfg = Release|Any CPU
+{19F1DEBC-DE5E-4517-8062-F000CD499087}.Release|Any CPU.Build.0 = Release|Any CPU
+EndGlobalSection
+GlobalSection(SolutionProperties) = preSolution
+HideSolutionNode = FALSE
+EndGlobalSection
 EndGlobal
