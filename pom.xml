@@ -4,7 +4,7 @@
     <groupId>com.sphereon.sdk</groupId>
     <artifactId>blockchain-proof-sdk-generator</artifactId>
     <packaging>jar</packaging>
-    <version>0.9.0</version>
+    <version>0.9.0-SNAPSHOT</version>
     <name>Blockchain Proof API SDK Generator</name>
 
     <properties>
@@ -71,6 +71,9 @@
                                 <configuration>
                                     <inputSpec>swagger.sdk.json</inputSpec>
                                     <language>java</language>
+									<templateDirectory>
+										${basedir}/src/main/mustacheTemplates/okhttp-gson
+									</templateDirectory>
                                     <configOptions>
                                         <dateLibrary>java8</dateLibrary>
                                     </configOptions>
@@ -78,7 +81,7 @@
                                     <verbose>${swagger-coden-verbose}</verbose>
                                     <output>${project.basedir}/java8-okhttp-gson</output>
                                     <groupId>com.sphereon.sdk</groupId>
-                                    <artifactId>blockchain-proof-sdk-java8</artifactId>
+                                    <artifactId>blockchain-proof-sdk-java8-okhttp-gson</artifactId>
                                     <artifactVersion>${project.version}</artifactVersion>
                                     <addCompileSourceRoot>true</addCompileSourceRoot>
                                     <apiPackage>${sdk-package}.api</apiPackage>

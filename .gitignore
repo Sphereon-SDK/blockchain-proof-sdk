@@ -1,3 +1,9 @@
+#Project sources
+src/main
+src/Sphereon.SDK.Blockchain.Proof
+javascript/src
+htmldocs/index.html
+
 # Visual Studio
 .vs/
 bin/
