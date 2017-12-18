@@ -28,7 +28,7 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
         /// Create a new configuration
         /// </summary>
         /// <remarks>
-        /// 
+        /// Create a new configuration
         /// </remarks>
         /// <exception cref="Sphereon.SDK.Blockchain.Proof.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="request">Create a new Proof of Existence context using the provided entity settings</param>
@@ -39,17 +39,17 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
         /// Create a new configuration
         /// </summary>
         /// <remarks>
-        /// 
+        /// Create a new configuration
         /// </remarks>
         /// <exception cref="Sphereon.SDK.Blockchain.Proof.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="request">Create a new Proof of Existence context using the provided entity settings</param>
         /// <returns>ApiResponse of ConfigurationResponse</returns>
         ApiResponse<ConfigurationResponse> CreateConfigurationWithHttpInfo (CreateConfiguration request);
         /// <summary>
-        /// Get the settings for registration/verification
+        /// Get configuration
         /// </summary>
         /// <remarks>
-        /// 
+        /// Get the configuration for registration/verification
         /// </remarks>
         /// <exception cref="Sphereon.SDK.Blockchain.Proof.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="configName">The configuration name this operation</param>
@@ -57,10 +57,10 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
         ConfigurationResponse GetConfiguration (string configName);
 
         /// <summary>
-        /// Get the settings for registration/verification
+        /// Get configuration
         /// </summary>
         /// <remarks>
-        /// 
+        /// Get the configuration for registration/verification
         /// </remarks>
         /// <exception cref="Sphereon.SDK.Blockchain.Proof.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="configName">The configuration name this operation</param>
@@ -72,7 +72,7 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
         /// Create a new configuration
         /// </summary>
         /// <remarks>
-        /// 
+        /// Create a new configuration
         /// </remarks>
         /// <exception cref="Sphereon.SDK.Blockchain.Proof.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="request">Create a new Proof of Existence context using the provided entity settings</param>
@@ -83,17 +83,17 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
         /// Create a new configuration
         /// </summary>
         /// <remarks>
-        /// 
+        /// Create a new configuration
         /// </remarks>
         /// <exception cref="Sphereon.SDK.Blockchain.Proof.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="request">Create a new Proof of Existence context using the provided entity settings</param>
         /// <returns>Task of ApiResponse (ConfigurationResponse)</returns>
         System.Threading.Tasks.Task<ApiResponse<ConfigurationResponse>> CreateConfigurationAsyncWithHttpInfo (CreateConfiguration request);
         /// <summary>
-        /// Get the settings for registration/verification
+        /// Get configuration
         /// </summary>
         /// <remarks>
-        /// 
+        /// Get the configuration for registration/verification
         /// </remarks>
         /// <exception cref="Sphereon.SDK.Blockchain.Proof.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="configName">The configuration name this operation</param>
@@ -101,10 +101,10 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
         System.Threading.Tasks.Task<ConfigurationResponse> GetConfigurationAsync (string configName);
 
         /// <summary>
-        /// Get the settings for registration/verification
+        /// Get configuration
         /// </summary>
         /// <remarks>
-        /// 
+        /// Get the configuration for registration/verification
         /// </remarks>
         /// <exception cref="Sphereon.SDK.Blockchain.Proof.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="configName">The configuration name this operation</param>
@@ -223,7 +223,7 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
         }
 
         /// <summary>
-        /// Create a new configuration 
+        /// Create a new configuration Create a new configuration
         /// </summary>
         /// <exception cref="Sphereon.SDK.Blockchain.Proof.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="request">Create a new Proof of Existence context using the provided entity settings</param>
@@ -235,7 +235,7 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
         }
 
         /// <summary>
-        /// Create a new configuration 
+        /// Create a new configuration Create a new configuration
         /// </summary>
         /// <exception cref="Sphereon.SDK.Blockchain.Proof.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="request">Create a new Proof of Existence context using the provided entity settings</param>
@@ -246,7 +246,7 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
             if (request == null)
                 throw new ApiException(400, "Missing required parameter 'request' when calling ConfigurationApi->CreateConfiguration");
 
-            var localVarPath = "/blockchain/proof/0.9/existence/config";
+            var localVarPath = "/blockchain/proof/0.9/config";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new Dictionary<String, String>();
             var localVarHeaderParams = new Dictionary<String, String>(Configuration.DefaultHeader);
@@ -303,7 +303,7 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
         }
 
         /// <summary>
-        /// Create a new configuration 
+        /// Create a new configuration Create a new configuration
         /// </summary>
         /// <exception cref="Sphereon.SDK.Blockchain.Proof.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="request">Create a new Proof of Existence context using the provided entity settings</param>
@@ -316,7 +316,7 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
         }
 
         /// <summary>
-        /// Create a new configuration 
+        /// Create a new configuration Create a new configuration
         /// </summary>
         /// <exception cref="Sphereon.SDK.Blockchain.Proof.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="request">Create a new Proof of Existence context using the provided entity settings</param>
@@ -327,7 +327,7 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
             if (request == null)
                 throw new ApiException(400, "Missing required parameter 'request' when calling ConfigurationApi->CreateConfiguration");
 
-            var localVarPath = "/blockchain/proof/0.9/existence/config";
+            var localVarPath = "/blockchain/proof/0.9/config";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new Dictionary<String, String>();
             var localVarHeaderParams = new Dictionary<String, String>(Configuration.DefaultHeader);
@@ -384,7 +384,7 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
         }
 
         /// <summary>
-        /// Get the settings for registration/verification 
+        /// Get configuration Get the configuration for registration/verification
         /// </summary>
         /// <exception cref="Sphereon.SDK.Blockchain.Proof.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="configName">The configuration name this operation</param>
@@ -396,7 +396,7 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
         }
 
         /// <summary>
-        /// Get the settings for registration/verification 
+        /// Get configuration Get the configuration for registration/verification
         /// </summary>
         /// <exception cref="Sphereon.SDK.Blockchain.Proof.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="configName">The configuration name this operation</param>
@@ -407,7 +407,7 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
             if (configName == null)
                 throw new ApiException(400, "Missing required parameter 'configName' when calling ConfigurationApi->GetConfiguration");
 
-            var localVarPath = "/blockchain/proof/0.9/existence/config/{configName}";
+            var localVarPath = "/blockchain/proof/0.9/config/{configName}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new Dictionary<String, String>();
             var localVarHeaderParams = new Dictionary<String, String>(Configuration.DefaultHeader);
@@ -457,7 +457,7 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
         }
 
         /// <summary>
-        /// Get the settings for registration/verification 
+        /// Get configuration Get the configuration for registration/verification
         /// </summary>
         /// <exception cref="Sphereon.SDK.Blockchain.Proof.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="configName">The configuration name this operation</param>
@@ -470,7 +470,7 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
         }
 
         /// <summary>
-        /// Get the settings for registration/verification 
+        /// Get configuration Get the configuration for registration/verification
         /// </summary>
         /// <exception cref="Sphereon.SDK.Blockchain.Proof.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="configName">The configuration name this operation</param>
@@ -481,7 +481,7 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
             if (configName == null)
                 throw new ApiException(400, "Missing required parameter 'configName' when calling ConfigurationApi->GetConfiguration");
 
-            var localVarPath = "/blockchain/proof/0.9/existence/config/{configName}";
+            var localVarPath = "/blockchain/proof/0.9/config/{configName}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new Dictionary<String, String>();
             var localVarHeaderParams = new Dictionary<String, String>(Configuration.DefaultHeader);

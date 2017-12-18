@@ -58,6 +58,7 @@
 
     /**
      * Verify content
+     * Verify content. Please provide the content in the request. You also have to provide whether you have hashed the content yourself, or whether is should be done on the server side
      * @param {String} configName The configName for this operation
      * @param {module:SphereonSDKBlockchainProof/model/ContentRequest} existence Verify content using the current settings
      * @param {module:SphereonSDKBlockchainProof/api/VerificationApi~verifyUsingContentCallback} callback The callback function, accepting three arguments: error, data, response
@@ -108,8 +109,8 @@
      */
 
     /**
-     * Verify content using Stream Locations from the Storage API
-     * Verify content by supplying a file or some other binary data. Hashing will be done on the server side
+     * Verify hash using the Storage API
+     * Verify a hash of file/blob by supplying a Stream location of the Storage API. This Stream Location maps to a location of a file/blob on some remote cloud storage. Hashing will be done on the server side Please note that the binary data itself will not be stored, only the hash. Use the registerUsingContent endpoint if you&#39;d like to store content
      * @param {String} configName The context for this operation
      * @param {Array.<module:SphereonSDKBlockchainProof/model/StreamLocation>} streamLocations The stream locations on storage
      * @param {module:SphereonSDKBlockchainProof/api/VerificationApi~verifyUsingLocationCallback} callback The callback function, accepting three arguments: error, data, response
@@ -160,8 +161,8 @@
      */
 
     /**
-     * Verify content using a bytestream/file
-     * Verify content by supplying a file or some other binary data. Hashing will be done on the server side
+     * Verify bytestream/file hash
+     * Verify a hash of content by supplying a file or some other binary data. Hashing will be done on the server side. Please note that the binary data itself will not be stored, only the hash. Use the registerUsingContent endpoint if you&#39;d like to store content
      * @param {String} configName The configuration name this operation
      * @param {File} stream The binary data (not hashed). Hashing will be done on the server side. The binary data will not be stored
      * @param {module:SphereonSDKBlockchainProof/api/VerificationApi~verifyUsingStreamCallback} callback The callback function, accepting three arguments: error, data, response

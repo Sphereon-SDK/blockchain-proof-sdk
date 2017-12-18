@@ -5,8 +5,8 @@ All URIs are relative to *https://gw-dev.api.cloud.sphereon.com*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**RegisterUsingContent**](RegistrationApi.md#registerusingcontent) | **PUT** /blockchain/proof/0.9/existence/{configName}/content | Register content
-[**RegisterUsingLocation**](RegistrationApi.md#registerusinglocation) | **PUT** /blockchain/proof/0.9/existence/{configName}/streams/location | Register content using a Stream Location from Storage API
-[**RegisterUsingStream**](RegistrationApi.md#registerusingstream) | **PUT** /blockchain/proof/0.9/existence/{configName}/streams/multipart | Register content using a bytestream/file
+[**RegisterUsingLocation**](RegistrationApi.md#registerusinglocation) | **PUT** /blockchain/proof/0.9/existence/{configName}/streams/location | Register hash using the Storage API
+[**RegisterUsingStream**](RegistrationApi.md#registerusingstream) | **PUT** /blockchain/proof/0.9/existence/{configName}/streams/multipart | Register bytestream/file hash
 
 
 <a name="registerusingcontent"></a>
@@ -14,6 +14,8 @@ Method | HTTP request | Description
 > RegisterContentResponse RegisterUsingContent (string configName, ContentRequest existence)
 
 Register content
+
+Register content. Please provide the content in the request. You also have to provide whether you have hashed the content yourself, or whether is should be done on the server side
 
 ### Example
 ```csharp
@@ -77,9 +79,9 @@ Name | Type | Description  | Notes
 # **RegisterUsingLocation**
 > RegisterContentResponse RegisterUsingLocation (string configName, List<StreamLocation> streamLocations)
 
-Register content using a Stream Location from Storage API
+Register hash using the Storage API
 
-Register content by supplying a file or some other binary data. Hashing will be done on the server side
+Register a hash of file/blob by supplying a Stream location of the Storage API. This Stream Location maps to a location of a file/blob on some remote cloud storage. Hashing will be done on the server side Please note that the binary data itself will not be stored, only the hash. Use the registerUsingContent endpoint if you'd like to store content
 
 ### Example
 ```csharp
@@ -104,7 +106,7 @@ namespace Example
 
             try
             {
-                // Register content using a Stream Location from Storage API
+                // Register hash using the Storage API
                 RegisterContentResponse result = apiInstance.RegisterUsingLocation(configName, streamLocations);
                 Debug.WriteLine(result);
             }
@@ -143,9 +145,9 @@ Name | Type | Description  | Notes
 # **RegisterUsingStream**
 > RegisterContentResponse RegisterUsingStream (string configName, System.IO.Stream stream)
 
-Register content using a bytestream/file
+Register bytestream/file hash
 
-Register content by supplying a file or some other binary data. Hashing will be done on the server side
+Register a hash of content by supplying a file or some other binary data. Hashing will be done on the server side. Please note that the binary data itself will not be stored, only the hash. Use the registerUsingContent endpoint if you'd like to store content
 
 ### Example
 ```csharp
@@ -170,7 +172,7 @@ namespace Example
 
             try
             {
-                // Register content using a bytestream/file
+                // Register bytestream/file hash
                 RegisterContentResponse result = apiInstance.RegisterUsingStream(configName, stream);
                 Debug.WriteLine(result);
             }

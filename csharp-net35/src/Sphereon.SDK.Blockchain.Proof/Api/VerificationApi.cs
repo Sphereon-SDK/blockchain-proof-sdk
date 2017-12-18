@@ -28,7 +28,7 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
         /// Verify content
         /// </summary>
         /// <remarks>
-        /// 
+        /// Verify content. Please provide the content in the request. You also have to provide whether you have hashed the content yourself, or whether is should be done on the server side
         /// </remarks>
         /// <exception cref="Sphereon.SDK.Blockchain.Proof.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="configName">The configName for this operation</param>
@@ -40,7 +40,7 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
         /// Verify content
         /// </summary>
         /// <remarks>
-        /// 
+        /// Verify content. Please provide the content in the request. You also have to provide whether you have hashed the content yourself, or whether is should be done on the server side
         /// </remarks>
         /// <exception cref="Sphereon.SDK.Blockchain.Proof.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="configName">The configName for this operation</param>
@@ -48,10 +48,10 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
         /// <returns>ApiResponse of VerifyContentResponse</returns>
         ApiResponse<VerifyContentResponse> VerifyUsingContentWithHttpInfo (string configName, ContentRequest existence);
         /// <summary>
-        /// Verify content using Stream Locations from the Storage API
+        /// Verify hash using the Storage API
         /// </summary>
         /// <remarks>
-        /// Verify content by supplying a file or some other binary data. Hashing will be done on the server side
+        /// Verify a hash of file/blob by supplying a Stream location of the Storage API. This Stream Location maps to a location of a file/blob on some remote cloud storage. Hashing will be done on the server side Please note that the binary data itself will not be stored, only the hash. Use the registerUsingContent endpoint if you&#39;d like to store content
         /// </remarks>
         /// <exception cref="Sphereon.SDK.Blockchain.Proof.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="configName">The context for this operation</param>
@@ -60,10 +60,10 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
         VerifyContentResponse VerifyUsingLocation (string configName, List<StreamLocation> streamLocations);
 
         /// <summary>
-        /// Verify content using Stream Locations from the Storage API
+        /// Verify hash using the Storage API
         /// </summary>
         /// <remarks>
-        /// Verify content by supplying a file or some other binary data. Hashing will be done on the server side
+        /// Verify a hash of file/blob by supplying a Stream location of the Storage API. This Stream Location maps to a location of a file/blob on some remote cloud storage. Hashing will be done on the server side Please note that the binary data itself will not be stored, only the hash. Use the registerUsingContent endpoint if you&#39;d like to store content
         /// </remarks>
         /// <exception cref="Sphereon.SDK.Blockchain.Proof.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="configName">The context for this operation</param>
@@ -71,10 +71,10 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
         /// <returns>ApiResponse of VerifyContentResponse</returns>
         ApiResponse<VerifyContentResponse> VerifyUsingLocationWithHttpInfo (string configName, List<StreamLocation> streamLocations);
         /// <summary>
-        /// Verify content using a bytestream/file
+        /// Verify bytestream/file hash
         /// </summary>
         /// <remarks>
-        /// Verify content by supplying a file or some other binary data. Hashing will be done on the server side
+        /// Verify a hash of content by supplying a file or some other binary data. Hashing will be done on the server side. Please note that the binary data itself will not be stored, only the hash. Use the registerUsingContent endpoint if you&#39;d like to store content
         /// </remarks>
         /// <exception cref="Sphereon.SDK.Blockchain.Proof.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="configName">The configuration name this operation</param>
@@ -83,10 +83,10 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
         VerifyContentResponse VerifyUsingStream (string configName, System.IO.Stream stream);
 
         /// <summary>
-        /// Verify content using a bytestream/file
+        /// Verify bytestream/file hash
         /// </summary>
         /// <remarks>
-        /// Verify content by supplying a file or some other binary data. Hashing will be done on the server side
+        /// Verify a hash of content by supplying a file or some other binary data. Hashing will be done on the server side. Please note that the binary data itself will not be stored, only the hash. Use the registerUsingContent endpoint if you&#39;d like to store content
         /// </remarks>
         /// <exception cref="Sphereon.SDK.Blockchain.Proof.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="configName">The configuration name this operation</param>
@@ -206,7 +206,7 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
         }
 
         /// <summary>
-        /// Verify content 
+        /// Verify content Verify content. Please provide the content in the request. You also have to provide whether you have hashed the content yourself, or whether is should be done on the server side
         /// </summary>
         /// <exception cref="Sphereon.SDK.Blockchain.Proof.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="configName">The configName for this operation</param>
@@ -219,7 +219,7 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
         }
 
         /// <summary>
-        /// Verify content 
+        /// Verify content Verify content. Please provide the content in the request. You also have to provide whether you have hashed the content yourself, or whether is should be done on the server side
         /// </summary>
         /// <exception cref="Sphereon.SDK.Blockchain.Proof.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="configName">The configName for this operation</param>
@@ -292,7 +292,7 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
         }
 
         /// <summary>
-        /// Verify content using Stream Locations from the Storage API Verify content by supplying a file or some other binary data. Hashing will be done on the server side
+        /// Verify hash using the Storage API Verify a hash of file/blob by supplying a Stream location of the Storage API. This Stream Location maps to a location of a file/blob on some remote cloud storage. Hashing will be done on the server side Please note that the binary data itself will not be stored, only the hash. Use the registerUsingContent endpoint if you&#39;d like to store content
         /// </summary>
         /// <exception cref="Sphereon.SDK.Blockchain.Proof.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="configName">The context for this operation</param>
@@ -305,7 +305,7 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
         }
 
         /// <summary>
-        /// Verify content using Stream Locations from the Storage API Verify content by supplying a file or some other binary data. Hashing will be done on the server side
+        /// Verify hash using the Storage API Verify a hash of file/blob by supplying a Stream location of the Storage API. This Stream Location maps to a location of a file/blob on some remote cloud storage. Hashing will be done on the server side Please note that the binary data itself will not be stored, only the hash. Use the registerUsingContent endpoint if you&#39;d like to store content
         /// </summary>
         /// <exception cref="Sphereon.SDK.Blockchain.Proof.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="configName">The context for this operation</param>
@@ -378,7 +378,7 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
         }
 
         /// <summary>
-        /// Verify content using a bytestream/file Verify content by supplying a file or some other binary data. Hashing will be done on the server side
+        /// Verify bytestream/file hash Verify a hash of content by supplying a file or some other binary data. Hashing will be done on the server side. Please note that the binary data itself will not be stored, only the hash. Use the registerUsingContent endpoint if you&#39;d like to store content
         /// </summary>
         /// <exception cref="Sphereon.SDK.Blockchain.Proof.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="configName">The configuration name this operation</param>
@@ -391,7 +391,7 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
         }
 
         /// <summary>
-        /// Verify content using a bytestream/file Verify content by supplying a file or some other binary data. Hashing will be done on the server side
+        /// Verify bytestream/file hash Verify a hash of content by supplying a file or some other binary data. Hashing will be done on the server side. Please note that the binary data itself will not be stored, only the hash. Use the registerUsingContent endpoint if you&#39;d like to store content
         /// </summary>
         /// <exception cref="Sphereon.SDK.Blockchain.Proof.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="configName">The configuration name this operation</param>

@@ -4,13 +4,15 @@ All URIs are relative to *https://gw-dev.api.cloud.sphereon.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**createConfiguration**](ConfigurationApi.md#createConfiguration) | **POST** blockchain/proof/0.9/existence/config | Create a new configuration
-[**getConfiguration**](ConfigurationApi.md#getConfiguration) | **GET** blockchain/proof/0.9/existence/config/{configName} | Get the settings for registration/verification
+[**createConfiguration**](ConfigurationApi.md#createConfiguration) | **POST** blockchain/proof/0.9/config | Create a new configuration
+[**getConfiguration**](ConfigurationApi.md#getConfiguration) | **GET** blockchain/proof/0.9/config/{configName} | Get configuration
 
 
 <a name="createConfiguration"></a>
 # **createConfiguration**
 > ConfigurationResponse createConfiguration(request)
+
+Create a new configuration
 
 Create a new configuration
 
@@ -63,7 +65,9 @@ Name | Type | Description  | Notes
 # **getConfiguration**
 > ConfigurationResponse getConfiguration(configName)
 
-Get the settings for registration/verification
+Get configuration
+
+Get the configuration for registration/verification
 
 ### Example
 ```java

@@ -9,19 +9,14 @@
  */
 
 using System;
-using System.IO;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Reflection;
-using RestSharp;
+using System.Text;
+using System.Threading;
 using NUnit.Framework;
-
-using Sphereon.SDK.Blockchain.Proof.Client;
 using Sphereon.SDK.Blockchain.Proof.Api;
+using Sphereon.SDK.Blockchain.Proof.Client;
 using Sphereon.SDK.Blockchain.Proof.Model;
 
-namespace Sphereon.SDK.Blockchain.Proof.Test
+namespace Sphereon.SDK.Blockchain.Proof.Test.Api
 {
     /// <summary>
     ///  Class for testing RegistrationApi
@@ -31,9 +26,10 @@ namespace Sphereon.SDK.Blockchain.Proof.Test
     /// Please update the test case below to test the API endpoint.
     /// </remarks>
     [TestFixture]
-    public class RegistrationApiTests
+    public class RegistrationApiTests : AbstractTests
     {
-        private RegistrationApi instance;
+        private RegistrationApi _registrationApi;
+        private VerificationApi _verificationApi;
 
         /// <summary>
         /// Setup before each unit test
@@ -41,7 +37,19 @@ namespace Sphereon.SDK.Blockchain.Proof.Test
         [SetUp]
         public void Init()
         {
-            instance = new RegistrationApi();
+            var apiConfig = new Configuration
+            {
+                AccessToken = FixedAccessToken,
+                Timeout = 40000
+            };
+            _registrationApi = new RegistrationApi
+            {
+                Configuration = apiConfig
+            };
+            _verificationApi = new VerificationApi
+            {
+                Configuration = apiConfig
+            };
         }
 
         /// <summary>
@@ -50,59 +58,131 @@ namespace Sphereon.SDK.Blockchain.Proof.Test
         [TearDown]
         public void Cleanup()
         {
-
         }
 
         /// <summary>
-        /// Test an instance of RegistrationApi
+        /// Test CreateConfiguration
         /// </summary>
-        [Test]
-        public void InstanceTest()
+        [Test, Order(10)]
+        public void CreateConfigurationTest()
         {
-            // TODO uncomment below to test 'IsInstanceOfType' RegistrationApi
-            //Assert.IsInstanceOfType(typeof(RegistrationApi), instance, "instance is a RegistrationApi");
+            CreateProofAndSettingsChain();
         }
 
-        
+        /// <summary>
+        /// Test GetConfiguration
+        /// </summary>
+        [Test, Order(20)]
+        public void GetConfigurationTest()
+        {
+            var configurationResponse = _configurationApi.GetConfiguration(UnitTestConfigName);
+            Assert.NotNull(configurationResponse);
+            var storedSettings = configurationResponse.StoredSettings;
+            Assert.NotNull(storedSettings);
+            Assert.NotNull(storedSettings.Context);
+            Assert.NotNull(storedSettings.ChainSettings);
+            Assert.NotNull(storedSettings.ProofChain);
+            Assert.NotNull(storedSettings.SettingsChain);
+            Assert.NotNull(storedSettings.ChainConfiguration);
+            Assert.NotNull(storedSettings.ChainSettings.ProofChainId);
+            Assert.NotNull(storedSettings.ChainSettings.HashAlgorithm);
+            Assert.IsTrue(storedSettings.SettingsChain.Id == SettingsChainId);
+            Assert.IsTrue(storedSettings.ProofChain.Id == ProofChainId);
+        }
+
+
         /// <summary>
         /// Test RegisterUsingContent
         /// </summary>
-        [Test]
+        [Test, Order(30)]
         public void RegisterUsingContentTest()
         {
-            // TODO uncomment below to test the method and replace null with proper value
-            //string configName = null;
-            //ContentRequest existence = null;
-            //var response = instance.RegisterUsingContent(configName, existence);
-            //Assert.IsInstanceOf<RegisterContentResponse> (response, "response is RegisterContentResponse");
+            var requestId = Guid.NewGuid().ToString();
+            RegisteredContent = Encoding.Default.GetBytes("test-" + requestId);
+            var contentRequest = new ContentRequest(Content: RegisteredContent,
+                HashProvider: ContentRequest.HashProviderEnum.SERVER,
+                RequestId: requestId
+            );
+            var response = _registrationApi.RegisterUsingContent(UnitTestConfigName, contentRequest);
+            Assert.IsInstanceOf<RegisterContentResponse>(response, "response is RegisterContentResponse");
+            Assert.NotNull(response);
+            Assert.True(response.RegistrationState == RegisterContentResponse.RegistrationStateEnum.REGISTERED
+                        || response.RegistrationState == RegisterContentResponse.RegistrationStateEnum.PENDING);
+            Assert.NotNull(response.ProofChain);
+            Assert.NotNull(response.FileChain);
+            Assert.AreEqual(contentRequest.RequestId, response.RequestId);
         }
-        
+
         /// <summary>
         /// Test RegisterUsingLocation
         /// </summary>
-        [Test]
+        [Test, Order(40)]
         public void RegisterUsingLocationTest()
         {
             // TODO uncomment below to test the method and replace null with proper value
             //string configName = null;
             //List<StreamLocation> streamLocations = null;
-            //var response = instance.RegisterUsingLocation(configName, streamLocations);
+            //var response = registrationApi.RegisterUsingLocation(configName, streamLocations);
             //Assert.IsInstanceOf<RegisterContentResponse> (response, "response is RegisterContentResponse");
         }
-        
+
         /// <summary>
         /// Test RegisterUsingStream
         /// </summary>
-        [Test]
+        [Test, Order(50)]
         public void RegisterUsingStreamTest()
         {
             // TODO uncomment below to test the method and replace null with proper value
             //string configName = null;
             //System.IO.Stream stream = null;
-            //var response = instance.RegisterUsingStream(configName, stream);
+            //var response = registrationApi.RegisterUsingStream(configName, stream);
             //Assert.IsInstanceOf<RegisterContentResponse> (response, "response is RegisterContentResponse");
         }
-        
-    }
 
+        /// <summary>
+        /// Test VerifyUsingContent
+        /// </summary>
+        [Test, Order(60)]
+        public void VerifyUsingContentTest()
+        {
+            Thread.Sleep(15000);
+            var contentRequest = new ContentRequest(RequestId: "anything",
+                HashProvider: ContentRequest.HashProviderEnum.SERVER,
+                Content: RegisteredContent);
+            var response = _verificationApi.VerifyUsingContent(UnitTestConfigName, contentRequest);
+            Assert.IsInstanceOf<VerifyContentResponse>(response, "response is VerifyContentResponse");
+            Assert.NotNull(response);
+            Assert.True(response.RegistrationState == VerifyContentResponse.RegistrationStateEnum.REGISTERED
+                        || response.RegistrationState == VerifyContentResponse.RegistrationStateEnum.PENDING);
+            Assert.NotNull(response.ProofChain);
+            Assert.NotNull(response.FileChain);
+            Assert.AreEqual(contentRequest.RequestId, response.RequestId);
+        }
+
+        /// <summary>
+        /// Test VerifyUsingLocation
+        /// </summary>
+        [Test, Order(70)]
+        public void VerifyUsingLocationTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //string configName = null;
+            //List<StreamLocation> streamLocations = null;
+            //var response = _verificationApi.VerifyUsingLocation(configName, streamLocations);
+            //Assert.IsInstanceOf<VerifyContentResponse> (response, "response is VerifyContentResponse");
+        }
+
+        /// <summary>
+        /// Test VerifyUsingStream
+        /// </summary>
+        [Test, Order(80)]
+        public void VerifyUsingStreamTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //string configName = null;
+            //System.IO.Stream stream = null;
+            //var response = _verificationApi.VerifyUsingStream(configName, stream);
+            //Assert.IsInstanceOf<VerifyContentResponse> (response, "response is VerifyContentResponse");
+        }
+    }
 }

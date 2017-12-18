@@ -4,13 +4,15 @@ All URIs are relative to *https://gw-dev.api.cloud.sphereon.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CreateConfiguration**](ConfigurationApi.md#createconfiguration) | **POST** /blockchain/proof/0.9/existence/config | Create a new configuration
-[**GetConfiguration**](ConfigurationApi.md#getconfiguration) | **GET** /blockchain/proof/0.9/existence/config/{configName} | Get the settings for registration/verification
+[**CreateConfiguration**](ConfigurationApi.md#createconfiguration) | **POST** /blockchain/proof/0.9/config | Create a new configuration
+[**GetConfiguration**](ConfigurationApi.md#getconfiguration) | **GET** /blockchain/proof/0.9/config/{configName} | Get configuration
 
 
 <a name="createconfiguration"></a>
 # **CreateConfiguration**
 > ConfigurationResponse CreateConfiguration (CreateConfiguration request)
+
+Create a new configuration
 
 Create a new configuration
 
@@ -74,7 +76,9 @@ Name | Type | Description  | Notes
 # **GetConfiguration**
 > ConfigurationResponse GetConfiguration (string configName)
 
-Get the settings for registration/verification
+Get configuration
+
+Get the configuration for registration/verification
 
 ### Example
 ```csharp
@@ -98,7 +102,7 @@ namespace Example
 
             try
             {
-                // Get the settings for registration/verification
+                // Get configuration
                 ConfigurationResponse result = apiInstance.GetConfiguration(configName);
                 Debug.WriteLine(result);
             }
