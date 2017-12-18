@@ -37,13 +37,6 @@ Contact: dev@sphereon.com
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="nunit.framework, Version=3.9.0.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\NUnit.3.9.0\lib\net45\nunit.framework.dll</HintPath>
-    </Reference>
-    <Reference Include="RestSharp, Version=100.0.0.0, Culture=neutral, PublicKeyToken=598062e77f915f75, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\RestSharpSigned.105.1.0\lib\net45\RestSharp.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -59,30 +52,31 @@ Contact: dev@sphereon.com
       <HintPath Condition="Exists('..\..\packages')">..\..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
       <HintPath Condition="Exists('..\..\vendor')">..\..\vendor\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="RestSharpSigned">
+      <HintPath Condition="Exists('$(SolutionDir)\packages')">$(SolutionDir)\packages\RestSharpSigned.105.1.0\lib\net45\RestSharp.dll</HintPath>
+      <HintPath Condition="Exists('..\packages')">..\packages\RestSharpSigned.105.1.0\lib\net45\RestSharp.dll</HintPath>
+      <HintPath Condition="Exists('..\..\packages')">..\..\packages\RestSharpSigned.105.1.0\lib\net45\RestSharp.dll</HintPath>
+      <HintPath Condition="Exists('..\..\vendor')">..\..\vendor\RestSharpSigned.105.1.0\lib\net45\RestSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework">
+      <HintPath Condition="Exists('$(SolutionDir)\packages')">$(SolutionDir)\packages\NUnit.3.9.0\lib\net45\nunit.framework.dll</HintPath>
+      <HintPath Condition="Exists('..\packages')">..\packages\NUnit.3.9.0\lib\net45\nunit.framework.dll</HintPath>
+      <HintPath Condition="Exists('..\..\packages')">..\..\packages\NUnit.3.9.0\lib\net45\nunit.framework.dll</HintPath>
+      <HintPath Condition="Exists('..\..\vendor')">..\..\vendor\NUnit.3.9.0\lib\nunit.framework.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Api\AbstractTests.cs" />
-    <Compile Include="Api\RegistrationApiTests.cs" />
-    <Compile Include="Model\ChainConfigurationTests.cs" />
-    <Compile Include="Model\ChainSettingsTests.cs" />
-    <Compile Include="Model\CommittedChainTests.cs" />
-    <Compile Include="Model\ConfigurationResponseTests.cs" />
-    <Compile Include="Model\ContentRequestTests.cs" />
-    <Compile Include="Model\CreateConfigurationTests.cs" />
-    <Compile Include="Model\ErrorResponseTests.cs" />
-    <Compile Include="Model\ErrorTests.cs" />
-    <Compile Include="Model\RegisterContentResponseTests.cs" />
-    <Compile Include="Model\StoredSettingsTests.cs" />
-    <Compile Include="Model\StreamLocationTests.cs" />
-    <Compile Include="Model\VerifyContentResponseTests.cs" />
+    <Compile Include="**\*.cs" Exclude="obj\**" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <Import Project="$(MsBuildToolsPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <ProjectReference Include="..\Sphereon.SDK.Blockchain.Proof\Sphereon.SDK.Blockchain.Proof.csproj">
-      <Project>{6B4967A6-B5F6-4FCD-83A5-B3B792710F5C}</Project>
+      <Project>{7A362C3B-8910-4AAE-A576-B6165226BBA8}</Project>
       <Name>Sphereon.SDK.Blockchain.Proof</Name>
     </ProjectReference>
   </ItemGroup>

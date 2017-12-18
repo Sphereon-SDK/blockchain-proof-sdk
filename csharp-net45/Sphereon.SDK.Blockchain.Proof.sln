@@ -2,7 +2,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27004.2002
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sphereon.SDK.Blockchain.Proof", "src\Sphereon.SDK.Blockchain.Proof\Sphereon.SDK.Blockchain.Proof.csproj", "{6B4967A6-B5F6-4FCD-83A5-B3B792710F5C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sphereon.SDK.Blockchain.Proof", "src\Sphereon.SDK.Blockchain.Proof\Sphereon.SDK.Blockchain.Proof.csproj", "{7A362C3B-8910-4AAE-A576-B6165226BBA8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sphereon.SDK.Blockchain.Proof.Test", "src\Sphereon.SDK.Blockchain.Proof.Test\Sphereon.SDK.Blockchain.Proof.Test.csproj", "{19F1DEBC-DE5E-4517-8062-F000CD499087}"
 EndProject
@@ -12,10 +12,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{6B4967A6-B5F6-4FCD-83A5-B3B792710F5C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6B4967A6-B5F6-4FCD-83A5-B3B792710F5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6B4967A6-B5F6-4FCD-83A5-B3B792710F5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6B4967A6-B5F6-4FCD-83A5-B3B792710F5C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A362C3B-8910-4AAE-A576-B6165226BBA8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A362C3B-8910-4AAE-A576-B6165226BBA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A362C3B-8910-4AAE-A576-B6165226BBA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A362C3B-8910-4AAE-A576-B6165226BBA8}.Release|Any CPU.Build.0 = Release|Any CPU
 		{19F1DEBC-DE5E-4517-8062-F000CD499087}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{19F1DEBC-DE5E-4517-8062-F000CD499087}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{19F1DEBC-DE5E-4517-8062-F000CD499087}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -25,6 +25,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {3712DAAB-3EB3-4E3F-B0BA-F8ACAD930008}
+		SolutionGuid = {B83B35A1-8538-48FF-A726-AA17ABBE9D00}
 	EndGlobalSection
 EndGlobal
