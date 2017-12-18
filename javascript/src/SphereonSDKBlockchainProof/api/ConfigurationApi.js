@@ -58,6 +58,7 @@
 
     /**
      * Create a new configuration
+     * Create a new configuration
      * @param {module:SphereonSDKBlockchainProof/model/CreateConfiguration} request Create a new Proof of Existence context using the provided entity settings
      * @param {module:SphereonSDKBlockchainProof/api/ConfigurationApi~createConfigurationCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {@link module:SphereonSDKBlockchainProof/model/ConfigurationResponse}
@@ -86,7 +87,7 @@
       var returnType = ConfigurationResponse;
 
       return this.apiClient.callApi(
-        '/blockchain/proof/0.9/existence/config', 'POST',
+        '/blockchain/proof/0.9/config', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, callback
       );
@@ -101,7 +102,8 @@
      */
 
     /**
-     * Get the settings for registration/verification
+     * Get configuration
+     * Get the configuration for registration/verification
      * @param {String} configName The configuration name this operation
      * @param {module:SphereonSDKBlockchainProof/api/ConfigurationApi~getConfigurationCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {@link module:SphereonSDKBlockchainProof/model/ConfigurationResponse}
@@ -131,7 +133,7 @@
       var returnType = ConfigurationResponse;
 
       return this.apiClient.callApi(
-        '/blockchain/proof/0.9/existence/config/{configName}', 'GET',
+        '/blockchain/proof/0.9/config/{configName}', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, callback
       );

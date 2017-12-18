@@ -5,8 +5,8 @@ All URIs are relative to *https://gw-dev.api.cloud.sphereon.com*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**registerUsingContent**](RegistrationApi.md#registerUsingContent) | **PUT** blockchain/proof/0.9/existence/{configName}/content | Register content
-[**registerUsingLocation**](RegistrationApi.md#registerUsingLocation) | **PUT** blockchain/proof/0.9/existence/{configName}/streams/location | Register content using a Stream Location from Storage API
-[**registerUsingStream**](RegistrationApi.md#registerUsingStream) | **PUT** blockchain/proof/0.9/existence/{configName}/streams/multipart | Register content using a bytestream/file
+[**registerUsingLocation**](RegistrationApi.md#registerUsingLocation) | **PUT** blockchain/proof/0.9/existence/{configName}/streams/location | Register hash using the Storage API
+[**registerUsingStream**](RegistrationApi.md#registerUsingStream) | **PUT** blockchain/proof/0.9/existence/{configName}/streams/multipart | Register bytestream/file hash
 
 
 <a name="registerUsingContent"></a>
@@ -14,6 +14,8 @@ Method | HTTP request | Description
 > RegisterContentResponse registerUsingContent(configName, existence)
 
 Register content
+
+Register content. Please provide the content in the request. You also have to provide whether you have hashed the content yourself, or whether is should be done on the server side
 
 ### Example
 ```java
@@ -66,9 +68,9 @@ Name | Type | Description  | Notes
 # **registerUsingLocation**
 > RegisterContentResponse registerUsingLocation(configName, streamLocations)
 
-Register content using a Stream Location from Storage API
+Register hash using the Storage API
 
-Register content by supplying a file or some other binary data. Hashing will be done on the server side
+Register a hash of file/blob by supplying a Stream location of the Storage API. This Stream Location maps to a location of a file/blob on some remote cloud storage. Hashing will be done on the server side Please note that the binary data itself will not be stored, only the hash. Use the registerUsingContent endpoint if you&#39;d like to store content
 
 ### Example
 ```java
@@ -121,9 +123,9 @@ Name | Type | Description  | Notes
 # **registerUsingStream**
 > RegisterContentResponse registerUsingStream(configName, stream)
 
-Register content using a bytestream/file
+Register bytestream/file hash
 
-Register content by supplying a file or some other binary data. Hashing will be done on the server side
+Register a hash of content by supplying a file or some other binary data. Hashing will be done on the server side. Please note that the binary data itself will not be stored, only the hash. Use the registerUsingContent endpoint if you&#39;d like to store content
 
 ### Example
 ```java

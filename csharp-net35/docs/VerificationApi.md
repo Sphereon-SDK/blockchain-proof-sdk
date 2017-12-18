@@ -5,8 +5,8 @@ All URIs are relative to *https://gw-dev.api.cloud.sphereon.com*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**VerifyUsingContent**](VerificationApi.md#verifyusingcontent) | **POST** /blockchain/proof/0.9/existence/{configName}/content | Verify content
-[**VerifyUsingLocation**](VerificationApi.md#verifyusinglocation) | **POST** /blockchain/proof/0.9/existence/{configName}/streams/location | Verify content using Stream Locations from the Storage API
-[**VerifyUsingStream**](VerificationApi.md#verifyusingstream) | **POST** /blockchain/proof/0.9/existence/{configName}/streams/multipart | Verify content using a bytestream/file
+[**VerifyUsingLocation**](VerificationApi.md#verifyusinglocation) | **POST** /blockchain/proof/0.9/existence/{configName}/streams/location | Verify hash using the Storage API
+[**VerifyUsingStream**](VerificationApi.md#verifyusingstream) | **POST** /blockchain/proof/0.9/existence/{configName}/streams/multipart | Verify bytestream/file hash
 
 
 <a name="verifyusingcontent"></a>
@@ -14,6 +14,8 @@ Method | HTTP request | Description
 > VerifyContentResponse VerifyUsingContent (string configName, ContentRequest existence)
 
 Verify content
+
+Verify content. Please provide the content in the request. You also have to provide whether you have hashed the content yourself, or whether is should be done on the server side
 
 ### Example
 ```csharp
@@ -77,9 +79,9 @@ Name | Type | Description  | Notes
 # **VerifyUsingLocation**
 > VerifyContentResponse VerifyUsingLocation (string configName, List<StreamLocation> streamLocations)
 
-Verify content using Stream Locations from the Storage API
+Verify hash using the Storage API
 
-Verify content by supplying a file or some other binary data. Hashing will be done on the server side
+Verify a hash of file/blob by supplying a Stream location of the Storage API. This Stream Location maps to a location of a file/blob on some remote cloud storage. Hashing will be done on the server side Please note that the binary data itself will not be stored, only the hash. Use the registerUsingContent endpoint if you'd like to store content
 
 ### Example
 ```csharp
@@ -104,7 +106,7 @@ namespace Example
 
             try
             {
-                // Verify content using Stream Locations from the Storage API
+                // Verify hash using the Storage API
                 VerifyContentResponse result = apiInstance.VerifyUsingLocation(configName, streamLocations);
                 Debug.WriteLine(result);
             }
@@ -143,9 +145,9 @@ Name | Type | Description  | Notes
 # **VerifyUsingStream**
 > VerifyContentResponse VerifyUsingStream (string configName, System.IO.Stream stream)
 
-Verify content using a bytestream/file
+Verify bytestream/file hash
 
-Verify content by supplying a file or some other binary data. Hashing will be done on the server side
+Verify a hash of content by supplying a file or some other binary data. Hashing will be done on the server side. Please note that the binary data itself will not be stored, only the hash. Use the registerUsingContent endpoint if you'd like to store content
 
 ### Example
 ```csharp
@@ -170,7 +172,7 @@ namespace Example
 
             try
             {
-                // Verify content using a bytestream/file
+                // Verify bytestream/file hash
                 VerifyContentResponse result = apiInstance.VerifyUsingStream(configName, stream);
                 Debug.WriteLine(result);
             }

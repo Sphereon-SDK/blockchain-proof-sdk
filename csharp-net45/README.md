@@ -72,7 +72,7 @@ namespace Example
             // Configure OAuth2 access token for authorization: oauth2schema
             Configuration.Default.AccessToken = "YOUR_ACCESS_TOKEN";
 
-            var apiInstance = new AllApi();
+            var apiInstance = new ConfigurationApi();
             var request = new CreateConfiguration(); // CreateConfiguration | Create a new Proof of Existence context using the provided entity settings
 
             try
@@ -83,7 +83,7 @@ namespace Example
             }
             catch (Exception e)
             {
-                Debug.Print("Exception when calling AllApi.CreateConfiguration: " + e.Message );
+                Debug.Print("Exception when calling ConfigurationApi.CreateConfiguration: " + e.Message );
             }
 
         }
@@ -98,22 +98,14 @@ All URIs are relative to *https://gw-dev.api.cloud.sphereon.com*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*AllApi* | [**CreateConfiguration**](docs/AllApi.md#createconfiguration) | **POST** /blockchain/proof/0.9/existence/config | Create a new configuration
-*AllApi* | [**GetConfiguration**](docs/AllApi.md#getconfiguration) | **GET** /blockchain/proof/0.9/existence/config/{configName} | Get the settings for registration/verification
-*AllApi* | [**RegisterUsingContent**](docs/AllApi.md#registerusingcontent) | **PUT** /blockchain/proof/0.9/existence/{configName}/content | Register content
-*AllApi* | [**RegisterUsingLocation**](docs/AllApi.md#registerusinglocation) | **PUT** /blockchain/proof/0.9/existence/{configName}/streams/location | Register content using a Stream Location from Storage API
-*AllApi* | [**RegisterUsingStream**](docs/AllApi.md#registerusingstream) | **PUT** /blockchain/proof/0.9/existence/{configName}/streams/multipart | Register content using a bytestream/file
-*AllApi* | [**VerifyUsingContent**](docs/AllApi.md#verifyusingcontent) | **POST** /blockchain/proof/0.9/existence/{configName}/content | Verify content
-*AllApi* | [**VerifyUsingLocation**](docs/AllApi.md#verifyusinglocation) | **POST** /blockchain/proof/0.9/existence/{configName}/streams/location | Verify content using Stream Locations from the Storage API
-*AllApi* | [**VerifyUsingStream**](docs/AllApi.md#verifyusingstream) | **POST** /blockchain/proof/0.9/existence/{configName}/streams/multipart | Verify content using a bytestream/file
-*ConfigurationApi* | [**CreateConfiguration**](docs/ConfigurationApi.md#createconfiguration) | **POST** /blockchain/proof/0.9/existence/config | Create a new configuration
-*ConfigurationApi* | [**GetConfiguration**](docs/ConfigurationApi.md#getconfiguration) | **GET** /blockchain/proof/0.9/existence/config/{configName} | Get the settings for registration/verification
+*ConfigurationApi* | [**CreateConfiguration**](docs/ConfigurationApi.md#createconfiguration) | **POST** /blockchain/proof/0.9/config | Create a new configuration
+*ConfigurationApi* | [**GetConfiguration**](docs/ConfigurationApi.md#getconfiguration) | **GET** /blockchain/proof/0.9/config/{configName} | Get configuration
 *RegistrationApi* | [**RegisterUsingContent**](docs/RegistrationApi.md#registerusingcontent) | **PUT** /blockchain/proof/0.9/existence/{configName}/content | Register content
-*RegistrationApi* | [**RegisterUsingLocation**](docs/RegistrationApi.md#registerusinglocation) | **PUT** /blockchain/proof/0.9/existence/{configName}/streams/location | Register content using a Stream Location from Storage API
-*RegistrationApi* | [**RegisterUsingStream**](docs/RegistrationApi.md#registerusingstream) | **PUT** /blockchain/proof/0.9/existence/{configName}/streams/multipart | Register content using a bytestream/file
+*RegistrationApi* | [**RegisterUsingLocation**](docs/RegistrationApi.md#registerusinglocation) | **PUT** /blockchain/proof/0.9/existence/{configName}/streams/location | Register hash using the Storage API
+*RegistrationApi* | [**RegisterUsingStream**](docs/RegistrationApi.md#registerusingstream) | **PUT** /blockchain/proof/0.9/existence/{configName}/streams/multipart | Register bytestream/file hash
 *VerificationApi* | [**VerifyUsingContent**](docs/VerificationApi.md#verifyusingcontent) | **POST** /blockchain/proof/0.9/existence/{configName}/content | Verify content
-*VerificationApi* | [**VerifyUsingLocation**](docs/VerificationApi.md#verifyusinglocation) | **POST** /blockchain/proof/0.9/existence/{configName}/streams/location | Verify content using Stream Locations from the Storage API
-*VerificationApi* | [**VerifyUsingStream**](docs/VerificationApi.md#verifyusingstream) | **POST** /blockchain/proof/0.9/existence/{configName}/streams/multipart | Verify content using a bytestream/file
+*VerificationApi* | [**VerifyUsingLocation**](docs/VerificationApi.md#verifyusinglocation) | **POST** /blockchain/proof/0.9/existence/{configName}/streams/location | Verify hash using the Storage API
+*VerificationApi* | [**VerifyUsingStream**](docs/VerificationApi.md#verifyusingstream) | **POST** /blockchain/proof/0.9/existence/{configName}/streams/multipart | Verify bytestream/file hash
 
 
 <a name="documentation-for-models"></a>

@@ -102,7 +102,7 @@ var defaultClient = BlockchainProof.ApiClient.instance;
 var oauth2schema = defaultClient.authentications['oauth2schema'];
 oauth2schema.accessToken = "YOUR ACCESS TOKEN"
 
-var api = new BlockchainProof.AllApi()
+var api = new BlockchainProof.ConfigurationApi()
 
 var request = new BlockchainProof.CreateConfiguration(); // {CreateConfiguration} Create a new Proof of Existence context using the provided entity settings
 
@@ -124,22 +124,14 @@ All URIs are relative to *https://gw-dev.api.cloud.sphereon.com*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*BlockchainProof.AllApi* | [**createConfiguration**](docs/AllApi.md#createConfiguration) | **POST** /blockchain/proof/0.9/existence/config | Create a new configuration
-*BlockchainProof.AllApi* | [**getConfiguration**](docs/AllApi.md#getConfiguration) | **GET** /blockchain/proof/0.9/existence/config/{configName} | Get the settings for registration/verification
-*BlockchainProof.AllApi* | [**registerUsingContent**](docs/AllApi.md#registerUsingContent) | **PUT** /blockchain/proof/0.9/existence/{configName}/content | Register content
-*BlockchainProof.AllApi* | [**registerUsingLocation**](docs/AllApi.md#registerUsingLocation) | **PUT** /blockchain/proof/0.9/existence/{configName}/streams/location | Register content using a Stream Location from Storage API
-*BlockchainProof.AllApi* | [**registerUsingStream**](docs/AllApi.md#registerUsingStream) | **PUT** /blockchain/proof/0.9/existence/{configName}/streams/multipart | Register content using a bytestream/file
-*BlockchainProof.AllApi* | [**verifyUsingContent**](docs/AllApi.md#verifyUsingContent) | **POST** /blockchain/proof/0.9/existence/{configName}/content | Verify content
-*BlockchainProof.AllApi* | [**verifyUsingLocation**](docs/AllApi.md#verifyUsingLocation) | **POST** /blockchain/proof/0.9/existence/{configName}/streams/location | Verify content using Stream Locations from the Storage API
-*BlockchainProof.AllApi* | [**verifyUsingStream**](docs/AllApi.md#verifyUsingStream) | **POST** /blockchain/proof/0.9/existence/{configName}/streams/multipart | Verify content using a bytestream/file
-*BlockchainProof.ConfigurationApi* | [**createConfiguration**](docs/ConfigurationApi.md#createConfiguration) | **POST** /blockchain/proof/0.9/existence/config | Create a new configuration
-*BlockchainProof.ConfigurationApi* | [**getConfiguration**](docs/ConfigurationApi.md#getConfiguration) | **GET** /blockchain/proof/0.9/existence/config/{configName} | Get the settings for registration/verification
+*BlockchainProof.ConfigurationApi* | [**createConfiguration**](docs/ConfigurationApi.md#createConfiguration) | **POST** /blockchain/proof/0.9/config | Create a new configuration
+*BlockchainProof.ConfigurationApi* | [**getConfiguration**](docs/ConfigurationApi.md#getConfiguration) | **GET** /blockchain/proof/0.9/config/{configName} | Get configuration
 *BlockchainProof.RegistrationApi* | [**registerUsingContent**](docs/RegistrationApi.md#registerUsingContent) | **PUT** /blockchain/proof/0.9/existence/{configName}/content | Register content
-*BlockchainProof.RegistrationApi* | [**registerUsingLocation**](docs/RegistrationApi.md#registerUsingLocation) | **PUT** /blockchain/proof/0.9/existence/{configName}/streams/location | Register content using a Stream Location from Storage API
-*BlockchainProof.RegistrationApi* | [**registerUsingStream**](docs/RegistrationApi.md#registerUsingStream) | **PUT** /blockchain/proof/0.9/existence/{configName}/streams/multipart | Register content using a bytestream/file
+*BlockchainProof.RegistrationApi* | [**registerUsingLocation**](docs/RegistrationApi.md#registerUsingLocation) | **PUT** /blockchain/proof/0.9/existence/{configName}/streams/location | Register hash using the Storage API
+*BlockchainProof.RegistrationApi* | [**registerUsingStream**](docs/RegistrationApi.md#registerUsingStream) | **PUT** /blockchain/proof/0.9/existence/{configName}/streams/multipart | Register bytestream/file hash
 *BlockchainProof.VerificationApi* | [**verifyUsingContent**](docs/VerificationApi.md#verifyUsingContent) | **POST** /blockchain/proof/0.9/existence/{configName}/content | Verify content
-*BlockchainProof.VerificationApi* | [**verifyUsingLocation**](docs/VerificationApi.md#verifyUsingLocation) | **POST** /blockchain/proof/0.9/existence/{configName}/streams/location | Verify content using Stream Locations from the Storage API
-*BlockchainProof.VerificationApi* | [**verifyUsingStream**](docs/VerificationApi.md#verifyUsingStream) | **POST** /blockchain/proof/0.9/existence/{configName}/streams/multipart | Verify content using a bytestream/file
+*BlockchainProof.VerificationApi* | [**verifyUsingLocation**](docs/VerificationApi.md#verifyUsingLocation) | **POST** /blockchain/proof/0.9/existence/{configName}/streams/location | Verify hash using the Storage API
+*BlockchainProof.VerificationApi* | [**verifyUsingStream**](docs/VerificationApi.md#verifyUsingStream) | **POST** /blockchain/proof/0.9/existence/{configName}/streams/multipart | Verify bytestream/file hash
 
 
 ## Documentation for Models

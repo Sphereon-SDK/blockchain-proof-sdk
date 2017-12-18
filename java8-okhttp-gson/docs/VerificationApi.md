@@ -5,8 +5,8 @@ All URIs are relative to *https://gw-dev.api.cloud.sphereon.com*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**verifyUsingContent**](VerificationApi.md#verifyUsingContent) | **POST** /blockchain/proof/0.9/existence/{configName}/content | Verify content
-[**verifyUsingLocation**](VerificationApi.md#verifyUsingLocation) | **POST** /blockchain/proof/0.9/existence/{configName}/streams/location | Verify content using Stream Locations from the Storage API
-[**verifyUsingStream**](VerificationApi.md#verifyUsingStream) | **POST** /blockchain/proof/0.9/existence/{configName}/streams/multipart | Verify content using a bytestream/file
+[**verifyUsingLocation**](VerificationApi.md#verifyUsingLocation) | **POST** /blockchain/proof/0.9/existence/{configName}/streams/location | Verify hash using the Storage API
+[**verifyUsingStream**](VerificationApi.md#verifyUsingStream) | **POST** /blockchain/proof/0.9/existence/{configName}/streams/multipart | Verify bytestream/file hash
 
 
 <a name="verifyUsingContent"></a>
@@ -14,6 +14,8 @@ Method | HTTP request | Description
 > VerifyContentResponse verifyUsingContent(configName, existence)
 
 Verify content
+
+Verify content. Please provide the content in the request. You also have to provide whether you have hashed the content yourself, or whether is should be done on the server side
 
 ### Example
 ```java
@@ -66,9 +68,9 @@ Name | Type | Description  | Notes
 # **verifyUsingLocation**
 > VerifyContentResponse verifyUsingLocation(configName, streamLocations)
 
-Verify content using Stream Locations from the Storage API
+Verify hash using the Storage API
 
-Verify content by supplying a file or some other binary data. Hashing will be done on the server side
+Verify a hash of file/blob by supplying a Stream location of the Storage API. This Stream Location maps to a location of a file/blob on some remote cloud storage. Hashing will be done on the server side Please note that the binary data itself will not be stored, only the hash. Use the registerUsingContent endpoint if you&#39;d like to store content
 
 ### Example
 ```java
@@ -121,9 +123,9 @@ Name | Type | Description  | Notes
 # **verifyUsingStream**
 > VerifyContentResponse verifyUsingStream(configName, stream)
 
-Verify content using a bytestream/file
+Verify bytestream/file hash
 
-Verify content by supplying a file or some other binary data. Hashing will be done on the server side
+Verify a hash of content by supplying a file or some other binary data. Hashing will be done on the server side. Please note that the binary data itself will not be stored, only the hash. Use the registerUsingContent endpoint if you&#39;d like to store content
 
 ### Example
 ```java
