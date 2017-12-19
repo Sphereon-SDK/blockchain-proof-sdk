@@ -12,6 +12,7 @@
 		<sdk-package>com.sphereon.sdk.blockchain.proof</sdk-package>
 		<sdk-package-javascript>SphereonSDKBlockchainProof</sdk-package-javascript>
 		<sdk-package-csharp>Sphereon.SDK.Blockchain.Proof</sdk-package-csharp>
+		<sdk-package-version>0.9.0</sdk-package-version>
 
 		<swagger-coden-maven-plugin.version>2.2.3</swagger-coden-maven-plugin.version>
 		<swagger-coden-verbose>false</swagger-coden-verbose>
@@ -233,6 +234,7 @@
 										<modelPackage>${sdk-package-csharp}.Model</modelPackage>
 										<invokerPackage>${sdk-package-csharp}.Handler</invokerPackage>
 										<packageName>${sdk-package-csharp}</packageName>
+										<packageVersion>${sdk-package-version}</packageVersion>
 									</configOptions>
 									<configurationFile>src/main/resources/config/csharp-net45.json</configurationFile>
 									<verbose>${swagger-coden-verbose}</verbose>
@@ -274,6 +276,7 @@
 										<modelPackage>${sdk-package-csharp}.Model</modelPackage>
 										<invokerPackage>${sdk-package-csharp}.Handler</invokerPackage>
 										<packageName>${sdk-package-csharp}</packageName>
+										<packageVersion>${sdk-package-version}</packageVersion>
 										<targetFramework>v3.5</targetFramework>
 									</configOptions>
 									<configurationFile>src/main/resources/config/csharp-net35.json</configurationFile>
