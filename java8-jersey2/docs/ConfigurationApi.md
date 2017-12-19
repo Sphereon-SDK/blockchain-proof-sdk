@@ -1,11 +1,11 @@
 # ConfigurationApi
 
-All URIs are relative to *https://gw-dev.api.cloud.sphereon.com*
+All URIs are relative to *https://gw.api.cloud.sphereon.com/blockchain/proof/0.9*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**createConfiguration**](ConfigurationApi.md#createConfiguration) | **POST** /blockchain/proof/0.9/config | Create a new configuration
-[**getConfiguration**](ConfigurationApi.md#getConfiguration) | **GET** /blockchain/proof/0.9/config/{configName} | Get configuration
+[**createConfiguration**](ConfigurationApi.md#createConfiguration) | **POST** /config | Create a new configuration
+[**getConfiguration**](ConfigurationApi.md#getConfiguration) | **GET** /config/{configName} | Get configuration
 
 
 <a name="createConfiguration"></a>
@@ -32,7 +32,7 @@ OAuth oauth2schema = (OAuth) defaultClient.getAuthentication("oauth2schema");
 oauth2schema.setAccessToken("YOUR ACCESS TOKEN");
 
 ConfigurationApi apiInstance = new ConfigurationApi();
-CreateConfiguration request = new CreateConfiguration(); // CreateConfiguration | Create a new Proof of Existence context using the provided entity settings
+CreateConfigurationRequest request = new CreateConfigurationRequest(); // CreateConfigurationRequest | Create a new Proof of Existence context using the provided entity settings
 try {
     ConfigurationResponse result = apiInstance.createConfiguration(request);
     System.out.println(result);
@@ -46,7 +46,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **request** | [**CreateConfiguration**](CreateConfiguration.md)| Create a new Proof of Existence context using the provided entity settings |
+ **request** | [**CreateConfigurationRequest**](CreateConfigurationRequest.md)| Create a new Proof of Existence context using the provided entity settings |
 
 ### Return type
 

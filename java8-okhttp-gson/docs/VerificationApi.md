@@ -1,12 +1,12 @@
 # VerificationApi
 
-All URIs are relative to *https://gw-dev.api.cloud.sphereon.com*
+All URIs are relative to *https://gw.api.cloud.sphereon.com/blockchain/proof/0.9*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**verifyUsingContent**](VerificationApi.md#verifyUsingContent) | **POST** /blockchain/proof/0.9/existence/{configName}/content | Verify content
-[**verifyUsingLocation**](VerificationApi.md#verifyUsingLocation) | **POST** /blockchain/proof/0.9/existence/{configName}/streams/location | Verify hash using the Storage API
-[**verifyUsingStream**](VerificationApi.md#verifyUsingStream) | **POST** /blockchain/proof/0.9/existence/{configName}/streams/multipart | Verify bytestream/file hash
+[**verifyUsingContent**](VerificationApi.md#verifyUsingContent) | **POST** /existence/{configName}/content | Verify content
+[**verifyUsingLocation**](VerificationApi.md#verifyUsingLocation) | **POST** /existence/{configName}/streams/location | Verify hash using the Storage API
+[**verifyUsingStream**](VerificationApi.md#verifyUsingStream) | **POST** /existence/{configName}/streams/multipart | Verify bytestream/file hash
 
 
 <a name="verifyUsingContent"></a>
@@ -121,7 +121,7 @@ Name | Type | Description  | Notes
 
 <a name="verifyUsingStream"></a>
 # **verifyUsingStream**
-> VerifyContentResponse verifyUsingStream(configName, stream)
+> VerifyContentResponse verifyUsingStream(configName, stream, fileName)
 
 Verify bytestream/file hash
 
@@ -145,8 +145,9 @@ oauth2schema.setAccessToken("YOUR ACCESS TOKEN");
 VerificationApi apiInstance = new VerificationApi();
 String configName = "configName_example"; // String | The configuration name this operation
 File stream = new File("/path/to/file.txt"); // File | The binary data (not hashed). Hashing will be done on the server side. The binary data will not be stored
+String fileName = "fileName_example"; // String | Optional input file name.
 try {
-    VerifyContentResponse result = apiInstance.verifyUsingStream(configName, stream);
+    VerifyContentResponse result = apiInstance.verifyUsingStream(configName, stream, fileName);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling VerificationApi#verifyUsingStream");
@@ -160,6 +161,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **configName** | **String**| The configuration name this operation |
  **stream** | **File**| The binary data (not hashed). Hashing will be done on the server side. The binary data will not be stored |
+ **fileName** | **String**| Optional input file name. | [optional]
 
 ### Return type
 

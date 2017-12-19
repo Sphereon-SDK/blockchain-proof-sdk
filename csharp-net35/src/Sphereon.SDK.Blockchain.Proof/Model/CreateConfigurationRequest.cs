@@ -28,13 +28,14 @@ namespace Sphereon.SDK.Blockchain.Proof.Model
     /// Create a context configuration
     /// </summary>
     [DataContract]
-    public partial class CreateConfiguration :  IEquatable<CreateConfiguration>, IValidatableObject
+    public partial class CreateConfigurationRequest :  IEquatable<CreateConfigurationRequest>
     {
         /// <summary>
-        /// Gets or Sets AccessLevel
+        /// The access mode for this configuration. Public means accessible to other tenants of the API as well. Currently public is only allowed for Sphereon itself
         /// </summary>
+        /// <value>The access mode for this configuration. Public means accessible to other tenants of the API as well. Currently public is only allowed for Sphereon itself</value>
         [JsonConverter(typeof(StringEnumConverter))]
-        public enum AccessLevelEnum
+        public enum AccessModeEnum
         {
             
             /// <summary>
@@ -51,46 +52,38 @@ namespace Sphereon.SDK.Blockchain.Proof.Model
         }
 
         /// <summary>
-        /// Gets or Sets AccessLevel
+        /// The access mode for this configuration. Public means accessible to other tenants of the API as well. Currently public is only allowed for Sphereon itself
         /// </summary>
-        [DataMember(Name="accessLevel", EmitDefaultValue=false)]
-        public AccessLevelEnum? AccessLevel { get; set; }
+        /// <value>The access mode for this configuration. Public means accessible to other tenants of the API as well. Currently public is only allowed for Sphereon itself</value>
+        [DataMember(Name="accessMode", EmitDefaultValue=false)]
+        public AccessModeEnum? AccessMode { get; set; }
         /// <summary>
-        /// Initializes a new instance of the <see cref="CreateConfiguration" /> class.
+        /// Initializes a new instance of the <see cref="CreateConfigurationRequest" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected CreateConfiguration() { }
+        protected CreateConfigurationRequest() { }
         /// <summary>
-        /// Initializes a new instance of the <see cref="CreateConfiguration" /> class.
+        /// Initializes a new instance of the <see cref="CreateConfigurationRequest" /> class.
         /// </summary>
         /// <param name="InitialSettings">The initial context settings. (required).</param>
-        /// <param name="AccessLevel">AccessLevel (required).</param>
-        /// <param name="Context">The blockchain context. (required).</param>
+        /// <param name="Context">The Easy Blockchain API context. (required).</param>
         /// <param name="Name">The configuration name. (required).</param>
-        public CreateConfiguration(ChainSettings InitialSettings = default(ChainSettings), AccessLevelEnum? AccessLevel = default(AccessLevelEnum?), string Context = default(string), string Name = default(string))
+        /// <param name="AccessMode">The access mode for this configuration. Public means accessible to other tenants of the API as well. Currently public is only allowed for Sphereon itself (required).</param>
+        public CreateConfigurationRequest(ChainSettings InitialSettings = default(ChainSettings), string Context = default(string), string Name = default(string), AccessModeEnum? AccessMode = default(AccessModeEnum?))
         {
             // to ensure "InitialSettings" is required (not null)
             if (InitialSettings == null)
             {
-                throw new InvalidDataException("InitialSettings is a required property for CreateConfiguration and cannot be null");
+                throw new InvalidDataException("InitialSettings is a required property for CreateConfigurationRequest and cannot be null");
             }
             else
             {
                 this.InitialSettings = InitialSettings;
             }
-            // to ensure "AccessLevel" is required (not null)
-            if (AccessLevel == null)
-            {
-                throw new InvalidDataException("AccessLevel is a required property for CreateConfiguration and cannot be null");
-            }
-            else
-            {
-                this.AccessLevel = AccessLevel;
-            }
             // to ensure "Context" is required (not null)
             if (Context == null)
             {
-                throw new InvalidDataException("Context is a required property for CreateConfiguration and cannot be null");
+                throw new InvalidDataException("Context is a required property for CreateConfigurationRequest and cannot be null");
             }
             else
             {
@@ -99,11 +92,20 @@ namespace Sphereon.SDK.Blockchain.Proof.Model
             // to ensure "Name" is required (not null)
             if (Name == null)
             {
-                throw new InvalidDataException("Name is a required property for CreateConfiguration and cannot be null");
+                throw new InvalidDataException("Name is a required property for CreateConfigurationRequest and cannot be null");
             }
             else
             {
                 this.Name = Name;
+            }
+            // to ensure "AccessMode" is required (not null)
+            if (AccessMode == null)
+            {
+                throw new InvalidDataException("AccessMode is a required property for CreateConfigurationRequest and cannot be null");
+            }
+            else
+            {
+                this.AccessMode = AccessMode;
             }
         }
         
@@ -114,11 +116,10 @@ namespace Sphereon.SDK.Blockchain.Proof.Model
         [DataMember(Name="initialSettings", EmitDefaultValue=false)]
         public ChainSettings InitialSettings { get; set; }
 
-
         /// <summary>
-        /// The blockchain context.
+        /// The Easy Blockchain API context.
         /// </summary>
-        /// <value>The blockchain context.</value>
+        /// <value>The Easy Blockchain API context.</value>
         [DataMember(Name="context", EmitDefaultValue=false)]
         public string Context { get; set; }
 
@@ -129,6 +130,7 @@ namespace Sphereon.SDK.Blockchain.Proof.Model
         [DataMember(Name="name", EmitDefaultValue=false)]
         public string Name { get; set; }
 
+
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
@@ -136,11 +138,11 @@ namespace Sphereon.SDK.Blockchain.Proof.Model
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class CreateConfiguration {\n");
+            sb.Append("class CreateConfigurationRequest {\n");
             sb.Append("  InitialSettings: ").Append(InitialSettings).Append("\n");
-            sb.Append("  AccessLevel: ").Append(AccessLevel).Append("\n");
             sb.Append("  Context: ").Append(Context).Append("\n");
             sb.Append("  Name: ").Append(Name).Append("\n");
+            sb.Append("  AccessMode: ").Append(AccessMode).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -162,15 +164,15 @@ namespace Sphereon.SDK.Blockchain.Proof.Model
         public override bool Equals(object obj)
         {
             // credit: http://stackoverflow.com/a/10454552/677735
-            return this.Equals(obj as CreateConfiguration);
+            return this.Equals(obj as CreateConfigurationRequest);
         }
 
         /// <summary>
-        /// Returns true if CreateConfiguration instances are equal
+        /// Returns true if CreateConfigurationRequest instances are equal
         /// </summary>
-        /// <param name="other">Instance of CreateConfiguration to be compared</param>
+        /// <param name="other">Instance of CreateConfigurationRequest to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(CreateConfiguration other)
+        public bool Equals(CreateConfigurationRequest other)
         {
             // credit: http://stackoverflow.com/a/10454552/677735
             if (other == null)
@@ -183,11 +185,6 @@ namespace Sphereon.SDK.Blockchain.Proof.Model
                     this.InitialSettings.Equals(other.InitialSettings)
                 ) && 
                 (
-                    this.AccessLevel == other.AccessLevel ||
-                    this.AccessLevel != null &&
-                    this.AccessLevel.Equals(other.AccessLevel)
-                ) && 
-                (
                     this.Context == other.Context ||
                     this.Context != null &&
                     this.Context.Equals(other.Context)
@@ -196,6 +193,11 @@ namespace Sphereon.SDK.Blockchain.Proof.Model
                     this.Name == other.Name ||
                     this.Name != null &&
                     this.Name.Equals(other.Name)
+                ) && 
+                (
+                    this.AccessMode == other.AccessMode ||
+                    this.AccessMode != null &&
+                    this.AccessMode.Equals(other.AccessMode)
                 );
         }
 
@@ -212,25 +214,16 @@ namespace Sphereon.SDK.Blockchain.Proof.Model
                 // Suitable nullity checks etc, of course :)
                 if (this.InitialSettings != null)
                     hash = hash * 59 + this.InitialSettings.GetHashCode();
-                if (this.AccessLevel != null)
-                    hash = hash * 59 + this.AccessLevel.GetHashCode();
                 if (this.Context != null)
                     hash = hash * 59 + this.Context.GetHashCode();
                 if (this.Name != null)
                     hash = hash * 59 + this.Name.GetHashCode();
+                if (this.AccessMode != null)
+                    hash = hash * 59 + this.AccessMode.GetHashCode();
                 return hash;
             }
         }
 
-        /// <summary>
-        /// To validate all properties of the instance
-        /// </summary>
-        /// <param name="validationContext">Validation context</param>
-        /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
-        {
-            yield break;
-        }
     }
 
 }

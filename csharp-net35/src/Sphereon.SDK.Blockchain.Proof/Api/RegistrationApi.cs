@@ -79,8 +79,9 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
         /// <exception cref="Sphereon.SDK.Blockchain.Proof.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="configName">The configuration name this operation</param>
         /// <param name="stream">The binary data (not hashed). Hashing will be done on the server side. The binary data will not be stored</param>
+        /// <param name="fileName">Optional input file name. (optional)</param>
         /// <returns>RegisterContentResponse</returns>
-        RegisterContentResponse RegisterUsingStream (string configName, System.IO.Stream stream);
+        RegisterContentResponse RegisterUsingStream (string configName, System.IO.Stream stream, string fileName = null);
 
         /// <summary>
         /// Register bytestream/file hash
@@ -91,8 +92,9 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
         /// <exception cref="Sphereon.SDK.Blockchain.Proof.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="configName">The configuration name this operation</param>
         /// <param name="stream">The binary data (not hashed). Hashing will be done on the server side. The binary data will not be stored</param>
+        /// <param name="fileName">Optional input file name. (optional)</param>
         /// <returns>ApiResponse of RegisterContentResponse</returns>
-        ApiResponse<RegisterContentResponse> RegisterUsingStreamWithHttpInfo (string configName, System.IO.Stream stream);
+        ApiResponse<RegisterContentResponse> RegisterUsingStreamWithHttpInfo (string configName, System.IO.Stream stream, string fileName = null);
         #endregion Synchronous Operations
     }
 
@@ -234,7 +236,7 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
             if (existence == null)
                 throw new ApiException(400, "Missing required parameter 'existence' when calling RegistrationApi->RegisterUsingContent");
 
-            var localVarPath = "/blockchain/proof/0.9/existence/{configName}/content";
+            var localVarPath = "/existence/{configName}/content";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new Dictionary<String, String>();
             var localVarHeaderParams = new Dictionary<String, String>(Configuration.DefaultHeader);
@@ -320,7 +322,7 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
             if (streamLocations == null)
                 throw new ApiException(400, "Missing required parameter 'streamLocations' when calling RegistrationApi->RegisterUsingLocation");
 
-            var localVarPath = "/blockchain/proof/0.9/existence/{configName}/streams/location";
+            var localVarPath = "/existence/{configName}/streams/location";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new Dictionary<String, String>();
             var localVarHeaderParams = new Dictionary<String, String>(Configuration.DefaultHeader);
@@ -383,10 +385,11 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
         /// <exception cref="Sphereon.SDK.Blockchain.Proof.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="configName">The configuration name this operation</param>
         /// <param name="stream">The binary data (not hashed). Hashing will be done on the server side. The binary data will not be stored</param>
+        /// <param name="fileName">Optional input file name. (optional)</param>
         /// <returns>RegisterContentResponse</returns>
-        public RegisterContentResponse RegisterUsingStream (string configName, System.IO.Stream stream)
+        public RegisterContentResponse RegisterUsingStream (string configName, System.IO.Stream stream, string fileName = null)
         {
-             ApiResponse<RegisterContentResponse> localVarResponse = RegisterUsingStreamWithHttpInfo(configName, stream);
+             ApiResponse<RegisterContentResponse> localVarResponse = RegisterUsingStreamWithHttpInfo(configName, stream, fileName);
              return localVarResponse.Data;
         }
 
@@ -396,8 +399,9 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
         /// <exception cref="Sphereon.SDK.Blockchain.Proof.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="configName">The configuration name this operation</param>
         /// <param name="stream">The binary data (not hashed). Hashing will be done on the server side. The binary data will not be stored</param>
+        /// <param name="fileName">Optional input file name. (optional)</param>
         /// <returns>ApiResponse of RegisterContentResponse</returns>
-        public ApiResponse< RegisterContentResponse > RegisterUsingStreamWithHttpInfo (string configName, System.IO.Stream stream)
+        public ApiResponse< RegisterContentResponse > RegisterUsingStreamWithHttpInfo (string configName, System.IO.Stream stream, string fileName = null)
         {
             // verify the required parameter 'configName' is set
             if (configName == null)
@@ -406,7 +410,7 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
             if (stream == null)
                 throw new ApiException(400, "Missing required parameter 'stream' when calling RegistrationApi->RegisterUsingStream");
 
-            var localVarPath = "/blockchain/proof/0.9/existence/{configName}/streams/multipart";
+            var localVarPath = "/existence/{configName}/streams/multipart";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new Dictionary<String, String>();
             var localVarHeaderParams = new Dictionary<String, String>(Configuration.DefaultHeader);
@@ -429,6 +433,7 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
 
             if (configName != null) localVarPathParams.Add("configName", Configuration.ApiClient.ParameterToString(configName)); // path parameter
+            if (fileName != null) localVarQueryParams.Add("fileName", Configuration.ApiClient.ParameterToString(fileName)); // query parameter
             if (stream != null) localVarFileParams.Add("stream", Configuration.ApiClient.ParameterToFile("stream", stream));
 
             // authentication (oauth2schema) required

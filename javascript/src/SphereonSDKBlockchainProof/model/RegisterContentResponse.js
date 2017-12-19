@@ -46,17 +46,16 @@
    * @alias module:SphereonSDKBlockchainProof/model/RegisterContentResponse
    * @class
    * @param contextName {String} 
-   * @param proofChain {module:SphereonSDKBlockchainProof/model/CommittedChain} 
    * @param registrationState {module:SphereonSDKBlockchainProof/model/RegisterContentResponse.RegistrationStateEnum} 
    */
-  var exports = function(contextName, proofChain, registrationState) {
+  var exports = function(contextName, registrationState) {
     var _this = this;
 
     _this['contextName'] = contextName;
 
-    _this['proofChain'] = proofChain;
-    _this['registrationState'] = registrationState;
 
+
+    _this['registrationState'] = registrationState;
   };
 
   /**
@@ -73,17 +72,17 @@
       if (data.hasOwnProperty('contextName')) {
         obj['contextName'] = ApiClient.convertToType(data['contextName'], 'String');
       }
+      if (data.hasOwnProperty('singleProofChain')) {
+        obj['singleProofChain'] = CommittedChain.constructFromObject(data['singleProofChain']);
+      }
       if (data.hasOwnProperty('requestId')) {
         obj['requestId'] = ApiClient.convertToType(data['requestId'], 'String');
       }
-      if (data.hasOwnProperty('proofChain')) {
-        obj['proofChain'] = CommittedChain.constructFromObject(data['proofChain']);
+      if (data.hasOwnProperty('perHashProofChain')) {
+        obj['perHashProofChain'] = CommittedChain.constructFromObject(data['perHashProofChain']);
       }
       if (data.hasOwnProperty('registrationState')) {
         obj['registrationState'] = ApiClient.convertToType(data['registrationState'], 'String');
-      }
-      if (data.hasOwnProperty('fileChain')) {
-        obj['fileChain'] = CommittedChain.constructFromObject(data['fileChain']);
       }
     }
     return obj;
@@ -94,21 +93,23 @@
    */
   exports.prototype['contextName'] = undefined;
   /**
+   * This is the single proof chain where all hashes are stored (if configured)
+   * @member {module:SphereonSDKBlockchainProof/model/CommittedChain} singleProofChain
+   */
+  exports.prototype['singleProofChain'] = undefined;
+  /**
    * @member {String} requestId
    */
   exports.prototype['requestId'] = undefined;
   /**
-   * @member {module:SphereonSDKBlockchainProof/model/CommittedChain} proofChain
+   * This is the proof chain specific for the current hash (if configured)
+   * @member {module:SphereonSDKBlockchainProof/model/CommittedChain} perHashProofChain
    */
-  exports.prototype['proofChain'] = undefined;
+  exports.prototype['perHashProofChain'] = undefined;
   /**
    * @member {module:SphereonSDKBlockchainProof/model/RegisterContentResponse.RegistrationStateEnum} registrationState
    */
   exports.prototype['registrationState'] = undefined;
-  /**
-   * @member {module:SphereonSDKBlockchainProof/model/CommittedChain} fileChain
-   */
-  exports.prototype['fileChain'] = undefined;
 
 
   /**

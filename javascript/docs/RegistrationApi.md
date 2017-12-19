@@ -1,12 +1,12 @@
 # BlockchainProof.RegistrationApi
 
-All URIs are relative to *https://gw-dev.api.cloud.sphereon.com*
+All URIs are relative to *https://gw.api.cloud.sphereon.com/blockchain/proof/0.9*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**registerUsingContent**](RegistrationApi.md#registerUsingContent) | **PUT** /blockchain/proof/0.9/existence/{configName}/content | Register content
-[**registerUsingLocation**](RegistrationApi.md#registerUsingLocation) | **PUT** /blockchain/proof/0.9/existence/{configName}/streams/location | Register hash using the Storage API
-[**registerUsingStream**](RegistrationApi.md#registerUsingStream) | **PUT** /blockchain/proof/0.9/existence/{configName}/streams/multipart | Register bytestream/file hash
+[**registerUsingContent**](RegistrationApi.md#registerUsingContent) | **PUT** /existence/{configName}/content | Register content
+[**registerUsingLocation**](RegistrationApi.md#registerUsingLocation) | **PUT** /existence/{configName}/streams/location | Register hash using the Storage API
+[**registerUsingStream**](RegistrationApi.md#registerUsingStream) | **PUT** /existence/{configName}/streams/multipart | Register bytestream/file hash
 
 
 <a name="registerUsingContent"></a>
@@ -119,7 +119,7 @@ Name | Type | Description  | Notes
 
 <a name="registerUsingStream"></a>
 # **registerUsingStream**
-> RegisterContentResponse registerUsingStream(configName, stream)
+> RegisterContentResponse registerUsingStream(configName, stream, opts)
 
 Register bytestream/file hash
 
@@ -140,6 +140,9 @@ var configName = "configName_example"; // String | The configuration name this o
 
 var stream = "/path/to/file.txt"; // File | The binary data (not hashed). Hashing will be done on the server side. The binary data will not be stored
 
+var opts = { 
+  'fileName': "fileName_example" // String | Optional input file name.
+};
 
 var callback = function(error, data, response) {
   if (error) {
@@ -148,7 +151,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.registerUsingStream(configName, stream, callback);
+apiInstance.registerUsingStream(configName, stream, opts, callback);
 ```
 
 ### Parameters
@@ -157,6 +160,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **configName** | **String**| The configuration name this operation | 
  **stream** | **File**| The binary data (not hashed). Hashing will be done on the server side. The binary data will not be stored | 
+ **fileName** | **String**| Optional input file name. | [optional] 
 
 ### Return type
 

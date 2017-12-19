@@ -1,11 +1,11 @@
 # BlockchainProof.ConfigurationApi
 
-All URIs are relative to *https://gw-dev.api.cloud.sphereon.com*
+All URIs are relative to *https://gw.api.cloud.sphereon.com/blockchain/proof/0.9*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**createConfiguration**](ConfigurationApi.md#createConfiguration) | **POST** /blockchain/proof/0.9/config | Create a new configuration
-[**getConfiguration**](ConfigurationApi.md#getConfiguration) | **GET** /blockchain/proof/0.9/config/{configName} | Get configuration
+[**createConfiguration**](ConfigurationApi.md#createConfiguration) | **POST** /config | Create a new configuration
+[**getConfiguration**](ConfigurationApi.md#getConfiguration) | **GET** /config/{configName} | Get configuration
 
 
 <a name="createConfiguration"></a>
@@ -27,7 +27,7 @@ oauth2schema.accessToken = 'YOUR ACCESS TOKEN';
 
 var apiInstance = new BlockchainProof.ConfigurationApi();
 
-var request = new BlockchainProof.CreateConfiguration(); // CreateConfiguration | Create a new Proof of Existence context using the provided entity settings
+var request = new BlockchainProof.CreateConfigurationRequest(); // CreateConfigurationRequest | Create a new Proof of Existence context using the provided entity settings
 
 
 var callback = function(error, data, response) {
@@ -44,7 +44,7 @@ apiInstance.createConfiguration(request, callback);
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **request** | [**CreateConfiguration**](CreateConfiguration.md)| Create a new Proof of Existence context using the provided entity settings | 
+ **request** | [**CreateConfigurationRequest**](CreateConfigurationRequest.md)| Create a new Proof of Existence context using the provided entity settings | 
 
 ### Return type
 

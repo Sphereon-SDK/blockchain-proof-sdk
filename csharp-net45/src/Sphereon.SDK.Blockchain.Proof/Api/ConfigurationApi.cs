@@ -33,7 +33,7 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
         /// <exception cref="Sphereon.SDK.Blockchain.Proof.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="request">Create a new Proof of Existence context using the provided entity settings</param>
         /// <returns>ConfigurationResponse</returns>
-        ConfigurationResponse CreateConfiguration (CreateConfiguration request);
+        ConfigurationResponse CreateConfiguration (CreateConfigurationRequest request);
 
         /// <summary>
         /// Create a new configuration
@@ -44,7 +44,7 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
         /// <exception cref="Sphereon.SDK.Blockchain.Proof.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="request">Create a new Proof of Existence context using the provided entity settings</param>
         /// <returns>ApiResponse of ConfigurationResponse</returns>
-        ApiResponse<ConfigurationResponse> CreateConfigurationWithHttpInfo (CreateConfiguration request);
+        ApiResponse<ConfigurationResponse> CreateConfigurationWithHttpInfo (CreateConfigurationRequest request);
         /// <summary>
         /// Get configuration
         /// </summary>
@@ -77,7 +77,7 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
         /// <exception cref="Sphereon.SDK.Blockchain.Proof.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="request">Create a new Proof of Existence context using the provided entity settings</param>
         /// <returns>Task of ConfigurationResponse</returns>
-        System.Threading.Tasks.Task<ConfigurationResponse> CreateConfigurationAsync (CreateConfiguration request);
+        System.Threading.Tasks.Task<ConfigurationResponse> CreateConfigurationAsync (CreateConfigurationRequest request);
 
         /// <summary>
         /// Create a new configuration
@@ -88,7 +88,7 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
         /// <exception cref="Sphereon.SDK.Blockchain.Proof.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="request">Create a new Proof of Existence context using the provided entity settings</param>
         /// <returns>Task of ApiResponse (ConfigurationResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<ConfigurationResponse>> CreateConfigurationAsyncWithHttpInfo (CreateConfiguration request);
+        System.Threading.Tasks.Task<ApiResponse<ConfigurationResponse>> CreateConfigurationAsyncWithHttpInfo (CreateConfigurationRequest request);
         /// <summary>
         /// Get configuration
         /// </summary>
@@ -228,7 +228,7 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
         /// <exception cref="Sphereon.SDK.Blockchain.Proof.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="request">Create a new Proof of Existence context using the provided entity settings</param>
         /// <returns>ConfigurationResponse</returns>
-        public ConfigurationResponse CreateConfiguration (CreateConfiguration request)
+        public ConfigurationResponse CreateConfiguration (CreateConfigurationRequest request)
         {
              ApiResponse<ConfigurationResponse> localVarResponse = CreateConfigurationWithHttpInfo(request);
              return localVarResponse.Data;
@@ -240,13 +240,13 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
         /// <exception cref="Sphereon.SDK.Blockchain.Proof.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="request">Create a new Proof of Existence context using the provided entity settings</param>
         /// <returns>ApiResponse of ConfigurationResponse</returns>
-        public ApiResponse< ConfigurationResponse > CreateConfigurationWithHttpInfo (CreateConfiguration request)
+        public ApiResponse< ConfigurationResponse > CreateConfigurationWithHttpInfo (CreateConfigurationRequest request)
         {
             // verify the required parameter 'request' is set
             if (request == null)
                 throw new ApiException(400, "Missing required parameter 'request' when calling ConfigurationApi->CreateConfiguration");
 
-            var localVarPath = "/blockchain/proof/0.9/config";
+            var localVarPath = "/config";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new Dictionary<String, String>();
             var localVarHeaderParams = new Dictionary<String, String>(Configuration.DefaultHeader);
@@ -308,7 +308,7 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
         /// <exception cref="Sphereon.SDK.Blockchain.Proof.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="request">Create a new Proof of Existence context using the provided entity settings</param>
         /// <returns>Task of ConfigurationResponse</returns>
-        public async System.Threading.Tasks.Task<ConfigurationResponse> CreateConfigurationAsync (CreateConfiguration request)
+        public async System.Threading.Tasks.Task<ConfigurationResponse> CreateConfigurationAsync (CreateConfigurationRequest request)
         {
              ApiResponse<ConfigurationResponse> localVarResponse = await CreateConfigurationAsyncWithHttpInfo(request);
              return localVarResponse.Data;
@@ -321,13 +321,13 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
         /// <exception cref="Sphereon.SDK.Blockchain.Proof.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="request">Create a new Proof of Existence context using the provided entity settings</param>
         /// <returns>Task of ApiResponse (ConfigurationResponse)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<ConfigurationResponse>> CreateConfigurationAsyncWithHttpInfo (CreateConfiguration request)
+        public async System.Threading.Tasks.Task<ApiResponse<ConfigurationResponse>> CreateConfigurationAsyncWithHttpInfo (CreateConfigurationRequest request)
         {
             // verify the required parameter 'request' is set
             if (request == null)
                 throw new ApiException(400, "Missing required parameter 'request' when calling ConfigurationApi->CreateConfiguration");
 
-            var localVarPath = "/blockchain/proof/0.9/config";
+            var localVarPath = "/config";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new Dictionary<String, String>();
             var localVarHeaderParams = new Dictionary<String, String>(Configuration.DefaultHeader);
@@ -407,7 +407,7 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
             if (configName == null)
                 throw new ApiException(400, "Missing required parameter 'configName' when calling ConfigurationApi->GetConfiguration");
 
-            var localVarPath = "/blockchain/proof/0.9/config/{configName}";
+            var localVarPath = "/config/{configName}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new Dictionary<String, String>();
             var localVarHeaderParams = new Dictionary<String, String>(Configuration.DefaultHeader);
@@ -481,7 +481,7 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
             if (configName == null)
                 throw new ApiException(400, "Missing required parameter 'configName' when calling ConfigurationApi->GetConfiguration");
 
-            var localVarPath = "/blockchain/proof/0.9/config/{configName}";
+            var localVarPath = "/config/{configName}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new Dictionary<String, String>();
             var localVarHeaderParams = new Dictionary<String, String>(Configuration.DefaultHeader);

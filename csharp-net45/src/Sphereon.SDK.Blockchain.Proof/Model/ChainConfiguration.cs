@@ -31,10 +31,10 @@ namespace Sphereon.SDK.Blockchain.Proof.Model
     public partial class ChainConfiguration :  IEquatable<ChainConfiguration>, IValidatableObject
     {
         /// <summary>
-        /// Gets or Sets AccessLevel
+        /// Gets or Sets AccessMode
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
-        public enum AccessLevelEnum
+        public enum AccessModeEnum
         {
             
             /// <summary>
@@ -51,10 +51,10 @@ namespace Sphereon.SDK.Blockchain.Proof.Model
         }
 
         /// <summary>
-        /// Gets or Sets AccessLevel
+        /// Gets or Sets AccessMode
         /// </summary>
-        [DataMember(Name="accessLevel", EmitDefaultValue=false)]
-        public AccessLevelEnum? AccessLevel { get; set; }
+        [DataMember(Name="accessMode", EmitDefaultValue=false)]
+        public AccessModeEnum? AccessMode { get; set; }
         /// <summary>
         /// Initializes a new instance of the <see cref="ChainConfiguration" /> class.
         /// </summary>
@@ -87,7 +87,6 @@ namespace Sphereon.SDK.Blockchain.Proof.Model
             }
         }
         
-
         /// <summary>
         /// Gets or Sets Context
         /// </summary>
@@ -112,6 +111,7 @@ namespace Sphereon.SDK.Blockchain.Proof.Model
         [DataMember(Name="id", EmitDefaultValue=false)]
         public string Id { get; private set; }
 
+
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
@@ -120,11 +120,11 @@ namespace Sphereon.SDK.Blockchain.Proof.Model
         {
             var sb = new StringBuilder();
             sb.Append("class ChainConfiguration {\n");
-            sb.Append("  AccessLevel: ").Append(AccessLevel).Append("\n");
             sb.Append("  Context: ").Append(Context).Append("\n");
             sb.Append("  Name: ").Append(Name).Append("\n");
             sb.Append("  SettingChainId: ").Append(SettingChainId).Append("\n");
             sb.Append("  Id: ").Append(Id).Append("\n");
+            sb.Append("  AccessMode: ").Append(AccessMode).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -162,11 +162,6 @@ namespace Sphereon.SDK.Blockchain.Proof.Model
 
             return 
                 (
-                    this.AccessLevel == other.AccessLevel ||
-                    this.AccessLevel != null &&
-                    this.AccessLevel.Equals(other.AccessLevel)
-                ) && 
-                (
                     this.Context == other.Context ||
                     this.Context != null &&
                     this.Context.Equals(other.Context)
@@ -185,6 +180,11 @@ namespace Sphereon.SDK.Blockchain.Proof.Model
                     this.Id == other.Id ||
                     this.Id != null &&
                     this.Id.Equals(other.Id)
+                ) && 
+                (
+                    this.AccessMode == other.AccessMode ||
+                    this.AccessMode != null &&
+                    this.AccessMode.Equals(other.AccessMode)
                 );
         }
 
@@ -199,8 +199,6 @@ namespace Sphereon.SDK.Blockchain.Proof.Model
             {
                 int hash = 41;
                 // Suitable nullity checks etc, of course :)
-                if (this.AccessLevel != null)
-                    hash = hash * 59 + this.AccessLevel.GetHashCode();
                 if (this.Context != null)
                     hash = hash * 59 + this.Context.GetHashCode();
                 if (this.Name != null)
@@ -209,6 +207,8 @@ namespace Sphereon.SDK.Blockchain.Proof.Model
                     hash = hash * 59 + this.SettingChainId.GetHashCode();
                 if (this.Id != null)
                     hash = hash * 59 + this.Id.GetHashCode();
+                if (this.AccessMode != null)
+                    hash = hash * 59 + this.AccessMode.GetHashCode();
                 return hash;
             }
         }

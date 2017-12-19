@@ -15,7 +15,7 @@ package com.sphereon.sdk.blockchain.proof.api;
 
 import com.sphereon.sdk.blockchain.proof.handler.ApiException;
 import com.sphereon.sdk.blockchain.proof.model.ConfigurationResponse;
-import com.sphereon.sdk.blockchain.proof.model.CreateConfiguration;
+import com.sphereon.sdk.blockchain.proof.model.CreateConfigurationRequest;
 import com.sphereon.sdk.blockchain.proof.model.ErrorResponse;
 import org.junit.Test;
 import org.junit.Ignore;
@@ -44,7 +44,7 @@ public class ConfigurationApiTest {
      */
     @Test
     public void createConfigurationTest() throws ApiException {
-        CreateConfiguration request = null;
+        CreateConfigurationRequest request = null;
         ConfigurationResponse response = api.createConfiguration(request);
 
         // TODO: test validations

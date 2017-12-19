@@ -73,11 +73,11 @@
       if (data.hasOwnProperty('signatureHash')) {
         obj['signatureHash'] = ApiClient.convertToType(data['signatureHash'], 'Blob');
       }
+      if (data.hasOwnProperty('singleProofChain')) {
+        obj['singleProofChain'] = ApiClient.convertToType(data['singleProofChain'], 'String');
+      }
       if (data.hasOwnProperty('contentRegistrationChains')) {
         obj['contentRegistrationChains'] = ApiClient.convertToType(data['contentRegistrationChains'], ['String']);
-      }
-      if (data.hasOwnProperty('proofChainId')) {
-        obj['proofChainId'] = ApiClient.convertToType(data['proofChainId'], 'String');
       }
       if (data.hasOwnProperty('metadataRegistrationChains')) {
         obj['metadataRegistrationChains'] = ApiClient.convertToType(data['metadataRegistrationChains'], ['String']);
@@ -97,17 +97,17 @@
    */
   exports.prototype['signatureHash'] = undefined;
   /**
+   * The proof chain id linked to the current configuration. This is a shared proof chain for all registrations
+   * @member {String} singleProofChain
+   */
+  exports.prototype['singleProofChain'] = undefined;
+  /**
    * A set of content registration targets
    * @member {Array.<module:SphereonSDKBlockchainProof/model/ChainSettings.ContentRegistrationChainsEnum>} contentRegistrationChains
    */
   exports.prototype['contentRegistrationChains'] = undefined;
   /**
-   * The proof chain id linked to the current configuration
-   * @member {String} proofChainId
-   */
-  exports.prototype['proofChainId'] = undefined;
-  /**
-   * A set of metadata registration targets
+   * A set of metadata registration targets (not in use currently)
    * @member {Array.<module:SphereonSDKBlockchainProof/model/ChainSettings.MetadataRegistrationChainsEnum>} metadataRegistrationChains
    */
   exports.prototype['metadataRegistrationChains'] = undefined;
@@ -117,7 +117,7 @@
    */
   exports.prototype['version'] = undefined;
   /**
-   * The hashing method used for the content
+   * The hashing method used for the content. We always return and expect the hash in HEX form
    * @member {module:SphereonSDKBlockchainProof/model/ChainSettings.HashAlgorithmEnum} hashAlgorithm
    */
   exports.prototype['hashAlgorithm'] = undefined;
@@ -130,15 +130,15 @@
    */
   exports.ContentRegistrationChainsEnum = {
     /**
-     * value: "FILE_CHAIN"
+     * value: "PER_HASH_PROOF_CHAIN"
      * @const
      */
-    "FILE_CHAIN": "FILE_CHAIN",
+    "PER_HASH_PROOF_CHAIN": "PER_HASH_PROOF_CHAIN",
     /**
-     * value: "PROOF_CHAIN"
+     * value: "SINGLE_PROOF_CHAIN"
      * @const
      */
-    "PROOF_CHAIN": "PROOF_CHAIN"  };
+    "SINGLE_PROOF_CHAIN": "SINGLE_PROOF_CHAIN"  };
 
   /**
    * Allowed values for the <code>metadataRegistrationChains</code> property.

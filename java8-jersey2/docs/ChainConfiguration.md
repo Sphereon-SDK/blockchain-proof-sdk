@@ -4,15 +4,15 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**accessLevel** | [**AccessLevelEnum**](#AccessLevelEnum) |  | 
 **context** | **String** |  | 
 **name** | **String** |  | 
 **settingChainId** | **String** |  | 
 **id** | **String** |  | 
+**accessMode** | [**AccessModeEnum**](#AccessModeEnum) |  | 
 
 
-<a name="AccessLevelEnum"></a>
-## Enum: AccessLevelEnum
+<a name="AccessModeEnum"></a>
+## Enum: AccessModeEnum
 Name | Value
 ---- | -----
 PUBLIC | &quot;PUBLIC&quot;
