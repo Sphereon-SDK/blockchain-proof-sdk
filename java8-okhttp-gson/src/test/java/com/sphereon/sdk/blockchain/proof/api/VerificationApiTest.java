@@ -82,7 +82,8 @@ public class VerificationApiTest {
     public void verifyUsingStreamTest() throws ApiException {
         String configName = null;
         File stream = null;
-        VerifyContentResponse response = api.verifyUsingStream(configName, stream);
+        String fileName = null;
+        VerifyContentResponse response = api.verifyUsingStream(configName, stream, fileName);
 
         // TODO: test validations
     }

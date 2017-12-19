@@ -121,7 +121,7 @@ Name | Type | Description  | Notes
 
 <a name="registerUsingStream"></a>
 # **registerUsingStream**
-> RegisterContentResponse registerUsingStream(configName, stream)
+> RegisterContentResponse registerUsingStream(configName, stream, fileName)
 
 Register bytestream/file hash
 
@@ -145,8 +145,9 @@ oauth2schema.setAccessToken("YOUR ACCESS TOKEN");
 RegistrationApi apiInstance = new RegistrationApi();
 String configName = "configName_example"; // String | The configuration name this operation
 File stream = new File("/path/to/file.txt"); // File | The binary data (not hashed). Hashing will be done on the server side. The binary data will not be stored
+String fileName = "fileName_example"; // String | Optional input file name.
 try {
-    RegisterContentResponse result = apiInstance.registerUsingStream(configName, stream);
+    RegisterContentResponse result = apiInstance.registerUsingStream(configName, stream, fileName);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling RegistrationApi#registerUsingStream");
@@ -160,6 +161,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **configName** | **String**| The configuration name this operation |
  **stream** | **File**| The binary data (not hashed). Hashing will be done on the server side. The binary data will not be stored |
+ **fileName** | **String**| Optional input file name. | [optional]
 
 ### Return type
 

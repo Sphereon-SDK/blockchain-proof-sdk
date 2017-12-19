@@ -82,7 +82,8 @@ public class RegistrationApiTest {
     public void registerUsingStreamTest() throws ApiException {
         String configName = null;
         File stream = null;
-        RegisterContentResponse response = api.registerUsingStream(configName, stream);
+        String fileName = null;
+        RegisterContentResponse response = api.registerUsingStream(configName, stream, fileName);
 
         // TODO: test validations
     }

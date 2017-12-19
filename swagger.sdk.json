@@ -108,6 +108,13 @@
             "description": "The binary data (not hashed). Hashing will be done on the server side. The binary data will not be stored",
             "type": "file",
             "required": true
+          },
+          {
+            "in": "query",
+            "name": "fileName",
+            "description": "Optional input file name.",
+            "type": "string",
+            "required": false
           }
         ],
         "tags": ["Verification"],
@@ -147,6 +154,13 @@
             "description": "The binary data (not hashed). Hashing will be done on the server side. The binary data will not be stored",
             "type": "file",
             "required": true
+          },
+          {
+            "in": "query",
+            "name": "fileName",
+            "description": "Optional input file name.",
+            "type": "string",
+            "required": false
           }
         ],
         "tags": ["Registration"],

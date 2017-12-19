@@ -143,7 +143,7 @@ Name | Type | Description  | Notes
 
 <a name="registerusingstream"></a>
 # **RegisterUsingStream**
-> RegisterContentResponse RegisterUsingStream (string configName, System.IO.Stream stream)
+> RegisterContentResponse RegisterUsingStream (string configName, System.IO.Stream stream, string fileName = null)
 
 Register bytestream/file hash
 
@@ -169,11 +169,12 @@ namespace Example
             var apiInstance = new RegistrationApi();
             var configName = configName_example;  // string | The configuration name this operation
             var stream = new System.IO.Stream(); // System.IO.Stream | The binary data (not hashed). Hashing will be done on the server side. The binary data will not be stored
+            var fileName = fileName_example;  // string | Optional input file name. (optional) 
 
             try
             {
                 // Register bytestream/file hash
-                RegisterContentResponse result = apiInstance.RegisterUsingStream(configName, stream);
+                RegisterContentResponse result = apiInstance.RegisterUsingStream(configName, stream, fileName);
                 Debug.WriteLine(result);
             }
             catch (Exception e)
@@ -191,6 +192,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **configName** | **string**| The configuration name this operation | 
  **stream** | **System.IO.Stream**| The binary data (not hashed). Hashing will be done on the server side. The binary data will not be stored | 
+ **fileName** | **string**| Optional input file name. | [optional] 
 
 ### Return type
 

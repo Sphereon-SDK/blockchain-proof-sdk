@@ -143,7 +143,7 @@ Name | Type | Description  | Notes
 
 <a name="verifyusingstream"></a>
 # **VerifyUsingStream**
-> VerifyContentResponse VerifyUsingStream (string configName, System.IO.Stream stream)
+> VerifyContentResponse VerifyUsingStream (string configName, System.IO.Stream stream, string fileName = null)
 
 Verify bytestream/file hash
 
@@ -169,11 +169,12 @@ namespace Example
             var apiInstance = new VerificationApi();
             var configName = configName_example;  // string | The configuration name this operation
             var stream = new System.IO.Stream(); // System.IO.Stream | The binary data (not hashed). Hashing will be done on the server side. The binary data will not be stored
+            var fileName = fileName_example;  // string | Optional input file name. (optional) 
 
             try
             {
                 // Verify bytestream/file hash
-                VerifyContentResponse result = apiInstance.VerifyUsingStream(configName, stream);
+                VerifyContentResponse result = apiInstance.VerifyUsingStream(configName, stream, fileName);
                 Debug.WriteLine(result);
             }
             catch (Exception e)
@@ -191,6 +192,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **configName** | **string**| The configuration name this operation | 
  **stream** | **System.IO.Stream**| The binary data (not hashed). Hashing will be done on the server side. The binary data will not be stored | 
+ **fileName** | **string**| Optional input file name. | [optional] 
 
 ### Return type
 

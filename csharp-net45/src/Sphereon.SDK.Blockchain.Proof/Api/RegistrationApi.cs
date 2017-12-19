@@ -79,8 +79,9 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
         /// <exception cref="Sphereon.SDK.Blockchain.Proof.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="configName">The configuration name this operation</param>
         /// <param name="stream">The binary data (not hashed). Hashing will be done on the server side. The binary data will not be stored</param>
+        /// <param name="fileName">Optional input file name. (optional)</param>
         /// <returns>RegisterContentResponse</returns>
-        RegisterContentResponse RegisterUsingStream (string configName, System.IO.Stream stream);
+        RegisterContentResponse RegisterUsingStream (string configName, System.IO.Stream stream, string fileName = null);
 
         /// <summary>
         /// Register bytestream/file hash
@@ -91,8 +92,9 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
         /// <exception cref="Sphereon.SDK.Blockchain.Proof.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="configName">The configuration name this operation</param>
         /// <param name="stream">The binary data (not hashed). Hashing will be done on the server side. The binary data will not be stored</param>
+        /// <param name="fileName">Optional input file name. (optional)</param>
         /// <returns>ApiResponse of RegisterContentResponse</returns>
-        ApiResponse<RegisterContentResponse> RegisterUsingStreamWithHttpInfo (string configName, System.IO.Stream stream);
+        ApiResponse<RegisterContentResponse> RegisterUsingStreamWithHttpInfo (string configName, System.IO.Stream stream, string fileName = null);
         #endregion Synchronous Operations
         #region Asynchronous Operations
         /// <summary>
@@ -150,8 +152,9 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
         /// <exception cref="Sphereon.SDK.Blockchain.Proof.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="configName">The configuration name this operation</param>
         /// <param name="stream">The binary data (not hashed). Hashing will be done on the server side. The binary data will not be stored</param>
+        /// <param name="fileName">Optional input file name. (optional)</param>
         /// <returns>Task of RegisterContentResponse</returns>
-        System.Threading.Tasks.Task<RegisterContentResponse> RegisterUsingStreamAsync (string configName, System.IO.Stream stream);
+        System.Threading.Tasks.Task<RegisterContentResponse> RegisterUsingStreamAsync (string configName, System.IO.Stream stream, string fileName = null);
 
         /// <summary>
         /// Register bytestream/file hash
@@ -162,8 +165,9 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
         /// <exception cref="Sphereon.SDK.Blockchain.Proof.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="configName">The configuration name this operation</param>
         /// <param name="stream">The binary data (not hashed). Hashing will be done on the server side. The binary data will not be stored</param>
+        /// <param name="fileName">Optional input file name. (optional)</param>
         /// <returns>Task of ApiResponse (RegisterContentResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<RegisterContentResponse>> RegisterUsingStreamAsyncWithHttpInfo (string configName, System.IO.Stream stream);
+        System.Threading.Tasks.Task<ApiResponse<RegisterContentResponse>> RegisterUsingStreamAsyncWithHttpInfo (string configName, System.IO.Stream stream, string fileName = null);
         #endregion Asynchronous Operations
     }
 
@@ -628,10 +632,11 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
         /// <exception cref="Sphereon.SDK.Blockchain.Proof.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="configName">The configuration name this operation</param>
         /// <param name="stream">The binary data (not hashed). Hashing will be done on the server side. The binary data will not be stored</param>
+        /// <param name="fileName">Optional input file name. (optional)</param>
         /// <returns>RegisterContentResponse</returns>
-        public RegisterContentResponse RegisterUsingStream (string configName, System.IO.Stream stream)
+        public RegisterContentResponse RegisterUsingStream (string configName, System.IO.Stream stream, string fileName = null)
         {
-             ApiResponse<RegisterContentResponse> localVarResponse = RegisterUsingStreamWithHttpInfo(configName, stream);
+             ApiResponse<RegisterContentResponse> localVarResponse = RegisterUsingStreamWithHttpInfo(configName, stream, fileName);
              return localVarResponse.Data;
         }
 
@@ -641,8 +646,9 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
         /// <exception cref="Sphereon.SDK.Blockchain.Proof.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="configName">The configuration name this operation</param>
         /// <param name="stream">The binary data (not hashed). Hashing will be done on the server side. The binary data will not be stored</param>
+        /// <param name="fileName">Optional input file name. (optional)</param>
         /// <returns>ApiResponse of RegisterContentResponse</returns>
-        public ApiResponse< RegisterContentResponse > RegisterUsingStreamWithHttpInfo (string configName, System.IO.Stream stream)
+        public ApiResponse< RegisterContentResponse > RegisterUsingStreamWithHttpInfo (string configName, System.IO.Stream stream, string fileName = null)
         {
             // verify the required parameter 'configName' is set
             if (configName == null)
@@ -674,6 +680,7 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
 
             if (configName != null) localVarPathParams.Add("configName", Configuration.ApiClient.ParameterToString(configName)); // path parameter
+            if (fileName != null) localVarQueryParams.Add("fileName", Configuration.ApiClient.ParameterToString(fileName)); // query parameter
             if (stream != null) localVarFileParams.Add("stream", Configuration.ApiClient.ParameterToFile("stream", stream));
 
             // authentication (oauth2schema) required
@@ -707,10 +714,11 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
         /// <exception cref="Sphereon.SDK.Blockchain.Proof.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="configName">The configuration name this operation</param>
         /// <param name="stream">The binary data (not hashed). Hashing will be done on the server side. The binary data will not be stored</param>
+        /// <param name="fileName">Optional input file name. (optional)</param>
         /// <returns>Task of RegisterContentResponse</returns>
-        public async System.Threading.Tasks.Task<RegisterContentResponse> RegisterUsingStreamAsync (string configName, System.IO.Stream stream)
+        public async System.Threading.Tasks.Task<RegisterContentResponse> RegisterUsingStreamAsync (string configName, System.IO.Stream stream, string fileName = null)
         {
-             ApiResponse<RegisterContentResponse> localVarResponse = await RegisterUsingStreamAsyncWithHttpInfo(configName, stream);
+             ApiResponse<RegisterContentResponse> localVarResponse = await RegisterUsingStreamAsyncWithHttpInfo(configName, stream, fileName);
              return localVarResponse.Data;
 
         }
@@ -721,8 +729,9 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
         /// <exception cref="Sphereon.SDK.Blockchain.Proof.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="configName">The configuration name this operation</param>
         /// <param name="stream">The binary data (not hashed). Hashing will be done on the server side. The binary data will not be stored</param>
+        /// <param name="fileName">Optional input file name. (optional)</param>
         /// <returns>Task of ApiResponse (RegisterContentResponse)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<RegisterContentResponse>> RegisterUsingStreamAsyncWithHttpInfo (string configName, System.IO.Stream stream)
+        public async System.Threading.Tasks.Task<ApiResponse<RegisterContentResponse>> RegisterUsingStreamAsyncWithHttpInfo (string configName, System.IO.Stream stream, string fileName = null)
         {
             // verify the required parameter 'configName' is set
             if (configName == null)
@@ -754,6 +763,7 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
 
             if (configName != null) localVarPathParams.Add("configName", Configuration.ApiClient.ParameterToString(configName)); // path parameter
+            if (fileName != null) localVarQueryParams.Add("fileName", Configuration.ApiClient.ParameterToString(fileName)); // query parameter
             if (stream != null) localVarFileParams.Add("stream", Configuration.ApiClient.ParameterToFile("stream", stream));
 
             // authentication (oauth2schema) required

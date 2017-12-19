@@ -12,6 +12,7 @@ using System;
 using System.Collections.Generic;
 using NUnit.Framework;
 using Sphereon.SDK.Blockchain.Proof.Api;
+using Sphereon.SDK.Blockchain.Proof.Client;
 using Sphereon.SDK.Blockchain.Proof.Model;
 
 namespace Sphereon.SDK.Blockchain.Proof.Test.Api
@@ -26,13 +27,14 @@ namespace Sphereon.SDK.Blockchain.Proof.Test.Api
 
         protected static string UnitTestConfigName;
         protected static byte[] RegisteredContent;
+        protected static byte[] RegisteredContentForStream;
         protected static string SettingsChainId;
         protected static string ProofChainId;
         protected static ConfigurationApi _configurationApi;
 
         static AbstractTests()
         {
-            UnitTestConfigName = TestConfigBasename + DateTime.Now.Ticks/1000;
+            UnitTestConfigName = TestConfigBasename + DateTime.Now.Ticks / 1000;
         }
 
         protected StoredSettings CreateProofAndSettingsChain()
@@ -47,7 +49,8 @@ namespace Sphereon.SDK.Blockchain.Proof.Test.Api
                 }
             };
 
-            var createConfiguration = new CreateConfigurationRequest(Name: UnitTestConfigName, InitialSettings: settings,
+            var createConfiguration = new CreateConfigurationRequest(Name: UnitTestConfigName,
+                InitialSettings: settings,
                 Context: TestContextMultichain, AccessMode: CreateConfigurationRequest.AccessModeEnum.PRIVATE);
 
             var configurationResponse = _configurationApi.CreateConfiguration(createConfiguration);
@@ -68,14 +71,19 @@ namespace Sphereon.SDK.Blockchain.Proof.Test.Api
         [SetUp]
         public void CreateConfigurationApi()
         {
-            _configurationApi = new ConfigurationApi
+            _configurationApi = new ConfigurationApi();
+            ConfigureApi(_configurationApi.Configuration);
+        }
+
+        protected void ConfigureApi(Configuration configuration)
+        {
+            configuration.AccessToken = FixedAccessToken;
+            configuration.Timeout = 40000;
+            var gatewayUrl = Environment.GetEnvironmentVariable("tests.dotnet.bcproof.gateway-url");
+            if (!string.IsNullOrEmpty(gatewayUrl))
             {
-                Configuration =
-                {
-                    AccessToken = FixedAccessToken,
-                    Timeout = 40000
-                }
-            };
+                configuration.ApiClient.RestClient.BaseUrl = new Uri(gatewayUrl);
+            }
         }
     }
 }

@@ -165,10 +165,13 @@
      * Verify a hash of content by supplying a file or some other binary data. Hashing will be done on the server side. Please note that the binary data itself will not be stored, only the hash. Use the registerUsingContent endpoint if you&#39;d like to store content
      * @param {String} configName The configuration name this operation
      * @param {File} stream The binary data (not hashed). Hashing will be done on the server side. The binary data will not be stored
+     * @param {Object} opts Optional parameters
+     * @param {String} opts.fileName Optional input file name.
      * @param {module:SphereonSDKBlockchainProof/api/VerificationApi~verifyUsingStreamCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {@link module:SphereonSDKBlockchainProof/model/VerifyContentResponse}
      */
-    this.verifyUsingStream = function(configName, stream, callback) {
+    this.verifyUsingStream = function(configName, stream, opts, callback) {
+      opts = opts || {};
       var postBody = null;
 
       // verify the required parameter 'configName' is set
@@ -186,6 +189,7 @@
         'configName': configName
       };
       var queryParams = {
+        'fileName': opts['fileName']
       };
       var headerParams = {
       };
