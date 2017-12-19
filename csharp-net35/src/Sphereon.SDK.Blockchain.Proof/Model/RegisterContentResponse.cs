@@ -70,11 +70,11 @@ namespace Sphereon.SDK.Blockchain.Proof.Model
         /// Initializes a new instance of the <see cref="RegisterContentResponse" /> class.
         /// </summary>
         /// <param name="ContextName">ContextName (required).</param>
+        /// <param name="SingleProofChain">This is the single proof chain where all hashes are stored (if configured).</param>
         /// <param name="RequestId">RequestId.</param>
-        /// <param name="ProofChain">ProofChain (required).</param>
+        /// <param name="PerHashProofChain">This is the proof chain specific for the current hash (if configured).</param>
         /// <param name="RegistrationState">RegistrationState (required).</param>
-        /// <param name="FileChain">FileChain.</param>
-        public RegisterContentResponse(string ContextName = default(string), string RequestId = default(string), CommittedChain ProofChain = default(CommittedChain), RegistrationStateEnum? RegistrationState = default(RegistrationStateEnum?), CommittedChain FileChain = default(CommittedChain))
+        public RegisterContentResponse(string ContextName = default(string), CommittedChain SingleProofChain = default(CommittedChain), string RequestId = default(string), CommittedChain PerHashProofChain = default(CommittedChain), RegistrationStateEnum? RegistrationState = default(RegistrationStateEnum?))
         {
             // to ensure "ContextName" is required (not null)
             if (ContextName == null)
@@ -85,15 +85,6 @@ namespace Sphereon.SDK.Blockchain.Proof.Model
             {
                 this.ContextName = ContextName;
             }
-            // to ensure "ProofChain" is required (not null)
-            if (ProofChain == null)
-            {
-                throw new InvalidDataException("ProofChain is a required property for RegisterContentResponse and cannot be null");
-            }
-            else
-            {
-                this.ProofChain = ProofChain;
-            }
             // to ensure "RegistrationState" is required (not null)
             if (RegistrationState == null)
             {
@@ -103,8 +94,9 @@ namespace Sphereon.SDK.Blockchain.Proof.Model
             {
                 this.RegistrationState = RegistrationState;
             }
+            this.SingleProofChain = SingleProofChain;
             this.RequestId = RequestId;
-            this.FileChain = FileChain;
+            this.PerHashProofChain = PerHashProofChain;
         }
         
         /// <summary>
@@ -114,23 +106,25 @@ namespace Sphereon.SDK.Blockchain.Proof.Model
         public string ContextName { get; set; }
 
         /// <summary>
+        /// This is the single proof chain where all hashes are stored (if configured)
+        /// </summary>
+        /// <value>This is the single proof chain where all hashes are stored (if configured)</value>
+        [DataMember(Name="singleProofChain", EmitDefaultValue=false)]
+        public CommittedChain SingleProofChain { get; set; }
+
+        /// <summary>
         /// Gets or Sets RequestId
         /// </summary>
         [DataMember(Name="requestId", EmitDefaultValue=false)]
         public string RequestId { get; set; }
 
         /// <summary>
-        /// Gets or Sets ProofChain
+        /// This is the proof chain specific for the current hash (if configured)
         /// </summary>
-        [DataMember(Name="proofChain", EmitDefaultValue=false)]
-        public CommittedChain ProofChain { get; set; }
+        /// <value>This is the proof chain specific for the current hash (if configured)</value>
+        [DataMember(Name="perHashProofChain", EmitDefaultValue=false)]
+        public CommittedChain PerHashProofChain { get; set; }
 
-
-        /// <summary>
-        /// Gets or Sets FileChain
-        /// </summary>
-        [DataMember(Name="fileChain", EmitDefaultValue=false)]
-        public CommittedChain FileChain { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -141,10 +135,10 @@ namespace Sphereon.SDK.Blockchain.Proof.Model
             var sb = new StringBuilder();
             sb.Append("class RegisterContentResponse {\n");
             sb.Append("  ContextName: ").Append(ContextName).Append("\n");
+            sb.Append("  SingleProofChain: ").Append(SingleProofChain).Append("\n");
             sb.Append("  RequestId: ").Append(RequestId).Append("\n");
-            sb.Append("  ProofChain: ").Append(ProofChain).Append("\n");
+            sb.Append("  PerHashProofChain: ").Append(PerHashProofChain).Append("\n");
             sb.Append("  RegistrationState: ").Append(RegistrationState).Append("\n");
-            sb.Append("  FileChain: ").Append(FileChain).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -187,24 +181,24 @@ namespace Sphereon.SDK.Blockchain.Proof.Model
                     this.ContextName.Equals(other.ContextName)
                 ) && 
                 (
+                    this.SingleProofChain == other.SingleProofChain ||
+                    this.SingleProofChain != null &&
+                    this.SingleProofChain.Equals(other.SingleProofChain)
+                ) && 
+                (
                     this.RequestId == other.RequestId ||
                     this.RequestId != null &&
                     this.RequestId.Equals(other.RequestId)
                 ) && 
                 (
-                    this.ProofChain == other.ProofChain ||
-                    this.ProofChain != null &&
-                    this.ProofChain.Equals(other.ProofChain)
+                    this.PerHashProofChain == other.PerHashProofChain ||
+                    this.PerHashProofChain != null &&
+                    this.PerHashProofChain.Equals(other.PerHashProofChain)
                 ) && 
                 (
                     this.RegistrationState == other.RegistrationState ||
                     this.RegistrationState != null &&
                     this.RegistrationState.Equals(other.RegistrationState)
-                ) && 
-                (
-                    this.FileChain == other.FileChain ||
-                    this.FileChain != null &&
-                    this.FileChain.Equals(other.FileChain)
                 );
         }
 
@@ -221,14 +215,14 @@ namespace Sphereon.SDK.Blockchain.Proof.Model
                 // Suitable nullity checks etc, of course :)
                 if (this.ContextName != null)
                     hash = hash * 59 + this.ContextName.GetHashCode();
+                if (this.SingleProofChain != null)
+                    hash = hash * 59 + this.SingleProofChain.GetHashCode();
                 if (this.RequestId != null)
                     hash = hash * 59 + this.RequestId.GetHashCode();
-                if (this.ProofChain != null)
-                    hash = hash * 59 + this.ProofChain.GetHashCode();
+                if (this.PerHashProofChain != null)
+                    hash = hash * 59 + this.PerHashProofChain.GetHashCode();
                 if (this.RegistrationState != null)
                     hash = hash * 59 + this.RegistrationState.GetHashCode();
-                if (this.FileChain != null)
-                    hash = hash * 59 + this.FileChain.GetHashCode();
                 return hash;
             }
         }

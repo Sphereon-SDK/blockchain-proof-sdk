@@ -94,7 +94,7 @@
       var returnType = RegisterContentResponse;
 
       return this.apiClient.callApi(
-        '/blockchain/proof/0.9/existence/{configName}/content', 'PUT',
+        '/existence/{configName}/content', 'PUT',
         pathParams, queryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, callback
       );
@@ -146,7 +146,7 @@
       var returnType = RegisterContentResponse;
 
       return this.apiClient.callApi(
-        '/blockchain/proof/0.9/existence/{configName}/streams/location', 'PUT',
+        '/existence/{configName}/streams/location', 'PUT',
         pathParams, queryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, callback
       );
@@ -199,7 +199,7 @@
       var returnType = RegisterContentResponse;
 
       return this.apiClient.callApi(
-        '/blockchain/proof/0.9/existence/{configName}/streams/multipart', 'PUT',
+        '/existence/{configName}/streams/multipart', 'PUT',
         pathParams, queryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, callback
       );

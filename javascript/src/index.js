@@ -17,12 +17,12 @@
 (function(factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
-    define(['SphereonSDKBlockchainProof/ApiClient', 'SphereonSDKBlockchainProof/model/ChainConfiguration', 'SphereonSDKBlockchainProof/model/ChainSettings', 'SphereonSDKBlockchainProof/model/CommittedChain', 'SphereonSDKBlockchainProof/model/ConfigurationResponse', 'SphereonSDKBlockchainProof/model/ContentRequest', 'SphereonSDKBlockchainProof/model/CreateConfiguration', 'SphereonSDKBlockchainProof/model/Error', 'SphereonSDKBlockchainProof/model/ErrorResponse', 'SphereonSDKBlockchainProof/model/RegisterContentResponse', 'SphereonSDKBlockchainProof/model/StoredSettings', 'SphereonSDKBlockchainProof/model/StreamLocation', 'SphereonSDKBlockchainProof/model/VerifyContentResponse', 'SphereonSDKBlockchainProof/api/ConfigurationApi', 'SphereonSDKBlockchainProof/api/RegistrationApi', 'SphereonSDKBlockchainProof/api/VerificationApi'], factory);
+    define(['SphereonSDKBlockchainProof/ApiClient', 'SphereonSDKBlockchainProof/model/ChainConfiguration', 'SphereonSDKBlockchainProof/model/ChainSettings', 'SphereonSDKBlockchainProof/model/CommittedChain', 'SphereonSDKBlockchainProof/model/ConfigurationResponse', 'SphereonSDKBlockchainProof/model/ContentRequest', 'SphereonSDKBlockchainProof/model/CreateConfigurationRequest', 'SphereonSDKBlockchainProof/model/Error', 'SphereonSDKBlockchainProof/model/ErrorResponse', 'SphereonSDKBlockchainProof/model/RegisterContentResponse', 'SphereonSDKBlockchainProof/model/StoredSettings', 'SphereonSDKBlockchainProof/model/StreamLocation', 'SphereonSDKBlockchainProof/model/VerifyContentResponse', 'SphereonSDKBlockchainProof/api/ConfigurationApi', 'SphereonSDKBlockchainProof/api/RegistrationApi', 'SphereonSDKBlockchainProof/api/VerificationApi'], factory);
   } else if (typeof module === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('./ApiClient'), require('./model/ChainConfiguration'), require('./model/ChainSettings'), require('./model/CommittedChain'), require('./model/ConfigurationResponse'), require('./model/ContentRequest'), require('./model/CreateConfiguration'), require('./model/Error'), require('./model/ErrorResponse'), require('./model/RegisterContentResponse'), require('./model/StoredSettings'), require('./model/StreamLocation'), require('./model/VerifyContentResponse'), require('./api/ConfigurationApi'), require('./api/RegistrationApi'), require('./api/VerificationApi'));
+    module.exports = factory(require('./ApiClient'), require('./model/ChainConfiguration'), require('./model/ChainSettings'), require('./model/CommittedChain'), require('./model/ConfigurationResponse'), require('./model/ContentRequest'), require('./model/CreateConfigurationRequest'), require('./model/Error'), require('./model/ErrorResponse'), require('./model/RegisterContentResponse'), require('./model/StoredSettings'), require('./model/StreamLocation'), require('./model/VerifyContentResponse'), require('./api/ConfigurationApi'), require('./api/RegistrationApi'), require('./api/VerificationApi'));
   }
-}(function(ApiClient, ChainConfiguration, ChainSettings, CommittedChain, ConfigurationResponse, ContentRequest, CreateConfiguration, Error, ErrorResponse, RegisterContentResponse, StoredSettings, StreamLocation, VerifyContentResponse, ConfigurationApi, RegistrationApi, VerificationApi) {
+}(function(ApiClient, ChainConfiguration, ChainSettings, CommittedChain, ConfigurationResponse, ContentRequest, CreateConfigurationRequest, Error, ErrorResponse, RegisterContentResponse, StoredSettings, StreamLocation, VerifyContentResponse, ConfigurationApi, RegistrationApi, VerificationApi) {
   'use strict';
 
   /**
@@ -88,10 +88,10 @@
      */
     ContentRequest: ContentRequest,
     /**
-     * The CreateConfiguration model constructor.
-     * @property {module:SphereonSDKBlockchainProof/model/CreateConfiguration}
+     * The CreateConfigurationRequest model constructor.
+     * @property {module:SphereonSDKBlockchainProof/model/CreateConfigurationRequest}
      */
-    CreateConfiguration: CreateConfiguration,
+    CreateConfigurationRequest: CreateConfigurationRequest,
     /**
      * The Error model constructor.
      * @property {module:SphereonSDKBlockchainProof/model/Error}

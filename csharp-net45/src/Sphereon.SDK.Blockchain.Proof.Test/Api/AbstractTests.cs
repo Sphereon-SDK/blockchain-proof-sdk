@@ -19,7 +19,7 @@ namespace Sphereon.SDK.Blockchain.Proof.Test.Api
     public abstract class AbstractTests
     {
         protected const string TestConfigBasename = "sphereoncstest";
-        protected const string TestContextMultichain = "testchain";
+        protected const string TestContextMultichain = "multichain";
 
         protected static string FixedAccessToken =
             Environment.GetEnvironmentVariable("tests.dotnet.bcproof.accesstoken");
@@ -37,36 +37,36 @@ namespace Sphereon.SDK.Blockchain.Proof.Test.Api
 
         protected StoredSettings CreateProofAndSettingsChain()
         {
-            CreateConfigurationApi();
             var settings = new ChainSettings(Version: ChainSettings.VersionEnum.NUMBER_1)
             {
                 HashAlgorithm = ChainSettings.HashAlgorithmEnum._256,
                 ContentRegistrationChains = new List<ChainSettings.ContentRegistrationChainsEnum>
                 {
-                    ChainSettings.ContentRegistrationChainsEnum.FILECHAIN,
-                    ChainSettings.ContentRegistrationChainsEnum.PROOFCHAIN
+                    ChainSettings.ContentRegistrationChainsEnum.PERHASHPROOFCHAIN,
+                    ChainSettings.ContentRegistrationChainsEnum.SINGLEPROOFCHAIN
                 }
             };
 
-            var createConfiguration = new CreateConfiguration(Name: UnitTestConfigName, InitialSettings: settings,
-                Context: TestContextMultichain, AccessLevel: CreateConfiguration.AccessLevelEnum.PRIVATE);
+            var createConfiguration = new CreateConfigurationRequest(Name: UnitTestConfigName, InitialSettings: settings,
+                Context: TestContextMultichain, AccessMode: CreateConfigurationRequest.AccessModeEnum.PRIVATE);
 
             var configurationResponse = _configurationApi.CreateConfiguration(createConfiguration);
             var storedSettings = configurationResponse.StoredSettings;
             Assert.NotNull(storedSettings);
             Assert.NotNull(storedSettings.Context);
             Assert.NotNull(storedSettings.ChainSettings);
-            Assert.NotNull(storedSettings.ProofChain);
+            Assert.NotNull(storedSettings.SingleProofChain);
             Assert.NotNull(storedSettings.SettingsChain);
             Assert.NotNull(storedSettings.ChainConfiguration);
-            Assert.NotNull(storedSettings.ChainSettings.ProofChainId);
+            Assert.NotNull(storedSettings.ChainSettings.SingleProofChain);
             Assert.NotNull(storedSettings.ChainSettings.HashAlgorithm);
             SettingsChainId = storedSettings.SettingsChain.Id;
-            ProofChainId = storedSettings.ProofChain.Id;
+            ProofChainId = storedSettings.SingleProofChain.Id;
             return storedSettings;
         }
 
-        private void CreateConfigurationApi()
+        [SetUp]
+        public void CreateConfigurationApi()
         {
             _configurationApi = new ConfigurationApi
             {

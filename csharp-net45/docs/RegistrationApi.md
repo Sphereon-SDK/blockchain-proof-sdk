@@ -1,12 +1,12 @@
 # Sphereon.SDK.Blockchain.Proof.Api.RegistrationApi
 
-All URIs are relative to *https://gw-dev.api.cloud.sphereon.com*
+All URIs are relative to *https://gw.api.cloud.sphereon.com/blockchain/proof/0.9*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**RegisterUsingContent**](RegistrationApi.md#registerusingcontent) | **PUT** /blockchain/proof/0.9/existence/{configName}/content | Register content
-[**RegisterUsingLocation**](RegistrationApi.md#registerusinglocation) | **PUT** /blockchain/proof/0.9/existence/{configName}/streams/location | Register hash using the Storage API
-[**RegisterUsingStream**](RegistrationApi.md#registerusingstream) | **PUT** /blockchain/proof/0.9/existence/{configName}/streams/multipart | Register bytestream/file hash
+[**RegisterUsingContent**](RegistrationApi.md#registerusingcontent) | **PUT** /existence/{configName}/content | Register content
+[**RegisterUsingLocation**](RegistrationApi.md#registerusinglocation) | **PUT** /existence/{configName}/streams/location | Register hash using the Storage API
+[**RegisterUsingStream**](RegistrationApi.md#registerusingstream) | **PUT** /existence/{configName}/streams/multipart | Register bytestream/file hash
 
 
 <a name="registerusingcontent"></a>

@@ -4,20 +4,20 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **signatureHash** | **Blob** |  | 
+**singleProofChain** | **String** | The proof chain id linked to the current configuration. This is a shared proof chain for all registrations | [optional] 
 **contentRegistrationChains** | **[String]** | A set of content registration targets | [optional] 
-**proofChainId** | **String** | The proof chain id linked to the current configuration | [optional] 
-**metadataRegistrationChains** | **[String]** | A set of metadata registration targets | [optional] 
+**metadataRegistrationChains** | **[String]** | A set of metadata registration targets (not in use currently) | [optional] 
 **version** | **Number** | The settings version (only 1 for now) | 
-**hashAlgorithm** | **String** | The hashing method used for the content | [optional] 
+**hashAlgorithm** | **String** | The hashing method used for the content. We always return and expect the hash in HEX form | [optional] 
 
 
 <a name="[ContentRegistrationChainsEnum]"></a>
 ## Enum: [ContentRegistrationChainsEnum]
 
 
-* `FILE_CHAIN` (value: `"FILE_CHAIN"`)
+* `PER_HASH_PROOF_CHAIN` (value: `"PER_HASH_PROOF_CHAIN"`)
 
-* `PROOF_CHAIN` (value: `"PROOF_CHAIN"`)
+* `SINGLE_PROOF_CHAIN` (value: `"SINGLE_PROOF_CHAIN"`)
 
 
 

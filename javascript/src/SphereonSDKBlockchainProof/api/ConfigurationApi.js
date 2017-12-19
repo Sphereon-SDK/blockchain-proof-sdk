@@ -17,18 +17,18 @@
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
-    define(['SphereonSDKBlockchainProof/ApiClient', 'SphereonSDKBlockchainProof/model/ConfigurationResponse', 'SphereonSDKBlockchainProof/model/CreateConfiguration', 'SphereonSDKBlockchainProof/model/ErrorResponse'], factory);
+    define(['SphereonSDKBlockchainProof/ApiClient', 'SphereonSDKBlockchainProof/model/ConfigurationResponse', 'SphereonSDKBlockchainProof/model/CreateConfigurationRequest', 'SphereonSDKBlockchainProof/model/ErrorResponse'], factory);
   } else if (typeof module === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('../model/ConfigurationResponse'), require('../model/CreateConfiguration'), require('../model/ErrorResponse'));
+    module.exports = factory(require('../ApiClient'), require('../model/ConfigurationResponse'), require('../model/CreateConfigurationRequest'), require('../model/ErrorResponse'));
   } else {
     // Browser globals (root is window)
     if (!root.BlockchainProof) {
       root.BlockchainProof = {};
     }
-    root.BlockchainProof.ConfigurationApi = factory(root.BlockchainProof.ApiClient, root.BlockchainProof.ConfigurationResponse, root.BlockchainProof.CreateConfiguration, root.BlockchainProof.ErrorResponse);
+    root.BlockchainProof.ConfigurationApi = factory(root.BlockchainProof.ApiClient, root.BlockchainProof.ConfigurationResponse, root.BlockchainProof.CreateConfigurationRequest, root.BlockchainProof.ErrorResponse);
   }
-}(this, function(ApiClient, ConfigurationResponse, CreateConfiguration, ErrorResponse) {
+}(this, function(ApiClient, ConfigurationResponse, CreateConfigurationRequest, ErrorResponse) {
   'use strict';
 
   /**
@@ -59,7 +59,7 @@
     /**
      * Create a new configuration
      * Create a new configuration
-     * @param {module:SphereonSDKBlockchainProof/model/CreateConfiguration} request Create a new Proof of Existence context using the provided entity settings
+     * @param {module:SphereonSDKBlockchainProof/model/CreateConfigurationRequest} request Create a new Proof of Existence context using the provided entity settings
      * @param {module:SphereonSDKBlockchainProof/api/ConfigurationApi~createConfigurationCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {@link module:SphereonSDKBlockchainProof/model/ConfigurationResponse}
      */
@@ -87,7 +87,7 @@
       var returnType = ConfigurationResponse;
 
       return this.apiClient.callApi(
-        '/blockchain/proof/0.9/config', 'POST',
+        '/config', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, callback
       );
@@ -133,7 +133,7 @@
       var returnType = ConfigurationResponse;
 
       return this.apiClient.callApi(
-        '/blockchain/proof/0.9/config/{configName}', 'GET',
+        '/config/{configName}', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, callback
       );

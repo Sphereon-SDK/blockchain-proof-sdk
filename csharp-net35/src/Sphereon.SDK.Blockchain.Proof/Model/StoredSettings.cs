@@ -38,12 +38,12 @@ namespace Sphereon.SDK.Blockchain.Proof.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="StoredSettings" /> class.
         /// </summary>
+        /// <param name="SingleProofChain">SingleProofChain.</param>
         /// <param name="SettingsChain">SettingsChain (required).</param>
         /// <param name="ChainSettings">ChainSettings (required).</param>
         /// <param name="ChainConfiguration">ChainConfiguration (required).</param>
         /// <param name="MetaDataChain">MetaDataChain.</param>
-        /// <param name="ProofChain">ProofChain.</param>
-        public StoredSettings(CommittedChain SettingsChain = default(CommittedChain), ChainSettings ChainSettings = default(ChainSettings), ChainConfiguration ChainConfiguration = default(ChainConfiguration), CommittedChain MetaDataChain = default(CommittedChain), CommittedChain ProofChain = default(CommittedChain))
+        public StoredSettings(CommittedChain SingleProofChain = default(CommittedChain), CommittedChain SettingsChain = default(CommittedChain), ChainSettings ChainSettings = default(ChainSettings), ChainConfiguration ChainConfiguration = default(ChainConfiguration), CommittedChain MetaDataChain = default(CommittedChain))
         {
             // to ensure "SettingsChain" is required (not null)
             if (SettingsChain == null)
@@ -72,10 +72,16 @@ namespace Sphereon.SDK.Blockchain.Proof.Model
             {
                 this.ChainConfiguration = ChainConfiguration;
             }
+            this.SingleProofChain = SingleProofChain;
             this.MetaDataChain = MetaDataChain;
-            this.ProofChain = ProofChain;
         }
         
+        /// <summary>
+        /// Gets or Sets SingleProofChain
+        /// </summary>
+        [DataMember(Name="singleProofChain", EmitDefaultValue=false)]
+        public CommittedChain SingleProofChain { get; set; }
+
         /// <summary>
         /// Gets or Sets SettingsChain
         /// </summary>
@@ -101,6 +107,12 @@ namespace Sphereon.SDK.Blockchain.Proof.Model
         public ChainConfiguration ChainConfiguration { get; set; }
 
         /// <summary>
+        /// Gets or Sets Id
+        /// </summary>
+        [DataMember(Name="id", EmitDefaultValue=false)]
+        public string Id { get; private set; }
+
+        /// <summary>
         /// Gets or Sets ValidFrom
         /// </summary>
         [DataMember(Name="validFrom", EmitDefaultValue=false)]
@@ -113,12 +125,6 @@ namespace Sphereon.SDK.Blockchain.Proof.Model
         public CommittedChain MetaDataChain { get; set; }
 
         /// <summary>
-        /// Gets or Sets ProofChain
-        /// </summary>
-        [DataMember(Name="proofChain", EmitDefaultValue=false)]
-        public CommittedChain ProofChain { get; set; }
-
-        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -126,13 +132,14 @@ namespace Sphereon.SDK.Blockchain.Proof.Model
         {
             var sb = new StringBuilder();
             sb.Append("class StoredSettings {\n");
+            sb.Append("  SingleProofChain: ").Append(SingleProofChain).Append("\n");
             sb.Append("  SettingsChain: ").Append(SettingsChain).Append("\n");
             sb.Append("  ChainSettings: ").Append(ChainSettings).Append("\n");
             sb.Append("  Context: ").Append(Context).Append("\n");
             sb.Append("  ChainConfiguration: ").Append(ChainConfiguration).Append("\n");
+            sb.Append("  Id: ").Append(Id).Append("\n");
             sb.Append("  ValidFrom: ").Append(ValidFrom).Append("\n");
             sb.Append("  MetaDataChain: ").Append(MetaDataChain).Append("\n");
-            sb.Append("  ProofChain: ").Append(ProofChain).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -170,6 +177,11 @@ namespace Sphereon.SDK.Blockchain.Proof.Model
 
             return 
                 (
+                    this.SingleProofChain == other.SingleProofChain ||
+                    this.SingleProofChain != null &&
+                    this.SingleProofChain.Equals(other.SingleProofChain)
+                ) && 
+                (
                     this.SettingsChain == other.SettingsChain ||
                     this.SettingsChain != null &&
                     this.SettingsChain.Equals(other.SettingsChain)
@@ -190,6 +202,11 @@ namespace Sphereon.SDK.Blockchain.Proof.Model
                     this.ChainConfiguration.Equals(other.ChainConfiguration)
                 ) && 
                 (
+                    this.Id == other.Id ||
+                    this.Id != null &&
+                    this.Id.Equals(other.Id)
+                ) && 
+                (
                     this.ValidFrom == other.ValidFrom ||
                     this.ValidFrom != null &&
                     this.ValidFrom.Equals(other.ValidFrom)
@@ -198,11 +215,6 @@ namespace Sphereon.SDK.Blockchain.Proof.Model
                     this.MetaDataChain == other.MetaDataChain ||
                     this.MetaDataChain != null &&
                     this.MetaDataChain.Equals(other.MetaDataChain)
-                ) && 
-                (
-                    this.ProofChain == other.ProofChain ||
-                    this.ProofChain != null &&
-                    this.ProofChain.Equals(other.ProofChain)
                 );
         }
 
@@ -217,6 +229,8 @@ namespace Sphereon.SDK.Blockchain.Proof.Model
             {
                 int hash = 41;
                 // Suitable nullity checks etc, of course :)
+                if (this.SingleProofChain != null)
+                    hash = hash * 59 + this.SingleProofChain.GetHashCode();
                 if (this.SettingsChain != null)
                     hash = hash * 59 + this.SettingsChain.GetHashCode();
                 if (this.ChainSettings != null)
@@ -225,12 +239,12 @@ namespace Sphereon.SDK.Blockchain.Proof.Model
                     hash = hash * 59 + this.Context.GetHashCode();
                 if (this.ChainConfiguration != null)
                     hash = hash * 59 + this.ChainConfiguration.GetHashCode();
+                if (this.Id != null)
+                    hash = hash * 59 + this.Id.GetHashCode();
                 if (this.ValidFrom != null)
                     hash = hash * 59 + this.ValidFrom.GetHashCode();
                 if (this.MetaDataChain != null)
                     hash = hash * 59 + this.MetaDataChain.GetHashCode();
-                if (this.ProofChain != null)
-                    hash = hash * 59 + this.ProofChain.GetHashCode();
                 return hash;
             }
         }

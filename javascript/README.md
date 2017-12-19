@@ -104,7 +104,7 @@ oauth2schema.accessToken = "YOUR ACCESS TOKEN"
 
 var api = new BlockchainProof.ConfigurationApi()
 
-var request = new BlockchainProof.CreateConfiguration(); // {CreateConfiguration} Create a new Proof of Existence context using the provided entity settings
+var request = new BlockchainProof.CreateConfigurationRequest(); // {CreateConfigurationRequest} Create a new Proof of Existence context using the provided entity settings
 
 
 var callback = function(error, data, response) {
@@ -120,18 +120,18 @@ api.createConfiguration(request, callback);
 
 ## Documentation for API Endpoints
 
-All URIs are relative to *https://gw-dev.api.cloud.sphereon.com*
+All URIs are relative to *https://gw.api.cloud.sphereon.com/blockchain/proof/0.9*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*BlockchainProof.ConfigurationApi* | [**createConfiguration**](docs/ConfigurationApi.md#createConfiguration) | **POST** /blockchain/proof/0.9/config | Create a new configuration
-*BlockchainProof.ConfigurationApi* | [**getConfiguration**](docs/ConfigurationApi.md#getConfiguration) | **GET** /blockchain/proof/0.9/config/{configName} | Get configuration
-*BlockchainProof.RegistrationApi* | [**registerUsingContent**](docs/RegistrationApi.md#registerUsingContent) | **PUT** /blockchain/proof/0.9/existence/{configName}/content | Register content
-*BlockchainProof.RegistrationApi* | [**registerUsingLocation**](docs/RegistrationApi.md#registerUsingLocation) | **PUT** /blockchain/proof/0.9/existence/{configName}/streams/location | Register hash using the Storage API
-*BlockchainProof.RegistrationApi* | [**registerUsingStream**](docs/RegistrationApi.md#registerUsingStream) | **PUT** /blockchain/proof/0.9/existence/{configName}/streams/multipart | Register bytestream/file hash
-*BlockchainProof.VerificationApi* | [**verifyUsingContent**](docs/VerificationApi.md#verifyUsingContent) | **POST** /blockchain/proof/0.9/existence/{configName}/content | Verify content
-*BlockchainProof.VerificationApi* | [**verifyUsingLocation**](docs/VerificationApi.md#verifyUsingLocation) | **POST** /blockchain/proof/0.9/existence/{configName}/streams/location | Verify hash using the Storage API
-*BlockchainProof.VerificationApi* | [**verifyUsingStream**](docs/VerificationApi.md#verifyUsingStream) | **POST** /blockchain/proof/0.9/existence/{configName}/streams/multipart | Verify bytestream/file hash
+*BlockchainProof.ConfigurationApi* | [**createConfiguration**](docs/ConfigurationApi.md#createConfiguration) | **POST** /config | Create a new configuration
+*BlockchainProof.ConfigurationApi* | [**getConfiguration**](docs/ConfigurationApi.md#getConfiguration) | **GET** /config/{configName} | Get configuration
+*BlockchainProof.RegistrationApi* | [**registerUsingContent**](docs/RegistrationApi.md#registerUsingContent) | **PUT** /existence/{configName}/content | Register content
+*BlockchainProof.RegistrationApi* | [**registerUsingLocation**](docs/RegistrationApi.md#registerUsingLocation) | **PUT** /existence/{configName}/streams/location | Register hash using the Storage API
+*BlockchainProof.RegistrationApi* | [**registerUsingStream**](docs/RegistrationApi.md#registerUsingStream) | **PUT** /existence/{configName}/streams/multipart | Register bytestream/file hash
+*BlockchainProof.VerificationApi* | [**verifyUsingContent**](docs/VerificationApi.md#verifyUsingContent) | **POST** /existence/{configName}/content | Verify content
+*BlockchainProof.VerificationApi* | [**verifyUsingLocation**](docs/VerificationApi.md#verifyUsingLocation) | **POST** /existence/{configName}/streams/location | Verify hash using the Storage API
+*BlockchainProof.VerificationApi* | [**verifyUsingStream**](docs/VerificationApi.md#verifyUsingStream) | **POST** /existence/{configName}/streams/multipart | Verify bytestream/file hash
 
 
 ## Documentation for Models
@@ -141,7 +141,7 @@ Class | Method | HTTP request | Description
  - [BlockchainProof.CommittedChain](docs/CommittedChain.md)
  - [BlockchainProof.ConfigurationResponse](docs/ConfigurationResponse.md)
  - [BlockchainProof.ContentRequest](docs/ContentRequest.md)
- - [BlockchainProof.CreateConfiguration](docs/CreateConfiguration.md)
+ - [BlockchainProof.CreateConfigurationRequest](docs/CreateConfigurationRequest.md)
  - [BlockchainProof.Error](docs/Error.md)
  - [BlockchainProof.ErrorResponse](docs/ErrorResponse.md)
  - [BlockchainProof.RegisterContentResponse](docs/RegisterContentResponse.md)

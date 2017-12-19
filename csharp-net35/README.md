@@ -73,7 +73,7 @@ namespace Example
             Configuration.Default.AccessToken = "YOUR_ACCESS_TOKEN";
 
             var apiInstance = new ConfigurationApi();
-            var request = new CreateConfiguration(); // CreateConfiguration | Create a new Proof of Existence context using the provided entity settings
+            var request = new CreateConfigurationRequest(); // CreateConfigurationRequest | Create a new Proof of Existence context using the provided entity settings
 
             try
             {
@@ -94,18 +94,18 @@ namespace Example
 <a name="documentation-for-api-endpoints"></a>
 ## Documentation for API Endpoints
 
-All URIs are relative to *https://gw-dev.api.cloud.sphereon.com*
+All URIs are relative to *https://gw.api.cloud.sphereon.com/blockchain/proof/0.9*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*ConfigurationApi* | [**CreateConfiguration**](docs/ConfigurationApi.md#createconfiguration) | **POST** /blockchain/proof/0.9/config | Create a new configuration
-*ConfigurationApi* | [**GetConfiguration**](docs/ConfigurationApi.md#getconfiguration) | **GET** /blockchain/proof/0.9/config/{configName} | Get configuration
-*RegistrationApi* | [**RegisterUsingContent**](docs/RegistrationApi.md#registerusingcontent) | **PUT** /blockchain/proof/0.9/existence/{configName}/content | Register content
-*RegistrationApi* | [**RegisterUsingLocation**](docs/RegistrationApi.md#registerusinglocation) | **PUT** /blockchain/proof/0.9/existence/{configName}/streams/location | Register hash using the Storage API
-*RegistrationApi* | [**RegisterUsingStream**](docs/RegistrationApi.md#registerusingstream) | **PUT** /blockchain/proof/0.9/existence/{configName}/streams/multipart | Register bytestream/file hash
-*VerificationApi* | [**VerifyUsingContent**](docs/VerificationApi.md#verifyusingcontent) | **POST** /blockchain/proof/0.9/existence/{configName}/content | Verify content
-*VerificationApi* | [**VerifyUsingLocation**](docs/VerificationApi.md#verifyusinglocation) | **POST** /blockchain/proof/0.9/existence/{configName}/streams/location | Verify hash using the Storage API
-*VerificationApi* | [**VerifyUsingStream**](docs/VerificationApi.md#verifyusingstream) | **POST** /blockchain/proof/0.9/existence/{configName}/streams/multipart | Verify bytestream/file hash
+*ConfigurationApi* | [**CreateConfiguration**](docs/ConfigurationApi.md#createconfiguration) | **POST** /config | Create a new configuration
+*ConfigurationApi* | [**GetConfiguration**](docs/ConfigurationApi.md#getconfiguration) | **GET** /config/{configName} | Get configuration
+*RegistrationApi* | [**RegisterUsingContent**](docs/RegistrationApi.md#registerusingcontent) | **PUT** /existence/{configName}/content | Register content
+*RegistrationApi* | [**RegisterUsingLocation**](docs/RegistrationApi.md#registerusinglocation) | **PUT** /existence/{configName}/streams/location | Register hash using the Storage API
+*RegistrationApi* | [**RegisterUsingStream**](docs/RegistrationApi.md#registerusingstream) | **PUT** /existence/{configName}/streams/multipart | Register bytestream/file hash
+*VerificationApi* | [**VerifyUsingContent**](docs/VerificationApi.md#verifyusingcontent) | **POST** /existence/{configName}/content | Verify content
+*VerificationApi* | [**VerifyUsingLocation**](docs/VerificationApi.md#verifyusinglocation) | **POST** /existence/{configName}/streams/location | Verify hash using the Storage API
+*VerificationApi* | [**VerifyUsingStream**](docs/VerificationApi.md#verifyusingstream) | **POST** /existence/{configName}/streams/multipart | Verify bytestream/file hash
 
 
 <a name="documentation-for-models"></a>
@@ -116,7 +116,7 @@ Class | Method | HTTP request | Description
  - [Model.CommittedChain](docs/CommittedChain.md)
  - [Model.ConfigurationResponse](docs/ConfigurationResponse.md)
  - [Model.ContentRequest](docs/ContentRequest.md)
- - [Model.CreateConfiguration](docs/CreateConfiguration.md)
+ - [Model.CreateConfigurationRequest](docs/CreateConfigurationRequest.md)
  - [Model.Error](docs/Error.md)
  - [Model.ErrorResponse](docs/ErrorResponse.md)
  - [Model.RegisterContentResponse](docs/RegisterContentResponse.md)

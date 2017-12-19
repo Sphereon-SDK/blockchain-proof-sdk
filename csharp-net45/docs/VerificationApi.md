@@ -1,12 +1,12 @@
 # Sphereon.SDK.Blockchain.Proof.Api.VerificationApi
 
-All URIs are relative to *https://gw-dev.api.cloud.sphereon.com*
+All URIs are relative to *https://gw.api.cloud.sphereon.com/blockchain/proof/0.9*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**VerifyUsingContent**](VerificationApi.md#verifyusingcontent) | **POST** /blockchain/proof/0.9/existence/{configName}/content | Verify content
-[**VerifyUsingLocation**](VerificationApi.md#verifyusinglocation) | **POST** /blockchain/proof/0.9/existence/{configName}/streams/location | Verify hash using the Storage API
-[**VerifyUsingStream**](VerificationApi.md#verifyusingstream) | **POST** /blockchain/proof/0.9/existence/{configName}/streams/multipart | Verify bytestream/file hash
+[**VerifyUsingContent**](VerificationApi.md#verifyusingcontent) | **POST** /existence/{configName}/content | Verify content
+[**VerifyUsingLocation**](VerificationApi.md#verifyusinglocation) | **POST** /existence/{configName}/streams/location | Verify hash using the Storage API
+[**VerifyUsingStream**](VerificationApi.md#verifyusingstream) | **POST** /existence/{configName}/streams/multipart | Verify bytestream/file hash
 
 
 <a name="verifyusingcontent"></a>

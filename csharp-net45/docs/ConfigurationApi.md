@@ -1,16 +1,16 @@
 # Sphereon.SDK.Blockchain.Proof.Api.ConfigurationApi
 
-All URIs are relative to *https://gw-dev.api.cloud.sphereon.com*
+All URIs are relative to *https://gw.api.cloud.sphereon.com/blockchain/proof/0.9*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CreateConfiguration**](ConfigurationApi.md#createconfiguration) | **POST** /blockchain/proof/0.9/config | Create a new configuration
-[**GetConfiguration**](ConfigurationApi.md#getconfiguration) | **GET** /blockchain/proof/0.9/config/{configName} | Get configuration
+[**CreateConfiguration**](ConfigurationApi.md#createconfiguration) | **POST** /config | Create a new configuration
+[**GetConfiguration**](ConfigurationApi.md#getconfiguration) | **GET** /config/{configName} | Get configuration
 
 
 <a name="createconfiguration"></a>
 # **CreateConfiguration**
-> ConfigurationResponse CreateConfiguration (CreateConfiguration request)
+> ConfigurationResponse CreateConfiguration (CreateConfigurationRequest request)
 
 Create a new configuration
 
@@ -34,7 +34,7 @@ namespace Example
             Configuration.Default.AccessToken = "YOUR_ACCESS_TOKEN";
 
             var apiInstance = new ConfigurationApi();
-            var request = new CreateConfiguration(); // CreateConfiguration | Create a new Proof of Existence context using the provided entity settings
+            var request = new CreateConfigurationRequest(); // CreateConfigurationRequest | Create a new Proof of Existence context using the provided entity settings
 
             try
             {
@@ -55,7 +55,7 @@ namespace Example
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **request** | [**CreateConfiguration**](CreateConfiguration.md)| Create a new Proof of Existence context using the provided entity settings | 
+ **request** | [**CreateConfigurationRequest**](CreateConfigurationRequest.md)| Create a new Proof of Existence context using the provided entity settings | 
 
 ### Return type
 

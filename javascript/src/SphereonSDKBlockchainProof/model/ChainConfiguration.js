@@ -44,20 +44,20 @@
    * Constructs a new <code>ChainConfiguration</code>.
    * @alias module:SphereonSDKBlockchainProof/model/ChainConfiguration
    * @class
-   * @param accessLevel {module:SphereonSDKBlockchainProof/model/ChainConfiguration.AccessLevelEnum} 
    * @param context {String} 
    * @param name {String} 
    * @param settingChainId {String} 
    * @param id {String} 
+   * @param accessMode {module:SphereonSDKBlockchainProof/model/ChainConfiguration.AccessModeEnum} 
    */
-  var exports = function(accessLevel, context, name, settingChainId, id) {
+  var exports = function(context, name, settingChainId, id, accessMode) {
     var _this = this;
 
-    _this['accessLevel'] = accessLevel;
     _this['context'] = context;
     _this['name'] = name;
     _this['settingChainId'] = settingChainId;
     _this['id'] = id;
+    _this['accessMode'] = accessMode;
   };
 
   /**
@@ -71,9 +71,6 @@
     if (data) {
       obj = obj || new exports();
 
-      if (data.hasOwnProperty('accessLevel')) {
-        obj['accessLevel'] = ApiClient.convertToType(data['accessLevel'], 'String');
-      }
       if (data.hasOwnProperty('context')) {
         obj['context'] = ApiClient.convertToType(data['context'], 'String');
       }
@@ -86,14 +83,13 @@
       if (data.hasOwnProperty('id')) {
         obj['id'] = ApiClient.convertToType(data['id'], 'String');
       }
+      if (data.hasOwnProperty('accessMode')) {
+        obj['accessMode'] = ApiClient.convertToType(data['accessMode'], 'String');
+      }
     }
     return obj;
   }
 
-  /**
-   * @member {module:SphereonSDKBlockchainProof/model/ChainConfiguration.AccessLevelEnum} accessLevel
-   */
-  exports.prototype['accessLevel'] = undefined;
   /**
    * @member {String} context
    */
@@ -110,14 +106,18 @@
    * @member {String} id
    */
   exports.prototype['id'] = undefined;
+  /**
+   * @member {module:SphereonSDKBlockchainProof/model/ChainConfiguration.AccessModeEnum} accessMode
+   */
+  exports.prototype['accessMode'] = undefined;
 
 
   /**
-   * Allowed values for the <code>accessLevel</code> property.
+   * Allowed values for the <code>accessMode</code> property.
    * @enum {String}
    * @readonly
    */
-  exports.AccessLevelEnum = {
+  exports.AccessModeEnum = {
     /**
      * value: "PUBLIC"
      * @const

@@ -49,17 +49,19 @@
    * @param chainSettings {module:SphereonSDKBlockchainProof/model/ChainSettings} 
    * @param context {String} 
    * @param chainConfiguration {module:SphereonSDKBlockchainProof/model/ChainConfiguration} 
+   * @param id {String} 
    * @param validFrom {Date} 
    */
-  var exports = function(settingsChain, chainSettings, context, chainConfiguration, validFrom) {
+  var exports = function(settingsChain, chainSettings, context, chainConfiguration, id, validFrom) {
     var _this = this;
+
 
     _this['settingsChain'] = settingsChain;
     _this['chainSettings'] = chainSettings;
     _this['context'] = context;
     _this['chainConfiguration'] = chainConfiguration;
+    _this['id'] = id;
     _this['validFrom'] = validFrom;
-
 
   };
 
@@ -74,6 +76,9 @@
     if (data) {
       obj = obj || new exports();
 
+      if (data.hasOwnProperty('singleProofChain')) {
+        obj['singleProofChain'] = CommittedChain.constructFromObject(data['singleProofChain']);
+      }
       if (data.hasOwnProperty('settingsChain')) {
         obj['settingsChain'] = CommittedChain.constructFromObject(data['settingsChain']);
       }
@@ -86,19 +91,23 @@
       if (data.hasOwnProperty('chainConfiguration')) {
         obj['chainConfiguration'] = ChainConfiguration.constructFromObject(data['chainConfiguration']);
       }
+      if (data.hasOwnProperty('id')) {
+        obj['id'] = ApiClient.convertToType(data['id'], 'String');
+      }
       if (data.hasOwnProperty('validFrom')) {
         obj['validFrom'] = ApiClient.convertToType(data['validFrom'], 'Date');
       }
       if (data.hasOwnProperty('metaDataChain')) {
         obj['metaDataChain'] = CommittedChain.constructFromObject(data['metaDataChain']);
       }
-      if (data.hasOwnProperty('proofChain')) {
-        obj['proofChain'] = CommittedChain.constructFromObject(data['proofChain']);
-      }
     }
     return obj;
   }
 
+  /**
+   * @member {module:SphereonSDKBlockchainProof/model/CommittedChain} singleProofChain
+   */
+  exports.prototype['singleProofChain'] = undefined;
   /**
    * @member {module:SphereonSDKBlockchainProof/model/CommittedChain} settingsChain
    */
@@ -116,6 +125,10 @@
    */
   exports.prototype['chainConfiguration'] = undefined;
   /**
+   * @member {String} id
+   */
+  exports.prototype['id'] = undefined;
+  /**
    * @member {Date} validFrom
    */
   exports.prototype['validFrom'] = undefined;
@@ -123,10 +136,6 @@
    * @member {module:SphereonSDKBlockchainProof/model/CommittedChain} metaDataChain
    */
   exports.prototype['metaDataChain'] = undefined;
-  /**
-   * @member {module:SphereonSDKBlockchainProof/model/CommittedChain} proofChain
-   */
-  exports.prototype['proofChain'] = undefined;
 
 
 
