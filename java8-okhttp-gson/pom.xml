@@ -19,20 +19,22 @@
 
   <licenses>
     <license>
-      <name>Unlicense</name>
+      <name>Apache2</name>
       <url>http://www.apache.org/licenses/LICENSE-2.0</url>
       <distribution>repo</distribution>
     </license>
   </licenses>
 
-  <developers>
-    <developer>
-      <name>Swagger</name>
-      <email>apiteam@swagger.io</email>
-      <organization>Swagger</organization>
-      <organizationUrl>http://swagger.io</organizationUrl>
-    </developer>
-  </developers>
+  <distributionManagement>
+    <repository>
+      <id>sphereon-sdk-releases</id>
+      <url>http://nexus.qa.sphereon.com/nexus/content/repositories/sphereon-sdk-releases</url>
+    </repository>
+    <snapshotRepository>
+      <id>sphereon-sdk-snapshots</id>
+      <url>http://nexus.qa.sphereon.com/nexus/content/repositories/sphereon-sdk-snapshots</url>
+    </snapshotRepository>
+  </distributionManagement>
 
   <build>
     <plugins>
