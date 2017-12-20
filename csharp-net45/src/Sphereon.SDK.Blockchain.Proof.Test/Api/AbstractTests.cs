@@ -10,6 +10,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Text;
 using NUnit.Framework;
 using Sphereon.SDK.Blockchain.Proof.Api;
 using Sphereon.SDK.Blockchain.Proof.Client;
@@ -25,6 +26,8 @@ namespace Sphereon.SDK.Blockchain.Proof.Test.Api
         protected static string FixedAccessToken =
             Environment.GetEnvironmentVariable("tests.dotnet.bcproof.accesstoken");
 
+        private static readonly byte[] HashingSecret = Encoding.UTF8.GetBytes("SphereonTestSecret");
+
         protected static string UnitTestConfigName;
         protected static byte[] RegisteredContent;
         protected static byte[] RegisteredContentForStream;
@@ -39,13 +42,13 @@ namespace Sphereon.SDK.Blockchain.Proof.Test.Api
 
         protected StoredSettings CreateProofAndSettingsChain()
         {
-            var settings = new ChainSettings(Version: ChainSettings.VersionEnum.NUMBER_1)
+            var settings = new ChainSettings(Version: ChainSettings.VersionEnum.NUMBER_1, Secret: HashingSecret,
+                HashAlgorithm: ChainSettings.HashAlgorithmEnum._256)
             {
-                HashAlgorithm = ChainSettings.HashAlgorithmEnum._256,
-                ContentRegistrationChains = new List<ChainSettings.ContentRegistrationChainsEnum>
+                ContentRegistrationChainTypes = new List<ChainSettings.ContentRegistrationChainTypesEnum>
                 {
-                    ChainSettings.ContentRegistrationChainsEnum.PERHASHPROOFCHAIN,
-                    ChainSettings.ContentRegistrationChainsEnum.SINGLEPROOFCHAIN
+                    ChainSettings.ContentRegistrationChainTypesEnum.PERHASHPROOFCHAIN,
+                    ChainSettings.ContentRegistrationChainTypesEnum.SINGLEPROOFCHAIN
                 }
             };
 
@@ -63,8 +66,8 @@ namespace Sphereon.SDK.Blockchain.Proof.Test.Api
             Assert.NotNull(storedSettings.ChainConfiguration);
             Assert.NotNull(storedSettings.ChainSettings.SingleProofChain);
             Assert.NotNull(storedSettings.ChainSettings.HashAlgorithm);
-            SettingsChainId = storedSettings.SettingsChain.Id;
-            ProofChainId = storedSettings.SingleProofChain.Id;
+            SettingsChainId = storedSettings.SettingsChain.ChainId;
+            ProofChainId = storedSettings.SingleProofChain.ChainId;
             return storedSettings;
         }
 

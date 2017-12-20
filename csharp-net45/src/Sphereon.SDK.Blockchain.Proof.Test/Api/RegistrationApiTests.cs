@@ -78,8 +78,8 @@ namespace Sphereon.SDK.Blockchain.Proof.Test.Api
             Assert.NotNull(storedSettings.ChainConfiguration);
             Assert.NotNull(storedSettings.ChainSettings.SingleProofChain);
             Assert.NotNull(storedSettings.ChainSettings.HashAlgorithm);
-            Assert.IsTrue(storedSettings.SettingsChain.Id == SettingsChainId);
-            Assert.IsTrue(storedSettings.SingleProofChain.Id == ProofChainId);
+            Assert.IsTrue(storedSettings.SettingsChain.ChainId == SettingsChainId);
+            Assert.IsTrue(storedSettings.SingleProofChain.ChainId == ProofChainId);
         }
 
 
@@ -98,8 +98,6 @@ namespace Sphereon.SDK.Blockchain.Proof.Test.Api
             var response = _registrationApi.RegisterUsingContent(UnitTestConfigName, contentRequest);
             Assert.IsInstanceOf<RegisterContentResponse>(response, "response is RegisterContentResponse");
             Assert.NotNull(response);
-            Assert.True(response.RegistrationState == RegisterContentResponse.RegistrationStateEnum.REGISTERED
-                        || response.RegistrationState == RegisterContentResponse.RegistrationStateEnum.PENDING);
             Assert.NotNull(response.SingleProofChain);
             Assert.NotNull(response.PerHashProofChain);
             Assert.AreEqual(contentRequest.RequestId, response.RequestId);
@@ -130,8 +128,6 @@ namespace Sphereon.SDK.Blockchain.Proof.Test.Api
             var response = _registrationApi.RegisterUsingStream(UnitTestConfigName, stream, "MemoryFile");
             Assert.IsInstanceOf<RegisterContentResponse>(response, "response is RegisterContentResponse");
             Assert.NotNull(response);
-            Assert.True(response.RegistrationState == RegisterContentResponse.RegistrationStateEnum.REGISTERED
-                        || response.RegistrationState == RegisterContentResponse.RegistrationStateEnum.PENDING);
             Assert.NotNull(response.SingleProofChain);
             Assert.NotNull(response.PerHashProofChain);
             Assert.AreEqual("MemoryFile", response.RequestId);
@@ -152,8 +148,8 @@ namespace Sphereon.SDK.Blockchain.Proof.Test.Api
             Assert.NotNull(response);
             Assert.True(response.RegistrationState == VerifyContentResponse.RegistrationStateEnum.REGISTERED
                         || response.RegistrationState == VerifyContentResponse.RegistrationStateEnum.PENDING);
-            Assert.NotNull(response.ProofChain);
-            Assert.NotNull(response.FileChain);
+            Assert.NotNull(response.SingleProofChain);
+            Assert.NotNull(response.PerHashProofChain);
             Assert.AreEqual(contentRequest.RequestId, response.RequestId);
         }
 
@@ -182,8 +178,8 @@ namespace Sphereon.SDK.Blockchain.Proof.Test.Api
             Assert.NotNull(response);
             Assert.True(response.RegistrationState == VerifyContentResponse.RegistrationStateEnum.REGISTERED
                         || response.RegistrationState == VerifyContentResponse.RegistrationStateEnum.PENDING);
-            Assert.NotNull(response.ProofChain);
-            Assert.NotNull(response.FileChain);
+            Assert.NotNull(response.SingleProofChain);
+            Assert.NotNull(response.PerHashProofChain);
             Assert.AreEqual("MemoryFile", response.RequestId);
         }
     }
