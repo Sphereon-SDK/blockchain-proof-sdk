@@ -1,6 +1,6 @@
 /**
  * Blockchain Proof
- * <b>With the Blockchain Proof API it is easy to prove or disprove existence of (binary) data at a certain point in time. Behind the scenes it stores entries using the Factom (bitcoin), Multichain or Ethereum blockchain by means of our generic blockchain API.</b>    The flow is generally as follows:  1. Make sure a configuration is present  2. Register content by uploading a file, some content, or providing a Stream Location from the Storage API. When you upload content you have to tell the API whether the data has already been hashed or not. If not, or when uploading a file or stream location, the API will take care of the hashing  3. Verify content by uploading a file, some content, or providing a Stream Location from the Storage API. When you upload content you have to tell the API whether the data has already been hashed or not. If not, or when uploading a file or stream location, the API will take care of the hashing. You will get back whether the content has been registered previously or not      <b>Interactive testing: </b>A web based test console is available in the <a href=\"https://store.sphereon.com\">Sphereon API Store</a>
+ * With the Blockchain Proof API it is easy to prove or disprove existence of data at a certain point in time. Behind the scenes it stores entries using the Factom (bitcoin), Multichain or Ethereum blockchain by means of our generic blockchain API.    The flow is generally as follows:  1. Make sure a configuration is present  2. Register content by uploading a file, some content, or providing a Stream Location from the Storage API. When you upload content you have to tell the API whether the data has already been hashed or not. If not, or when uploading a file or stream location, the API will take care of the hashing  3. Verify content by uploading a file, some content, or providing a Stream Location from the Storage API. When you upload content you have to tell the API whether the data has already been hashed or not. If not, or when uploading a file or stream location, the API will take care of the hashing. You will get back whether the content has been registered previously or not    Full API Documentation: https://docs.sphereon.com/api/blockchain-proof/0.9/html  Interactive testing: A web based test console is available in the Sphereon API Store at https://store.sphereon.com
  *
  * OpenAPI spec version: 0.9
  * Contact: dev@sphereon.com
@@ -17,18 +17,18 @@
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
-    define(['SphereonSDKBlockchainProof/ApiClient', 'SphereonSDKBlockchainProof/model/CommittedChain'], factory);
+    define(['SphereonSDKBlockchainProof/ApiClient', 'SphereonSDKBlockchainProof/model/CommittedEntry'], factory);
   } else if (typeof module === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('./CommittedChain'));
+    module.exports = factory(require('../ApiClient'), require('./CommittedEntry'));
   } else {
     // Browser globals (root is window)
     if (!root.BlockchainProof) {
       root.BlockchainProof = {};
     }
-    root.BlockchainProof.VerifyContentResponse = factory(root.BlockchainProof.ApiClient, root.BlockchainProof.CommittedChain);
+    root.BlockchainProof.VerifyContentResponse = factory(root.BlockchainProof.ApiClient, root.BlockchainProof.CommittedEntry);
   }
-}(this, function(ApiClient, CommittedChain) {
+}(this, function(ApiClient, CommittedEntry) {
   'use strict';
 
 
@@ -46,21 +46,17 @@
    * @alias module:SphereonSDKBlockchainProof/model/VerifyContentResponse
    * @class
    * @param contextName {String} 
-   * @param contentId {String} 
-   * @param proofChain {module:SphereonSDKBlockchainProof/model/CommittedChain} 
-   * @param registrationState {module:SphereonSDKBlockchainProof/model/VerifyContentResponse.RegistrationStateEnum} 
-   * @param fileChain {module:SphereonSDKBlockchainProof/model/CommittedChain} 
    */
-  var exports = function(contextName, contentId, proofChain, registrationState, fileChain) {
+  var exports = function(contextName) {
     var _this = this;
 
 
     _this['contextName'] = contextName;
 
-    _this['contentId'] = contentId;
-    _this['proofChain'] = proofChain;
-    _this['registrationState'] = registrationState;
-    _this['fileChain'] = fileChain;
+
+
+
+
   };
 
   /**
@@ -80,26 +76,27 @@
       if (data.hasOwnProperty('contextName')) {
         obj['contextName'] = ApiClient.convertToType(data['contextName'], 'String');
       }
+      if (data.hasOwnProperty('singleProofChain')) {
+        obj['singleProofChain'] = CommittedEntry.constructFromObject(data['singleProofChain']);
+      }
+      if (data.hasOwnProperty('contentRegistrationChainTypes')) {
+        obj['contentRegistrationChainTypes'] = ApiClient.convertToType(data['contentRegistrationChainTypes'], ['String']);
+      }
       if (data.hasOwnProperty('requestId')) {
         obj['requestId'] = ApiClient.convertToType(data['requestId'], 'String');
       }
-      if (data.hasOwnProperty('contentId')) {
-        obj['contentId'] = ApiClient.convertToType(data['contentId'], 'String');
-      }
-      if (data.hasOwnProperty('proofChain')) {
-        obj['proofChain'] = CommittedChain.constructFromObject(data['proofChain']);
+      if (data.hasOwnProperty('perHashProofChain')) {
+        obj['perHashProofChain'] = CommittedEntry.constructFromObject(data['perHashProofChain']);
       }
       if (data.hasOwnProperty('registrationState')) {
         obj['registrationState'] = ApiClient.convertToType(data['registrationState'], 'String');
-      }
-      if (data.hasOwnProperty('fileChain')) {
-        obj['fileChain'] = CommittedChain.constructFromObject(data['fileChain']);
       }
     }
     return obj;
   }
 
   /**
+   * This is the first registration time from the singleProofChain or the perHashProofChain
    * @member {Date} registrationTime
    */
   exports.prototype['registrationTime'] = undefined;
@@ -108,26 +105,47 @@
    */
   exports.prototype['contextName'] = undefined;
   /**
+   * This is the single proof chain where all hashes are stored (if configured)
+   * @member {module:SphereonSDKBlockchainProof/model/CommittedEntry} singleProofChain
+   */
+  exports.prototype['singleProofChain'] = undefined;
+  /**
+   * A set of content registration targets
+   * @member {Array.<module:SphereonSDKBlockchainProof/model/VerifyContentResponse.ContentRegistrationChainTypesEnum>} contentRegistrationChainTypes
+   */
+  exports.prototype['contentRegistrationChainTypes'] = undefined;
+  /**
    * @member {String} requestId
    */
   exports.prototype['requestId'] = undefined;
   /**
-   * @member {String} contentId
+   * This is the proof chain specific for the current hash (if configured)
+   * @member {module:SphereonSDKBlockchainProof/model/CommittedEntry} perHashProofChain
    */
-  exports.prototype['contentId'] = undefined;
+  exports.prototype['perHashProofChain'] = undefined;
   /**
-   * @member {module:SphereonSDKBlockchainProof/model/CommittedChain} proofChain
-   */
-  exports.prototype['proofChain'] = undefined;
-  /**
+   * This is the registration state from the singleProofChain or the perHashProofChain. If one of the chains has a registration this will return REGISTERED
    * @member {module:SphereonSDKBlockchainProof/model/VerifyContentResponse.RegistrationStateEnum} registrationState
    */
   exports.prototype['registrationState'] = undefined;
-  /**
-   * @member {module:SphereonSDKBlockchainProof/model/CommittedChain} fileChain
-   */
-  exports.prototype['fileChain'] = undefined;
 
+
+  /**
+   * Allowed values for the <code>contentRegistrationChainTypes</code> property.
+   * @enum {String}
+   * @readonly
+   */
+  exports.ContentRegistrationChainTypesEnum = {
+    /**
+     * value: "PER_HASH_PROOF_CHAIN"
+     * @const
+     */
+    "PER_HASH_PROOF_CHAIN": "PER_HASH_PROOF_CHAIN",
+    /**
+     * value: "SINGLE_PROOF_CHAIN"
+     * @const
+     */
+    "SINGLE_PROOF_CHAIN": "SINGLE_PROOF_CHAIN"  };
 
   /**
    * Allowed values for the <code>registrationState</code> property.
@@ -135,6 +153,11 @@
    * @readonly
    */
   exports.RegistrationStateEnum = {
+    /**
+     * value: "NOT_REGISTERED"
+     * @const
+     */
+    "NOT_REGISTERED": "NOT_REGISTERED",
     /**
      * value: "PENDING"
      * @const
@@ -144,12 +167,7 @@
      * value: "REGISTERED"
      * @const
      */
-    "REGISTERED": "REGISTERED",
-    /**
-     * value: "NOT_REGISTERED"
-     * @const
-     */
-    "NOT_REGISTERED": "NOT_REGISTERED"  };
+    "REGISTERED": "REGISTERED"  };
 
 
   return exports;

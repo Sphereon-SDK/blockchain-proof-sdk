@@ -1,6 +1,6 @@
 /**
  * Blockchain Proof
- * <b>With the Blockchain Proof API it is easy to prove or disprove existence of (binary) data at a certain point in time. Behind the scenes it stores entries using the Factom (bitcoin), Multichain or Ethereum blockchain by means of our generic blockchain API.</b>    The flow is generally as follows:  1. Make sure a configuration is present  2. Register content by uploading a file, some content, or providing a Stream Location from the Storage API. When you upload content you have to tell the API whether the data has already been hashed or not. If not, or when uploading a file or stream location, the API will take care of the hashing  3. Verify content by uploading a file, some content, or providing a Stream Location from the Storage API. When you upload content you have to tell the API whether the data has already been hashed or not. If not, or when uploading a file or stream location, the API will take care of the hashing. You will get back whether the content has been registered previously or not      <b>Interactive testing: </b>A web based test console is available in the <a href=\"https://store.sphereon.com\">Sphereon API Store</a>
+ * With the Blockchain Proof API it is easy to prove or disprove existence of data at a certain point in time. Behind the scenes it stores entries using the Factom (bitcoin), Multichain or Ethereum blockchain by means of our generic blockchain API.    The flow is generally as follows:  1. Make sure a configuration is present  2. Register content by uploading a file, some content, or providing a Stream Location from the Storage API. When you upload content you have to tell the API whether the data has already been hashed or not. If not, or when uploading a file or stream location, the API will take care of the hashing  3. Verify content by uploading a file, some content, or providing a Stream Location from the Storage API. When you upload content you have to tell the API whether the data has already been hashed or not. If not, or when uploading a file or stream location, the API will take care of the hashing. You will get back whether the content has been registered previously or not    Full API Documentation: https://docs.sphereon.com/api/blockchain-proof/0.9/html  Interactive testing: A web based test console is available in the Sphereon API Store at https://store.sphereon.com
  *
  * OpenAPI spec version: 0.9
  * Contact: dev@sphereon.com
@@ -45,16 +45,16 @@
    * Existence ChainSettings. Normally you only supply them once during chain creation or during a settings update. You can also supply them during a content request, but then it is up to you to also supply the correct setting during verify
    * @alias module:SphereonSDKBlockchainProof/model/ChainSettings
    * @class
-   * @param signatureHash {Blob} 
+   * @param secret {Blob} A secret that is used as a seed during hashing
    * @param version {module:SphereonSDKBlockchainProof/model/ChainSettings.VersionEnum} The settings version (only 1 for now)
    */
-  var exports = function(signatureHash, version) {
+  var exports = function(secret, version) {
     var _this = this;
 
-    _this['signatureHash'] = signatureHash;
 
 
 
+    _this['secret'] = secret;
     _this['version'] = version;
 
   };
@@ -70,17 +70,17 @@
     if (data) {
       obj = obj || new exports();
 
-      if (data.hasOwnProperty('signatureHash')) {
-        obj['signatureHash'] = ApiClient.convertToType(data['signatureHash'], 'Blob');
-      }
       if (data.hasOwnProperty('singleProofChain')) {
         obj['singleProofChain'] = ApiClient.convertToType(data['singleProofChain'], 'String');
       }
-      if (data.hasOwnProperty('contentRegistrationChains')) {
-        obj['contentRegistrationChains'] = ApiClient.convertToType(data['contentRegistrationChains'], ['String']);
+      if (data.hasOwnProperty('contentRegistrationChainTypes')) {
+        obj['contentRegistrationChainTypes'] = ApiClient.convertToType(data['contentRegistrationChainTypes'], ['String']);
       }
       if (data.hasOwnProperty('metadataRegistrationChains')) {
         obj['metadataRegistrationChains'] = ApiClient.convertToType(data['metadataRegistrationChains'], ['String']);
+      }
+      if (data.hasOwnProperty('secret')) {
+        obj['secret'] = ApiClient.convertToType(data['secret'], 'Blob');
       }
       if (data.hasOwnProperty('version')) {
         obj['version'] = ApiClient.convertToType(data['version'], 'Number');
@@ -93,42 +93,43 @@
   }
 
   /**
-   * @member {Blob} signatureHash
-   */
-  exports.prototype['signatureHash'] = undefined;
-  /**
    * The proof chain id linked to the current configuration. This is a shared proof chain for all registrations
    * @member {String} singleProofChain
    */
   exports.prototype['singleProofChain'] = undefined;
   /**
    * A set of content registration targets
-   * @member {Array.<module:SphereonSDKBlockchainProof/model/ChainSettings.ContentRegistrationChainsEnum>} contentRegistrationChains
+   * @member {Array.<module:SphereonSDKBlockchainProof/model/ChainSettings.ContentRegistrationChainTypesEnum>} contentRegistrationChainTypes
    */
-  exports.prototype['contentRegistrationChains'] = undefined;
+  exports.prototype['contentRegistrationChainTypes'] = undefined;
   /**
    * A set of metadata registration targets (not in use currently)
    * @member {Array.<module:SphereonSDKBlockchainProof/model/ChainSettings.MetadataRegistrationChainsEnum>} metadataRegistrationChains
    */
   exports.prototype['metadataRegistrationChains'] = undefined;
   /**
+   * A secret that is used as a seed during hashing
+   * @member {Blob} secret
+   */
+  exports.prototype['secret'] = undefined;
+  /**
    * The settings version (only 1 for now)
    * @member {module:SphereonSDKBlockchainProof/model/ChainSettings.VersionEnum} version
    */
   exports.prototype['version'] = undefined;
   /**
-   * The hashing method used for the content. We always return and expect the hash in HEX form
+   * The hashing method used for the content. We always return and expect the convertInputToHashWhenNeeded in HEX form
    * @member {module:SphereonSDKBlockchainProof/model/ChainSettings.HashAlgorithmEnum} hashAlgorithm
    */
   exports.prototype['hashAlgorithm'] = undefined;
 
 
   /**
-   * Allowed values for the <code>contentRegistrationChains</code> property.
+   * Allowed values for the <code>contentRegistrationChainTypes</code> property.
    * @enum {String}
    * @readonly
    */
-  exports.ContentRegistrationChainsEnum = {
+  exports.ContentRegistrationChainTypesEnum = {
     /**
      * value: "PER_HASH_PROOF_CHAIN"
      * @const

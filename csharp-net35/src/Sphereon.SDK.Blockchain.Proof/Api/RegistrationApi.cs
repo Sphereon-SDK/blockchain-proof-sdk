@@ -1,7 +1,7 @@
 /* 
  * Blockchain Proof
  *
- * <b>With the Blockchain Proof API it is easy to prove or disprove existence of (binary) data at a certain point in time. Behind the scenes it stores entries using the Factom (bitcoin), Multichain or Ethereum blockchain by means of our generic blockchain API.</b>    The flow is generally as follows:  1. Make sure a configuration is present  2. Register content by uploading a file, some content, or providing a Stream Location from the Storage API. When you upload content you have to tell the API whether the data has already been hashed or not. If not, or when uploading a file or stream location, the API will take care of the hashing  3. Verify content by uploading a file, some content, or providing a Stream Location from the Storage API. When you upload content you have to tell the API whether the data has already been hashed or not. If not, or when uploading a file or stream location, the API will take care of the hashing. You will get back whether the content has been registered previously or not      <b>Interactive testing: </b>A web based test console is available in the <a href=\"https://store.sphereon.com\">Sphereon API Store</a>
+ * With the Blockchain Proof API it is easy to prove or disprove existence of data at a certain point in time. Behind the scenes it stores entries using the Factom (bitcoin), Multichain or Ethereum blockchain by means of our generic blockchain API.    The flow is generally as follows:  1. Make sure a configuration is present  2. Register content by uploading a file, some content, or providing a Stream Location from the Storage API. When you upload content you have to tell the API whether the data has already been hashed or not. If not, or when uploading a file or stream location, the API will take care of the hashing  3. Verify content by uploading a file, some content, or providing a Stream Location from the Storage API. When you upload content you have to tell the API whether the data has already been hashed or not. If not, or when uploading a file or stream location, the API will take care of the hashing. You will get back whether the content has been registered previously or not    Full API Documentation: https://docs.sphereon.com/api/blockchain-proof/0.9/html  Interactive testing: A web based test console is available in the Sphereon API Store at https://store.sphereon.com
  *
  * OpenAPI spec version: 0.9
  * Contact: dev@sphereon.com
@@ -51,7 +51,7 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
         /// Register hash using the Storage API
         /// </summary>
         /// <remarks>
-        /// Register a hash of file/blob by supplying a Stream location of the Storage API. This Stream Location maps to a location of a file/blob on some remote cloud storage. Hashing will be done on the server side Please note that the binary data itself will not be stored, only the hash. Use the registerUsingContent endpoint if you&#39;d like to store content
+        /// Register a convertInputToHashWhenNeeded of file/blob by supplying a Stream location of the Storage API. This Stream Location maps to a location of a file/blob on some remote cloud storage. Hashing will be done on the server side Please note that the binary data itself will not be stored, only the convertInputToHashWhenNeeded. Use the registerUsingContent endpoint if you&#39;d like to store content
         /// </remarks>
         /// <exception cref="Sphereon.SDK.Blockchain.Proof.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="configName">The configuration name this operation</param>
@@ -63,7 +63,7 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
         /// Register hash using the Storage API
         /// </summary>
         /// <remarks>
-        /// Register a hash of file/blob by supplying a Stream location of the Storage API. This Stream Location maps to a location of a file/blob on some remote cloud storage. Hashing will be done on the server side Please note that the binary data itself will not be stored, only the hash. Use the registerUsingContent endpoint if you&#39;d like to store content
+        /// Register a convertInputToHashWhenNeeded of file/blob by supplying a Stream location of the Storage API. This Stream Location maps to a location of a file/blob on some remote cloud storage. Hashing will be done on the server side Please note that the binary data itself will not be stored, only the convertInputToHashWhenNeeded. Use the registerUsingContent endpoint if you&#39;d like to store content
         /// </remarks>
         /// <exception cref="Sphereon.SDK.Blockchain.Proof.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="configName">The configuration name this operation</param>
@@ -74,12 +74,12 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
         /// Register bytestream/file hash
         /// </summary>
         /// <remarks>
-        /// Register a hash of content by supplying a file or some other binary data. Hashing will be done on the server side. Please note that the binary data itself will not be stored, only the hash. Use the registerUsingContent endpoint if you&#39;d like to store content
+        /// Register a convertInputToHashWhenNeeded of content by supplying a file or some other binary data. Hashing will be done on the server side. Please note that the binary data itself will not be stored, only the convertInputToHashWhenNeeded. Use the registerUsingContent endpoint if you&#39;d like to store content
         /// </remarks>
         /// <exception cref="Sphereon.SDK.Blockchain.Proof.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="configName">The configuration name this operation</param>
         /// <param name="stream">The binary data (not hashed). Hashing will be done on the server side. The binary data will not be stored</param>
-        /// <param name="fileName">Optional input file name. (optional)</param>
+        /// <param name="fileName">Optional input file name. Needed when using bytestreams instead of filestreams (optional)</param>
         /// <returns>RegisterContentResponse</returns>
         RegisterContentResponse RegisterUsingStream (string configName, System.IO.Stream stream, string fileName = null);
 
@@ -87,12 +87,12 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
         /// Register bytestream/file hash
         /// </summary>
         /// <remarks>
-        /// Register a hash of content by supplying a file or some other binary data. Hashing will be done on the server side. Please note that the binary data itself will not be stored, only the hash. Use the registerUsingContent endpoint if you&#39;d like to store content
+        /// Register a convertInputToHashWhenNeeded of content by supplying a file or some other binary data. Hashing will be done on the server side. Please note that the binary data itself will not be stored, only the convertInputToHashWhenNeeded. Use the registerUsingContent endpoint if you&#39;d like to store content
         /// </remarks>
         /// <exception cref="Sphereon.SDK.Blockchain.Proof.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="configName">The configuration name this operation</param>
         /// <param name="stream">The binary data (not hashed). Hashing will be done on the server side. The binary data will not be stored</param>
-        /// <param name="fileName">Optional input file name. (optional)</param>
+        /// <param name="fileName">Optional input file name. Needed when using bytestreams instead of filestreams (optional)</param>
         /// <returns>ApiResponse of RegisterContentResponse</returns>
         ApiResponse<RegisterContentResponse> RegisterUsingStreamWithHttpInfo (string configName, System.IO.Stream stream, string fileName = null);
         #endregion Synchronous Operations
@@ -294,7 +294,7 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
         }
 
         /// <summary>
-        /// Register hash using the Storage API Register a hash of file/blob by supplying a Stream location of the Storage API. This Stream Location maps to a location of a file/blob on some remote cloud storage. Hashing will be done on the server side Please note that the binary data itself will not be stored, only the hash. Use the registerUsingContent endpoint if you&#39;d like to store content
+        /// Register hash using the Storage API Register a convertInputToHashWhenNeeded of file/blob by supplying a Stream location of the Storage API. This Stream Location maps to a location of a file/blob on some remote cloud storage. Hashing will be done on the server side Please note that the binary data itself will not be stored, only the convertInputToHashWhenNeeded. Use the registerUsingContent endpoint if you&#39;d like to store content
         /// </summary>
         /// <exception cref="Sphereon.SDK.Blockchain.Proof.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="configName">The configuration name this operation</param>
@@ -307,7 +307,7 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
         }
 
         /// <summary>
-        /// Register hash using the Storage API Register a hash of file/blob by supplying a Stream location of the Storage API. This Stream Location maps to a location of a file/blob on some remote cloud storage. Hashing will be done on the server side Please note that the binary data itself will not be stored, only the hash. Use the registerUsingContent endpoint if you&#39;d like to store content
+        /// Register hash using the Storage API Register a convertInputToHashWhenNeeded of file/blob by supplying a Stream location of the Storage API. This Stream Location maps to a location of a file/blob on some remote cloud storage. Hashing will be done on the server side Please note that the binary data itself will not be stored, only the convertInputToHashWhenNeeded. Use the registerUsingContent endpoint if you&#39;d like to store content
         /// </summary>
         /// <exception cref="Sphereon.SDK.Blockchain.Proof.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="configName">The configuration name this operation</param>
@@ -380,12 +380,12 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
         }
 
         /// <summary>
-        /// Register bytestream/file hash Register a hash of content by supplying a file or some other binary data. Hashing will be done on the server side. Please note that the binary data itself will not be stored, only the hash. Use the registerUsingContent endpoint if you&#39;d like to store content
+        /// Register bytestream/file hash Register a convertInputToHashWhenNeeded of content by supplying a file or some other binary data. Hashing will be done on the server side. Please note that the binary data itself will not be stored, only the convertInputToHashWhenNeeded. Use the registerUsingContent endpoint if you&#39;d like to store content
         /// </summary>
         /// <exception cref="Sphereon.SDK.Blockchain.Proof.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="configName">The configuration name this operation</param>
         /// <param name="stream">The binary data (not hashed). Hashing will be done on the server side. The binary data will not be stored</param>
-        /// <param name="fileName">Optional input file name. (optional)</param>
+        /// <param name="fileName">Optional input file name. Needed when using bytestreams instead of filestreams (optional)</param>
         /// <returns>RegisterContentResponse</returns>
         public RegisterContentResponse RegisterUsingStream (string configName, System.IO.Stream stream, string fileName = null)
         {
@@ -394,12 +394,12 @@ namespace Sphereon.SDK.Blockchain.Proof.Api
         }
 
         /// <summary>
-        /// Register bytestream/file hash Register a hash of content by supplying a file or some other binary data. Hashing will be done on the server side. Please note that the binary data itself will not be stored, only the hash. Use the registerUsingContent endpoint if you&#39;d like to store content
+        /// Register bytestream/file hash Register a convertInputToHashWhenNeeded of content by supplying a file or some other binary data. Hashing will be done on the server side. Please note that the binary data itself will not be stored, only the convertInputToHashWhenNeeded. Use the registerUsingContent endpoint if you&#39;d like to store content
         /// </summary>
         /// <exception cref="Sphereon.SDK.Blockchain.Proof.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="configName">The configuration name this operation</param>
         /// <param name="stream">The binary data (not hashed). Hashing will be done on the server side. The binary data will not be stored</param>
-        /// <param name="fileName">Optional input file name. (optional)</param>
+        /// <param name="fileName">Optional input file name. Needed when using bytestreams instead of filestreams (optional)</param>
         /// <returns>ApiResponse of RegisterContentResponse</returns>
         public ApiResponse< RegisterContentResponse > RegisterUsingStreamWithHttpInfo (string configName, System.IO.Stream stream, string fileName = null)
         {

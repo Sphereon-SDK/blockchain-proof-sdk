@@ -4,21 +4,19 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **contextName** | **String** |  | 
-**singleProofChain** | [**CommittedChain**](CommittedChain.md) | This is the single proof chain where all hashes are stored (if configured) | [optional] 
+**singleProofChain** | [**CommittedEntry**](CommittedEntry.md) | This is the single proof chain where all hashes are stored (if configured) | [optional] 
+**contentRegistrationChainTypes** | **[String]** | A set of content registration targets | [optional] 
 **requestId** | **String** |  | [optional] 
-**perHashProofChain** | [**CommittedChain**](CommittedChain.md) | This is the proof chain specific for the current hash (if configured) | [optional] 
-**registrationState** | **String** |  | 
+**perHashProofChain** | [**CommittedEntry**](CommittedEntry.md) | This is the proof chain specific for the current hash (if configured) | [optional] 
 
 
-<a name="RegistrationStateEnum"></a>
-## Enum: RegistrationStateEnum
+<a name="[ContentRegistrationChainTypesEnum]"></a>
+## Enum: [ContentRegistrationChainTypesEnum]
 
 
-* `PENDING` (value: `"PENDING"`)
+* `PER_HASH_PROOF_CHAIN` (value: `"PER_HASH_PROOF_CHAIN"`)
 
-* `REGISTERED` (value: `"REGISTERED"`)
-
-* `NOT_REGISTERED` (value: `"NOT_REGISTERED"`)
+* `SINGLE_PROOF_CHAIN` (value: `"SINGLE_PROOF_CHAIN"`)
 
 
 

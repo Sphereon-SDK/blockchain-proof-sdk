@@ -1,6 +1,6 @@
 /**
  * Blockchain Proof
- * <b>With the Blockchain Proof API it is easy to prove or disprove existence of (binary) data at a certain point in time. Behind the scenes it stores entries using the Factom (bitcoin), Multichain or Ethereum blockchain by means of our generic blockchain API.</b>    The flow is generally as follows:  1. Make sure a configuration is present  2. Register content by uploading a file, some content, or providing a Stream Location from the Storage API. When you upload content you have to tell the API whether the data has already been hashed or not. If not, or when uploading a file or stream location, the API will take care of the hashing  3. Verify content by uploading a file, some content, or providing a Stream Location from the Storage API. When you upload content you have to tell the API whether the data has already been hashed or not. If not, or when uploading a file or stream location, the API will take care of the hashing. You will get back whether the content has been registered previously or not      <b>Interactive testing: </b>A web based test console is available in the <a href=\"https://store.sphereon.com\">Sphereon API Store</a>
+ * With the Blockchain Proof API it is easy to prove or disprove existence of data at a certain point in time. Behind the scenes it stores entries using the Factom (bitcoin), Multichain or Ethereum blockchain by means of our generic blockchain API.    The flow is generally as follows:  1. Make sure a configuration is present  2. Register content by uploading a file, some content, or providing a Stream Location from the Storage API. When you upload content you have to tell the API whether the data has already been hashed or not. If not, or when uploading a file or stream location, the API will take care of the hashing  3. Verify content by uploading a file, some content, or providing a Stream Location from the Storage API. When you upload content you have to tell the API whether the data has already been hashed or not. If not, or when uploading a file or stream location, the API will take care of the hashing. You will get back whether the content has been registered previously or not    Full API Documentation: https://docs.sphereon.com/api/blockchain-proof/0.9/html  Interactive testing: A web based test console is available in the Sphereon API Store at https://store.sphereon.com
  *
  * OpenAPI spec version: 0.9
  * Contact: dev@sphereon.com
@@ -110,7 +110,7 @@
 
     /**
      * Verify hash using the Storage API
-     * Verify a hash of file/blob by supplying a Stream location of the Storage API. This Stream Location maps to a location of a file/blob on some remote cloud storage. Hashing will be done on the server side Please note that the binary data itself will not be stored, only the hash. Use the registerUsingContent endpoint if you&#39;d like to store content
+     * Verify a convertInputToHashWhenNeeded of file/blob by supplying a Stream location of the Storage API. This Stream Location maps to a location of a file/blob on some remote cloud storage. Hashing will be done on the server side Please note that the binary data itself will not be stored, only the convertInputToHashWhenNeeded. Use the registerUsingContent endpoint if you&#39;d like to store content
      * @param {String} configName The context for this operation
      * @param {Array.<module:SphereonSDKBlockchainProof/model/StreamLocation>} streamLocations The stream locations on storage
      * @param {module:SphereonSDKBlockchainProof/api/VerificationApi~verifyUsingLocationCallback} callback The callback function, accepting three arguments: error, data, response
@@ -162,11 +162,11 @@
 
     /**
      * Verify bytestream/file hash
-     * Verify a hash of content by supplying a file or some other binary data. Hashing will be done on the server side. Please note that the binary data itself will not be stored, only the hash. Use the registerUsingContent endpoint if you&#39;d like to store content
+     * Verify a convertInputToHashWhenNeeded of content by supplying a file or some other binary data. Hashing will be done on the server side. Please note that the binary data itself will not be stored, only the convertInputToHashWhenNeeded. Use the registerUsingContent endpoint if you&#39;d like to store content
      * @param {String} configName The configuration name this operation
      * @param {File} stream The binary data (not hashed). Hashing will be done on the server side. The binary data will not be stored
      * @param {Object} opts Optional parameters
-     * @param {String} opts.fileName Optional input file name.
+     * @param {String} opts.fileName Optional input file name. Needed when using bytestreams instead of filestreams
      * @param {module:SphereonSDKBlockchainProof/api/VerificationApi~verifyUsingStreamCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {@link module:SphereonSDKBlockchainProof/model/VerifyContentResponse}
      */

@@ -5,19 +5,18 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **contextName** | **String** |  | 
-**singleProofChain** | [**CommittedChain**](CommittedChain.md) | This is the single proof chain where all hashes are stored (if configured) |  [optional]
+**singleProofChain** | [**CommittedEntry**](CommittedEntry.md) | This is the single proof chain where all hashes are stored (if configured) |  [optional]
+**contentRegistrationChainTypes** | [**List&lt;ContentRegistrationChainTypesEnum&gt;**](#List&lt;ContentRegistrationChainTypesEnum&gt;) | A set of content registration targets |  [optional]
 **requestId** | **String** |  |  [optional]
-**perHashProofChain** | [**CommittedChain**](CommittedChain.md) | This is the proof chain specific for the current hash (if configured) |  [optional]
-**registrationState** | [**RegistrationStateEnum**](#RegistrationStateEnum) |  | 
+**perHashProofChain** | [**CommittedEntry**](CommittedEntry.md) | This is the proof chain specific for the current hash (if configured) |  [optional]
 
 
-<a name="RegistrationStateEnum"></a>
-## Enum: RegistrationStateEnum
+<a name="List<ContentRegistrationChainTypesEnum>"></a>
+## Enum: List&lt;ContentRegistrationChainTypesEnum&gt;
 Name | Value
 ---- | -----
-PENDING | &quot;PENDING&quot;
-REGISTERED | &quot;REGISTERED&quot;
-NOT_REGISTERED | &quot;NOT_REGISTERED&quot;
+PER_HASH_PROOF_CHAIN | &quot;PER_HASH_PROOF_CHAIN&quot;
+SINGLE_PROOF_CHAIN | &quot;SINGLE_PROOF_CHAIN&quot;
 
 
 

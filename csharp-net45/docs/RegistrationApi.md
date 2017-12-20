@@ -81,7 +81,7 @@ Name | Type | Description  | Notes
 
 Register hash using the Storage API
 
-Register a hash of file/blob by supplying a Stream location of the Storage API. This Stream Location maps to a location of a file/blob on some remote cloud storage. Hashing will be done on the server side Please note that the binary data itself will not be stored, only the hash. Use the registerUsingContent endpoint if you'd like to store content
+Register a convertInputToHashWhenNeeded of file/blob by supplying a Stream location of the Storage API. This Stream Location maps to a location of a file/blob on some remote cloud storage. Hashing will be done on the server side Please note that the binary data itself will not be stored, only the convertInputToHashWhenNeeded. Use the registerUsingContent endpoint if you'd like to store content
 
 ### Example
 ```csharp
@@ -147,7 +147,7 @@ Name | Type | Description  | Notes
 
 Register bytestream/file hash
 
-Register a hash of content by supplying a file or some other binary data. Hashing will be done on the server side. Please note that the binary data itself will not be stored, only the hash. Use the registerUsingContent endpoint if you'd like to store content
+Register a convertInputToHashWhenNeeded of content by supplying a file or some other binary data. Hashing will be done on the server side. Please note that the binary data itself will not be stored, only the convertInputToHashWhenNeeded. Use the registerUsingContent endpoint if you'd like to store content
 
 ### Example
 ```csharp
@@ -169,7 +169,7 @@ namespace Example
             var apiInstance = new RegistrationApi();
             var configName = configName_example;  // string | The configuration name this operation
             var stream = new System.IO.Stream(); // System.IO.Stream | The binary data (not hashed). Hashing will be done on the server side. The binary data will not be stored
-            var fileName = fileName_example;  // string | Optional input file name. (optional) 
+            var fileName = fileName_example;  // string | Optional input file name. Needed when using bytestreams instead of filestreams (optional) 
 
             try
             {
@@ -192,7 +192,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **configName** | **string**| The configuration name this operation | 
  **stream** | **System.IO.Stream**| The binary data (not hashed). Hashing will be done on the server side. The binary data will not be stored | 
- **fileName** | **string**| Optional input file name. | [optional] 
+ **fileName** | **string**| Optional input file name. Needed when using bytestreams instead of filestreams | [optional] 
 
 ### Return type
 

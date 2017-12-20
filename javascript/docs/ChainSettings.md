@@ -3,16 +3,16 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**signatureHash** | **Blob** |  | 
 **singleProofChain** | **String** | The proof chain id linked to the current configuration. This is a shared proof chain for all registrations | [optional] 
-**contentRegistrationChains** | **[String]** | A set of content registration targets | [optional] 
+**contentRegistrationChainTypes** | **[String]** | A set of content registration targets | [optional] 
 **metadataRegistrationChains** | **[String]** | A set of metadata registration targets (not in use currently) | [optional] 
+**secret** | **Blob** | A secret that is used as a seed during hashing | 
 **version** | **Number** | The settings version (only 1 for now) | 
-**hashAlgorithm** | **String** | The hashing method used for the content. We always return and expect the hash in HEX form | [optional] 
+**hashAlgorithm** | **String** | The hashing method used for the content. We always return and expect the convertInputToHashWhenNeeded in HEX form | [optional] 
 
 
-<a name="[ContentRegistrationChainsEnum]"></a>
-## Enum: [ContentRegistrationChainsEnum]
+<a name="[ContentRegistrationChainTypesEnum]"></a>
+## Enum: [ContentRegistrationChainTypesEnum]
 
 
 * `PER_HASH_PROOF_CHAIN` (value: `"PER_HASH_PROOF_CHAIN"`)

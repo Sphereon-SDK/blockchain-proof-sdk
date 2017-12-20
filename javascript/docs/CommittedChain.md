@@ -3,7 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**chainId** | **String** | Chain ID | [optional] 
 **context** | **String** |  | [optional] 
-**id** | **String** | Chain ID | [optional] 
 
 

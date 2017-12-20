@@ -34,7 +34,7 @@ namespace Example
             Configuration.Default.AccessToken = "YOUR_ACCESS_TOKEN";
 
             var apiInstance = new ConfigurationApi();
-            var request = new CreateConfigurationRequest(); // CreateConfigurationRequest | Create a new Proof of Existence context using the provided entity settings
+            var request = new CreateConfigurationRequest(); // CreateConfigurationRequest | Create a new Proof of Existence configuration using the provided settings. The context points to a context of the Easy Blockchain API. When you have no own context, simply use 'multichain' without the quotes as context. You will be using our multichain ledger then, which is recomended during development/testing
 
             try
             {
@@ -55,7 +55,7 @@ namespace Example
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **request** | [**CreateConfigurationRequest**](CreateConfigurationRequest.md)| Create a new Proof of Existence context using the provided entity settings | 
+ **request** | [**CreateConfigurationRequest**](CreateConfigurationRequest.md)| Create a new Proof of Existence configuration using the provided settings. The context points to a context of the Easy Blockchain API. When you have no own context, simply use &#39;multichain&#39; without the quotes as context. You will be using our multichain ledger then, which is recomended during development/testing | 
 
 ### Return type
 

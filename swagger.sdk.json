@@ -82,7 +82,7 @@
         "summary": "Verify bytestream/file hash",
         "security": [{"oauth2schema": ["global"]}],
         "produces": ["application/json;charset=UTF-8"],
-        "description": "Verify a hash of content by supplying a file or some other binary data. Hashing will be done on the server side. Please note that the binary data itself will not be stored, only the hash. Use the registerUsingContent endpoint if you'd like to store content",
+        "description": "Verify a convertInputToHashWhenNeeded of content by supplying a file or some other binary data. Hashing will be done on the server side. Please note that the binary data itself will not be stored, only the convertInputToHashWhenNeeded. Use the registerUsingContent endpoint if you'd like to store content",
         "operationId": "verifyUsingStream",
         "responses": {
           "200": {
@@ -112,7 +112,7 @@
           {
             "in": "query",
             "name": "fileName",
-            "description": "Optional input file name.",
+            "description": "Optional input file name. Needed when using bytestreams instead of filestreams",
             "type": "string",
             "required": false
           }
@@ -124,7 +124,7 @@
         "summary": "Register bytestream/file hash",
         "security": [{"oauth2schema": ["global"]}],
         "produces": ["application/json;charset=UTF-8"],
-        "description": "Register a hash of content by supplying a file or some other binary data. Hashing will be done on the server side. Please note that the binary data itself will not be stored, only the hash. Use the registerUsingContent endpoint if you'd like to store content",
+        "description": "Register a convertInputToHashWhenNeeded of content by supplying a file or some other binary data. Hashing will be done on the server side. Please note that the binary data itself will not be stored, only the convertInputToHashWhenNeeded. Use the registerUsingContent endpoint if you'd like to store content",
         "operationId": "registerUsingStream",
         "responses": {
           "200": {
@@ -158,7 +158,7 @@
           {
             "in": "query",
             "name": "fileName",
-            "description": "Optional input file name.",
+            "description": "Optional input file name. Needed when using bytestreams instead of filestreams",
             "type": "string",
             "required": false
           }
@@ -184,14 +184,14 @@
         },
         "202": {
           "schema": {"$ref": "#/definitions/ConfigurationResponse"},
-          "description": "Configuration request received"
+          "description": "Configuration request received. Since we do register on the blockchain and this takes some time you will get back a 202 instead of a 201"
         }
       },
       "parameters": [{
         "schema": {"$ref": "#/definitions/CreateConfigurationRequest"},
         "in": "body",
         "name": "request",
-        "description": "Create a new Proof of Existence context using the provided entity settings",
+        "description": "Create a new Proof of Existence configuration using the provided settings. The context points to a context of the Easy Blockchain API. When you have no own context, simply use 'multichain' without the quotes as context. You will be using our multichain ledger then, which is recomended during development/testing",
         "required": true
       }],
       "tags": ["Configuration"],
@@ -202,7 +202,7 @@
         "summary": "Verify hash using the Storage API",
         "security": [{"oauth2schema": ["global"]}],
         "produces": ["application/json;charset=UTF-8"],
-        "description": "Verify a hash of file/blob by supplying a Stream location of the Storage API. This Stream Location maps to a location of a file/blob on some remote cloud storage. Hashing will be done on the server side Please note that the binary data itself will not be stored, only the hash. Use the registerUsingContent endpoint if you'd like to store content",
+        "description": "Verify a convertInputToHashWhenNeeded of file/blob by supplying a Stream location of the Storage API. This Stream Location maps to a location of a file/blob on some remote cloud storage. Hashing will be done on the server side Please note that the binary data itself will not be stored, only the convertInputToHashWhenNeeded. Use the registerUsingContent endpoint if you'd like to store content",
         "operationId": "verifyUsingLocation",
         "responses": {
           "200": {
@@ -240,7 +240,7 @@
         "summary": "Register hash using the Storage API",
         "security": [{"oauth2schema": ["global"]}],
         "produces": ["application/json;charset=UTF-8"],
-        "description": "Register a hash of file/blob by supplying a Stream location of the Storage API. This Stream Location maps to a location of a file/blob on some remote cloud storage. Hashing will be done on the server side Please note that the binary data itself will not be stored, only the hash. Use the registerUsingContent endpoint if you'd like to store content",
+        "description": "Register a convertInputToHashWhenNeeded of file/blob by supplying a Stream location of the Storage API. This Stream Location maps to a location of a file/blob on some remote cloud storage. Hashing will be done on the server side Please note that the binary data itself will not be stored, only the convertInputToHashWhenNeeded. Use the registerUsingContent endpoint if you'd like to store content",
         "operationId": "registerUsingLocation",
         "responses": {
           "200": {
@@ -288,15 +288,15 @@
       "responses": {
         "200": {
           "schema": {"$ref": "#/definitions/ConfigurationResponse"},
-          "description": "The settings for the proof chain"
+          "description": "The configuration"
         },
         "400": {
           "schema": {"$ref": "#/definitions/ErrorResponse"},
-          "description": "Invalid  request"
+          "description": "Invalid request"
         },
         "404": {
           "schema": {"$ref": "#/definitions/ErrorResponse"},
-          "description": "ChainSettings not found"
+          "description": "Configuration not found"
         }
       },
       "parameters": [{
@@ -319,45 +319,193 @@
     "flow": "application"
   }},
   "definitions": {
-    "VerifyContentResponse": {
-      "description": "Verify Content response",
-      "type": "object",
-      "required": [
-        "contentId",
-        "contextName",
-        "fileChain",
-        "proofChain",
-        "registrationState"
-      ],
-      "properties": {
-        "registrationTime": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "contextName": {"type": "string"},
-        "requestId": {"type": "string"},
-        "contentId": {"type": "string"},
-        "proofChain": {"$ref": "#/definitions/CommittedChain"},
-        "registrationState": {
-          "type": "string",
-          "enum": [
-            "PENDING",
-            "REGISTERED",
-            "NOT_REGISTERED"
-          ]
-        },
-        "fileChain": {"$ref": "#/definitions/CommittedChain"}
-      }
-    },
     "CommittedChain": {
       "description": "Commited Chain",
       "type": "object",
       "properties": {
-        "context": {"type": "string"},
-        "id": {
+        "chainId": {
           "description": "Chain ID",
           "readOnly": true,
           "type": "string"
+        },
+        "context": {"type": "string"}
+      }
+    },
+    "ConfigurationResponse": {
+      "description": "Committed context and settings response",
+      "type": "object",
+      "required": ["storedSettings"],
+      "properties": {"storedSettings": {"$ref": "#/definitions/StoredSettings"}}
+    },
+    "ChainSettings": {
+      "description": "Existence ChainSettings. Normally you only supply them once during chain creation or during a settings update. You can also supply them during a content request, but then it is up to you to also supply the correct setting during verify",
+      "type": "object",
+      "required": [
+        "secret",
+        "version"
+      ],
+      "properties": {
+        "singleProofChain": {
+          "description": "The proof chain id linked to the current configuration. This is a shared proof chain for all registrations",
+          "type": "string"
+        },
+        "contentRegistrationChainTypes": {
+          "description": "A set of content registration targets",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "PER_HASH_PROOF_CHAIN",
+              "SINGLE_PROOF_CHAIN"
+            ]
+          }
+        },
+        "metadataRegistrationChains": {
+          "description": "A set of metadata registration targets (not in use currently)",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "FILE_CHAIN",
+              "PROOF_CHAIN",
+              "METADATA_CHAIN"
+            ]
+          }
+        },
+        "secret": {
+          "format": "byte",
+          "description": "A secret that is used as a seed during hashing",
+          "type": "string"
+        },
+        "version": {
+          "format": "int32",
+          "description": "The settings version (only 1 for now)",
+          "type": "integer",
+          "enum": [1]
+        },
+        "hashAlgorithm": {
+          "description": "The hashing method used for the content. We always return and expect the convertInputToHashWhenNeeded in HEX form",
+          "type": "string",
+          "enum": [
+            "SHA_256",
+            "SHA_512"
+          ]
+        }
+      }
+    },
+    "ChainConfiguration": {
+      "type": "object",
+      "required": [
+        "accessMode",
+        "context",
+        "id",
+        "name",
+        "settingChainId"
+      ],
+      "properties": {
+        "context": {"type": "string"},
+        "name": {
+          "readOnly": true,
+          "type": "string"
+        },
+        "settingChainId": {"type": "string"},
+        "id": {
+          "readOnly": true,
+          "type": "string"
+        },
+        "accessMode": {
+          "readOnly": true,
+          "type": "string",
+          "enum": [
+            "PUBLIC",
+            "PRIVATE"
+          ]
+        }
+      }
+    },
+    "Error": {
+      "description": "An error",
+      "type": "object",
+      "required": [
+        "code",
+        "level",
+        "message"
+      ],
+      "properties": {
+        "code": {"type": "string"},
+        "level": {
+          "type": "string",
+          "enum": [
+            "INFO",
+            "WARNING",
+            "FATAL"
+          ]
+        },
+        "cause": {"$ref": "#/definitions/Error"},
+        "message": {"type": "string"}
+      }
+    },
+    "StreamLocation": {
+      "description": "Location record of data stream",
+      "type": "object",
+      "properties": {
+        "folderPath": {"type": "string"},
+        "filename": {"type": "string"},
+        "id": {
+          "readOnly": true,
+          "type": "string"
+        },
+        "containerId": {"type": "string"},
+        "originalFilename": {"type": "string"}
+      }
+    },
+    "ErrorResponse": {
+      "description": "The error response",
+      "type": "object",
+      "properties": {"errors": {
+        "type": "array",
+        "items": {"$ref": "#/definitions/Error"}
+      }}
+    },
+    "VerifyContentResponse": {
+      "description": "Verify Content response",
+      "type": "object",
+      "required": ["contextName"],
+      "properties": {
+        "registrationTime": {
+          "format": "date-time",
+          "description": "This is the first registration time from the singleProofChain or the perHashProofChain",
+          "type": "string"
+        },
+        "contextName": {"type": "string"},
+        "singleProofChain": {
+          "description": "This is the single proof chain where all hashes are stored (if configured)",
+          "$ref": "#/definitions/CommittedEntry"
+        },
+        "contentRegistrationChainTypes": {
+          "description": "A set of content registration targets",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "PER_HASH_PROOF_CHAIN",
+              "SINGLE_PROOF_CHAIN"
+            ]
+          }
+        },
+        "requestId": {"type": "string"},
+        "perHashProofChain": {
+          "description": "This is the proof chain specific for the current hash (if configured)",
+          "$ref": "#/definitions/CommittedEntry"
+        },
+        "registrationState": {
+          "description": "This is the registration state from the singleProofChain or the perHashProofChain. If one of the chains has a registration this will return REGISTERED",
+          "type": "string",
+          "enum": [
+            "NOT_REGISTERED",
+            "PENDING",
+            "REGISTERED"
+          ]
         }
       }
     },
@@ -408,12 +556,6 @@
         }
       }
     },
-    "ConfigurationResponse": {
-      "description": "Committed context and settings response",
-      "type": "object",
-      "required": ["storedSettings"],
-      "properties": {"storedSettings": {"$ref": "#/definitions/StoredSettings"}}
-    },
     "ContentRequest": {
       "description": "Content existence request",
       "type": "object",
@@ -423,7 +565,7 @@
       ],
       "properties": {
         "hashProvider": {
-          "description": "When CLIENT is supplied the content should already have been hashed by you. When SERVER is supplied we will hash the content",
+          "description": "When CLIENT is supplied the content should already have been hashed by you. When SERVER is supplied we will convertInputToHashWhenNeeded the content",
           "type": "string",
           "enum": [
             "SERVER",
@@ -441,24 +583,46 @@
         }
       }
     },
-    "ChainSettings": {
-      "description": "Existence ChainSettings. Normally you only supply them once during chain creation or during a settings update. You can also supply them during a content request, but then it is up to you to also supply the correct setting during verify",
+    "CommittedEntry": {
+      "description": "Commited Entry",
       "type": "object",
       "required": [
-        "signatureHash",
-        "version"
+        "entryId",
+        "registrationState"
       ],
       "properties": {
-        "signatureHash": {
-          "format": "byte",
+        "registrationTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "chainId": {
+          "description": "Chain ID",
           "readOnly": true,
           "type": "string"
         },
-        "singleProofChain": {
-          "description": "The proof chain id linked to the current configuration. This is a shared proof chain for all registrations",
-          "type": "string"
+        "context": {"type": "string"},
+        "registrationState": {
+          "type": "string",
+          "enum": [
+            "NOT_REGISTERED",
+            "PENDING",
+            "REGISTERED"
+          ]
         },
-        "contentRegistrationChains": {
+        "entryId": {"type": "string"}
+      }
+    },
+    "RegisterContentResponse": {
+      "description": "Committed Content response",
+      "type": "object",
+      "required": ["contextName"],
+      "properties": {
+        "contextName": {"type": "string"},
+        "singleProofChain": {
+          "description": "This is the single proof chain where all hashes are stored (if configured)",
+          "$ref": "#/definitions/CommittedEntry"
+        },
+        "contentRegistrationChainTypes": {
           "description": "A set of content registration targets",
           "type": "array",
           "items": {
@@ -469,112 +633,11 @@
             ]
           }
         },
-        "metadataRegistrationChains": {
-          "description": "A set of metadata registration targets (not in use currently)",
-          "type": "array",
-          "items": {
-            "type": "string",
-            "enum": [
-              "FILE_CHAIN",
-              "PROOF_CHAIN",
-              "METADATA_CHAIN"
-            ]
-          }
-        },
-        "version": {
-          "format": "int32",
-          "description": "The settings version (only 1 for now)",
-          "type": "integer",
-          "enum": [1]
-        },
-        "hashAlgorithm": {
-          "description": "The hashing method used for the content. We always return and expect the hash in HEX form",
-          "type": "string",
-          "enum": [
-            "SHA_256",
-            "SHA_512"
-          ]
-        }
-      }
-    },
-    "ChainConfiguration": {
-      "type": "object",
-      "required": [
-        "accessMode",
-        "context",
-        "id",
-        "name",
-        "settingChainId"
-      ],
-      "properties": {
-        "context": {"type": "string"},
-        "name": {
-          "readOnly": true,
-          "type": "string"
-        },
-        "settingChainId": {"type": "string"},
-        "id": {
-          "readOnly": true,
-          "type": "string"
-        },
-        "accessMode": {
-          "readOnly": true,
-          "type": "string",
-          "enum": [
-            "PUBLIC",
-            "PRIVATE"
-          ]
-        }
-      }
-    },
-    "RegisterContentResponse": {
-      "description": "Committed Content response",
-      "type": "object",
-      "required": [
-        "contextName",
-        "registrationState"
-      ],
-      "properties": {
-        "contextName": {"type": "string"},
-        "singleProofChain": {
-          "description": "This is the single proof chain where all hashes are stored (if configured)",
-          "$ref": "#/definitions/CommittedChain"
-        },
         "requestId": {"type": "string"},
         "perHashProofChain": {
           "description": "This is the proof chain specific for the current hash (if configured)",
-          "$ref": "#/definitions/CommittedChain"
-        },
-        "registrationState": {
-          "type": "string",
-          "enum": [
-            "PENDING",
-            "REGISTERED",
-            "NOT_REGISTERED"
-          ]
+          "$ref": "#/definitions/CommittedEntry"
         }
-      }
-    },
-    "Error": {
-      "description": "An error",
-      "type": "object",
-      "required": [
-        "code",
-        "level",
-        "message"
-      ],
-      "properties": {
-        "code": {"type": "string"},
-        "level": {
-          "type": "string",
-          "enum": [
-            "INFO",
-            "WARNING",
-            "FATAL"
-          ]
-        },
-        "cause": {"$ref": "#/definitions/Error"},
-        "message": {"type": "string"}
       }
     },
     "CreateConfigurationRequest": {
@@ -608,28 +671,6 @@
           ]
         }
       }
-    },
-    "StreamLocation": {
-      "description": "Location record of data stream",
-      "type": "object",
-      "properties": {
-        "folderPath": {"type": "string"},
-        "filename": {"type": "string"},
-        "id": {
-          "readOnly": true,
-          "type": "string"
-        },
-        "containerId": {"type": "string"},
-        "originalFilename": {"type": "string"}
-      }
-    },
-    "ErrorResponse": {
-      "description": "The error response",
-      "type": "object",
-      "properties": {"errors": {
-        "type": "array",
-        "items": {"$ref": "#/definitions/Error"}
-      }}
     }
   },
   "swagger": "2.0",
@@ -643,8 +684,8 @@
       "url": "https://sphereon.com",
       "email": "dev@sphereon.com"
     },
-    "description": "<b>With the Blockchain Proof API it is easy to prove or disprove existence of (binary) data at a certain point in time. Behind the scenes it stores entries using the Factom (bitcoin), Multichain or Ethereum blockchain by means of our generic blockchain API.<\/b>\r\n\r\nThe flow is generally as follows:\r\n1. Make sure a configuration is present\r\n2. Register content by uploading a file, some content, or providing a Stream Location from the Storage API. When you upload content you have to tell the API whether the data has already been hashed or not. If not, or when uploading a file or stream location, the API will take care of the hashing\r\n3. Verify content by uploading a file, some content, or providing a Stream Location from the Storage API. When you upload content you have to tell the API whether the data has already been hashed or not. If not, or when uploading a file or stream location, the API will take care of the hashing. You will get back whether the content has been registered previously or not\r\n\r\n\r\n<b>Interactive testing: <\/b>A web based test console is available in the <a href=\"https://store.sphereon.com\">Sphereon API Store<\/a>",
-    "termsOfService": "https://sphereon.com",
+    "description": "With the Blockchain Proof API it is easy to prove or disprove existence of data at a certain point in time. Behind the scenes it stores entries using the Factom (bitcoin), Multichain or Ethereum blockchain by means of our generic blockchain API.\r\n\r\nThe flow is generally as follows:\r\n1. Make sure a configuration is present\r\n2. Register content by uploading a file, some content, or providing a Stream Location from the Storage API. When you upload content you have to tell the API whether the data has already been hashed or not. If not, or when uploading a file or stream location, the API will take care of the hashing\r\n3. Verify content by uploading a file, some content, or providing a Stream Location from the Storage API. When you upload content you have to tell the API whether the data has already been hashed or not. If not, or when uploading a file or stream location, the API will take care of the hashing. You will get back whether the content has been registered previously or not\r\n\r\nFull API Documentation: https://docs.sphereon.com/api/blockchain-proof/0.9/html\r\nInteractive testing: A web based test console is available in the Sphereon API Store at https://store.sphereon.com",
+    "termsOfService": "https://docs.sphereon.com/api/blockchain-proof/0.9/html",
     "title": "Blockchain Proof",
     "version": "0.9"
   },

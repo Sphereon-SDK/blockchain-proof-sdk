@@ -69,7 +69,7 @@ Name | Type | Description  | Notes
 
 Register hash using the Storage API
 
-Register a hash of file/blob by supplying a Stream location of the Storage API. This Stream Location maps to a location of a file/blob on some remote cloud storage. Hashing will be done on the server side Please note that the binary data itself will not be stored, only the hash. Use the registerUsingContent endpoint if you&#39;d like to store content
+Register a convertInputToHashWhenNeeded of file/blob by supplying a Stream location of the Storage API. This Stream Location maps to a location of a file/blob on some remote cloud storage. Hashing will be done on the server side Please note that the binary data itself will not be stored, only the convertInputToHashWhenNeeded. Use the registerUsingContent endpoint if you&#39;d like to store content
 
 ### Example
 ```javascript
@@ -123,7 +123,7 @@ Name | Type | Description  | Notes
 
 Register bytestream/file hash
 
-Register a hash of content by supplying a file or some other binary data. Hashing will be done on the server side. Please note that the binary data itself will not be stored, only the hash. Use the registerUsingContent endpoint if you&#39;d like to store content
+Register a convertInputToHashWhenNeeded of content by supplying a file or some other binary data. Hashing will be done on the server side. Please note that the binary data itself will not be stored, only the convertInputToHashWhenNeeded. Use the registerUsingContent endpoint if you&#39;d like to store content
 
 ### Example
 ```javascript
@@ -141,7 +141,7 @@ var configName = "configName_example"; // String | The configuration name this o
 var stream = "/path/to/file.txt"; // File | The binary data (not hashed). Hashing will be done on the server side. The binary data will not be stored
 
 var opts = { 
-  'fileName': "fileName_example" // String | Optional input file name.
+  'fileName': "fileName_example" // String | Optional input file name. Needed when using bytestreams instead of filestreams
 };
 
 var callback = function(error, data, response) {
@@ -160,7 +160,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **configName** | **String**| The configuration name this operation | 
  **stream** | **File**| The binary data (not hashed). Hashing will be done on the server side. The binary data will not be stored | 
- **fileName** | **String**| Optional input file name. | [optional] 
+ **fileName** | **String**| Optional input file name. Needed when using bytestreams instead of filestreams | [optional] 
 
 ### Return type
 
