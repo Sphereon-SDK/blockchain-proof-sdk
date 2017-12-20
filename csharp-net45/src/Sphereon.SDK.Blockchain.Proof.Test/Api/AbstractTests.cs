@@ -10,7 +10,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
 using NUnit.Framework;
 using Sphereon.SDK.Blockchain.Proof.Api;
 using Sphereon.SDK.Blockchain.Proof.Client;
@@ -26,7 +25,7 @@ namespace Sphereon.SDK.Blockchain.Proof.Test.Api
         protected static string FixedAccessToken =
             Environment.GetEnvironmentVariable("tests.dotnet.bcproof.accesstoken");
 
-        protected static string ExampleConfigName;
+        protected static string UnitTestConfigName;
         protected static byte[] RegisteredContent;
         protected static byte[] RegisteredContentForStream;
         protected static string SettingsChainId;
@@ -35,22 +34,22 @@ namespace Sphereon.SDK.Blockchain.Proof.Test.Api
 
         static AbstractTests()
         {
-            ExampleConfigName = TestConfigBasename + DateTime.Now.Ticks / 1000;
+            UnitTestConfigName = TestConfigBasename + DateTime.Now.Ticks / 1000;
         }
 
         protected StoredSettings CreateProofAndSettingsChain()
         {
-            var settings = new ChainSettings(Version: ChainSettings.VersionEnum.NUMBER_1, Secret: Encoding.UTF8.GetBytes("very secret"))
+            var settings = new ChainSettings(Version: ChainSettings.VersionEnum.NUMBER_1)
             {
                 HashAlgorithm = ChainSettings.HashAlgorithmEnum._256,
-                ContentRegistrationChainTypes = new List<ChainSettings.ContentRegistrationChainTypesEnum>
+                ContentRegistrationChains = new List<ChainSettings.ContentRegistrationChainsEnum>
                 {
-                    ChainSettings.ContentRegistrationChainTypesEnum.PERHASHPROOFCHAIN,
-                    ChainSettings.ContentRegistrationChainTypesEnum.SINGLEPROOFCHAIN
-                } 
+                    ChainSettings.ContentRegistrationChainsEnum.PERHASHPROOFCHAIN,
+                    ChainSettings.ContentRegistrationChainsEnum.SINGLEPROOFCHAIN
+                }
             };
 
-            var createConfiguration = new CreateConfigurationRequest(Name: ExampleConfigName,
+            var createConfiguration = new CreateConfigurationRequest(Name: UnitTestConfigName,
                 InitialSettings: settings,
                 Context: TestContextMultichain, AccessMode: CreateConfigurationRequest.AccessModeEnum.PRIVATE);
 
@@ -64,8 +63,8 @@ namespace Sphereon.SDK.Blockchain.Proof.Test.Api
             Assert.NotNull(storedSettings.ChainConfiguration);
             Assert.NotNull(storedSettings.ChainSettings.SingleProofChain);
             Assert.NotNull(storedSettings.ChainSettings.HashAlgorithm);
-            SettingsChainId = storedSettings.SettingsChain.ChainId;
-            ProofChainId = storedSettings.SingleProofChain.ChainId;
+            SettingsChainId = storedSettings.SettingsChain.Id;
+            ProofChainId = storedSettings.SingleProofChain.Id;
             return storedSettings;
         }
 
@@ -81,11 +80,6 @@ namespace Sphereon.SDK.Blockchain.Proof.Test.Api
             configuration.AccessToken = FixedAccessToken;
             configuration.Timeout = 40000;
             var gatewayUrl = Environment.GetEnvironmentVariable("tests.dotnet.bcproof.gateway-url");
-            if (string.IsNullOrEmpty(gatewayUrl))
-            {
-                gatewayUrl = "https://gw.api.cloud.sphereon.com/blockchain/proof/0.9";
-            }
-            
             if (!string.IsNullOrEmpty(gatewayUrl))
             {
                 configuration.ApiClient.RestClient.BaseUrl = new Uri(gatewayUrl);
