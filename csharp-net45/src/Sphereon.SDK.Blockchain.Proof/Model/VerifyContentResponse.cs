@@ -1,7 +1,7 @@
 /* 
  * Blockchain Proof
  *
- * <b>With the Blockchain Proof API it is easy to prove or disprove existence of (binary) data at a certain point in time. Behind the scenes it stores entries using the Factom (bitcoin), Multichain or Ethereum blockchain by means of our generic blockchain API.</b>    The flow is generally as follows:  1. Make sure a configuration is present  2. Register content by uploading a file, some content, or providing a Stream Location from the Storage API. When you upload content you have to tell the API whether the data has already been hashed or not. If not, or when uploading a file or stream location, the API will take care of the hashing  3. Verify content by uploading a file, some content, or providing a Stream Location from the Storage API. When you upload content you have to tell the API whether the data has already been hashed or not. If not, or when uploading a file or stream location, the API will take care of the hashing. You will get back whether the content has been registered previously or not      <b>Interactive testing: </b>A web based test console is available in the <a href=\"https://store.sphereon.com\">Sphereon API Store</a>
+ * With the Blockchain Proof API it is easy to prove or disprove existence of data at a certain point in time. Behind the scenes it stores entries using the Factom (bitcoin), Multichain or Ethereum blockchain by means of our generic blockchain API.    The flow is generally as follows:  1. Make sure a configuration is present  2. Register content by uploading a file, some content, or providing a Stream Location from the Storage API. When you upload content you have to tell the API whether the data has already been hashed or not. If not, or when uploading a file or stream location, the API will take care of the hashing  3. Verify content by uploading a file, some content, or providing a Stream Location from the Storage API. When you upload content you have to tell the API whether the data has already been hashed or not. If not, or when uploading a file or stream location, the API will take care of the hashing. You will get back whether the content has been registered previously or not    Full API Documentation: https://docs.sphereon.com/api/blockchain-proof/0.9/html  Interactive testing: A web based test console is available in the Sphereon API Store at https://store.sphereon.com
  *
  * OpenAPI spec version: 0.9
  * Contact: dev@sphereon.com
@@ -30,12 +30,40 @@ namespace Sphereon.SDK.Blockchain.Proof.Model
     [DataContract]
     public partial class VerifyContentResponse :  IEquatable<VerifyContentResponse>, IValidatableObject
     {
+
         /// <summary>
-        /// Gets or Sets RegistrationState
+        /// Gets or Sets ContentRegistrationChainTypes
         /// </summary>
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum ContentRegistrationChainTypesEnum
+        {
+            
+            /// <summary>
+            /// Enum PERHASHPROOFCHAIN for "PER_HASH_PROOF_CHAIN"
+            /// </summary>
+            [EnumMember(Value = "PER_HASH_PROOF_CHAIN")]
+            PERHASHPROOFCHAIN,
+            
+            /// <summary>
+            /// Enum SINGLEPROOFCHAIN for "SINGLE_PROOF_CHAIN"
+            /// </summary>
+            [EnumMember(Value = "SINGLE_PROOF_CHAIN")]
+            SINGLEPROOFCHAIN
+        }
+
+        /// <summary>
+        /// This is the registration state from the singleProofChain or the perHashProofChain. If one of the chains has a registration this will return REGISTERED
+        /// </summary>
+        /// <value>This is the registration state from the singleProofChain or the perHashProofChain. If one of the chains has a registration this will return REGISTERED</value>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum RegistrationStateEnum
         {
+            
+            /// <summary>
+            /// Enum NOTREGISTERED for "NOT_REGISTERED"
+            /// </summary>
+            [EnumMember(Value = "NOT_REGISTERED")]
+            NOTREGISTERED,
             
             /// <summary>
             /// Enum PENDING for "PENDING"
@@ -47,18 +75,19 @@ namespace Sphereon.SDK.Blockchain.Proof.Model
             /// Enum REGISTERED for "REGISTERED"
             /// </summary>
             [EnumMember(Value = "REGISTERED")]
-            REGISTERED,
-            
-            /// <summary>
-            /// Enum NOTREGISTERED for "NOT_REGISTERED"
-            /// </summary>
-            [EnumMember(Value = "NOT_REGISTERED")]
-            NOTREGISTERED
+            REGISTERED
         }
 
         /// <summary>
-        /// Gets or Sets RegistrationState
+        /// A set of content registration targets
         /// </summary>
+        /// <value>A set of content registration targets</value>
+        [DataMember(Name="contentRegistrationChainTypes", EmitDefaultValue=false)]
+        public List<ContentRegistrationChainTypesEnum> ContentRegistrationChainTypes { get; set; }
+        /// <summary>
+        /// This is the registration state from the singleProofChain or the perHashProofChain. If one of the chains has a registration this will return REGISTERED
+        /// </summary>
+        /// <value>This is the registration state from the singleProofChain or the perHashProofChain. If one of the chains has a registration this will return REGISTERED</value>
         [DataMember(Name="registrationState", EmitDefaultValue=false)]
         public RegistrationStateEnum? RegistrationState { get; set; }
         /// <summary>
@@ -69,14 +98,14 @@ namespace Sphereon.SDK.Blockchain.Proof.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="VerifyContentResponse" /> class.
         /// </summary>
-        /// <param name="RegistrationTime">RegistrationTime.</param>
+        /// <param name="RegistrationTime">This is the first registration time from the singleProofChain or the perHashProofChain.</param>
         /// <param name="ContextName">ContextName (required).</param>
+        /// <param name="SingleProofChain">This is the single proof chain where all hashes are stored (if configured).</param>
+        /// <param name="ContentRegistrationChainTypes">A set of content registration targets.</param>
         /// <param name="RequestId">RequestId.</param>
-        /// <param name="ContentId">ContentId (required).</param>
-        /// <param name="ProofChain">ProofChain (required).</param>
-        /// <param name="RegistrationState">RegistrationState (required).</param>
-        /// <param name="FileChain">FileChain (required).</param>
-        public VerifyContentResponse(DateTime? RegistrationTime = default(DateTime?), string ContextName = default(string), string RequestId = default(string), string ContentId = default(string), CommittedChain ProofChain = default(CommittedChain), RegistrationStateEnum? RegistrationState = default(RegistrationStateEnum?), CommittedChain FileChain = default(CommittedChain))
+        /// <param name="PerHashProofChain">This is the proof chain specific for the current hash (if configured).</param>
+        /// <param name="RegistrationState">This is the registration state from the singleProofChain or the perHashProofChain. If one of the chains has a registration this will return REGISTERED.</param>
+        public VerifyContentResponse(DateTime? RegistrationTime = default(DateTime?), string ContextName = default(string), CommittedEntry SingleProofChain = default(CommittedEntry), List<ContentRegistrationChainTypesEnum> ContentRegistrationChainTypes = default(List<ContentRegistrationChainTypesEnum>), string RequestId = default(string), CommittedEntry PerHashProofChain = default(CommittedEntry), RegistrationStateEnum? RegistrationState = default(RegistrationStateEnum?))
         {
             // to ensure "ContextName" is required (not null)
             if (ContextName == null)
@@ -87,49 +116,18 @@ namespace Sphereon.SDK.Blockchain.Proof.Model
             {
                 this.ContextName = ContextName;
             }
-            // to ensure "ContentId" is required (not null)
-            if (ContentId == null)
-            {
-                throw new InvalidDataException("ContentId is a required property for VerifyContentResponse and cannot be null");
-            }
-            else
-            {
-                this.ContentId = ContentId;
-            }
-            // to ensure "ProofChain" is required (not null)
-            if (ProofChain == null)
-            {
-                throw new InvalidDataException("ProofChain is a required property for VerifyContentResponse and cannot be null");
-            }
-            else
-            {
-                this.ProofChain = ProofChain;
-            }
-            // to ensure "RegistrationState" is required (not null)
-            if (RegistrationState == null)
-            {
-                throw new InvalidDataException("RegistrationState is a required property for VerifyContentResponse and cannot be null");
-            }
-            else
-            {
-                this.RegistrationState = RegistrationState;
-            }
-            // to ensure "FileChain" is required (not null)
-            if (FileChain == null)
-            {
-                throw new InvalidDataException("FileChain is a required property for VerifyContentResponse and cannot be null");
-            }
-            else
-            {
-                this.FileChain = FileChain;
-            }
             this.RegistrationTime = RegistrationTime;
+            this.SingleProofChain = SingleProofChain;
+            this.ContentRegistrationChainTypes = ContentRegistrationChainTypes;
             this.RequestId = RequestId;
+            this.PerHashProofChain = PerHashProofChain;
+            this.RegistrationState = RegistrationState;
         }
         
         /// <summary>
-        /// Gets or Sets RegistrationTime
+        /// This is the first registration time from the singleProofChain or the perHashProofChain
         /// </summary>
+        /// <value>This is the first registration time from the singleProofChain or the perHashProofChain</value>
         [DataMember(Name="registrationTime", EmitDefaultValue=false)]
         public DateTime? RegistrationTime { get; set; }
 
@@ -140,29 +138,26 @@ namespace Sphereon.SDK.Blockchain.Proof.Model
         public string ContextName { get; set; }
 
         /// <summary>
+        /// This is the single proof chain where all hashes are stored (if configured)
+        /// </summary>
+        /// <value>This is the single proof chain where all hashes are stored (if configured)</value>
+        [DataMember(Name="singleProofChain", EmitDefaultValue=false)]
+        public CommittedEntry SingleProofChain { get; set; }
+
+
+        /// <summary>
         /// Gets or Sets RequestId
         /// </summary>
         [DataMember(Name="requestId", EmitDefaultValue=false)]
         public string RequestId { get; set; }
 
         /// <summary>
-        /// Gets or Sets ContentId
+        /// This is the proof chain specific for the current hash (if configured)
         /// </summary>
-        [DataMember(Name="contentId", EmitDefaultValue=false)]
-        public string ContentId { get; set; }
+        /// <value>This is the proof chain specific for the current hash (if configured)</value>
+        [DataMember(Name="perHashProofChain", EmitDefaultValue=false)]
+        public CommittedEntry PerHashProofChain { get; set; }
 
-        /// <summary>
-        /// Gets or Sets ProofChain
-        /// </summary>
-        [DataMember(Name="proofChain", EmitDefaultValue=false)]
-        public CommittedChain ProofChain { get; set; }
-
-
-        /// <summary>
-        /// Gets or Sets FileChain
-        /// </summary>
-        [DataMember(Name="fileChain", EmitDefaultValue=false)]
-        public CommittedChain FileChain { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -174,11 +169,11 @@ namespace Sphereon.SDK.Blockchain.Proof.Model
             sb.Append("class VerifyContentResponse {\n");
             sb.Append("  RegistrationTime: ").Append(RegistrationTime).Append("\n");
             sb.Append("  ContextName: ").Append(ContextName).Append("\n");
+            sb.Append("  SingleProofChain: ").Append(SingleProofChain).Append("\n");
+            sb.Append("  ContentRegistrationChainTypes: ").Append(ContentRegistrationChainTypes).Append("\n");
             sb.Append("  RequestId: ").Append(RequestId).Append("\n");
-            sb.Append("  ContentId: ").Append(ContentId).Append("\n");
-            sb.Append("  ProofChain: ").Append(ProofChain).Append("\n");
+            sb.Append("  PerHashProofChain: ").Append(PerHashProofChain).Append("\n");
             sb.Append("  RegistrationState: ").Append(RegistrationState).Append("\n");
-            sb.Append("  FileChain: ").Append(FileChain).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -226,29 +221,29 @@ namespace Sphereon.SDK.Blockchain.Proof.Model
                     this.ContextName.Equals(other.ContextName)
                 ) && 
                 (
+                    this.SingleProofChain == other.SingleProofChain ||
+                    this.SingleProofChain != null &&
+                    this.SingleProofChain.Equals(other.SingleProofChain)
+                ) && 
+                (
+                    this.ContentRegistrationChainTypes == other.ContentRegistrationChainTypes ||
+                    this.ContentRegistrationChainTypes != null &&
+                    this.ContentRegistrationChainTypes.SequenceEqual(other.ContentRegistrationChainTypes)
+                ) && 
+                (
                     this.RequestId == other.RequestId ||
                     this.RequestId != null &&
                     this.RequestId.Equals(other.RequestId)
                 ) && 
                 (
-                    this.ContentId == other.ContentId ||
-                    this.ContentId != null &&
-                    this.ContentId.Equals(other.ContentId)
-                ) && 
-                (
-                    this.ProofChain == other.ProofChain ||
-                    this.ProofChain != null &&
-                    this.ProofChain.Equals(other.ProofChain)
+                    this.PerHashProofChain == other.PerHashProofChain ||
+                    this.PerHashProofChain != null &&
+                    this.PerHashProofChain.Equals(other.PerHashProofChain)
                 ) && 
                 (
                     this.RegistrationState == other.RegistrationState ||
                     this.RegistrationState != null &&
                     this.RegistrationState.Equals(other.RegistrationState)
-                ) && 
-                (
-                    this.FileChain == other.FileChain ||
-                    this.FileChain != null &&
-                    this.FileChain.Equals(other.FileChain)
                 );
         }
 
@@ -267,16 +262,16 @@ namespace Sphereon.SDK.Blockchain.Proof.Model
                     hash = hash * 59 + this.RegistrationTime.GetHashCode();
                 if (this.ContextName != null)
                     hash = hash * 59 + this.ContextName.GetHashCode();
+                if (this.SingleProofChain != null)
+                    hash = hash * 59 + this.SingleProofChain.GetHashCode();
+                if (this.ContentRegistrationChainTypes != null)
+                    hash = hash * 59 + this.ContentRegistrationChainTypes.GetHashCode();
                 if (this.RequestId != null)
                     hash = hash * 59 + this.RequestId.GetHashCode();
-                if (this.ContentId != null)
-                    hash = hash * 59 + this.ContentId.GetHashCode();
-                if (this.ProofChain != null)
-                    hash = hash * 59 + this.ProofChain.GetHashCode();
+                if (this.PerHashProofChain != null)
+                    hash = hash * 59 + this.PerHashProofChain.GetHashCode();
                 if (this.RegistrationState != null)
                     hash = hash * 59 + this.RegistrationState.GetHashCode();
-                if (this.FileChain != null)
-                    hash = hash * 59 + this.FileChain.GetHashCode();
                 return hash;
             }
         }

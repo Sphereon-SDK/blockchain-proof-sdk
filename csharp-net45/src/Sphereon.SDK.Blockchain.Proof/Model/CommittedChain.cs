@@ -1,7 +1,7 @@
 /* 
  * Blockchain Proof
  *
- * <b>With the Blockchain Proof API it is easy to prove or disprove existence of (binary) data at a certain point in time. Behind the scenes it stores entries using the Factom (bitcoin), Multichain or Ethereum blockchain by means of our generic blockchain API.</b>    The flow is generally as follows:  1. Make sure a configuration is present  2. Register content by uploading a file, some content, or providing a Stream Location from the Storage API. When you upload content you have to tell the API whether the data has already been hashed or not. If not, or when uploading a file or stream location, the API will take care of the hashing  3. Verify content by uploading a file, some content, or providing a Stream Location from the Storage API. When you upload content you have to tell the API whether the data has already been hashed or not. If not, or when uploading a file or stream location, the API will take care of the hashing. You will get back whether the content has been registered previously or not      <b>Interactive testing: </b>A web based test console is available in the <a href=\"https://store.sphereon.com\">Sphereon API Store</a>
+ * With the Blockchain Proof API it is easy to prove or disprove existence of data at a certain point in time. Behind the scenes it stores entries using the Factom (bitcoin), Multichain or Ethereum blockchain by means of our generic blockchain API.    The flow is generally as follows:  1. Make sure a configuration is present  2. Register content by uploading a file, some content, or providing a Stream Location from the Storage API. When you upload content you have to tell the API whether the data has already been hashed or not. If not, or when uploading a file or stream location, the API will take care of the hashing  3. Verify content by uploading a file, some content, or providing a Stream Location from the Storage API. When you upload content you have to tell the API whether the data has already been hashed or not. If not, or when uploading a file or stream location, the API will take care of the hashing. You will get back whether the content has been registered previously or not    Full API Documentation: https://docs.sphereon.com/api/blockchain-proof/0.9/html  Interactive testing: A web based test console is available in the Sphereon API Store at https://store.sphereon.com
  *
  * OpenAPI spec version: 0.9
  * Contact: dev@sphereon.com
@@ -40,17 +40,17 @@ namespace Sphereon.SDK.Blockchain.Proof.Model
         }
         
         /// <summary>
+        /// Chain ID
+        /// </summary>
+        /// <value>Chain ID</value>
+        [DataMember(Name="chainId", EmitDefaultValue=false)]
+        public string ChainId { get; private set; }
+
+        /// <summary>
         /// Gets or Sets Context
         /// </summary>
         [DataMember(Name="context", EmitDefaultValue=false)]
         public string Context { get; set; }
-
-        /// <summary>
-        /// Chain ID
-        /// </summary>
-        /// <value>Chain ID</value>
-        [DataMember(Name="id", EmitDefaultValue=false)]
-        public string Id { get; private set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -60,8 +60,8 @@ namespace Sphereon.SDK.Blockchain.Proof.Model
         {
             var sb = new StringBuilder();
             sb.Append("class CommittedChain {\n");
+            sb.Append("  ChainId: ").Append(ChainId).Append("\n");
             sb.Append("  Context: ").Append(Context).Append("\n");
-            sb.Append("  Id: ").Append(Id).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -99,14 +99,14 @@ namespace Sphereon.SDK.Blockchain.Proof.Model
 
             return 
                 (
+                    this.ChainId == other.ChainId ||
+                    this.ChainId != null &&
+                    this.ChainId.Equals(other.ChainId)
+                ) && 
+                (
                     this.Context == other.Context ||
                     this.Context != null &&
                     this.Context.Equals(other.Context)
-                ) && 
-                (
-                    this.Id == other.Id ||
-                    this.Id != null &&
-                    this.Id.Equals(other.Id)
                 );
         }
 
@@ -121,10 +121,10 @@ namespace Sphereon.SDK.Blockchain.Proof.Model
             {
                 int hash = 41;
                 // Suitable nullity checks etc, of course :)
+                if (this.ChainId != null)
+                    hash = hash * 59 + this.ChainId.GetHashCode();
                 if (this.Context != null)
                     hash = hash * 59 + this.Context.GetHashCode();
-                if (this.Id != null)
-                    hash = hash * 59 + this.Id.GetHashCode();
                 return hash;
             }
         }

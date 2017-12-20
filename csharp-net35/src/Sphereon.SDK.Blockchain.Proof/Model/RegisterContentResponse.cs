@@ -1,7 +1,7 @@
 /* 
  * Blockchain Proof
  *
- * <b>With the Blockchain Proof API it is easy to prove or disprove existence of (binary) data at a certain point in time. Behind the scenes it stores entries using the Factom (bitcoin), Multichain or Ethereum blockchain by means of our generic blockchain API.</b>    The flow is generally as follows:  1. Make sure a configuration is present  2. Register content by uploading a file, some content, or providing a Stream Location from the Storage API. When you upload content you have to tell the API whether the data has already been hashed or not. If not, or when uploading a file or stream location, the API will take care of the hashing  3. Verify content by uploading a file, some content, or providing a Stream Location from the Storage API. When you upload content you have to tell the API whether the data has already been hashed or not. If not, or when uploading a file or stream location, the API will take care of the hashing. You will get back whether the content has been registered previously or not      <b>Interactive testing: </b>A web based test console is available in the <a href=\"https://store.sphereon.com\">Sphereon API Store</a>
+ * With the Blockchain Proof API it is easy to prove or disprove existence of data at a certain point in time. Behind the scenes it stores entries using the Factom (bitcoin), Multichain or Ethereum blockchain by means of our generic blockchain API.    The flow is generally as follows:  1. Make sure a configuration is present  2. Register content by uploading a file, some content, or providing a Stream Location from the Storage API. When you upload content you have to tell the API whether the data has already been hashed or not. If not, or when uploading a file or stream location, the API will take care of the hashing  3. Verify content by uploading a file, some content, or providing a Stream Location from the Storage API. When you upload content you have to tell the API whether the data has already been hashed or not. If not, or when uploading a file or stream location, the API will take care of the hashing. You will get back whether the content has been registered previously or not    Full API Documentation: https://docs.sphereon.com/api/blockchain-proof/0.9/html  Interactive testing: A web based test console is available in the Sphereon API Store at https://store.sphereon.com
  *
  * OpenAPI spec version: 0.9
  * Contact: dev@sphereon.com
@@ -30,37 +30,33 @@ namespace Sphereon.SDK.Blockchain.Proof.Model
     [DataContract]
     public partial class RegisterContentResponse :  IEquatable<RegisterContentResponse>
     {
+
         /// <summary>
-        /// Gets or Sets RegistrationState
+        /// Gets or Sets ContentRegistrationChainTypes
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
-        public enum RegistrationStateEnum
+        public enum ContentRegistrationChainTypesEnum
         {
             
             /// <summary>
-            /// Enum PENDING for "PENDING"
+            /// Enum PERHASHPROOFCHAIN for "PER_HASH_PROOF_CHAIN"
             /// </summary>
-            [EnumMember(Value = "PENDING")]
-            PENDING,
+            [EnumMember(Value = "PER_HASH_PROOF_CHAIN")]
+            PERHASHPROOFCHAIN,
             
             /// <summary>
-            /// Enum REGISTERED for "REGISTERED"
+            /// Enum SINGLEPROOFCHAIN for "SINGLE_PROOF_CHAIN"
             /// </summary>
-            [EnumMember(Value = "REGISTERED")]
-            REGISTERED,
-            
-            /// <summary>
-            /// Enum NOTREGISTERED for "NOT_REGISTERED"
-            /// </summary>
-            [EnumMember(Value = "NOT_REGISTERED")]
-            NOTREGISTERED
+            [EnumMember(Value = "SINGLE_PROOF_CHAIN")]
+            SINGLEPROOFCHAIN
         }
 
         /// <summary>
-        /// Gets or Sets RegistrationState
+        /// A set of content registration targets
         /// </summary>
-        [DataMember(Name="registrationState", EmitDefaultValue=false)]
-        public RegistrationStateEnum? RegistrationState { get; set; }
+        /// <value>A set of content registration targets</value>
+        [DataMember(Name="contentRegistrationChainTypes", EmitDefaultValue=false)]
+        public List<ContentRegistrationChainTypesEnum> ContentRegistrationChainTypes { get; set; }
         /// <summary>
         /// Initializes a new instance of the <see cref="RegisterContentResponse" /> class.
         /// </summary>
@@ -71,10 +67,10 @@ namespace Sphereon.SDK.Blockchain.Proof.Model
         /// </summary>
         /// <param name="ContextName">ContextName (required).</param>
         /// <param name="SingleProofChain">This is the single proof chain where all hashes are stored (if configured).</param>
+        /// <param name="ContentRegistrationChainTypes">A set of content registration targets.</param>
         /// <param name="RequestId">RequestId.</param>
         /// <param name="PerHashProofChain">This is the proof chain specific for the current hash (if configured).</param>
-        /// <param name="RegistrationState">RegistrationState (required).</param>
-        public RegisterContentResponse(string ContextName = default(string), CommittedChain SingleProofChain = default(CommittedChain), string RequestId = default(string), CommittedChain PerHashProofChain = default(CommittedChain), RegistrationStateEnum? RegistrationState = default(RegistrationStateEnum?))
+        public RegisterContentResponse(string ContextName = default(string), CommittedEntry SingleProofChain = default(CommittedEntry), List<ContentRegistrationChainTypesEnum> ContentRegistrationChainTypes = default(List<ContentRegistrationChainTypesEnum>), string RequestId = default(string), CommittedEntry PerHashProofChain = default(CommittedEntry))
         {
             // to ensure "ContextName" is required (not null)
             if (ContextName == null)
@@ -85,16 +81,8 @@ namespace Sphereon.SDK.Blockchain.Proof.Model
             {
                 this.ContextName = ContextName;
             }
-            // to ensure "RegistrationState" is required (not null)
-            if (RegistrationState == null)
-            {
-                throw new InvalidDataException("RegistrationState is a required property for RegisterContentResponse and cannot be null");
-            }
-            else
-            {
-                this.RegistrationState = RegistrationState;
-            }
             this.SingleProofChain = SingleProofChain;
+            this.ContentRegistrationChainTypes = ContentRegistrationChainTypes;
             this.RequestId = RequestId;
             this.PerHashProofChain = PerHashProofChain;
         }
@@ -110,7 +98,8 @@ namespace Sphereon.SDK.Blockchain.Proof.Model
         /// </summary>
         /// <value>This is the single proof chain where all hashes are stored (if configured)</value>
         [DataMember(Name="singleProofChain", EmitDefaultValue=false)]
-        public CommittedChain SingleProofChain { get; set; }
+        public CommittedEntry SingleProofChain { get; set; }
+
 
         /// <summary>
         /// Gets or Sets RequestId
@@ -123,8 +112,7 @@ namespace Sphereon.SDK.Blockchain.Proof.Model
         /// </summary>
         /// <value>This is the proof chain specific for the current hash (if configured)</value>
         [DataMember(Name="perHashProofChain", EmitDefaultValue=false)]
-        public CommittedChain PerHashProofChain { get; set; }
-
+        public CommittedEntry PerHashProofChain { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -136,9 +124,9 @@ namespace Sphereon.SDK.Blockchain.Proof.Model
             sb.Append("class RegisterContentResponse {\n");
             sb.Append("  ContextName: ").Append(ContextName).Append("\n");
             sb.Append("  SingleProofChain: ").Append(SingleProofChain).Append("\n");
+            sb.Append("  ContentRegistrationChainTypes: ").Append(ContentRegistrationChainTypes).Append("\n");
             sb.Append("  RequestId: ").Append(RequestId).Append("\n");
             sb.Append("  PerHashProofChain: ").Append(PerHashProofChain).Append("\n");
-            sb.Append("  RegistrationState: ").Append(RegistrationState).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -186,6 +174,11 @@ namespace Sphereon.SDK.Blockchain.Proof.Model
                     this.SingleProofChain.Equals(other.SingleProofChain)
                 ) && 
                 (
+                    this.ContentRegistrationChainTypes == other.ContentRegistrationChainTypes ||
+                    this.ContentRegistrationChainTypes != null &&
+                    this.ContentRegistrationChainTypes.SequenceEqual(other.ContentRegistrationChainTypes)
+                ) && 
+                (
                     this.RequestId == other.RequestId ||
                     this.RequestId != null &&
                     this.RequestId.Equals(other.RequestId)
@@ -194,11 +187,6 @@ namespace Sphereon.SDK.Blockchain.Proof.Model
                     this.PerHashProofChain == other.PerHashProofChain ||
                     this.PerHashProofChain != null &&
                     this.PerHashProofChain.Equals(other.PerHashProofChain)
-                ) && 
-                (
-                    this.RegistrationState == other.RegistrationState ||
-                    this.RegistrationState != null &&
-                    this.RegistrationState.Equals(other.RegistrationState)
                 );
         }
 
@@ -217,12 +205,12 @@ namespace Sphereon.SDK.Blockchain.Proof.Model
                     hash = hash * 59 + this.ContextName.GetHashCode();
                 if (this.SingleProofChain != null)
                     hash = hash * 59 + this.SingleProofChain.GetHashCode();
+                if (this.ContentRegistrationChainTypes != null)
+                    hash = hash * 59 + this.ContentRegistrationChainTypes.GetHashCode();
                 if (this.RequestId != null)
                     hash = hash * 59 + this.RequestId.GetHashCode();
                 if (this.PerHashProofChain != null)
                     hash = hash * 59 + this.PerHashProofChain.GetHashCode();
-                if (this.RegistrationState != null)
-                    hash = hash * 59 + this.RegistrationState.GetHashCode();
                 return hash;
             }
         }

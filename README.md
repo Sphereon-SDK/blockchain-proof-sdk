@@ -5,13 +5,15 @@
 Welcome to the blockchain Proof SDK. This SDK allows you to prove existence of objects at a specific point in time, without having to worry about the low level details of blockchain or cryptocurrencies.
 Actualy the notion of blockchain is hidden away for the most part in this API.
 
-See this page on our website for more information: https://sphereon.com/products/blockchain-api
+For documentation please see: https://docs.sphereon.com/api/blockchain-proof/0.9/html
+
+See also our website for more information: https://sphereon.com/products/blockchain-api
 
 ## Available SDKs
 
 The SDK currently supports the folowing languages:
  * [Java - Jersey2](java8-jersey2)
- * [Java - Retrofit2](java8-retrofit2)
+ * [Java - Okhttp - gson](java8-okhttp-gson)
  * [C# .NET](csharp-net45)
  * [Javascript](javascript)
  

@@ -1,7 +1,7 @@
 /* 
  * Blockchain Proof
  *
- * <b>With the Blockchain Proof API it is easy to prove or disprove existence of (binary) data at a certain point in time. Behind the scenes it stores entries using the Factom (bitcoin), Multichain or Ethereum blockchain by means of our generic blockchain API.</b>    The flow is generally as follows:  1. Make sure a configuration is present  2. Register content by uploading a file, some content, or providing a Stream Location from the Storage API. When you upload content you have to tell the API whether the data has already been hashed or not. If not, or when uploading a file or stream location, the API will take care of the hashing  3. Verify content by uploading a file, some content, or providing a Stream Location from the Storage API. When you upload content you have to tell the API whether the data has already been hashed or not. If not, or when uploading a file or stream location, the API will take care of the hashing. You will get back whether the content has been registered previously or not      <b>Interactive testing: </b>A web based test console is available in the <a href=\"https://store.sphereon.com\">Sphereon API Store</a>
+ * With the Blockchain Proof API it is easy to prove or disprove existence of data at a certain point in time. Behind the scenes it stores entries using the Factom (bitcoin), Multichain or Ethereum blockchain by means of our generic blockchain API.    The flow is generally as follows:  1. Make sure a configuration is present  2. Register content by uploading a file, some content, or providing a Stream Location from the Storage API. When you upload content you have to tell the API whether the data has already been hashed or not. If not, or when uploading a file or stream location, the API will take care of the hashing  3. Verify content by uploading a file, some content, or providing a Stream Location from the Storage API. When you upload content you have to tell the API whether the data has already been hashed or not. If not, or when uploading a file or stream location, the API will take care of the hashing. You will get back whether the content has been registered previously or not    Full API Documentation: https://docs.sphereon.com/api/blockchain-proof/0.9/html  Interactive testing: A web based test console is available in the Sphereon API Store at https://store.sphereon.com
  *
  * OpenAPI spec version: 0.9
  * Contact: dev@sphereon.com
@@ -32,10 +32,10 @@ namespace Sphereon.SDK.Blockchain.Proof.Model
     {
 
         /// <summary>
-        /// Gets or Sets ContentRegistrationChains
+        /// Gets or Sets ContentRegistrationChainTypes
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
-        public enum ContentRegistrationChainsEnum
+        public enum ContentRegistrationChainTypesEnum
         {
             
             /// <summary>
@@ -94,9 +94,9 @@ namespace Sphereon.SDK.Blockchain.Proof.Model
         }
 
         /// <summary>
-        /// The hashing method used for the content. We always return and expect the hash in HEX form
+        /// The hashing method used for the content. We always return and expect the convertInputToHashWhenNeeded in HEX form
         /// </summary>
-        /// <value>The hashing method used for the content. We always return and expect the hash in HEX form</value>
+        /// <value>The hashing method used for the content. We always return and expect the convertInputToHashWhenNeeded in HEX form</value>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum HashAlgorithmEnum
         {
@@ -118,8 +118,8 @@ namespace Sphereon.SDK.Blockchain.Proof.Model
         /// A set of content registration targets
         /// </summary>
         /// <value>A set of content registration targets</value>
-        [DataMember(Name="contentRegistrationChains", EmitDefaultValue=false)]
-        public List<ContentRegistrationChainsEnum> ContentRegistrationChains { get; set; }
+        [DataMember(Name="contentRegistrationChainTypes", EmitDefaultValue=false)]
+        public List<ContentRegistrationChainTypesEnum> ContentRegistrationChainTypes { get; set; }
         /// <summary>
         /// A set of metadata registration targets (not in use currently)
         /// </summary>
@@ -133,9 +133,9 @@ namespace Sphereon.SDK.Blockchain.Proof.Model
         [DataMember(Name="version", EmitDefaultValue=false)]
         public VersionEnum? Version { get; set; }
         /// <summary>
-        /// The hashing method used for the content. We always return and expect the hash in HEX form
+        /// The hashing method used for the content. We always return and expect the convertInputToHashWhenNeeded in HEX form
         /// </summary>
-        /// <value>The hashing method used for the content. We always return and expect the hash in HEX form</value>
+        /// <value>The hashing method used for the content. We always return and expect the convertInputToHashWhenNeeded in HEX form</value>
         [DataMember(Name="hashAlgorithm", EmitDefaultValue=false)]
         public HashAlgorithmEnum? HashAlgorithm { get; set; }
         /// <summary>
@@ -147,12 +147,22 @@ namespace Sphereon.SDK.Blockchain.Proof.Model
         /// Initializes a new instance of the <see cref="ChainSettings" /> class.
         /// </summary>
         /// <param name="SingleProofChain">The proof chain id linked to the current configuration. This is a shared proof chain for all registrations.</param>
-        /// <param name="ContentRegistrationChains">A set of content registration targets.</param>
+        /// <param name="ContentRegistrationChainTypes">A set of content registration targets.</param>
         /// <param name="MetadataRegistrationChains">A set of metadata registration targets (not in use currently).</param>
+        /// <param name="Secret">A secret that is used as a seed during hashing (required).</param>
         /// <param name="Version">The settings version (only 1 for now) (required).</param>
-        /// <param name="HashAlgorithm">The hashing method used for the content. We always return and expect the hash in HEX form.</param>
-        public ChainSettings(string SingleProofChain = default(string), List<ContentRegistrationChainsEnum> ContentRegistrationChains = default(List<ContentRegistrationChainsEnum>), List<MetadataRegistrationChainsEnum> MetadataRegistrationChains = default(List<MetadataRegistrationChainsEnum>), VersionEnum? Version = default(VersionEnum?), HashAlgorithmEnum? HashAlgorithm = default(HashAlgorithmEnum?))
+        /// <param name="HashAlgorithm">The hashing method used for the content. We always return and expect the convertInputToHashWhenNeeded in HEX form.</param>
+        public ChainSettings(string SingleProofChain = default(string), List<ContentRegistrationChainTypesEnum> ContentRegistrationChainTypes = default(List<ContentRegistrationChainTypesEnum>), List<MetadataRegistrationChainsEnum> MetadataRegistrationChains = default(List<MetadataRegistrationChainsEnum>), byte[] Secret = default(byte[]), VersionEnum? Version = default(VersionEnum?), HashAlgorithmEnum? HashAlgorithm = default(HashAlgorithmEnum?))
         {
+            // to ensure "Secret" is required (not null)
+            if (Secret == null)
+            {
+                throw new InvalidDataException("Secret is a required property for ChainSettings and cannot be null");
+            }
+            else
+            {
+                this.Secret = Secret;
+            }
             // to ensure "Version" is required (not null)
             if (Version == null)
             {
@@ -163,17 +173,11 @@ namespace Sphereon.SDK.Blockchain.Proof.Model
                 this.Version = Version;
             }
             this.SingleProofChain = SingleProofChain;
-            this.ContentRegistrationChains = ContentRegistrationChains;
+            this.ContentRegistrationChainTypes = ContentRegistrationChainTypes;
             this.MetadataRegistrationChains = MetadataRegistrationChains;
             this.HashAlgorithm = HashAlgorithm;
         }
         
-        /// <summary>
-        /// Gets or Sets SignatureHash
-        /// </summary>
-        [DataMember(Name="signatureHash", EmitDefaultValue=false)]
-        public byte[] SignatureHash { get; private set; }
-
         /// <summary>
         /// The proof chain id linked to the current configuration. This is a shared proof chain for all registrations
         /// </summary>
@@ -182,6 +186,13 @@ namespace Sphereon.SDK.Blockchain.Proof.Model
         public string SingleProofChain { get; set; }
 
 
+
+        /// <summary>
+        /// A secret that is used as a seed during hashing
+        /// </summary>
+        /// <value>A secret that is used as a seed during hashing</value>
+        [DataMember(Name="secret", EmitDefaultValue=false)]
+        public byte[] Secret { get; set; }
 
 
 
@@ -193,10 +204,10 @@ namespace Sphereon.SDK.Blockchain.Proof.Model
         {
             var sb = new StringBuilder();
             sb.Append("class ChainSettings {\n");
-            sb.Append("  SignatureHash: ").Append(SignatureHash).Append("\n");
             sb.Append("  SingleProofChain: ").Append(SingleProofChain).Append("\n");
-            sb.Append("  ContentRegistrationChains: ").Append(ContentRegistrationChains).Append("\n");
+            sb.Append("  ContentRegistrationChainTypes: ").Append(ContentRegistrationChainTypes).Append("\n");
             sb.Append("  MetadataRegistrationChains: ").Append(MetadataRegistrationChains).Append("\n");
+            sb.Append("  Secret: ").Append(Secret).Append("\n");
             sb.Append("  Version: ").Append(Version).Append("\n");
             sb.Append("  HashAlgorithm: ").Append(HashAlgorithm).Append("\n");
             sb.Append("}\n");
@@ -236,24 +247,24 @@ namespace Sphereon.SDK.Blockchain.Proof.Model
 
             return 
                 (
-                    this.SignatureHash == other.SignatureHash ||
-                    this.SignatureHash != null &&
-                    this.SignatureHash.Equals(other.SignatureHash)
-                ) && 
-                (
                     this.SingleProofChain == other.SingleProofChain ||
                     this.SingleProofChain != null &&
                     this.SingleProofChain.Equals(other.SingleProofChain)
                 ) && 
                 (
-                    this.ContentRegistrationChains == other.ContentRegistrationChains ||
-                    this.ContentRegistrationChains != null &&
-                    this.ContentRegistrationChains.SequenceEqual(other.ContentRegistrationChains)
+                    this.ContentRegistrationChainTypes == other.ContentRegistrationChainTypes ||
+                    this.ContentRegistrationChainTypes != null &&
+                    this.ContentRegistrationChainTypes.SequenceEqual(other.ContentRegistrationChainTypes)
                 ) && 
                 (
                     this.MetadataRegistrationChains == other.MetadataRegistrationChains ||
                     this.MetadataRegistrationChains != null &&
                     this.MetadataRegistrationChains.SequenceEqual(other.MetadataRegistrationChains)
+                ) && 
+                (
+                    this.Secret == other.Secret ||
+                    this.Secret != null &&
+                    this.Secret.Equals(other.Secret)
                 ) && 
                 (
                     this.Version == other.Version ||
@@ -278,14 +289,14 @@ namespace Sphereon.SDK.Blockchain.Proof.Model
             {
                 int hash = 41;
                 // Suitable nullity checks etc, of course :)
-                if (this.SignatureHash != null)
-                    hash = hash * 59 + this.SignatureHash.GetHashCode();
                 if (this.SingleProofChain != null)
                     hash = hash * 59 + this.SingleProofChain.GetHashCode();
-                if (this.ContentRegistrationChains != null)
-                    hash = hash * 59 + this.ContentRegistrationChains.GetHashCode();
+                if (this.ContentRegistrationChainTypes != null)
+                    hash = hash * 59 + this.ContentRegistrationChainTypes.GetHashCode();
                 if (this.MetadataRegistrationChains != null)
                     hash = hash * 59 + this.MetadataRegistrationChains.GetHashCode();
+                if (this.Secret != null)
+                    hash = hash * 59 + this.Secret.GetHashCode();
                 if (this.Version != null)
                     hash = hash * 59 + this.Version.GetHashCode();
                 if (this.HashAlgorithm != null)

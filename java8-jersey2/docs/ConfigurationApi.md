@@ -32,7 +32,7 @@ OAuth oauth2schema = (OAuth) defaultClient.getAuthentication("oauth2schema");
 oauth2schema.setAccessToken("YOUR ACCESS TOKEN");
 
 ConfigurationApi apiInstance = new ConfigurationApi();
-CreateConfigurationRequest request = new CreateConfigurationRequest(); // CreateConfigurationRequest | Create a new Proof of Existence context using the provided entity settings
+CreateConfigurationRequest request = new CreateConfigurationRequest(); // CreateConfigurationRequest | Create a new Proof of Existence configuration using the provided settings. The context points to a context of the Easy Blockchain API. When you have no own context, simply use 'multichain' without the quotes as context. You will be using our multichain ledger then, which is recomended during development/testing
 try {
     ConfigurationResponse result = apiInstance.createConfiguration(request);
     System.out.println(result);
@@ -46,7 +46,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **request** | [**CreateConfigurationRequest**](CreateConfigurationRequest.md)| Create a new Proof of Existence context using the provided entity settings |
+ **request** | [**CreateConfigurationRequest**](CreateConfigurationRequest.md)| Create a new Proof of Existence configuration using the provided settings. The context points to a context of the Easy Blockchain API. When you have no own context, simply use &#39;multichain&#39; without the quotes as context. You will be using our multichain ledger then, which is recomended during development/testing |
 
 ### Return type
 

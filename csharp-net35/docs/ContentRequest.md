@@ -3,7 +3,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**HashProvider** | **string** | When CLIENT is supplied the content should already have been hashed by you. When SERVER is supplied we will hash the content | 
+**HashProvider** | **string** | When CLIENT is supplied the content should already have been hashed by you. When SERVER is supplied we will convertInputToHashWhenNeeded the content | 
 **RequestId** | **string** | An id that will be returned in the response. | [optional] 
 **Content** | **byte[]** | The content to register. | 
 
