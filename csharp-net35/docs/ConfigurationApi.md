@@ -1,6 +1,6 @@
 # Sphereon.SDK.Blockchain.Proof.Api.ConfigurationApi
 
-All URIs are relative to *https://gw.api.cloud.sphereon.com/blockchain/proof/0.9*
+All URIs are relative to *https://gw.api.cloud.sphereon.com/blockchain/proof/0.9/*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------

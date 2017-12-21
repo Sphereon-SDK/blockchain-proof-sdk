@@ -120,7 +120,7 @@ api.createConfiguration(request, callback);
 
 ## Documentation for API Endpoints
 
-All URIs are relative to *https://gw.api.cloud.sphereon.com/blockchain/proof/0.9*
+All URIs are relative to *https://gw.api.cloud.sphereon.com/blockchain/proof/0.9/*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------

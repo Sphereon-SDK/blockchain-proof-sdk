@@ -1,5 +1,5 @@
 {
-  "basePath": "/blockchain/proof/0.9",
+  "basePath": "/blockchain/proof/0.9/",
   "paths": {
     "/existence/{configName}/content": {
       "post": {
