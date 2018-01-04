@@ -1,6 +1,6 @@
 # RegistrationApi
 
-All URIs are relative to *https://gw.api.cloud.sphereon.com/blockchain/proof/0.9/*
+All URIs are relative to *https://gw.api.cloud.sphereon.com/blockchain/proof/0.9*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -66,7 +66,7 @@ Name | Type | Description  | Notes
 
 <a name="registerUsingLocation"></a>
 # **registerUsingLocation**
-> RegisterContentResponse registerUsingLocation(configName, streamLocations)
+> RegisterContentResponse registerUsingLocation(configName, streamLocation, requestId)
 
 Register hash using the Storage API
 
@@ -89,9 +89,10 @@ oauth2schema.setAccessToken("YOUR ACCESS TOKEN");
 
 RegistrationApi apiInstance = new RegistrationApi();
 String configName = "configName_example"; // String | The configuration name this operation
-List<StreamLocation> streamLocations = Arrays.asList(new StreamLocation()); // List<StreamLocation> | The stream locations on storage
+StreamLocation streamLocation = new StreamLocation(); // StreamLocation | The stream locations on storage
+String requestId = "requestId_example"; // String | Optional request id
 try {
-    RegisterContentResponse result = apiInstance.registerUsingLocation(configName, streamLocations);
+    RegisterContentResponse result = apiInstance.registerUsingLocation(configName, streamLocation, requestId);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling RegistrationApi#registerUsingLocation");
@@ -104,7 +105,8 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **configName** | **String**| The configuration name this operation |
- **streamLocations** | [**List&lt;StreamLocation&gt;**](StreamLocation.md)| The stream locations on storage |
+ **streamLocation** | [**StreamLocation**](StreamLocation.md)| The stream locations on storage |
+ **requestId** | **String**| Optional request id | [optional]
 
 ### Return type
 

@@ -1,6 +1,6 @@
 # BlockchainProof.VerificationApi
 
-All URIs are relative to *https://gw.api.cloud.sphereon.com/blockchain/proof/0.9/*
+All URIs are relative to *https://gw.api.cloud.sphereon.com/blockchain/proof/0.9*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -65,7 +65,7 @@ Name | Type | Description  | Notes
 
 <a name="verifyUsingLocation"></a>
 # **verifyUsingLocation**
-> VerifyContentResponse verifyUsingLocation(configName, streamLocations)
+> VerifyContentResponse verifyUsingLocation(configName, streamLocation, opts)
 
 Verify hash using the Storage API
 
@@ -84,8 +84,11 @@ var apiInstance = new BlockchainProof.VerificationApi();
 
 var configName = "configName_example"; // String | The context for this operation
 
-var streamLocations = [new BlockchainProof.StreamLocation()]; // [StreamLocation] | The stream locations on storage
+var streamLocation = new BlockchainProof.StreamLocation(); // StreamLocation | The stream location on storage
 
+var opts = { 
+  'requestId': "requestId_example" // String | Optional request id
+};
 
 var callback = function(error, data, response) {
   if (error) {
@@ -94,7 +97,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.verifyUsingLocation(configName, streamLocations, callback);
+apiInstance.verifyUsingLocation(configName, streamLocation, opts, callback);
 ```
 
 ### Parameters
@@ -102,7 +105,8 @@ apiInstance.verifyUsingLocation(configName, streamLocations, callback);
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **configName** | **String**| The context for this operation | 
- **streamLocations** | [**[StreamLocation]**](StreamLocation.md)| The stream locations on storage | 
+ **streamLocation** | [**StreamLocation**](StreamLocation.md)| The stream location on storage | 
+ **requestId** | **String**| Optional request id | [optional] 
 
 ### Return type
 
