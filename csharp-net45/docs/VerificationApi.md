@@ -77,7 +77,7 @@ Name | Type | Description  | Notes
 
 <a name="verifyusinglocation"></a>
 # **VerifyUsingLocation**
-> VerifyContentResponse VerifyUsingLocation (string configName, List<StreamLocation> streamLocations)
+> VerifyContentResponse VerifyUsingLocation (string configName, StreamLocation streamLocation, string requestId = null)
 
 Verify hash using the Storage API
 
@@ -102,12 +102,13 @@ namespace Example
 
             var apiInstance = new VerificationApi();
             var configName = configName_example;  // string | The context for this operation
-            var streamLocations = new List<StreamLocation>(); // List<StreamLocation> | The stream locations on storage
+            var streamLocation = new StreamLocation(); // StreamLocation | The stream location on storage
+            var requestId = requestId_example;  // string | Optional request id (optional) 
 
             try
             {
                 // Verify hash using the Storage API
-                VerifyContentResponse result = apiInstance.VerifyUsingLocation(configName, streamLocations);
+                VerifyContentResponse result = apiInstance.VerifyUsingLocation(configName, streamLocation, requestId);
                 Debug.WriteLine(result);
             }
             catch (Exception e)
@@ -124,7 +125,8 @@ namespace Example
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **configName** | **string**| The context for this operation | 
- **streamLocations** | [**List&lt;StreamLocation&gt;**](StreamLocation.md)| The stream locations on storage | 
+ **streamLocation** | [**StreamLocation**](StreamLocation.md)| The stream location on storage | 
+ **requestId** | **string**| Optional request id | [optional] 
 
 ### Return type
 

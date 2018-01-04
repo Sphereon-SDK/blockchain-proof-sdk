@@ -65,7 +65,7 @@ Name | Type | Description  | Notes
 
 <a name="registerUsingLocation"></a>
 # **registerUsingLocation**
-> RegisterContentResponse registerUsingLocation(configName, streamLocations)
+> RegisterContentResponse registerUsingLocation(configName, streamLocation, opts)
 
 Register hash using the Storage API
 
@@ -84,8 +84,11 @@ var apiInstance = new BlockchainProof.RegistrationApi();
 
 var configName = "configName_example"; // String | The configuration name this operation
 
-var streamLocations = [new BlockchainProof.StreamLocation()]; // [StreamLocation] | The stream locations on storage
+var streamLocation = new BlockchainProof.StreamLocation(); // StreamLocation | The stream locations on storage
 
+var opts = { 
+  'requestId': "requestId_example" // String | Optional request id
+};
 
 var callback = function(error, data, response) {
   if (error) {
@@ -94,7 +97,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.registerUsingLocation(configName, streamLocations, callback);
+apiInstance.registerUsingLocation(configName, streamLocation, opts, callback);
 ```
 
 ### Parameters
@@ -102,7 +105,8 @@ apiInstance.registerUsingLocation(configName, streamLocations, callback);
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **configName** | **String**| The configuration name this operation | 
- **streamLocations** | [**[StreamLocation]**](StreamLocation.md)| The stream locations on storage | 
+ **streamLocation** | [**StreamLocation**](StreamLocation.md)| The stream locations on storage | 
+ **requestId** | **String**| Optional request id | [optional] 
 
 ### Return type
 

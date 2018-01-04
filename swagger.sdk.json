@@ -223,13 +223,17 @@
             "required": true
           },
           {
-            "schema": {
-              "type": "array",
-              "items": {"$ref": "#/definitions/StreamLocation"}
-            },
+            "in": "query",
+            "name": "requestId",
+            "description": "Optional request id",
+            "type": "string",
+            "required": false
+          },
+          {
+            "schema": {"$ref": "#/definitions/StreamLocation"},
             "in": "body",
-            "name": "streamLocations",
-            "description": "The stream locations on storage",
+            "name": "streamLocation",
+            "description": "The stream location on storage",
             "required": true
           }
         ],
@@ -265,12 +269,16 @@
             "required": true
           },
           {
-            "schema": {
-              "type": "array",
-              "items": {"$ref": "#/definitions/StreamLocation"}
-            },
+            "in": "query",
+            "name": "requestId",
+            "description": "Optional request id",
+            "type": "string",
+            "required": false
+          },
+          {
+            "schema": {"$ref": "#/definitions/StreamLocation"},
             "in": "body",
-            "name": "streamLocations",
+            "name": "streamLocation",
             "description": "The stream locations on storage",
             "required": true
           }

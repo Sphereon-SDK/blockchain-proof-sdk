@@ -77,7 +77,7 @@ Name | Type | Description  | Notes
 
 <a name="registerusinglocation"></a>
 # **RegisterUsingLocation**
-> RegisterContentResponse RegisterUsingLocation (string configName, List<StreamLocation> streamLocations)
+> RegisterContentResponse RegisterUsingLocation (string configName, StreamLocation streamLocation, string requestId = null)
 
 Register hash using the Storage API
 
@@ -102,12 +102,13 @@ namespace Example
 
             var apiInstance = new RegistrationApi();
             var configName = configName_example;  // string | The configuration name this operation
-            var streamLocations = new List<StreamLocation>(); // List<StreamLocation> | The stream locations on storage
+            var streamLocation = new StreamLocation(); // StreamLocation | The stream locations on storage
+            var requestId = requestId_example;  // string | Optional request id (optional) 
 
             try
             {
                 // Register hash using the Storage API
-                RegisterContentResponse result = apiInstance.RegisterUsingLocation(configName, streamLocations);
+                RegisterContentResponse result = apiInstance.RegisterUsingLocation(configName, streamLocation, requestId);
                 Debug.WriteLine(result);
             }
             catch (Exception e)
@@ -124,7 +125,8 @@ namespace Example
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **configName** | **string**| The configuration name this operation | 
- **streamLocations** | [**List&lt;StreamLocation&gt;**](StreamLocation.md)| The stream locations on storage | 
+ **streamLocation** | [**StreamLocation**](StreamLocation.md)| The stream locations on storage | 
+ **requestId** | **string**| Optional request id | [optional] 
 
 ### Return type
 
