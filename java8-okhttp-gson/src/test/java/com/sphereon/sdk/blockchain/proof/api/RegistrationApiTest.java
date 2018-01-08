@@ -14,79 +14,129 @@
 package com.sphereon.sdk.blockchain.proof.api;
 
 import com.sphereon.sdk.blockchain.proof.handler.ApiException;
-import com.sphereon.sdk.blockchain.proof.model.ContentRequest;
-import com.sphereon.sdk.blockchain.proof.model.ErrorResponse;
-import java.io.File;
-import com.sphereon.sdk.blockchain.proof.model.RegisterContentResponse;
-import com.sphereon.sdk.blockchain.proof.model.StreamLocation;
+import com.sphereon.sdk.blockchain.proof.model.*;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
-import org.junit.Ignore;
+import org.junit.runners.MethodSorters;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.UUID;
 
 /**
  * API tests for RegistrationApi
  */
-@Ignore
-public class RegistrationApiTest {
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+public class RegistrationApiTest extends AbstractApiTest {
 
-    private final RegistrationApi api = new RegistrationApi();
+    private final RegistrationApi registrationApi = new RegistrationApi();
+    private final VerificationApi verificationApi = new VerificationApi();
 
-    
-    /**
-     * Register content
-     *
-     * Register content. Please provide the content in the request. You also have to provide whether you have hashed the content yourself, or whether is should be done on the server side
-     *
-     * @throws ApiException
-     *          if the Api call fails
-     */
-    @Test
-    public void registerUsingContentTest() throws ApiException {
-        String configName = null;
-        ContentRequest existence = null;
-        RegisterContentResponse response = api.registerUsingContent(configName, existence);
 
-        // TODO: test validations
+    @Before
+    public void init() {
+        configureApi(registrationApi.getApiClient());
+        configureApi(verificationApi.getApiClient());
     }
-    
-    /**
-     * Register hash using the Storage API
-     *
-     * Register a convertInputToHashWhenNeeded of file/blob by supplying a Stream location of the Storage API. This Stream Location maps to a location of a file/blob on some remote cloud storage. Hashing will be done on the server side Please note that the binary data itself will not be stored, only the convertInputToHashWhenNeeded. Use the registerUsingContent endpoint if you&#39;d like to store content
-     *
-     * @throws ApiException
-     *          if the Api call fails
-     */
-    @Test
-    public void registerUsingLocationTest() throws ApiException {
-        String configName = null;
-        StreamLocation streamLocation = null;
-        String requestId = null;
-        RegisterContentResponse response = api.registerUsingLocation(configName, streamLocation, requestId);
 
-        // TODO: test validations
-    }
-    
-    /**
-     * Register bytestream/file hash
-     *
-     * Register a convertInputToHashWhenNeeded of content by supplying a file or some other binary data. Hashing will be done on the server side. Please note that the binary data itself will not be stored, only the convertInputToHashWhenNeeded. Use the registerUsingContent endpoint if you&#39;d like to store content
-     *
-     * @throws ApiException
-     *          if the Api call fails
-     */
-    @Test
-    public void registerUsingStreamTest() throws ApiException {
-        String configName = null;
-        File stream = null;
-        String fileName = null;
-        RegisterContentResponse response = api.registerUsingStream(configName, stream, fileName);
 
-        // TODO: test validations
+    @Test
+    public void _010_createConfigurationTest() throws ApiException {
+        createProofAndSettingsChain();
     }
-    
+
+
+    @Test
+    public void _020_getConfigurationTest() throws ApiException {
+        ConfigurationResponse configurationResponse = configurationApi.getConfiguration(unitTestConfigName);
+        Assert.assertNotNull(configurationResponse);
+        StoredSettings storedSettings = configurationResponse.getStoredSettings();
+        Assert.assertNotNull(storedSettings);
+        Assert.assertNotNull(storedSettings.getContext());
+        Assert.assertNotNull(storedSettings.getChainSettings());
+        Assert.assertNotNull(storedSettings.getSingleProofChain());
+        Assert.assertNotNull(storedSettings.getSettingsChain());
+        Assert.assertNotNull(storedSettings.getChainConfiguration());
+        Assert.assertNotNull(storedSettings.getChainSettings().getSingleProofChain());
+        Assert.assertNotNull(storedSettings.getChainSettings().getHashAlgorithm());
+        Assert.assertEquals(storedSettings.getSettingsChain().getChainId(), settingsChainId);
+        Assert.assertEquals(storedSettings.getSingleProofChain().getChainId(), proofChainId);
+    }
+
+
+    @Test
+    public void _030_RegisterUsingContentTest() throws ApiException {
+        String requestId = UUID.randomUUID().toString();
+        registeredContent = ("test-" + requestId).getBytes();
+        ContentRequest contentRequest = new ContentRequest();
+        contentRequest.setContent(registeredContent);
+        contentRequest.setHashProvider(ContentRequest.HashProviderEnum.SERVER);
+        RegisterContentResponse response = registrationApi.registerUsingContent(unitTestConfigName, contentRequest);
+        Assert.assertNotNull(response);
+        Assert.assertNotNull(response.getSingleProofChain());
+        Assert.assertNotNull(response.getPerHashProofChain());
+        Assert.assertEquals(contentRequest.getRequestId(), response.getRequestId());
+    }
+
+
+    @Test
+    public void _040_registerUsingLocationTest() {
+
+    }
+
+
+    @Test
+    public void _050_RegisterUsingStreamTest() throws IOException, ApiException {
+        String requestId = UUID.randomUUID().toString();
+        registeredContentFileForStream = File.createTempFile("random", ".tmp");
+        registeredContentFileForStream.deleteOnExit();
+        try (FileOutputStream out = new FileOutputStream(registeredContentFileForStream)) {
+            out.write(("test-" + requestId).getBytes());
+        }
+        RegisterContentResponse response = registrationApi.registerUsingStream(unitTestConfigName, registeredContentFileForStream,
+            "RandomFile");
+        Assert.assertNotNull(response);
+        Assert.assertNotNull(response.getSingleProofChain());
+        Assert.assertNotNull(response.getSingleProofChain());
+        Assert.assertEquals("RandomFile", response.getRequestId());
+    }
+
+
+    @Test
+    public void _060_verifyUsingContentTest() throws InterruptedException, ApiException {
+        Thread.sleep(15000); // Should be enough for multichain registration
+        ContentRequest contentRequest = new ContentRequest();
+        contentRequest.setRequestId("anything");
+        contentRequest.setHashProvider(ContentRequest.HashProviderEnum.SERVER);
+        contentRequest.setContent(registeredContent);
+        VerifyContentResponse response = verificationApi.verifyUsingContent(unitTestConfigName, contentRequest);
+        Assert.assertNotNull(response);
+        Assert.assertTrue(response.getRegistrationState() == VerifyContentResponse.RegistrationStateEnum.REGISTERED
+                              || response.getRegistrationState() == VerifyContentResponse.RegistrationStateEnum.PENDING);
+        Assert.assertNotNull(response.getSingleProofChain());
+        Assert.assertNotNull(response.getPerHashProofChain());
+        Assert.assertEquals(contentRequest.getRequestId(), response.getRequestId());
+    }
+
+
+    @Test
+    public void _070_verifyUsingLocationTest() {
+
+    }
+
+
+    @Test
+    public void _080_verifyUsingStreamTest() throws ApiException {
+        VerifyContentResponse response = verificationApi.verifyUsingStream(unitTestConfigName, registeredContentFileForStream,
+            "RandomFile");
+        Assert.assertNotNull(response);
+        Assert.assertTrue(response.getRegistrationState() == VerifyContentResponse.RegistrationStateEnum.REGISTERED
+                              || response.getRegistrationState() == VerifyContentResponse.RegistrationStateEnum.PENDING);
+        Assert.assertNotNull(response.getSingleProofChain());
+        Assert.assertNotNull(response.getPerHashProofChain());
+        Assert.assertEquals("RandomFile", response.getRequestId());
+    }
 }

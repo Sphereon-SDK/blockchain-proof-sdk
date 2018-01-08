@@ -240,6 +240,12 @@
       <version>${junit-version}</version>
       <scope>test</scope>
     </dependency>
+	<dependency>
+		<groupId>com.sphereon.public</groupId>
+		<artifactId>authentication-lib-main</artifactId>
+		<version>${authentication-lib.version}</version>
+		<scope>test</scope>
+	</dependency>
   </dependencies>
   <properties>
     <java.version>{{#java8}}1.8{{/java8}}{{^java8}}1.7{{/java8}}</java.version>
@@ -253,5 +259,6 @@
     <maven-plugin-version>1.0.0</maven-plugin-version>
     <junit-version>4.12</junit-version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <authentication-lib.version>0.1.1-SNAPSHOT</authentication-lib.version>
   </properties>
 </project>
