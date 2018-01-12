@@ -69,7 +69,7 @@ Name | Type | Description  | Notes
 
 Register hash using the Storage API
 
-Register a convertInputToHashWhenNeeded of file/blob by supplying a Stream location of the Storage API. This Stream Location maps to a location of a file/blob on some remote cloud storage. Hashing will be done on the server side Please note that the binary data itself will not be stored, only the convertInputToHashWhenNeeded. Use the registerUsingContent endpoint if you&#39;d like to store content
+Register a hash of file/blob by supplying a Stream location of the Storage API. This Stream Location maps to a location of a file/blob on some remote cloud storage. Hashing will be done on the server side Please note that the binary data itself will not be stored, only the hash. Use the registerUsingContent endpoint if you&#39;d like to store content
 
 ### Example
 ```javascript
@@ -87,7 +87,8 @@ var configName = "configName_example"; // String | The configuration name this o
 var streamLocation = new BlockchainProof.StreamLocation(); // StreamLocation | The stream locations on storage
 
 var opts = { 
-  'requestId': "requestId_example" // String | Optional request id
+  'requestId': "requestId_example", // String | Optional request id
+  'secret': "secret_example" // String | An alternate secret key in base 64 format that overrides the value in your configuration.
 };
 
 var callback = function(error, data, response) {
@@ -107,6 +108,7 @@ Name | Type | Description  | Notes
  **configName** | **String**| The configuration name this operation | 
  **streamLocation** | [**StreamLocation**](StreamLocation.md)| The stream locations on storage | 
  **requestId** | **String**| Optional request id | [optional] 
+ **secret** | **String**| An alternate secret key in base 64 format that overrides the value in your configuration. | [optional] 
 
 ### Return type
 
@@ -127,7 +129,7 @@ Name | Type | Description  | Notes
 
 Register bytestream/file hash
 
-Register a convertInputToHashWhenNeeded of content by supplying a file or some other binary data. Hashing will be done on the server side. Please note that the binary data itself will not be stored, only the convertInputToHashWhenNeeded. Use the registerUsingContent endpoint if you&#39;d like to store content
+Register a hash of content by supplying a file or some other binary data. Hashing will be done on the server side. Please note that the binary data itself will not be stored, only the hash. Use the registerUsingContent endpoint if you&#39;d like to store content
 
 ### Example
 ```javascript
@@ -145,7 +147,8 @@ var configName = "configName_example"; // String | The configuration name this o
 var stream = "/path/to/file.txt"; // File | The binary data (not hashed). Hashing will be done on the server side. The binary data will not be stored
 
 var opts = { 
-  'fileName': "fileName_example" // String | Optional input file name. Needed when using bytestreams instead of filestreams
+  'fileName': "fileName_example", // String | Optional input file name. Needed when using bytestreams instead of filestreams
+  'secret': "secret_example" // String | An alternate secret key in base64 format that overrides the value in your configuration.
 };
 
 var callback = function(error, data, response) {
@@ -165,6 +168,7 @@ Name | Type | Description  | Notes
  **configName** | **String**| The configuration name this operation | 
  **stream** | **File**| The binary data (not hashed). Hashing will be done on the server side. The binary data will not be stored | 
  **fileName** | **String**| Optional input file name. Needed when using bytestreams instead of filestreams | [optional] 
+ **secret** | **String**| An alternate secret key in base64 format that overrides the value in your configuration. | [optional] 
 
 ### Return type
 

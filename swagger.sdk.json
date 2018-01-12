@@ -27,6 +27,13 @@
             "required": true
           },
           {
+            "in": "header",
+            "name": "secret",
+            "description": "An alternate secret key in base 64 format that overrides the value in your configuration.",
+            "type": "string",
+            "required": false
+          },
+          {
             "schema": {"$ref": "#/definitions/ContentRequest"},
             "in": "body",
             "name": "existence",
@@ -48,13 +55,13 @@
             "schema": {"$ref": "#/definitions/RegisterContentResponse"},
             "description": "Content already registered"
           },
-          "400": {
-            "schema": {"$ref": "#/definitions/ErrorResponse"},
-            "description": "Invalid registration request"
-          },
           "202": {
             "schema": {"$ref": "#/definitions/RegisterContentResponse"},
             "description": "Registration request received"
+          },
+          "400": {
+            "schema": {"$ref": "#/definitions/ErrorResponse"},
+            "description": "Invalid registration request"
           }
         },
         "parameters": [
@@ -82,7 +89,7 @@
         "summary": "Verify bytestream/file hash",
         "security": [{"oauth2schema": ["global"]}],
         "produces": ["application/json;charset=UTF-8"],
-        "description": "Verify a convertInputToHashWhenNeeded of content by supplying a file or some other binary data. Hashing will be done on the server side. Please note that the binary data itself will not be stored, only the convertInputToHashWhenNeeded. Use the registerUsingContent endpoint if you'd like to store content",
+        "description": "Verify a hash of content by supplying a file or some other binary data. Hashing will be done on the server side. Please note that the binary data itself will not be stored, only the hash. Use the registerUsingContent endpoint if you'd like to store content",
         "operationId": "verifyUsingStream",
         "responses": {
           "200": {
@@ -115,6 +122,13 @@
             "description": "Optional input file name. Needed when using bytestreams instead of filestreams",
             "type": "string",
             "required": false
+          },
+          {
+            "in": "header",
+            "name": "secret",
+            "description": "An alternate secret key in base 64 format that overrides the value in your configuration.",
+            "type": "string",
+            "required": false
           }
         ],
         "tags": ["Verification"],
@@ -124,20 +138,20 @@
         "summary": "Register bytestream/file hash",
         "security": [{"oauth2schema": ["global"]}],
         "produces": ["application/json;charset=UTF-8"],
-        "description": "Register a convertInputToHashWhenNeeded of content by supplying a file or some other binary data. Hashing will be done on the server side. Please note that the binary data itself will not be stored, only the convertInputToHashWhenNeeded. Use the registerUsingContent endpoint if you'd like to store content",
+        "description": "Register a hash of content by supplying a file or some other binary data. Hashing will be done on the server side. Please note that the binary data itself will not be stored, only the hash. Use the registerUsingContent endpoint if you'd like to store content",
         "operationId": "registerUsingStream",
         "responses": {
           "200": {
             "schema": {"$ref": "#/definitions/RegisterContentResponse"},
             "description": "Content already registered"
           },
-          "400": {
-            "schema": {"$ref": "#/definitions/ErrorResponse"},
-            "description": "Invalid registration request"
-          },
           "202": {
             "schema": {"$ref": "#/definitions/RegisterContentResponse"},
             "description": "Registration request received"
+          },
+          "400": {
+            "schema": {"$ref": "#/definitions/ErrorResponse"},
+            "description": "Invalid registration request"
           }
         },
         "parameters": [
@@ -161,6 +175,13 @@
             "description": "Optional input file name. Needed when using bytestreams instead of filestreams",
             "type": "string",
             "required": false
+          },
+          {
+            "in": "header",
+            "name": "secret",
+            "description": "An alternate secret key in base64 format that overrides the value in your configuration.",
+            "type": "string",
+            "required": false
           }
         ],
         "tags": ["Registration"],
@@ -178,13 +199,13 @@
           "schema": {"$ref": "#/definitions/ConfigurationResponse"},
           "description": "Configuration already exists"
         },
-        "400": {
-          "schema": {"$ref": "#/definitions/ErrorResponse"},
-          "description": "Invalid configuration request"
-        },
         "202": {
           "schema": {"$ref": "#/definitions/ConfigurationResponse"},
           "description": "Configuration request received. Since we do register on the blockchain and this takes some time you will get back a 202 instead of a 201"
+        },
+        "400": {
+          "schema": {"$ref": "#/definitions/ErrorResponse"},
+          "description": "Invalid configuration request"
         }
       },
       "parameters": [{
@@ -202,7 +223,7 @@
         "summary": "Verify hash using the Storage API",
         "security": [{"oauth2schema": ["global"]}],
         "produces": ["application/json;charset=UTF-8"],
-        "description": "Verify a convertInputToHashWhenNeeded of file/blob by supplying a Stream location of the Storage API. This Stream Location maps to a location of a file/blob on some remote cloud storage. Hashing will be done on the server side Please note that the binary data itself will not be stored, only the convertInputToHashWhenNeeded. Use the registerUsingContent endpoint if you'd like to store content",
+        "description": "Verify a hash of file/blob by supplying a Stream location of the Storage API. This Stream Location maps to a location of a file/blob on some remote cloud storage. Hashing will be done on the server side Please note that the binary data itself will not be stored, only the hash. Use the registerUsingContent endpoint if you'd like to store content",
         "operationId": "verifyUsingLocation",
         "responses": {
           "200": {
@@ -230,6 +251,13 @@
             "required": false
           },
           {
+            "in": "header",
+            "name": "secret",
+            "description": "An alternate secret key in base 64 format that overrides the value in your configuration.",
+            "type": "string",
+            "required": false
+          },
+          {
             "schema": {"$ref": "#/definitions/StreamLocation"},
             "in": "body",
             "name": "streamLocation",
@@ -244,20 +272,20 @@
         "summary": "Register hash using the Storage API",
         "security": [{"oauth2schema": ["global"]}],
         "produces": ["application/json;charset=UTF-8"],
-        "description": "Register a convertInputToHashWhenNeeded of file/blob by supplying a Stream location of the Storage API. This Stream Location maps to a location of a file/blob on some remote cloud storage. Hashing will be done on the server side Please note that the binary data itself will not be stored, only the convertInputToHashWhenNeeded. Use the registerUsingContent endpoint if you'd like to store content",
+        "description": "Register a hash of file/blob by supplying a Stream location of the Storage API. This Stream Location maps to a location of a file/blob on some remote cloud storage. Hashing will be done on the server side Please note that the binary data itself will not be stored, only the hash. Use the registerUsingContent endpoint if you'd like to store content",
         "operationId": "registerUsingLocation",
         "responses": {
           "200": {
             "schema": {"$ref": "#/definitions/RegisterContentResponse"},
             "description": "Content already registered"
           },
-          "400": {
-            "schema": {"$ref": "#/definitions/ErrorResponse"},
-            "description": "Invalid registration request"
-          },
           "202": {
             "schema": {"$ref": "#/definitions/RegisterContentResponse"},
             "description": "Registration request received"
+          },
+          "400": {
+            "schema": {"$ref": "#/definitions/ErrorResponse"},
+            "description": "Invalid registration request"
           }
         },
         "parameters": [
@@ -272,6 +300,13 @@
             "in": "query",
             "name": "requestId",
             "description": "Optional request id",
+            "type": "string",
+            "required": false
+          },
+          {
+            "in": "header",
+            "name": "secret",
+            "description": "An alternate secret key in base 64 format that overrides the value in your configuration.",
             "type": "string",
             "required": false
           },
@@ -328,15 +363,19 @@
   }},
   "definitions": {
     "CommittedChain": {
-      "description": "Commited Chain",
+      "description": "Committed Chain",
       "type": "object",
       "properties": {
         "chainId": {
-          "description": "Chain ID",
+          "description": "Chain Id",
           "readOnly": true,
           "type": "string"
         },
-        "context": {"type": "string"}
+        "context": {
+          "description": "The context",
+          "readOnly": true,
+          "type": "string"
+        }
       }
     },
     "ConfigurationResponse": {
@@ -349,16 +388,16 @@
       "description": "Existence ChainSettings. Normally you only supply them once during chain creation or during a settings update. You can also supply them during a content request, but then it is up to you to also supply the correct setting during verify",
       "type": "object",
       "required": [
-        "secret",
+        "contentRegistrationChainTypes",
         "version"
       ],
       "properties": {
         "singleProofChain": {
-          "description": "The proof chain id linked to the current configuration. This is a shared proof chain for all registrations",
+          "description": "The proof chain Id linked to the current configuration. This is a shared proof chain for all registrations/hashes. Only when the single proof chain type has been configured.",
           "type": "string"
         },
         "contentRegistrationChainTypes": {
-          "description": "A set of content registration targets",
+          "description": "A set of content registration chain types. This can be a single proof chain for all hashes, a more powerful chain per hash, or both",
           "type": "array",
           "items": {
             "type": "string",
@@ -368,21 +407,18 @@
             ]
           }
         },
-        "metadataRegistrationChains": {
-          "description": "A set of metadata registration targets (not in use currently)",
-          "type": "array",
-          "items": {
-            "type": "string",
-            "enum": [
-              "FILE_CHAIN",
-              "PROOF_CHAIN",
-              "METADATA_CHAIN"
-            ]
-          }
+        "signatureType": {
+          "description": "The signature type to use for every registration/validation. Important: Do not change, this concept is important to make sure the registration/validation if being done by your organization. AUTO: We create a signature based on your configuration. SECRET: We use the secret you provided. NONE: No signature is being used. A signature is useful the prove you are the owner of the entry. The signature is created from your configuration or secret by concatenating it with the hash and creating a new hash (SHA256) and storing that value in the content of the entry. For the single proof chain case, this means that the secret influences the entry Id resulting in validation errors. For the chain per hash case the chain Id will remain the same, sou you could still look it up. The first entry Id will change however. You could check validity yourself using this information.",
+          "type": "string",
+          "enum": [
+            "AUTO",
+            "SECRET",
+            "NONE"
+          ]
         },
         "secret": {
           "format": "byte",
-          "description": "A secret that is used as a seed during hashing",
+          "description": "A secret that is used as a seed during hashing when the signatureType is set to SECRET. Please note that this value us being used to sign the content. Changing this value currently invalidates previous registration/validations. So do not change without contacting us for solutions!",
           "type": "string"
         },
         "version": {
@@ -392,7 +428,7 @@
           "enum": [1]
         },
         "hashAlgorithm": {
-          "description": "The hashing method used for the content. We always return and expect the convertInputToHashWhenNeeded in HEX form",
+          "description": "The hashing method used for the content. We always return and expect the hash in HEX form",
           "type": "string",
           "enum": [
             "SHA_256",
@@ -478,7 +514,10 @@
     "VerifyContentResponse": {
       "description": "Verify Content response",
       "type": "object",
-      "required": ["contextName"],
+      "required": [
+        "contentRegistrationChainTypes",
+        "contextName"
+      ],
       "properties": {
         "registrationTime": {
           "format": "date-time",
@@ -487,9 +526,10 @@
         },
         "contextName": {"type": "string"},
         "singleProofChain": {
-          "description": "This is the single proof chain where all hashes are stored (if configured)",
+          "description": "This is the single proof chain where all hashes are stored in a single chain (if configured)",
           "$ref": "#/definitions/CommittedEntry"
         },
+        "signature": {"type": "string"},
         "contentRegistrationChainTypes": {
           "description": "A set of content registration targets",
           "type": "array",
@@ -503,7 +543,7 @@
         },
         "requestId": {"type": "string"},
         "perHashProofChain": {
-          "description": "This is the proof chain specific for the current hash (if configured)",
+          "description": "This is the proof chain specific for the current hash, so a chain per hash (if configured)",
           "$ref": "#/definitions/CommittedEntry"
         },
         "registrationState": {
@@ -514,6 +554,24 @@
             "PENDING",
             "REGISTERED"
           ]
+        },
+        "signatureState": {
+          "description": "This is the signature state.",
+          "type": "string",
+          "enum": [
+            "not found",
+            "unsigned",
+            "invalid",
+            "verified"
+          ]
+        },
+        "hash": {
+          "description": "The hash in HEX format that you supplied or that was calculated. This is the actual hash for the content",
+          "type": "string"
+        },
+        "signatureStateMessage": {
+          "description": "This is a message describing the signature state.",
+          "type": "string"
         }
       }
     },
@@ -573,7 +631,7 @@
       ],
       "properties": {
         "hashProvider": {
-          "description": "When CLIENT is supplied the content should already have been hashed by you. When SERVER is supplied we will convertInputToHashWhenNeeded the content",
+          "description": "When CLIENT is supplied the content should already have been hashed by you. When SERVER is supplied we will hash the content. Please note that we do not validate the hash when you supply it",
           "type": "string",
           "enum": [
             "SERVER",
@@ -582,6 +640,11 @@
         },
         "requestId": {
           "description": "An id that will be returned in the response.",
+          "type": "string"
+        },
+        "secret": {
+          "format": "byte",
+          "description": "An alternate secret key that overrides the value in your configuration.",
           "type": "string"
         },
         "content": {
@@ -601,15 +664,23 @@
       "properties": {
         "registrationTime": {
           "format": "date-time",
-          "type": "string"
-        },
-        "chainId": {
-          "description": "Chain ID",
+          "description": "The registration time of the entry. Only when registration has occurred ofcourse",
           "readOnly": true,
           "type": "string"
         },
-        "context": {"type": "string"},
+        "chainId": {
+          "description": "Chain Id",
+          "readOnly": true,
+          "type": "string"
+        },
+        "context": {
+          "description": "The context",
+          "readOnly": true,
+          "type": "string"
+        },
         "registrationState": {
+          "description": "The registration state of the entry",
+          "readOnly": true,
           "type": "string",
           "enum": [
             "NOT_REGISTERED",
@@ -617,7 +688,25 @@
             "REGISTERED"
           ]
         },
-        "entryId": {"type": "string"}
+        "signatureState": {
+          "description": "This is the signature state.",
+          "type": "string",
+          "enum": [
+            "not found",
+            "unsigned",
+            "invalid",
+            "verified"
+          ]
+        },
+        "signatureStateMessage": {
+          "description": "This is a message describing the signature state.",
+          "type": "string"
+        },
+        "entryId": {
+          "description": "The entry Id for the registration",
+          "readOnly": true,
+          "type": "string"
+        }
       }
     },
     "RegisterContentResponse": {
@@ -630,6 +719,7 @@
           "description": "This is the single proof chain where all hashes are stored (if configured)",
           "$ref": "#/definitions/CommittedEntry"
         },
+        "signature": {"type": "string"},
         "contentRegistrationChainTypes": {
           "description": "A set of content registration targets",
           "type": "array",
@@ -645,6 +735,10 @@
         "perHashProofChain": {
           "description": "This is the proof chain specific for the current hash (if configured)",
           "$ref": "#/definitions/CommittedEntry"
+        },
+        "hash": {
+          "description": "The hash in HEX format that you supplied or that was calculated. This is the actual hash for the content",
+          "type": "string"
         }
       }
     },
@@ -663,7 +757,7 @@
           "$ref": "#/definitions/ChainSettings"
         },
         "context": {
-          "description": "The Easy Blockchain API context.",
+          "description": "The Easy Blockchain API context. This has to be a context you created or a public context",
           "type": "string"
         },
         "name": {

@@ -77,11 +77,11 @@ Name | Type | Description  | Notes
 
 <a name="registerusinglocation"></a>
 # **RegisterUsingLocation**
-> RegisterContentResponse RegisterUsingLocation (string configName, StreamLocation streamLocation, string requestId = null)
+> RegisterContentResponse RegisterUsingLocation (string configName, StreamLocation streamLocation, string requestId = null, string secret = null)
 
 Register hash using the Storage API
 
-Register a convertInputToHashWhenNeeded of file/blob by supplying a Stream location of the Storage API. This Stream Location maps to a location of a file/blob on some remote cloud storage. Hashing will be done on the server side Please note that the binary data itself will not be stored, only the convertInputToHashWhenNeeded. Use the registerUsingContent endpoint if you'd like to store content
+Register a hash of file/blob by supplying a Stream location of the Storage API. This Stream Location maps to a location of a file/blob on some remote cloud storage. Hashing will be done on the server side Please note that the binary data itself will not be stored, only the hash. Use the registerUsingContent endpoint if you'd like to store content
 
 ### Example
 ```csharp
@@ -104,11 +104,12 @@ namespace Example
             var configName = configName_example;  // string | The configuration name this operation
             var streamLocation = new StreamLocation(); // StreamLocation | The stream locations on storage
             var requestId = requestId_example;  // string | Optional request id (optional) 
+            var secret = secret_example;  // string | An alternate secret key in base 64 format that overrides the value in your configuration. (optional) 
 
             try
             {
                 // Register hash using the Storage API
-                RegisterContentResponse result = apiInstance.RegisterUsingLocation(configName, streamLocation, requestId);
+                RegisterContentResponse result = apiInstance.RegisterUsingLocation(configName, streamLocation, requestId, secret);
                 Debug.WriteLine(result);
             }
             catch (Exception e)
@@ -127,6 +128,7 @@ Name | Type | Description  | Notes
  **configName** | **string**| The configuration name this operation | 
  **streamLocation** | [**StreamLocation**](StreamLocation.md)| The stream locations on storage | 
  **requestId** | **string**| Optional request id | [optional] 
+ **secret** | **string**| An alternate secret key in base 64 format that overrides the value in your configuration. | [optional] 
 
 ### Return type
 
@@ -145,11 +147,11 @@ Name | Type | Description  | Notes
 
 <a name="registerusingstream"></a>
 # **RegisterUsingStream**
-> RegisterContentResponse RegisterUsingStream (string configName, System.IO.Stream stream, string fileName = null)
+> RegisterContentResponse RegisterUsingStream (string configName, System.IO.Stream stream, string fileName = null, string secret = null)
 
 Register bytestream/file hash
 
-Register a convertInputToHashWhenNeeded of content by supplying a file or some other binary data. Hashing will be done on the server side. Please note that the binary data itself will not be stored, only the convertInputToHashWhenNeeded. Use the registerUsingContent endpoint if you'd like to store content
+Register a hash of content by supplying a file or some other binary data. Hashing will be done on the server side. Please note that the binary data itself will not be stored, only the hash. Use the registerUsingContent endpoint if you'd like to store content
 
 ### Example
 ```csharp
@@ -172,11 +174,12 @@ namespace Example
             var configName = configName_example;  // string | The configuration name this operation
             var stream = new System.IO.Stream(); // System.IO.Stream | The binary data (not hashed). Hashing will be done on the server side. The binary data will not be stored
             var fileName = fileName_example;  // string | Optional input file name. Needed when using bytestreams instead of filestreams (optional) 
+            var secret = secret_example;  // string | An alternate secret key in base64 format that overrides the value in your configuration. (optional) 
 
             try
             {
                 // Register bytestream/file hash
-                RegisterContentResponse result = apiInstance.RegisterUsingStream(configName, stream, fileName);
+                RegisterContentResponse result = apiInstance.RegisterUsingStream(configName, stream, fileName, secret);
                 Debug.WriteLine(result);
             }
             catch (Exception e)
@@ -195,6 +198,7 @@ Name | Type | Description  | Notes
  **configName** | **string**| The configuration name this operation | 
  **stream** | **System.IO.Stream**| The binary data (not hashed). Hashing will be done on the server side. The binary data will not be stored | 
  **fileName** | **string**| Optional input file name. Needed when using bytestreams instead of filestreams | [optional] 
+ **secret** | **string**| An alternate secret key in base64 format that overrides the value in your configuration. | [optional] 
 
 ### Return type
 

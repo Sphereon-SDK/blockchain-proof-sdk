@@ -11,7 +11,7 @@ Method | HTTP request | Description
 
 <a name="verifyUsingContent"></a>
 # **verifyUsingContent**
-> VerifyContentResponse verifyUsingContent(configName, existence)
+> VerifyContentResponse verifyUsingContent(configName, existence, opts)
 
 Verify content
 
@@ -32,6 +32,9 @@ var configName = "configName_example"; // String | The configName for this opera
 
 var existence = new BlockchainProof.ContentRequest(); // ContentRequest | Verify content using the current settings
 
+var opts = { 
+  'secret': "secret_example" // String | An alternate secret key in base 64 format that overrides the value in your configuration.
+};
 
 var callback = function(error, data, response) {
   if (error) {
@@ -40,7 +43,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.verifyUsingContent(configName, existence, callback);
+apiInstance.verifyUsingContent(configName, existence, opts, callback);
 ```
 
 ### Parameters
@@ -49,6 +52,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **configName** | **String**| The configName for this operation | 
  **existence** | [**ContentRequest**](ContentRequest.md)| Verify content using the current settings | 
+ **secret** | **String**| An alternate secret key in base 64 format that overrides the value in your configuration. | [optional] 
 
 ### Return type
 
@@ -69,7 +73,7 @@ Name | Type | Description  | Notes
 
 Verify hash using the Storage API
 
-Verify a convertInputToHashWhenNeeded of file/blob by supplying a Stream location of the Storage API. This Stream Location maps to a location of a file/blob on some remote cloud storage. Hashing will be done on the server side Please note that the binary data itself will not be stored, only the convertInputToHashWhenNeeded. Use the registerUsingContent endpoint if you&#39;d like to store content
+Verify a hash of file/blob by supplying a Stream location of the Storage API. This Stream Location maps to a location of a file/blob on some remote cloud storage. Hashing will be done on the server side Please note that the binary data itself will not be stored, only the hash. Use the registerUsingContent endpoint if you&#39;d like to store content
 
 ### Example
 ```javascript
@@ -87,7 +91,8 @@ var configName = "configName_example"; // String | The context for this operatio
 var streamLocation = new BlockchainProof.StreamLocation(); // StreamLocation | The stream location on storage
 
 var opts = { 
-  'requestId': "requestId_example" // String | Optional request id
+  'requestId': "requestId_example", // String | Optional request id
+  'secret': "secret_example" // String | An alternate secret key in base 64 format that overrides the value in your configuration.
 };
 
 var callback = function(error, data, response) {
@@ -107,6 +112,7 @@ Name | Type | Description  | Notes
  **configName** | **String**| The context for this operation | 
  **streamLocation** | [**StreamLocation**](StreamLocation.md)| The stream location on storage | 
  **requestId** | **String**| Optional request id | [optional] 
+ **secret** | **String**| An alternate secret key in base 64 format that overrides the value in your configuration. | [optional] 
 
 ### Return type
 
@@ -127,7 +133,7 @@ Name | Type | Description  | Notes
 
 Verify bytestream/file hash
 
-Verify a convertInputToHashWhenNeeded of content by supplying a file or some other binary data. Hashing will be done on the server side. Please note that the binary data itself will not be stored, only the convertInputToHashWhenNeeded. Use the registerUsingContent endpoint if you&#39;d like to store content
+Verify a hash of content by supplying a file or some other binary data. Hashing will be done on the server side. Please note that the binary data itself will not be stored, only the hash. Use the registerUsingContent endpoint if you&#39;d like to store content
 
 ### Example
 ```javascript
@@ -145,7 +151,8 @@ var configName = "configName_example"; // String | The configuration name this o
 var stream = "/path/to/file.txt"; // File | The binary data (not hashed). Hashing will be done on the server side. The binary data will not be stored
 
 var opts = { 
-  'fileName': "fileName_example" // String | Optional input file name. Needed when using bytestreams instead of filestreams
+  'fileName': "fileName_example", // String | Optional input file name. Needed when using bytestreams instead of filestreams
+  'secret': "secret_example" // String | An alternate secret key in base 64 format that overrides the value in your configuration.
 };
 
 var callback = function(error, data, response) {
@@ -165,6 +172,7 @@ Name | Type | Description  | Notes
  **configName** | **String**| The configuration name this operation | 
  **stream** | **File**| The binary data (not hashed). Hashing will be done on the server side. The binary data will not be stored | 
  **fileName** | **String**| Optional input file name. Needed when using bytestreams instead of filestreams | [optional] 
+ **secret** | **String**| An alternate secret key in base 64 format that overrides the value in your configuration. | [optional] 
 
 ### Return type
 

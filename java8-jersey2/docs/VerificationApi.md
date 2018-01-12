@@ -11,7 +11,7 @@ Method | HTTP request | Description
 
 <a name="verifyUsingContent"></a>
 # **verifyUsingContent**
-> VerifyContentResponse verifyUsingContent(configName, existence)
+> VerifyContentResponse verifyUsingContent(configName, existence, secret)
 
 Verify content
 
@@ -35,8 +35,9 @@ oauth2schema.setAccessToken("YOUR ACCESS TOKEN");
 VerificationApi apiInstance = new VerificationApi();
 String configName = "configName_example"; // String | The configName for this operation
 ContentRequest existence = new ContentRequest(); // ContentRequest | Verify content using the current settings
+String secret = "secret_example"; // String | An alternate secret key in base 64 format that overrides the value in your configuration.
 try {
-    VerifyContentResponse result = apiInstance.verifyUsingContent(configName, existence);
+    VerifyContentResponse result = apiInstance.verifyUsingContent(configName, existence, secret);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling VerificationApi#verifyUsingContent");
@@ -50,6 +51,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **configName** | **String**| The configName for this operation |
  **existence** | [**ContentRequest**](ContentRequest.md)| Verify content using the current settings |
+ **secret** | **String**| An alternate secret key in base 64 format that overrides the value in your configuration. | [optional]
 
 ### Return type
 
@@ -66,11 +68,11 @@ Name | Type | Description  | Notes
 
 <a name="verifyUsingLocation"></a>
 # **verifyUsingLocation**
-> VerifyContentResponse verifyUsingLocation(configName, streamLocation, requestId)
+> VerifyContentResponse verifyUsingLocation(configName, streamLocation, requestId, secret)
 
 Verify hash using the Storage API
 
-Verify a convertInputToHashWhenNeeded of file/blob by supplying a Stream location of the Storage API. This Stream Location maps to a location of a file/blob on some remote cloud storage. Hashing will be done on the server side Please note that the binary data itself will not be stored, only the convertInputToHashWhenNeeded. Use the registerUsingContent endpoint if you&#39;d like to store content
+Verify a hash of file/blob by supplying a Stream location of the Storage API. This Stream Location maps to a location of a file/blob on some remote cloud storage. Hashing will be done on the server side Please note that the binary data itself will not be stored, only the hash. Use the registerUsingContent endpoint if you&#39;d like to store content
 
 ### Example
 ```java
@@ -91,8 +93,9 @@ VerificationApi apiInstance = new VerificationApi();
 String configName = "configName_example"; // String | The context for this operation
 StreamLocation streamLocation = new StreamLocation(); // StreamLocation | The stream location on storage
 String requestId = "requestId_example"; // String | Optional request id
+String secret = "secret_example"; // String | An alternate secret key in base 64 format that overrides the value in your configuration.
 try {
-    VerifyContentResponse result = apiInstance.verifyUsingLocation(configName, streamLocation, requestId);
+    VerifyContentResponse result = apiInstance.verifyUsingLocation(configName, streamLocation, requestId, secret);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling VerificationApi#verifyUsingLocation");
@@ -107,6 +110,7 @@ Name | Type | Description  | Notes
  **configName** | **String**| The context for this operation |
  **streamLocation** | [**StreamLocation**](StreamLocation.md)| The stream location on storage |
  **requestId** | **String**| Optional request id | [optional]
+ **secret** | **String**| An alternate secret key in base 64 format that overrides the value in your configuration. | [optional]
 
 ### Return type
 
@@ -123,11 +127,11 @@ Name | Type | Description  | Notes
 
 <a name="verifyUsingStream"></a>
 # **verifyUsingStream**
-> VerifyContentResponse verifyUsingStream(configName, stream, fileName)
+> VerifyContentResponse verifyUsingStream(configName, stream, fileName, secret)
 
 Verify bytestream/file hash
 
-Verify a convertInputToHashWhenNeeded of content by supplying a file or some other binary data. Hashing will be done on the server side. Please note that the binary data itself will not be stored, only the convertInputToHashWhenNeeded. Use the registerUsingContent endpoint if you&#39;d like to store content
+Verify a hash of content by supplying a file or some other binary data. Hashing will be done on the server side. Please note that the binary data itself will not be stored, only the hash. Use the registerUsingContent endpoint if you&#39;d like to store content
 
 ### Example
 ```java
@@ -148,8 +152,9 @@ VerificationApi apiInstance = new VerificationApi();
 String configName = "configName_example"; // String | The configuration name this operation
 File stream = new File("/path/to/file.txt"); // File | The binary data (not hashed). Hashing will be done on the server side. The binary data will not be stored
 String fileName = "fileName_example"; // String | Optional input file name. Needed when using bytestreams instead of filestreams
+String secret = "secret_example"; // String | An alternate secret key in base 64 format that overrides the value in your configuration.
 try {
-    VerifyContentResponse result = apiInstance.verifyUsingStream(configName, stream, fileName);
+    VerifyContentResponse result = apiInstance.verifyUsingStream(configName, stream, fileName, secret);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling VerificationApi#verifyUsingStream");
@@ -164,6 +169,7 @@ Name | Type | Description  | Notes
  **configName** | **String**| The configuration name this operation |
  **stream** | **File**| The binary data (not hashed). Hashing will be done on the server side. The binary data will not be stored |
  **fileName** | **String**| Optional input file name. Needed when using bytestreams instead of filestreams | [optional]
+ **secret** | **String**| An alternate secret key in base 64 format that overrides the value in your configuration. | [optional]
 
 ### Return type
 
