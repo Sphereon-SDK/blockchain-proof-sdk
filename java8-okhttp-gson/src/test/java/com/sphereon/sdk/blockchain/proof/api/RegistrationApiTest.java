@@ -97,7 +97,7 @@ public class RegistrationApiTest extends AbstractApiTest {
             out.write(("test-" + requestId).getBytes());
         }
         RegisterContentResponse response = registrationApi.registerUsingStream(unitTestConfigName, registeredContentFileForStream,
-            "RandomFile");
+            "RandomFile", null);
         Assert.assertNotNull(response);
         Assert.assertNotNull(response.getSingleProofChain());
         Assert.assertNotNull(response.getSingleProofChain());
@@ -131,7 +131,7 @@ public class RegistrationApiTest extends AbstractApiTest {
     @Test
     public void _080_verifyUsingStreamTest() throws ApiException {
         VerifyContentResponse response = verificationApi.verifyUsingStream(unitTestConfigName, registeredContentFileForStream,
-            "RandomFile");
+            "RandomFile", null);
         Assert.assertNotNull(response);
         Assert.assertTrue(response.getRegistrationState() == VerifyContentResponse.RegistrationStateEnum.REGISTERED
                               || response.getRegistrationState() == VerifyContentResponse.RegistrationStateEnum.PENDING);

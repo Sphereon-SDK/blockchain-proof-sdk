@@ -6,6 +6,7 @@ csharp-net35/src/Sphereon.SDK.Blockchain.Proof
 csharp-net45/src/Sphereon.SDK.Blockchain.Proof
 javascript/src
 html-docs/index.html
+node_modules/
 
 # Visual Studio
 .vs/

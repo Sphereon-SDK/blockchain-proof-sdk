@@ -82,7 +82,6 @@ public abstract class AbstractApiTest {
         Assert.assertNotNull(storedSettings.getChainConfiguration());
         Assert.assertNotNull(storedSettings.getChainSettings().getSingleProofChain());
         Assert.assertNotNull(storedSettings.getChainSettings().getHashAlgorithm());
-        module.log(message, 0);
         settingsChainId = storedSettings.getSettingsChain().getChainId();
         proofChainId = storedSettings.getSingleProofChain().getChainId();
         return storedSettings;
