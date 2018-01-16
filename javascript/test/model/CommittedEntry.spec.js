@@ -17,10 +17,10 @@
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD.
-    define(['expect.js', '../../src/index'], factory);
+    define(['expect.js', '../../src/SphereonSDKBlockchainProof/index'], factory);
   } else if (typeof module === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    factory(require('expect.js'), require('../../src/index'));
+    factory(require('expect.js'), require('../../src/SphereonSDKBlockchainProof/index'));
   } else {
     // Browser globals (root is window)
     factory(root.expect, root.BlockchainProof);
@@ -77,6 +77,18 @@
 
     it('should have the property registrationState (base name: "registrationState")', function() {
       // uncomment below and update the code to test the property registrationState
+      //var instane = new BlockchainProof.CommittedEntry();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property signatureState (base name: "signatureState")', function() {
+      // uncomment below and update the code to test the property signatureState
+      //var instane = new BlockchainProof.CommittedEntry();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property signatureStateMessage (base name: "signatureStateMessage")', function() {
+      // uncomment below and update the code to test the property signatureStateMessage
       //var instane = new BlockchainProof.CommittedEntry();
       //expect(instance).to.be();
     });
