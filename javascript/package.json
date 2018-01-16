@@ -11,7 +11,11 @@
     "fs": false
   },
   "dependencies": {
-    "superagent": "3.5.2"
+    "memory-streams": "^0.1.2",
+    "os-tmpdir": "^1.0.2",
+    "path": "^0.12.7",
+    "superagent": "3.5.2",
+    "uuid": "^3.2.0"
   },
   "devDependencies": {
     "mocha": "~2.3.4",

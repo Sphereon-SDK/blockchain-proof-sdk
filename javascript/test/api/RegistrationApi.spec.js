@@ -15,87 +15,101 @@
  */
 
 (function (root, factory) {
-    if (typeof define === 'function' && define.amd) {
-        // AMD.
-        define(['expect.js', '../../src/SphereonSDKBlockchainProof/index'], factory);
-    } else if (typeof module === 'object' && module.exports) {
-        // CommonJS-like environments that support module.exports, like Node.
-        factory(require('expect.js'), require('../../src/SphereonSDKBlockchainProof/index'));
-    } else {
-        // Browser globals (root is window)
-        factory(root.expect, root.BlockchainProof);
-    }
-}(this, function (expect, BlockchainProof) {
-    'use strict';
+        if (typeof define === 'function' && define.amd) {
+            // AMD.
+            define(['expect.js', '../../src/SphereonSDKBlockchainProof/index'], factory);
+        } else if (typeof module === 'object' && module.exports) {
+            // CommonJS-like environments that support module.exports, like Node.
+            factory(require('expect.js'), require('../../src/SphereonSDKBlockchainProof/index'));
+        } else {
+            // Browser globals (root is window)
+            factory(root.expect, root.BlockchainProof);
+        }
+    }(this, function (expect, BlockchainProof) {
+        'use strict';
 
-    var TEST_CONFIG_BASENAME = "sphereoncstest";
-    var TEST_CONTEXT_MULTICHAIN = "multichain";
-    var CONNECTION_TIMEOUT = 40000;
-    var ACCESS_TOKEN = "6534f740-a99a-3bde-9046-287de103baf9";
+        const TEST_CONFIG_BASENAME = "sphereoncstest";
+        const TEST_CONTEXT_MULTICHAIN = "multichain";
+        const MULTICHAIN_WAIT_TIME = 20000;
+        const CONNECTION_TIMEOUT = 40000;
+        const ACCESS_TOKEN = "6534f740-a99a-3bde-9046-287de103baf9";
 
-    var module = require('module');
-    var assert = require('assert');
+        const assert = require('assert');
+        const uuidv4 = require('uuid/v4');
+//        const streams = require('memory-streams');
+        const fs = require('fs');
+        const os = require('os');
+        const path = require('path');
 
-    var unitTestConfigName;
-    var hashingSecret = new Buffer("SphereonTestSecret", "utf-8").toString('base64');
+        let unitTestConfigName;
+        const hashingSecret = new Buffer("SphereonTestSecret", "utf-8").toString('base64');
 
-    var configurationApi;
-    var registrationApi;
-    var verificationApi;
+        let configurationApi;
+        let registrationApi;
+        let verificationApi;
 
-    var settingsChainId;
-    var proofChainId;
+        let settingsChainId;
+        let proofChainId;
+        let registeredContent;
+        let registeredContentTempFile;
 
 
-    before(function () {
-        configurationApi = new BlockchainProof.ConfigurationApi();
-        registrationApi = new BlockchainProof.RegistrationApi();
-        verificationApi = new BlockchainProof.VerificationApi();
-        unitTestConfigName = TEST_CONFIG_BASENAME + (new Date).getTime();
+        before(function () {
+            configurationApi = new BlockchainProof.ConfigurationApi();
+            registrationApi = new BlockchainProof.RegistrationApi();
+            verificationApi = new BlockchainProof.VerificationApi();
+            unitTestConfigName = TEST_CONFIG_BASENAME + (new Date).getTime();
 
-        var defaultClient = BlockchainProof.ApiClient.instance;
-        var oauth2schema = defaultClient.authentications['oauth2schema'];
-        oauth2schema.accessToken = ACCESS_TOKEN;
-    });
+            const defaultClient = BlockchainProof.ApiClient.instance;
+            const oauth2schema = defaultClient.authentications['oauth2schema'];
+            oauth2schema.accessToken = ACCESS_TOKEN;
+            defaultClient.timeout = CONNECTION_TIMEOUT;
+        });
 
-    var getProperty = function (object, getter, property) {
-        // Use getter method if present; otherwise, get the property directly.
-        if (typeof object[getter] === 'function')
-            return object[getter]();
-        else
-            return object[property];
-    }
+        describe('RegistrationApi', function () {
 
-    var setProperty = function (object, setter, property, value) {
-        // Use setter method if present; otherwise, set the property directly.
-        if (typeof object[setter] === 'function')
-            object[setter](value);
-        else
-            object[property] = value;
-    }
+            describe('createProofAndSettingsChain', function () {
+                it('should call createProofAndSettingsChain successfully', function (done) {
+                    const settings = new BlockchainProof.ChainSettings();
+                    settings.version = BlockchainProof.ChainSettings.VersionEnum["1"];
+                    settings.secret = hashingSecret;
+                    settings.hashAlgorithm = BlockchainProof.ChainSettings.HashAlgorithmEnum["256"];
+                    settings.contentRegistrationChainTypes = [
+                        BlockchainProof.ChainSettings.ContentRegistrationChainTypesEnum.PER_HASH_PROOF_CHAIN,
+                        BlockchainProof.ChainSettings.ContentRegistrationChainTypesEnum.SINGLE_PROOF_CHAIN
+                    ];
 
-    describe('RegistrationApi', function () {
+                    const createConfiguration = new BlockchainProof.CreateConfigurationRequest();
+                    createConfiguration.name = unitTestConfigName;
+                    createConfiguration.initialSettings = settings;
+                    createConfiguration.context = TEST_CONTEXT_MULTICHAIN;
+                    createConfiguration.accessMode = BlockchainProof.CreateConfigurationRequest.AccessModeEnum.PRIVATE;
+                    configurationApi.createConfiguration(createConfiguration, (error, configurationResponse, response) => {
+                            if (error) throw error + ": " + response.text;
+                            assert(configurationResponse);
+                            const storedSettings = configurationResponse.storedSettings;
+                            assert(storedSettings);
+                            assert(storedSettings.context);
+                            assert(storedSettings.chainSettings);
+                            assert(storedSettings.singleProofChain);
+                            assert(storedSettings.settingsChain);
+                            assert(storedSettings.chainConfiguration);
+                            assert(storedSettings.chainSettings.singleProofChain);
+                            assert(storedSettings.chainSettings.hashAlgorithm);
+                            settingsChainId = storedSettings.settingsChain.chainId;
+                            proofChainId = storedSettings.singleProofChain.chainId;
+                            done();
+                        }
+                    );
+                });
+            });
 
-        describe('createProofAndSettingsChain', function () {
-            it('should call createProofAndSettingsChain successfully', function (done) {
-                var settings = new BlockchainProof.ChainSettings();
-                settings.version = BlockchainProof.ChainSettings.VersionEnum["1"];
-                settings.secret = hashingSecret;
-                settings.hashAlgorithm = BlockchainProof.ChainSettings.HashAlgorithmEnum["256"];
-                settings.contentRegistrationChainTypes = [
-                    BlockchainProof.ChainSettings.ContentRegistrationChainTypesEnum.PER_HASH_PROOF_CHAIN,
-                    BlockchainProof.ChainSettings.ContentRegistrationChainTypesEnum.SINGLE_PROOF_CHAIN
-                ];
-
-                var createConfiguration = new BlockchainProof.CreateConfigurationRequest();
-                createConfiguration.name = unitTestConfigName;
-                createConfiguration.initialSettings = settings;
-                createConfiguration.context = TEST_CONTEXT_MULTICHAIN;
-                createConfiguration.accessMode = BlockchainProof.CreateConfigurationRequest.AccessModeEnum.PRIVATE;
-                var test = configurationApi.createConfiguration(createConfiguration, (error, configurationResponse, response) => {
+            describe('getConfiguration', function () {
+                it('should call getConfiguration successfully', function (done) {
+                    configurationApi.getConfiguration(unitTestConfigName, (error, configurationResponse, response) => {
                         if (error) throw error + ": " + response.text;
                         assert(configurationResponse);
-                        var storedSettings = configurationResponse.storedSettings;
+                        const storedSettings = configurationResponse.storedSettings;
                         assert(storedSettings);
                         assert(storedSettings.context);
                         assert(storedSettings.chainSettings);
@@ -104,44 +118,112 @@
                         assert(storedSettings.chainConfiguration);
                         assert(storedSettings.chainSettings.singleProofChain);
                         assert(storedSettings.chainSettings.hashAlgorithm);
-                        settingsChainId = storedSettings.settingsChain.chainId;
-                        proofChainId = storedSettings.singleProofChain.chainId;
-                        expect().to.be();
+                        expect(storedSettings.settingsChain.chainId).to.be(settingsChainId);
+                        expect(storedSettings.singleProofChain.chainId).to.be(proofChainId);
                         done();
-                    }
-                );
+                    });
+                });
             });
-        });
 
-        describe('registerUsingContent', function () {
-            it('should call registerUsingContent successfully', function (done) {
-//                registrationApi.registerUsingContent(function (error) {
-//                    if (error) throw error;
-//                    expect().to.be();
-//                });
-                done();
+            describe('registerUsingContent', function () {
+                it('should call registerUsingContent successfully', function (done) {
+                    const requestId = uuidv4();
+                    registeredContent = new Buffer("test-" + requestId, "utf-8").toString('base64');
+                    const contentRequest = new BlockchainProof.ContentRequest();
+                    contentRequest.requestId = requestId;
+                    contentRequest.content = registeredContent;
+                    contentRequest.hashProvider = BlockchainProof.ContentRequest.HashProviderEnum.SERVER;
+                    registrationApi.registerUsingContent(unitTestConfigName, contentRequest, (error, registerResponse, response) => {
+                        if (error) throw error + ": " + response.text;
+                        assert(registerResponse);
+                        assert(registerResponse.singleProofChain);
+                        assert(registerResponse.perHashProofChain);
+                        expect(registerResponse.requestId).to.be(contentRequest.requestId);
+                        done();
+                    });
+                });
             });
-        });
-        describe('registerUsingLocation', function () {
-            it('should call registerUsingLocation successfully', function (done) {
-                //uncomment below and update the code to test registerUsingLocation
-                //instance.registerUsingLocation(function(error) {
-                //  if (error) throw error;
-                //expect().to.be();
-                //});
-                done();
-            });
-        });
-        describe('registerUsingStream', function () {
-            it('should call registerUsingStream successfully', function (done) {
-                //uncomment below and update the code to test registerUsingStream
-                //instance.registerUsingStream(function(error) {
-                //  if (error) throw error;
-                //expect().to.be();
-                //});
-                done();
-            });
-        });
-    });
 
-}));
+            describe('registerUsingLocation', function () {
+                it('should call registerUsingLocation successfully', function (done) {
+                    done();
+                });
+            });
+
+            describe('registerUsingStream', function () {
+                it('should call registerUsingStream successfully', function (done) {
+                    const requestId = uuidv4();
+                    const randomBuffer = new Buffer("test-" + requestId, "utf-8").toString('base64');
+                    registeredContentTempFile = path.join(os.tmpDir(), `test-stream-${unitTestConfigName}`);
+                    const writeStream = fs.createWriteStream(registeredContentTempFile);
+                    writeStream.write(randomBuffer);
+                    writeStream.end(function () {
+                        const readStream = fs.createReadStream(registeredContentTempFile);
+                        const opts = {fileName: "RandomFile"};
+                        registrationApi.registerUsingStream(unitTestConfigName, readStream, opts, (error, registerResponse, response) => {
+                            if (error) throw error + ": " + response.text;
+                            assert(registerResponse);
+                            assert(registerResponse.singleProofChain);
+                            assert(registerResponse.perHashProofChain);
+                            expect(registerResponse.requestId).to.be("RandomFile");
+                            done();
+                        });
+
+                    });
+                });
+            });
+
+
+            describe('wait', function () {
+                it('waiting for blockchain....', done => {
+                    setTimeout(function () {
+                        done();
+                    }, MULTICHAIN_WAIT_TIME);
+                });
+            });
+
+            describe('verifyUsingContent', function () {
+                it('should call verifyUsingContent successfully', done => {
+                    const contentRequest = new BlockchainProof.ContentRequest();
+                    contentRequest.requestId = "anything";
+                    contentRequest.content = registeredContent;
+                    contentRequest.hashProvider = BlockchainProof.ContentRequest.HashProviderEnum.SERVER;
+                    var opts = {};
+                    verificationApi.verifyUsingContent(unitTestConfigName, contentRequest, opts, (error, verifyResponse, response) => {
+                        if (error) throw error + ": " + response.text;
+                        assert(verifyResponse);
+                        assert(verifyResponse.registrationState == BlockchainProof.VerifyContentResponse.RegistrationStateEnum.REGISTERED
+                            || verifyResponse.registrationState == BlockchainProof.VerifyContentResponse.RegistrationStateEnum.PENDING);
+                        assert(verifyResponse.singleProofChain);
+                        assert(verifyResponse.perHashProofChain);
+                        expect(verifyResponse.requestId).to.be(contentRequest.requestId);
+                        done();
+                    });
+                });
+            });
+
+            describe('verifyUsingLocation', function () {
+                it('should call verifyUsingLocation successfully', function (done) {
+                    done();
+                });
+            });
+
+            describe('verifyUsingStream', function () {
+                it('should call verifyUsingStream successfully', function (done) {
+                    const readStream = fs.createReadStream(registeredContentTempFile);
+                    const opts = {fileName: "RandomFile"};
+                    verificationApi.verifyUsingStream(unitTestConfigName, readStream, opts, (error, verifyResponse, response) => {
+                        if (error) throw error + ": " + response.text;
+                        assert(verifyResponse);
+                        assert(verifyResponse.registrationState == BlockchainProof.VerifyContentResponse.RegistrationStateEnum.REGISTERED
+                            || verifyResponse.registrationState == BlockchainProof.VerifyContentResponse.RegistrationStateEnum.PENDING);
+                        assert(verifyResponse.singleProofChain);
+                        assert(verifyResponse.perHashProofChain);
+                        expect(verifyResponse.requestId).to.be("RandomFile");
+                        done();
+                    });
+                });
+            });
+        });
+    })
+);
