@@ -175,6 +175,7 @@
 
 
             describe('wait', function () {
+                this.timeout(MULTICHAIN_WAIT_TIME * 2);
                 it('waiting for blockchain....', done => {
                     setTimeout(function () {
                         done();
