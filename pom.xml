@@ -224,6 +224,42 @@
 				</plugins>
 			</build>
 		</profile>
+		
+		<profile>
+			<id>typescript-angular2</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>io.swagger</groupId>
+						<artifactId>swagger-codegen-maven-plugin</artifactId>
+						<version>${swagger-coden-maven-plugin.version}</version>
+						<executions>
+							<execution>
+								<goals>
+									<goal>generate</goal>
+								</goals>
+								<configuration>
+									<inputSpec>swagger.sdk.json</inputSpec>
+									<language>typescript-angular2</language>
+									<configOptions>
+										<dateLibrary>java8</dateLibrary>
+									</configOptions>
+									<verbose>${swagger-coden-verbose}</verbose>
+									<output>${project.basedir}/typescript-angular2/sdk</output>
+									<groupId>com.sphereon.sdk</groupId>
+									<artifactId>blockchain-proof-sdk-angular2</artifactId>
+									<artifactVersion>${project.version}</artifactVersion>
+									<addCompileSourceRoot>true</addCompileSourceRoot>
+									<apiPackage>api</apiPackage>
+									<modelPackage>model</modelPackage>
+									<invokerPackage>${sdk-package-javascript}</invokerPackage>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
 
 		<profile>
 			<id>csharp-net45</id>

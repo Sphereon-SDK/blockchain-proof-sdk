@@ -1,17 +1,20 @@
 {
   "name": "blockchain_proof",
-  "version": "0.9",
+  "version": "0.9.0",
   "description": "With_the_Blockchain_Proof_API_it_is_easy_to_prove_or_disprove_existence_of_data_at_a_certain_point_in_time__Behind_the_scenes_it_stores_entries_using_the_Factom__bitcoin_Multichain_or_Ethereum_blockchain_by_means_of_our_generic_blockchain_API_The_flow_is_generally_as_follows1__Make_sure_a_configuration_is_present2__Register_content_by_uploading_a_file_some_content_or_providing_a_Stream_Location_from_the_Storage_API__When_you_upload_content_you_have_to_tell_the_API_whether_the_data_has_already_been_hashed_or_not__If_not_or_when_uploading_a_file_or_stream_location_the_API_will_take_care_of_the_hashing3__Verify_content_by_uploading_a_file_some_content_or_providing_a_Stream_Location_from_the_Storage_API__When_you_upload_content_you_have_to_tell_the_API_whether_the_data_has_already_been_hashed_or_not__If_not_or_when_uploading_a_file_or_stream_location_the_API_will_take_care_of_the_hashing__You_will_get_back_whether_the_content_has_been_registered_previously_or_notFull_API_Documentation_httpsdocs_sphereon_comapiblockchain_proof0_9htmlInteractive_testing_A_web_based_test_console_is_available_in_the_Sphereon_API_Store_at_httpsstore_sphereon_com",
   "license": "Unlicense",
   "main": "src/SphereonSDKBlockchainProof/index.js",
   "scripts": {
-    "test": "./node_modules/mocha/bin/mocha --recursive"
+    "test": "mocha --recursive"
   },
   "browser": {
     "fs": false
   },
   "dependencies": {
-    "superagent": "3.5.2"
+    "os-tmpdir": "^1.0.2",
+    "path": "^0.12.7",
+    "superagent": "3.5.2",
+    "uuid": "^3.2.0"
   },
   "devDependencies": {
     "mocha": "~2.3.4",
