@@ -70,6 +70,7 @@
 
         describe('createProofAndSettingsChain', function () {
             it('should call createProofAndSettingsChain successfully', function (done) {
+                this.timeout(CONNECTION_TIMEOUT * 2);
                 const settings = new BlockchainProof.ChainSettings();
                 settings.version = BlockchainProof.ChainSettings.VersionEnum["1"];
                 settings.secret = hashingSecret;
@@ -106,6 +107,7 @@
 
         describe('getConfiguration', function () {
             it('should call getConfiguration successfully', function (done) {
+                this.timeout(CONNECTION_TIMEOUT * 2);
                 configurationApi.getConfiguration(unitTestConfigName, (error, configurationResponse, response) => {
                     handleError(error, response);
                     assert(configurationResponse);
@@ -127,6 +129,7 @@
 
         describe('registerUsingContent', function () {
             it('should call registerUsingContent successfully', function (done) {
+                this.timeout(CONNECTION_TIMEOUT * 2);
                 const requestId = uuidv4();
                 registeredContent = new Buffer("test-" + requestId, "utf-8").toString('base64');
                 const contentRequest = new BlockchainProof.ContentRequest();
@@ -152,6 +155,7 @@
 
         describe('registerUsingStream', function () {
             it('should call registerUsingStream successfully', function (done) {
+                this.timeout(CONNECTION_TIMEOUT * 2);
                 const requestId = uuidv4();
                 const randomBuffer = new Buffer("test-" + requestId, "utf-8").toString('base64');
                 registeredContentTempFile = path.join(os.tmpdir(), `test-stream-${unitTestConfigName}`);
@@ -175,7 +179,7 @@
 
 
         describe('wait', function () {
-            this.timeout(MULTICHAIN_WAIT_TIME * 2);
+            this.timeout(CONNECTION_TIMEOUT * 2);
             it('waiting for blockchain....', done => {
                 setTimeout(function () {
                     done();
@@ -211,6 +215,7 @@
 
         describe('verifyUsingStream', function () {
             it('should call verifyUsingStream successfully', function (done) {
+                this.timeout(CONNECTION_TIMEOUT * 2);
                 const readStream = fs.createReadStream(registeredContentTempFile);
                 const opts = {fileName: "RandomFile"};
                 verificationApi.verifyUsingStream(unitTestConfigName, readStream, opts, (error, verifyResponse, response) => {
