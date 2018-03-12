@@ -1,7 +1,7 @@
 /* 
  * Blockchain Proof
  *
- * <b>With the Blockchain Proof API it is easy to prove or disprove existence of (binary) data at a certain point in time. Behind the scenes it stores entries using the Factom (bitcoin), Multichain or Ethereum blockchain by means of our generic blockchain API.</b>    The flow is generally as follows:  1. Make sure a configuration is present  2. Register content by uploading a file, some content, or providing a Stream Location from the Storage API. When you upload content you have to tell the API whether the data has already been hashed or not. If not, or when uploading a file or stream location, the API will take care of the hashing  3. Verify content by uploading a file, some content, or providing a Stream Location from the Storage API. When you upload content you have to tell the API whether the data has already been hashed or not. If not, or when uploading a file or stream location, the API will take care of the hashing. You will get back whether the content has been registered previously or not      <b>Interactive testing: </b>A web based test console is available in the <a href=\"https://store.sphereon.com\">Sphereon API Store</a>
+ * With the Blockchain Proof API it is easy to prove or disprove existence of data at a certain point in time. Behind the scenes it stores entries using the Factom (bitcoin), Multichain or Ethereum blockchain by means of our generic blockchain API.    The flow is generally as follows:  1. Make sure a configuration is present  2. Register content by uploading a file, some content, or providing a Stream Location from the Storage API. When you upload content you have to tell the API whether the data has already been hashed or not. If not, or when uploading a file or stream location, the API will take care of the hashing  3. Verify content by uploading a file, some content, or providing a Stream Location from the Storage API. When you upload content you have to tell the API whether the data has already been hashed or not. If not, or when uploading a file or stream location, the API will take care of the hashing. You will get back whether the content has been registered previously or not    Full API Documentation: https://docs.sphereon.com/api/blockchain-proof/0.9/html  Interactive testing: A web based test console is available in the Sphereon API Store at https://store.sphereon.com
  *
  * OpenAPI spec version: 0.9
  * Contact: dev@sphereon.com
@@ -81,6 +81,30 @@ namespace Sphereon.SDK.Blockchain.Proof.Test
             // TODO unit test for the property 'ContextName'
         }
         /// <summary>
+        /// Test the property 'SingleProofChain'
+        /// </summary>
+        [Test]
+        public void SingleProofChainTest()
+        {
+            // TODO unit test for the property 'SingleProofChain'
+        }
+        /// <summary>
+        /// Test the property 'Signature'
+        /// </summary>
+        [Test]
+        public void SignatureTest()
+        {
+            // TODO unit test for the property 'Signature'
+        }
+        /// <summary>
+        /// Test the property 'ContentRegistrationChainTypes'
+        /// </summary>
+        [Test]
+        public void ContentRegistrationChainTypesTest()
+        {
+            // TODO unit test for the property 'ContentRegistrationChainTypes'
+        }
+        /// <summary>
         /// Test the property 'RequestId'
         /// </summary>
         [Test]
@@ -89,20 +113,12 @@ namespace Sphereon.SDK.Blockchain.Proof.Test
             // TODO unit test for the property 'RequestId'
         }
         /// <summary>
-        /// Test the property 'ContentId'
+        /// Test the property 'PerHashProofChain'
         /// </summary>
         [Test]
-        public void ContentIdTest()
+        public void PerHashProofChainTest()
         {
-            // TODO unit test for the property 'ContentId'
-        }
-        /// <summary>
-        /// Test the property 'ProofChain'
-        /// </summary>
-        [Test]
-        public void ProofChainTest()
-        {
-            // TODO unit test for the property 'ProofChain'
+            // TODO unit test for the property 'PerHashProofChain'
         }
         /// <summary>
         /// Test the property 'RegistrationState'
@@ -113,12 +129,28 @@ namespace Sphereon.SDK.Blockchain.Proof.Test
             // TODO unit test for the property 'RegistrationState'
         }
         /// <summary>
-        /// Test the property 'FileChain'
+        /// Test the property 'SignatureState'
         /// </summary>
         [Test]
-        public void FileChainTest()
+        public void SignatureStateTest()
         {
-            // TODO unit test for the property 'FileChain'
+            // TODO unit test for the property 'SignatureState'
+        }
+        /// <summary>
+        /// Test the property 'Hash'
+        /// </summary>
+        [Test]
+        public void HashTest()
+        {
+            // TODO unit test for the property 'Hash'
+        }
+        /// <summary>
+        /// Test the property 'SignatureStateMessage'
+        /// </summary>
+        [Test]
+        public void SignatureStateMessageTest()
+        {
+            // TODO unit test for the property 'SignatureStateMessage'
         }
 
     }

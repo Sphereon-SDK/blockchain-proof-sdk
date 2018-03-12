@@ -14,11 +14,9 @@ using System.Text;
 using System.Threading;
 using NUnit.Framework;
 using Sphereon.SDK.Blockchain.Proof.Api;
-using Sphereon.SDK.Blockchain.Proof.Client;
 using Sphereon.SDK.Blockchain.Proof.Model;
 
-namespace Sphereon.SDK.Blockchain.Proof.Test.Api
-{
+namespace Sphereon.SDK.Blockchain.Proof.Test.Api {
     /// <summary>
     ///  Class for testing RegistrationApi
     /// </summary>
@@ -27,8 +25,7 @@ namespace Sphereon.SDK.Blockchain.Proof.Test.Api
     /// Please update the test case below to test the API endpoint.
     /// </remarks>
     [TestFixture]
-    public class RegistrationApiTests : AbstractTests
-    {
+    public class RegistrationApiTests : AbstractTests {
         private RegistrationApi _registrationApi;
         private VerificationApi _verificationApi;
 
@@ -36,8 +33,7 @@ namespace Sphereon.SDK.Blockchain.Proof.Test.Api
         /// Setup before each unit test
         /// </summary>
         [SetUp]
-        public void Init()
-        {
+        public void Init() {
             _registrationApi = new RegistrationApi();
             ConfigureApi(_registrationApi.Configuration);
             _verificationApi = new VerificationApi();
@@ -48,16 +44,13 @@ namespace Sphereon.SDK.Blockchain.Proof.Test.Api
         /// Clean up after each unit test
         /// </summary>
         [TearDown]
-        public void Cleanup()
-        {
-        }
+        public void Cleanup() { }
 
         /// <summary>
         /// Test CreateConfiguration
         /// </summary>
         [Test, Order(10)]
-        public void CreateConfigurationTest()
-        {
+        public void CreateConfigurationTest() {
             CreateProofAndSettingsChain();
         }
 
@@ -65,8 +58,7 @@ namespace Sphereon.SDK.Blockchain.Proof.Test.Api
         /// Test GetConfiguration
         /// </summary>
         [Test, Order(20)]
-        public void GetConfigurationTest()
-        {
+        public void GetConfigurationTest() {
             var configurationResponse = _configurationApi.GetConfiguration(UnitTestConfigName);
             Assert.NotNull(configurationResponse);
             var storedSettings = configurationResponse.StoredSettings;
@@ -87,8 +79,7 @@ namespace Sphereon.SDK.Blockchain.Proof.Test.Api
         /// Test RegisterUsingContent
         /// </summary>
         [Test, Order(30)]
-        public void RegisterUsingContentTest()
-        {
+        public void RegisterUsingContentTest() {
             var requestId = Guid.NewGuid().ToString();
             RegisteredContent = Encoding.Default.GetBytes("test-" + requestId);
             var contentRequest = new ContentRequest(Content: RegisteredContent,
@@ -107,8 +98,7 @@ namespace Sphereon.SDK.Blockchain.Proof.Test.Api
         /// Test RegisterUsingLocation
         /// </summary>
         [Test, Order(40)]
-        public void RegisterUsingLocationTest()
-        {
+        public void RegisterUsingLocationTest() {
             // TODO uncomment below to test the method and replace null with proper value
             //string configName = null;
             //List<StreamLocation> streamLocations = null;
@@ -120,8 +110,7 @@ namespace Sphereon.SDK.Blockchain.Proof.Test.Api
         /// Test RegisterUsingStream
         /// </summary>
         [Test, Order(50)]
-        public void RegisterUsingStreamTest()
-        {
+        public void RegisterUsingStreamTest() {
             var requestId = Guid.NewGuid().ToString();
             RegisteredContentForStream = Encoding.Default.GetBytes("test-" + requestId);
             Stream stream = new MemoryStream(RegisteredContentForStream);
@@ -137,8 +126,7 @@ namespace Sphereon.SDK.Blockchain.Proof.Test.Api
         /// Test VerifyUsingContent
         /// </summary>
         [Test, Order(60)]
-        public void VerifyUsingContentTest()
-        {
+        public void VerifyUsingContentTest() {
             Thread.Sleep(15000); // Should be enough for multichain registration
             var contentRequest = new ContentRequest(RequestId: "anything",
                 HashProvider: ContentRequest.HashProviderEnum.SERVER,
@@ -157,8 +145,7 @@ namespace Sphereon.SDK.Blockchain.Proof.Test.Api
         /// Test VerifyUsingLocation
         /// </summary>
         [Test, Order(70)]
-        public void VerifyUsingLocationTest()
-        {
+        public void VerifyUsingLocationTest() {
             // TODO uncomment below to test the method and replace null with proper value
             //string configName = null;
             //List<StreamLocation> streamLocations = null;
@@ -170,8 +157,7 @@ namespace Sphereon.SDK.Blockchain.Proof.Test.Api
         /// Test VerifyUsingStream
         /// </summary>
         [Test, Order(80)]
-        public void VerifyUsingStreamTest()
-        {
+        public void VerifyUsingStreamTest() {
             Stream stream = new MemoryStream(RegisteredContentForStream);
             var response = _verificationApi.VerifyUsingStream(UnitTestConfigName, stream, "MemoryFile");
             Assert.IsInstanceOf<VerifyContentResponse>(response, "response is VerifyContentResponse");

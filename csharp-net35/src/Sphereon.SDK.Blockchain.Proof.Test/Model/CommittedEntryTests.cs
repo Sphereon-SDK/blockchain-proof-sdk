@@ -97,6 +97,22 @@ namespace Sphereon.SDK.Blockchain.Proof.Test
             // TODO unit test for the property 'RegistrationState'
         }
         /// <summary>
+        /// Test the property 'SignatureState'
+        /// </summary>
+        [Test]
+        public void SignatureStateTest()
+        {
+            // TODO unit test for the property 'SignatureState'
+        }
+        /// <summary>
+        /// Test the property 'SignatureStateMessage'
+        /// </summary>
+        [Test]
+        public void SignatureStateMessageTest()
+        {
+            // TODO unit test for the property 'SignatureStateMessage'
+        }
+        /// <summary>
         /// Test the property 'EntryId'
         /// </summary>
         [Test]

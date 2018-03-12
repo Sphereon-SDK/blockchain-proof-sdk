@@ -35,22 +35,18 @@ namespace Sphereon.SDK.Blockchain.Proof.Test.Api
         protected static string ProofChainId;
         protected static ConfigurationApi _configurationApi;
 
-        static AbstractTests()
-        {
+        static AbstractTests() {
             UnitTestConfigName = TestConfigBasename + DateTime.Now.Ticks / 1000;
         }
 
-        protected StoredSettings CreateProofAndSettingsChain()
-        {
+        protected StoredSettings CreateProofAndSettingsChain() {
             var settings = new ChainSettings(Version: ChainSettings.VersionEnum.NUMBER_1, Secret: HashingSecret,
-                HashAlgorithm: ChainSettings.HashAlgorithmEnum._256)
-            {
-                ContentRegistrationChainTypes = new List<ChainSettings.ContentRegistrationChainTypesEnum>
+                HashAlgorithm: ChainSettings.HashAlgorithmEnum._256, ContentRegistrationChainTypes: new List<ChainSettings.ContentRegistrationChainTypesEnum>
                 {
                     ChainSettings.ContentRegistrationChainTypesEnum.PERHASHPROOFCHAIN,
                     ChainSettings.ContentRegistrationChainTypesEnum.SINGLEPROOFCHAIN
-                }
-            };
+                });
+           
 
             var createConfiguration = new CreateConfigurationRequest(Name: UnitTestConfigName,
                 InitialSettings: settings,
