@@ -32,6 +32,8 @@ import java.util.UUID;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class RegistrationApiTest extends AbstractApiTest {
 
+    private static final String ANY_REQUEST_ID = "any";
+
     private final RegistrationApi registrationApi = new RegistrationApi();
     private final VerificationApi verificationApi = new VerificationApi();
 
@@ -53,17 +55,15 @@ public class RegistrationApiTest extends AbstractApiTest {
     public void _020_getConfigurationTest() throws ApiException {
         ConfigurationResponse configurationResponse = configurationApi.getConfiguration(unitTestConfigName);
         Assert.assertNotNull(configurationResponse);
-        StoredSettings storedSettings = configurationResponse.getStoredSettings();
-        Assert.assertNotNull(storedSettings);
-        Assert.assertNotNull(storedSettings.getContext());
-        Assert.assertNotNull(storedSettings.getChainSettings());
-        Assert.assertNotNull(storedSettings.getSingleProofChain());
-        Assert.assertNotNull(storedSettings.getSettingsChain());
-        Assert.assertNotNull(storedSettings.getChainConfiguration());
-        Assert.assertNotNull(storedSettings.getChainSettings().getSingleProofChain());
-        Assert.assertNotNull(storedSettings.getChainSettings().getHashAlgorithm());
-        Assert.assertEquals(storedSettings.getSettingsChain().getChainId(), settingsChainId);
-        Assert.assertEquals(storedSettings.getSingleProofChain().getChainId(), proofChainId);
+        ModelConfiguration configuration = configurationResponse.getConfiguration();
+        Assert.assertNotNull(configuration);
+        Assert.assertNotNull(configuration.getContext());
+        Assert.assertNotNull(configuration.getChainSettings());
+        Assert.assertNotNull(configuration.getSingleProofChain());
+        Assert.assertNotNull(configuration.getChainSettings().getSingleProofChain());
+        Assert.assertNotNull(configuration.getChainSettings().getHashAlgorithm());
+        Assert.assertNotNull(configuration.getId(), configId);
+        Assert.assertEquals(configuration.getSingleProofChain().getChainId(), proofChainId);
     }
 
 
@@ -74,11 +74,12 @@ public class RegistrationApiTest extends AbstractApiTest {
         ContentRequest contentRequest = new ContentRequest();
         contentRequest.setContent(registeredContent);
         contentRequest.setHashProvider(ContentRequest.HashProviderEnum.SERVER);
-        RegisterContentResponse response = registrationApi.registerUsingContent(unitTestConfigName, contentRequest);
+        RegisterContentResponse response = registrationApi.registerUsingContent(unitTestConfigName, contentRequest, requestId,
+            hashingSecret, null, null);
         Assert.assertNotNull(response);
         Assert.assertNotNull(response.getSingleProofChain());
         Assert.assertNotNull(response.getPerHashProofChain());
-        Assert.assertEquals(contentRequest.getRequestId(), response.getRequestId());
+        Assert.assertEquals(requestId, response.getRequestId());
     }
 
 
@@ -97,7 +98,7 @@ public class RegistrationApiTest extends AbstractApiTest {
             out.write(("test-" + requestId).getBytes());
         }
         RegisterContentResponse response = registrationApi.registerUsingStream(unitTestConfigName, registeredContentFileForStream,
-            "RandomFile", null);
+            registeredContentFileForStream.getName(), "RandomFile", hashingSecret, null, null);
         Assert.assertNotNull(response);
         Assert.assertNotNull(response.getSingleProofChain());
         Assert.assertNotNull(response.getSingleProofChain());
@@ -109,16 +110,16 @@ public class RegistrationApiTest extends AbstractApiTest {
     public void _060_verifyUsingContentTest() throws InterruptedException, ApiException {
         Thread.sleep(15000); // Should be enough for multichain registration
         ContentRequest contentRequest = new ContentRequest();
-        contentRequest.setRequestId("anything");
         contentRequest.setHashProvider(ContentRequest.HashProviderEnum.SERVER);
         contentRequest.setContent(registeredContent);
-        VerifyContentResponse response = verificationApi.verifyUsingContent(unitTestConfigName, contentRequest, null);
+        VerifyContentResponse response = verificationApi.verifyUsingContent(unitTestConfigName, contentRequest, ANY_REQUEST_ID, hashingSecret,
+            null, null);
         Assert.assertNotNull(response);
         Assert.assertTrue(response.getRegistrationState() == VerifyContentResponse.RegistrationStateEnum.REGISTERED
                               || response.getRegistrationState() == VerifyContentResponse.RegistrationStateEnum.PENDING);
         Assert.assertNotNull(response.getSingleProofChain());
         Assert.assertNotNull(response.getPerHashProofChain());
-        Assert.assertEquals(contentRequest.getRequestId(), response.getRequestId());
+        Assert.assertEquals(ANY_REQUEST_ID, response.getRequestId());
     }
 
 
@@ -131,12 +132,12 @@ public class RegistrationApiTest extends AbstractApiTest {
     @Test
     public void _080_verifyUsingStreamTest() throws ApiException {
         VerifyContentResponse response = verificationApi.verifyUsingStream(unitTestConfigName, registeredContentFileForStream,
-            "RandomFile", null);
+            null, ANY_REQUEST_ID, hashingSecret, null, null);
         Assert.assertNotNull(response);
         Assert.assertTrue(response.getRegistrationState() == VerifyContentResponse.RegistrationStateEnum.REGISTERED
                               || response.getRegistrationState() == VerifyContentResponse.RegistrationStateEnum.PENDING);
         Assert.assertNotNull(response.getSingleProofChain());
         Assert.assertNotNull(response.getPerHashProofChain());
-        Assert.assertEquals("RandomFile", response.getRequestId());
+        Assert.assertEquals(ANY_REQUEST_ID, response.getRequestId());
     }
 }

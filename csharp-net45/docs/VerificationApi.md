@@ -1,6 +1,6 @@
 # Sphereon.SDK.Blockchain.Proof.Api.VerificationApi
 
-All URIs are relative to *https://gw.api.cloud.sphereon.com/blockchain/proof/0.9*
+All URIs are relative to *https://gw.api.cloud.sphereon.com/blockchain/proof/0.10*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -11,7 +11,7 @@ Method | HTTP request | Description
 
 <a name="verifyusingcontent"></a>
 # **VerifyUsingContent**
-> VerifyContentResponse VerifyUsingContent (string configName, ContentRequest existence, string secret = null)
+> VerifyContentResponse VerifyUsingContent (string configName, ContentRequest existence, string requestId = null, string base64Secret = null, string suppliedSignature = null, string keyId = null)
 
 Verify content
 
@@ -37,12 +37,15 @@ namespace Example
             var apiInstance = new VerificationApi();
             var configName = configName_example;  // string | The configName for this operation
             var existence = new ContentRequest(); // ContentRequest | Verify content using the current settings
-            var secret = secret_example;  // string | An alternate secret key in base 64 format that overrides the value in your configuration. (optional) 
+            var requestId = requestId_example;  // string | Optional request id (optional) 
+            var base64Secret = base64Secret_example;  // string | An alternate secret key in base64 format that overrides the value in your configuration. (optional) 
+            var suppliedSignature = suppliedSignature_example;  // string | An alternate supplied Signature in base64 format that overrides the signature generation. (optional) 
+            var keyId = keyId_example;  // string | An alternate crypto keys API id that will be used for signature generation. (optional) 
 
             try
             {
                 // Verify content
-                VerifyContentResponse result = apiInstance.VerifyUsingContent(configName, existence, secret);
+                VerifyContentResponse result = apiInstance.VerifyUsingContent(configName, existence, requestId, base64Secret, suppliedSignature, keyId);
                 Debug.WriteLine(result);
             }
             catch (Exception e)
@@ -60,7 +63,10 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **configName** | **string**| The configName for this operation | 
  **existence** | [**ContentRequest**](ContentRequest.md)| Verify content using the current settings | 
- **secret** | **string**| An alternate secret key in base 64 format that overrides the value in your configuration. | [optional] 
+ **requestId** | **string**| Optional request id | [optional] 
+ **base64Secret** | **string**| An alternate secret key in base64 format that overrides the value in your configuration. | [optional] 
+ **suppliedSignature** | **string**| An alternate supplied Signature in base64 format that overrides the signature generation. | [optional] 
+ **keyId** | **string**| An alternate crypto keys API id that will be used for signature generation. | [optional] 
 
 ### Return type
 
@@ -79,7 +85,7 @@ Name | Type | Description  | Notes
 
 <a name="verifyusinglocation"></a>
 # **VerifyUsingLocation**
-> VerifyContentResponse VerifyUsingLocation (string configName, StreamLocation streamLocation, string requestId = null, string secret = null)
+> VerifyContentResponse VerifyUsingLocation (string configName, StreamLocation streamLocation, string requestId = null, string base64Secret = null, string suppliedSignature = null, string keyId = null)
 
 Verify hash using the Storage API
 
@@ -106,12 +112,14 @@ namespace Example
             var configName = configName_example;  // string | The context for this operation
             var streamLocation = new StreamLocation(); // StreamLocation | The stream location on storage
             var requestId = requestId_example;  // string | Optional request id (optional) 
-            var secret = secret_example;  // string | An alternate secret key in base 64 format that overrides the value in your configuration. (optional) 
+            var base64Secret = base64Secret_example;  // string | An alternate secret key in base64 format that overrides the value in your configuration. (optional) 
+            var suppliedSignature = suppliedSignature_example;  // string | An alternate supplied Signature in base64 format that overrides the signature generation. (optional) 
+            var keyId = keyId_example;  // string | An alternate crypto keys API id that will be used for signature generation. (optional) 
 
             try
             {
                 // Verify hash using the Storage API
-                VerifyContentResponse result = apiInstance.VerifyUsingLocation(configName, streamLocation, requestId, secret);
+                VerifyContentResponse result = apiInstance.VerifyUsingLocation(configName, streamLocation, requestId, base64Secret, suppliedSignature, keyId);
                 Debug.WriteLine(result);
             }
             catch (Exception e)
@@ -130,7 +138,9 @@ Name | Type | Description  | Notes
  **configName** | **string**| The context for this operation | 
  **streamLocation** | [**StreamLocation**](StreamLocation.md)| The stream location on storage | 
  **requestId** | **string**| Optional request id | [optional] 
- **secret** | **string**| An alternate secret key in base 64 format that overrides the value in your configuration. | [optional] 
+ **base64Secret** | **string**| An alternate secret key in base64 format that overrides the value in your configuration. | [optional] 
+ **suppliedSignature** | **string**| An alternate supplied Signature in base64 format that overrides the signature generation. | [optional] 
+ **keyId** | **string**| An alternate crypto keys API id that will be used for signature generation. | [optional] 
 
 ### Return type
 
@@ -149,7 +159,7 @@ Name | Type | Description  | Notes
 
 <a name="verifyusingstream"></a>
 # **VerifyUsingStream**
-> VerifyContentResponse VerifyUsingStream (string configName, System.IO.Stream stream, string fileName = null, string secret = null)
+> VerifyContentResponse VerifyUsingStream (string configName, System.IO.Stream stream, string fileName = null, string requestId = null, string base64Secret = null, string suppliedSignature = null, string keyId = null)
 
 Verify bytestream/file hash
 
@@ -176,12 +186,15 @@ namespace Example
             var configName = configName_example;  // string | The configuration name this operation
             var stream = new System.IO.Stream(); // System.IO.Stream | The binary data (not hashed). Hashing will be done on the server side. The binary data will not be stored
             var fileName = fileName_example;  // string | Optional input file name. Needed when using bytestreams instead of filestreams (optional) 
-            var secret = secret_example;  // string | An alternate secret key in base 64 format that overrides the value in your configuration. (optional) 
+            var requestId = requestId_example;  // string | Optional request id (optional) 
+            var base64Secret = base64Secret_example;  // string | An alternate secret key in base64 format that overrides the value in your configuration. (optional) 
+            var suppliedSignature = suppliedSignature_example;  // string | An alternate supplied Signature in base64 format that overrides the signature generation. (optional) 
+            var keyId = keyId_example;  // string | An alternate crypto keys API id that will be used for signature generation. (optional) 
 
             try
             {
                 // Verify bytestream/file hash
-                VerifyContentResponse result = apiInstance.VerifyUsingStream(configName, stream, fileName, secret);
+                VerifyContentResponse result = apiInstance.VerifyUsingStream(configName, stream, fileName, requestId, base64Secret, suppliedSignature, keyId);
                 Debug.WriteLine(result);
             }
             catch (Exception e)
@@ -200,7 +213,10 @@ Name | Type | Description  | Notes
  **configName** | **string**| The configuration name this operation | 
  **stream** | **System.IO.Stream**| The binary data (not hashed). Hashing will be done on the server side. The binary data will not be stored | 
  **fileName** | **string**| Optional input file name. Needed when using bytestreams instead of filestreams | [optional] 
- **secret** | **string**| An alternate secret key in base 64 format that overrides the value in your configuration. | [optional] 
+ **requestId** | **string**| Optional request id | [optional] 
+ **base64Secret** | **string**| An alternate secret key in base64 format that overrides the value in your configuration. | [optional] 
+ **suppliedSignature** | **string**| An alternate supplied Signature in base64 format that overrides the signature generation. | [optional] 
+ **keyId** | **string**| An alternate crypto keys API id that will be used for signature generation. | [optional] 
 
 ### Return type
 

@@ -1,6 +1,6 @@
 # Sphereon.SDK.Blockchain.Proof.Api.RegistrationApi
 
-All URIs are relative to *https://gw.api.cloud.sphereon.com/blockchain/proof/0.9*
+All URIs are relative to *https://gw.api.cloud.sphereon.com/blockchain/proof/0.10*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -11,7 +11,7 @@ Method | HTTP request | Description
 
 <a name="registerusingcontent"></a>
 # **RegisterUsingContent**
-> RegisterContentResponse RegisterUsingContent (string configName, ContentRequest existence)
+> RegisterContentResponse RegisterUsingContent (string configName, ContentRequest existence, string requestId = null, string base64Secret = null, string suppliedSignature = null, string keyId = null)
 
 Register content
 
@@ -37,11 +37,15 @@ namespace Example
             var apiInstance = new RegistrationApi();
             var configName = configName_example;  // string | The configuration name this operation
             var existence = new ContentRequest(); // ContentRequest | Register content using the current settings
+            var requestId = requestId_example;  // string | Optional request id (optional) 
+            var base64Secret = base64Secret_example;  // string | An alternate secret key in base64 format that overrides the value in your configuration. (optional) 
+            var suppliedSignature = suppliedSignature_example;  // string | An alternate supplied Signature in base64 format that overrides the signature generation. (optional) 
+            var keyId = keyId_example;  // string | An alternate crypto keys API id that will be used for signature generation. (optional) 
 
             try
             {
                 // Register content
-                RegisterContentResponse result = apiInstance.RegisterUsingContent(configName, existence);
+                RegisterContentResponse result = apiInstance.RegisterUsingContent(configName, existence, requestId, base64Secret, suppliedSignature, keyId);
                 Debug.WriteLine(result);
             }
             catch (Exception e)
@@ -59,6 +63,10 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **configName** | **string**| The configuration name this operation | 
  **existence** | [**ContentRequest**](ContentRequest.md)| Register content using the current settings | 
+ **requestId** | **string**| Optional request id | [optional] 
+ **base64Secret** | **string**| An alternate secret key in base64 format that overrides the value in your configuration. | [optional] 
+ **suppliedSignature** | **string**| An alternate supplied Signature in base64 format that overrides the signature generation. | [optional] 
+ **keyId** | **string**| An alternate crypto keys API id that will be used for signature generation. | [optional] 
 
 ### Return type
 
@@ -77,7 +85,7 @@ Name | Type | Description  | Notes
 
 <a name="registerusinglocation"></a>
 # **RegisterUsingLocation**
-> RegisterContentResponse RegisterUsingLocation (string configName, StreamLocation streamLocation, string requestId = null, string secret = null)
+> RegisterContentResponse RegisterUsingLocation (string configName, StreamLocation streamLocation, string requestId = null, string base64Secret = null, string suppliedSignature = null, string keyId = null)
 
 Register hash using the Storage API
 
@@ -104,12 +112,14 @@ namespace Example
             var configName = configName_example;  // string | The configuration name this operation
             var streamLocation = new StreamLocation(); // StreamLocation | The stream locations on storage
             var requestId = requestId_example;  // string | Optional request id (optional) 
-            var secret = secret_example;  // string | An alternate secret key in base 64 format that overrides the value in your configuration. (optional) 
+            var base64Secret = base64Secret_example;  // string | An alternate secret key in base64 format that overrides the value in your configuration. (optional) 
+            var suppliedSignature = suppliedSignature_example;  // string | An alternate supplied Signature in base64 format that overrides the signature generation. (optional) 
+            var keyId = keyId_example;  // string | An alternate crypto keys API id that will be used for signature generation. (optional) 
 
             try
             {
                 // Register hash using the Storage API
-                RegisterContentResponse result = apiInstance.RegisterUsingLocation(configName, streamLocation, requestId, secret);
+                RegisterContentResponse result = apiInstance.RegisterUsingLocation(configName, streamLocation, requestId, base64Secret, suppliedSignature, keyId);
                 Debug.WriteLine(result);
             }
             catch (Exception e)
@@ -128,7 +138,9 @@ Name | Type | Description  | Notes
  **configName** | **string**| The configuration name this operation | 
  **streamLocation** | [**StreamLocation**](StreamLocation.md)| The stream locations on storage | 
  **requestId** | **string**| Optional request id | [optional] 
- **secret** | **string**| An alternate secret key in base 64 format that overrides the value in your configuration. | [optional] 
+ **base64Secret** | **string**| An alternate secret key in base64 format that overrides the value in your configuration. | [optional] 
+ **suppliedSignature** | **string**| An alternate supplied Signature in base64 format that overrides the signature generation. | [optional] 
+ **keyId** | **string**| An alternate crypto keys API id that will be used for signature generation. | [optional] 
 
 ### Return type
 
@@ -147,7 +159,7 @@ Name | Type | Description  | Notes
 
 <a name="registerusingstream"></a>
 # **RegisterUsingStream**
-> RegisterContentResponse RegisterUsingStream (string configName, System.IO.Stream stream, string fileName = null, string secret = null)
+> RegisterContentResponse RegisterUsingStream (string configName, System.IO.Stream stream, string fileName = null, string requestId = null, string base64Secret = null, string suppliedSignature = null, string keyId = null)
 
 Register bytestream/file hash
 
@@ -174,12 +186,15 @@ namespace Example
             var configName = configName_example;  // string | The configuration name this operation
             var stream = new System.IO.Stream(); // System.IO.Stream | The binary data (not hashed). Hashing will be done on the server side. The binary data will not be stored
             var fileName = fileName_example;  // string | Optional input file name. Needed when using bytestreams instead of filestreams (optional) 
-            var secret = secret_example;  // string | An alternate secret key in base64 format that overrides the value in your configuration. (optional) 
+            var requestId = requestId_example;  // string | Optional request id (optional) 
+            var base64Secret = base64Secret_example;  // string | An alternate secret key in base64 format that overrides the value in your configuration. (optional) 
+            var suppliedSignature = suppliedSignature_example;  // string | An alternate supplied Signature in base64 format that overrides the signature generation. (optional) 
+            var keyId = keyId_example;  // string | An alternate crypto keys API id that will be used for signature generation. (optional) 
 
             try
             {
                 // Register bytestream/file hash
-                RegisterContentResponse result = apiInstance.RegisterUsingStream(configName, stream, fileName, secret);
+                RegisterContentResponse result = apiInstance.RegisterUsingStream(configName, stream, fileName, requestId, base64Secret, suppliedSignature, keyId);
                 Debug.WriteLine(result);
             }
             catch (Exception e)
@@ -198,7 +213,10 @@ Name | Type | Description  | Notes
  **configName** | **string**| The configuration name this operation | 
  **stream** | **System.IO.Stream**| The binary data (not hashed). Hashing will be done on the server side. The binary data will not be stored | 
  **fileName** | **string**| Optional input file name. Needed when using bytestreams instead of filestreams | [optional] 
- **secret** | **string**| An alternate secret key in base64 format that overrides the value in your configuration. | [optional] 
+ **requestId** | **string**| Optional request id | [optional] 
+ **base64Secret** | **string**| An alternate secret key in base64 format that overrides the value in your configuration. | [optional] 
+ **suppliedSignature** | **string**| An alternate supplied Signature in base64 format that overrides the signature generation. | [optional] 
+ **keyId** | **string**| An alternate crypto keys API id that will be used for signature generation. | [optional] 
 
 ### Return type
 

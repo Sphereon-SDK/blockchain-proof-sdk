@@ -1,6 +1,6 @@
 # Sphereon.SDK.Blockchain.Proof.Api.ConfigurationApi
 
-All URIs are relative to *https://gw.api.cloud.sphereon.com/blockchain/proof/0.9*
+All URIs are relative to *https://gw.api.cloud.sphereon.com/blockchain/proof/0.10*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -98,7 +98,7 @@ namespace Example
             Configuration.Default.AccessToken = "YOUR_ACCESS_TOKEN";
 
             var apiInstance = new ConfigurationApi();
-            var configName = configName_example;  // string | The configuration name this operation
+            var configName = configName_example;  // string | The configuration name for this operation
 
             try
             {
@@ -119,7 +119,7 @@ namespace Example
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **configName** | **string**| The configuration name this operation | 
+ **configName** | **string**| The configuration name for this operation | 
 
 ### Return type
 
