@@ -112,7 +112,7 @@ public class RegistrationApiTest extends AbstractApiTest {
         contentRequest.setRequestId("anything");
         contentRequest.setHashProvider(ContentRequest.HashProviderEnum.SERVER);
         contentRequest.setContent(registeredContent);
-        VerifyContentResponse response = verificationApi.verifyUsingContent(unitTestConfigName, contentRequest);
+        VerifyContentResponse response = verificationApi.verifyUsingContent(unitTestConfigName, contentRequest, null);
         Assert.assertNotNull(response);
         Assert.assertTrue(response.getRegistrationState() == VerifyContentResponse.RegistrationStateEnum.REGISTERED
                               || response.getRegistrationState() == VerifyContentResponse.RegistrationStateEnum.PENDING);
