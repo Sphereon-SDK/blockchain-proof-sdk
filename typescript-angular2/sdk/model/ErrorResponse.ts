@@ -10,12 +10,10 @@
  * Do not edit the class manually.
  */
 
-import * as models from './models';
 
 /**
  * The error response
  */
 export interface ErrorResponse {
-    errors?: Array<models.ModelError>;
-
+    errors?: Array<Error>;
 }

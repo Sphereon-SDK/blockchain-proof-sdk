@@ -10,7 +10,6 @@
  * Do not edit the class manually.
  */
 
-import * as models from './models';
 
 /**
  * Commited Entry
@@ -20,48 +19,43 @@ export interface CommittedEntry {
      * The registration time of the entry. Only when registration has occurred ofcourse
      */
     registrationTime?: Date;
-
     /**
      * Chain Id
      */
     chainId?: string;
-
     /**
      * The context
      */
     context?: string;
-
     /**
      * The registration state of the entry
      */
     registrationState: CommittedEntry.RegistrationStateEnum;
-
     /**
      * This is the signature state.
      */
     signatureState?: CommittedEntry.SignatureStateEnum;
-
     /**
      * This is a message describing the signature state.
      */
     signatureStateMessage?: string;
-
     /**
      * The entry Id for the registration
      */
     entryId: string;
-
 }
 export namespace CommittedEntry {
-    export enum RegistrationStateEnum {
-        NOTREGISTERED = <any> 'NOT_REGISTERED',
-        PENDING = <any> 'PENDING',
-        REGISTERED = <any> 'REGISTERED'
+    export type RegistrationStateEnum = 'NOT_REGISTERED' | 'PENDING' | 'REGISTERED';
+    export const RegistrationStateEnum = {
+        NOTREGISTERED: 'NOT_REGISTERED' as RegistrationStateEnum,
+        PENDING: 'PENDING' as RegistrationStateEnum,
+        REGISTERED: 'REGISTERED' as RegistrationStateEnum
     }
-    export enum SignatureStateEnum {
-        NotFound = <any> 'not found',
-        Unsigned = <any> 'unsigned',
-        Invalid = <any> 'invalid',
-        Verified = <any> 'verified'
+    export type SignatureStateEnum = 'not found' | 'unsigned' | 'invalid' | 'verified';
+    export const SignatureStateEnum = {
+        NotFound: 'not found' as SignatureStateEnum,
+        Unsigned: 'unsigned' as SignatureStateEnum,
+        Invalid: 'invalid' as SignatureStateEnum,
+        Verified: 'verified' as SignatureStateEnum
     }
 }

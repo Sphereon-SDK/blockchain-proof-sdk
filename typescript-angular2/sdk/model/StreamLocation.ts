@@ -10,20 +10,14 @@
  * Do not edit the class manually.
  */
 
-import * as models from './models';
 
 /**
  * Location record of data stream
  */
 export interface StreamLocation {
     folderPath?: string;
-
     filename?: string;
-
     id?: string;
-
     containerId?: string;
-
     originalFilename?: string;
-
 }

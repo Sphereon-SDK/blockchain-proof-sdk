@@ -9,62 +9,55 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+import { CommittedEntry } from './committedEntry';
 
-import * as models from './models';
 
 /**
  * Committed Content response
  */
 export interface RegisterContentResponse {
     contextName: string;
-
     /**
      * This is the single proof chain where all hashes are stored (if configured)
      */
-    singleProofChain?: models.CommittedEntry;
-
+    singleProofChain?: CommittedEntry;
     /**
      * A set of content registration targets
      */
     contentRegistrationChainTypes?: Array<RegisterContentResponse.ContentRegistrationChainTypesEnum>;
-
     requestId?: string;
-
     /**
      * The signature type from the request or the default from the settings
      */
     signatureType: RegisterContentResponse.SignatureTypeEnum;
-
     /**
      * This is the proof chain specific for the current hash (if configured)
      */
-    perHashProofChain?: models.CommittedEntry;
-
+    perHashProofChain?: CommittedEntry;
     /**
      * The calculated signature in base64 form
      */
     base64Signature: string;
-
     /**
      * The hash in base64 format that you supplied or that was calculated. This is the actual hash for the content
      */
     hash: string;
-
     /**
      * The calculated signature in hex form
      */
     hexSignature: string;
-
 }
 export namespace RegisterContentResponse {
-    export enum ContentRegistrationChainTypesEnum {
-        PERHASHPROOFCHAIN = <any> 'PER_HASH_PROOF_CHAIN',
-        SINGLEPROOFCHAIN = <any> 'SINGLE_PROOF_CHAIN'
+    export type ContentRegistrationChainTypesEnum = 'PER_HASH_PROOF_CHAIN' | 'SINGLE_PROOF_CHAIN';
+    export const ContentRegistrationChainTypesEnum = {
+        PERHASHPROOFCHAIN: 'PER_HASH_PROOF_CHAIN' as ContentRegistrationChainTypesEnum,
+        SINGLEPROOFCHAIN: 'SINGLE_PROOF_CHAIN' as ContentRegistrationChainTypesEnum
     }
-    export enum SignatureTypeEnum {
-        KEYID = <any> 'KEY_ID',
-        SUPPLIED = <any> 'SUPPLIED',
-        SECRET = <any> 'SECRET',
-        NONE = <any> 'NONE'
+    export type SignatureTypeEnum = 'KEY_ID' | 'SUPPLIED' | 'SECRET' | 'NONE';
+    export const SignatureTypeEnum = {
+        KEYID: 'KEY_ID' as SignatureTypeEnum,
+        SUPPLIED: 'SUPPLIED' as SignatureTypeEnum,
+        SECRET: 'SECRET' as SignatureTypeEnum,
+        NONE: 'NONE' as SignatureTypeEnum
     }
 }

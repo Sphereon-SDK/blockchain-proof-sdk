@@ -10,25 +10,21 @@
  * Do not edit the class manually.
  */
 
-import * as models from './models';
 
 /**
  * An error
  */
 export interface ModelError {
     code: string;
-
     level: ModelError.LevelEnum;
-
-    cause?: models.ModelError;
-
+    cause?: Error;
     message: string;
-
 }
 export namespace ModelError {
-    export enum LevelEnum {
-        INFO = <any> 'INFO',
-        WARNING = <any> 'WARNING',
-        FATAL = <any> 'FATAL'
+    export type LevelEnum = 'INFO' | 'WARNING' | 'FATAL';
+    export const LevelEnum = {
+        INFO: 'INFO' as LevelEnum,
+        WARNING: 'WARNING' as LevelEnum,
+        FATAL: 'FATAL' as LevelEnum
     }
 }

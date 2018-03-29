@@ -9,31 +9,26 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+import { ChainSettings } from './chainSettings';
+import { CommittedChain } from './committedChain';
 
-import * as models from './models';
 
 /**
  * The stored chainSettings from the chainSettings chain
  */
 export interface Configuration {
-    singleProofChain?: models.CommittedChain;
-
-    chainSettings: models.ChainSettings;
-
+    singleProofChain?: CommittedChain;
+    chainSettings: ChainSettings;
     context: string;
-
     name: string;
-
     id: string;
-
     validFrom: Date;
-
     accessMode: Configuration.AccessModeEnum;
-
 }
 export namespace Configuration {
-    export enum AccessModeEnum {
-        PUBLIC = <any> 'PUBLIC',
-        PRIVATE = <any> 'PRIVATE'
+    export type AccessModeEnum = 'PUBLIC' | 'PRIVATE';
+    export const AccessModeEnum = {
+        PUBLIC: 'PUBLIC' as AccessModeEnum,
+        PRIVATE: 'PRIVATE' as AccessModeEnum
     }
 }

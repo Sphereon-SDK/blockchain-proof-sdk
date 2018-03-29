@@ -10,7 +10,6 @@
  * Do not edit the class manually.
  */
 
-import * as models from './models';
 
 /**
  * Committed Chain
@@ -20,10 +19,8 @@ export interface CommittedChain {
      * Chain Id
      */
     chainId?: string;
-
     /**
      * The context
      */
     context?: string;
-
 }

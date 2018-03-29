@@ -9,8 +9,8 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+import { SignatureSettings } from './signatureSettings';
 
-import * as models from './models';
 
 /**
  * Existence ChainSettings. Normally you only supply them once during chain creation or during a settings update. You can also supply them during a content request, but then it is up to you to also supply the correct setting during verify
@@ -20,38 +20,36 @@ export interface ChainSettings {
      * The proof chain Id linked to the current configuration. This is a shared proof chain for all registrations/hashes. Only when the single proof chain type has been configured.
      */
     singleProofChain?: string;
-
     /**
      * A set of content registration chain types. This can be a single proof chain for all hashes, a more powerful chain per hash, or both
      */
     contentRegistrationChainTypes: Array<ChainSettings.ContentRegistrationChainTypesEnum>;
-
     /**
      * Settings that determine how the signature should be registered/verified
      */
-    signatureSettings: models.SignatureSettings;
-
+    signatureSettings: SignatureSettings;
     /**
      * The settings version (only 1 for now)
      */
     version: ChainSettings.VersionEnum;
-
     /**
      * The hashing method used for the content. We always return and expect the hash in base64 form
      */
     hashAlgorithm?: ChainSettings.HashAlgorithmEnum;
-
 }
 export namespace ChainSettings {
-    export enum ContentRegistrationChainTypesEnum {
-        PERHASHPROOFCHAIN = <any> 'PER_HASH_PROOF_CHAIN',
-        SINGLEPROOFCHAIN = <any> 'SINGLE_PROOF_CHAIN'
+    export type ContentRegistrationChainTypesEnum = 'PER_HASH_PROOF_CHAIN' | 'SINGLE_PROOF_CHAIN';
+    export const ContentRegistrationChainTypesEnum = {
+        PERHASHPROOFCHAIN: 'PER_HASH_PROOF_CHAIN' as ContentRegistrationChainTypesEnum,
+        SINGLEPROOFCHAIN: 'SINGLE_PROOF_CHAIN' as ContentRegistrationChainTypesEnum
     }
-    export enum VersionEnum {
-        NUMBER_1 = <any> 1
+    export type VersionEnum = 1;
+    export const VersionEnum = {
+        NUMBER_1: 1 as VersionEnum
     }
-    export enum HashAlgorithmEnum {
-        _256 = <any> 'SHA_256',
-        _512 = <any> 'SHA_512'
+    export type HashAlgorithmEnum = 'SHA_256' | 'SHA_512';
+    export const HashAlgorithmEnum = {
+        _256: 'SHA_256' as HashAlgorithmEnum,
+        _512: 'SHA_512' as HashAlgorithmEnum
     }
 }

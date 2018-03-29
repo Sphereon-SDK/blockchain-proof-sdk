@@ -9,13 +9,12 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+import { Configuration } from './configuration';
 
-import * as models from './models';
 
 /**
  * Committed context and settings response
  */
 export interface ConfigurationResponse {
-    configuration: models.Configuration;
-
+    configuration: Configuration;
 }

@@ -9,8 +9,8 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+import { ChainSettings } from './chainSettings';
 
-import * as models from './models';
 
 /**
  * Create a context configuration
@@ -19,27 +19,24 @@ export interface CreateConfigurationRequest {
     /**
      * The initial context settings.
      */
-    initialSettings: models.ChainSettings;
-
+    initialSettings: ChainSettings;
     /**
      * The Easy Blockchain API context. This has to be a context you created or a public context
      */
     context: string;
-
     /**
      * The configuration name.
      */
     name: string;
-
     /**
      * The access mode for this configuration. Public means accessible to other tenants of the API as well. Currently public is only allowed for Sphereon itself
      */
     accessMode: CreateConfigurationRequest.AccessModeEnum;
-
 }
 export namespace CreateConfigurationRequest {
-    export enum AccessModeEnum {
-        PUBLIC = <any> 'PUBLIC',
-        PRIVATE = <any> 'PRIVATE'
+    export type AccessModeEnum = 'PUBLIC' | 'PRIVATE';
+    export const AccessModeEnum = {
+        PUBLIC: 'PUBLIC' as AccessModeEnum,
+        PRIVATE: 'PRIVATE' as AccessModeEnum
     }
 }
