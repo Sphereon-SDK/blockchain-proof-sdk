@@ -9,8 +9,8 @@ Name | Type | Description | Notes
 **requestId** | **String** |  | [optional] 
 **signatureType** | **String** | The signature type from the request or the default from the settings | 
 **perHashProofChain** | [**CommittedEntry**](CommittedEntry.md) | This is the proof chain specific for the current hash (if configured) | [optional] 
-**base64Signature** | **Blob** | The calculated signature in base64 form | 
-**hash** | **Blob** | The hash in base64 format that you supplied or that was calculated. This is the actual hash for the content | 
+**base64Signature** | **String** | The calculated signature in base64 form | 
+**hash** | **String** | The hash in base64 format that you supplied or that was calculated. This is the actual hash for the content | 
 **hexSignature** | **String** | The calculated signature in hex form | 
 
 

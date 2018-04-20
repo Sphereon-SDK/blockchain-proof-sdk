@@ -10,10 +10,10 @@ Name | Type | Description | Notes
 **SignatureType** | **string** | The signature type from the request or the default from the settings | 
 **PerHashProofChain** | [**CommittedEntry**](CommittedEntry.md) | This is the proof chain specific for the current hash, so a chain per hash (if configured) | [optional] 
 **RequestId** | **string** |  | [optional] 
-**Base64Signature** | **byte[]** | The calculated signature in base64 form | 
+**Base64Signature** | **string** | The calculated signature in base64 form | 
 **RegistrationState** | **string** | This is the registration state from the singleProofChain or the perHashProofChain. If one of the chains has a registration this will return REGISTERED | [optional] 
 **SignatureState** | **string** | This is the signature state. | [optional] 
-**Hash** | **byte[]** | The hash in base64 format that you supplied or that was calculated. This is the actual hash for the content | 
+**Hash** | **string** | The hash in base64 format that you supplied or that was calculated. This is the actual hash for the content | 
 **SignatureStateMessage** | **string** | This is a message describing the signature state. | [optional] 
 **HexSignature** | **string** | The calculated signature in hex form | 
 

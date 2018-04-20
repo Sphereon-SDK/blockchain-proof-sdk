@@ -20,6 +20,10 @@ export interface SignatureSettings {
      */
     base64Secret?: string;
     /**
+     * Crypto keys config name when KEY_NAME_ONLY is supplied for key qualification
+     */
+    keyConfig?: string;
+    /**
      * Only use this if you calculate your own signature. Otherwise always leave this blank! We will use the signature as is for registration/verification
      */
     suppliedSignature?: string;
@@ -31,6 +35,10 @@ export interface SignatureSettings {
      * Use a symmetric or asymmetric key from the crypto keys API to generate the signature.
      */
     keyId?: string;
+    /**
+     * This determines whether yoy use fully qualified keyIds of the crypto-keys API in form (config/keys/keyname/version) or that you only use the keyname and provide the configuration here. The later means we will use the latest version by default
+     */
+    keyQualification?: SignatureSettings.KeyQualificationEnum;
 }
 export namespace SignatureSettings {
     export type SignatureTypeEnum = 'KEY_ID' | 'SUPPLIED' | 'SECRET' | 'NONE';
@@ -39,5 +47,10 @@ export namespace SignatureSettings {
         SUPPLIED: 'SUPPLIED' as SignatureTypeEnum,
         SECRET: 'SECRET' as SignatureTypeEnum,
         NONE: 'NONE' as SignatureTypeEnum
+    }
+    export type KeyQualificationEnum = 'KEY_NAME_ONLY' | 'FULLY_QUALIFIED_KEY_ID';
+    export const KeyQualificationEnum = {
+        KEYNAMEONLY: 'KEY_NAME_ONLY' as KeyQualificationEnum,
+        FULLYQUALIFIEDKEYID: 'FULLY_QUALIFIED_KEY_ID' as KeyQualificationEnum
     }
 }

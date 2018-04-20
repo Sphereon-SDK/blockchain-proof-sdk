@@ -636,12 +636,14 @@
       "required": ["signatureType"],
       "properties": {
         "base64Secret": {
-          "format": "byte",
           "description": "An alternate base64Secret key that overrides the value in your configuration in base64. Used for generating a signature with a base64Secret",
           "type": "string"
         },
+        "keyConfig": {
+          "description": "Crypto keys config name when KEY_NAME_ONLY is supplied for key qualification",
+          "type": "string"
+        },
         "suppliedSignature": {
-          "format": "byte",
           "description": "Only use this if you calculate your own signature. Otherwise always leave this blank! We will use the signature as is for registration/verification",
           "type": "string"
         },
@@ -658,6 +660,14 @@
         "keyId": {
           "description": "Use a symmetric or asymmetric key from the crypto keys API to generate the signature.",
           "type": "string"
+        },
+        "keyQualification": {
+          "description": "This determines whether yoy use fully qualified keyIds of the crypto-keys API in form (config/keys/keyname/version) or that you only use the keyname and provide the configuration here. The later means we will use the latest version by default",
+          "type": "string",
+          "enum": [
+            "KEY_NAME_ONLY",
+            "FULLY_QUALIFIED_KEY_ID"
+          ]
         }
       }
     },
@@ -720,7 +730,6 @@
         },
         "requestId": {"type": "string"},
         "base64Signature": {
-          "format": "byte",
           "description": "The calculated signature in base64 form",
           "readOnly": true,
           "type": "string"
@@ -746,7 +755,6 @@
           ]
         },
         "hash": {
-          "format": "byte",
           "description": "The hash in base64 format that you supplied or that was calculated. This is the actual hash for the content",
           "readOnly": true,
           "type": "string"
@@ -884,13 +892,11 @@
           "$ref": "#/definitions/CommittedEntry"
         },
         "base64Signature": {
-          "format": "byte",
           "description": "The calculated signature in base64 form",
           "readOnly": true,
           "type": "string"
         },
         "hash": {
-          "format": "byte",
           "description": "The hash in base64 format that you supplied or that was calculated. This is the actual hash for the content",
           "readOnly": true,
           "type": "string"

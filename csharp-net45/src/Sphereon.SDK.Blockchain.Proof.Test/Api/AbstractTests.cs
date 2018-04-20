@@ -16,22 +16,19 @@ using Sphereon.SDK.Blockchain.Proof.Api;
 using Sphereon.SDK.Blockchain.Proof.Client;
 using Sphereon.SDK.Blockchain.Proof.Model;
 
-namespace Sphereon.SDK.Blockchain.Proof.Test.Api
-{
-    public abstract class AbstractTests
-    {
+namespace Sphereon.SDK.Blockchain.Proof.Test.Api {
+    public abstract class AbstractTests {
         protected const string TestConfigBasename = "sphereoncstest";
         protected const string TestContextMultichain = "multichain";
 
         protected static string FixedAccessToken =
-            Environment.GetEnvironmentVariable("tests.dotnet.bcproof.accesstoken");
+            Environment.GetEnvironmentVariable("sphereon.test.accesstoken");
 
-        private static readonly byte[] HashingSecret = Encoding.UTF8.GetBytes("SphereonTestSecret");
+        private static readonly string HashingSecret = Convert.ToBase64String(Encoding.UTF8.GetBytes("SphereonTestSecret"));
 
         protected static string UnitTestConfigName;
         protected static byte[] RegisteredContent;
         protected static byte[] RegisteredContentForStream;
-        protected static string SettingsChainId;
         protected static string ProofChainId;
         protected static ConfigurationApi _configurationApi;
 
@@ -39,48 +36,46 @@ namespace Sphereon.SDK.Blockchain.Proof.Test.Api
             UnitTestConfigName = TestConfigBasename + DateTime.Now.Ticks / 1000;
         }
 
-        protected StoredSettings CreateProofAndSettingsChain() {
-            var settings = new ChainSettings(Version: ChainSettings.VersionEnum.NUMBER_1, Secret: HashingSecret,
-                HashAlgorithm: ChainSettings.HashAlgorithmEnum._256, ContentRegistrationChainTypes: new List<ChainSettings.ContentRegistrationChainTypesEnum>
-                {
+        protected Model.Configuration CreateConfiguration() {
+            var settings = new ChainSettings(Version: ChainSettings.VersionEnum.NUMBER_1,
+                HashAlgorithm: ChainSettings.HashAlgorithmEnum._256,
+                SignatureSettings: new SignatureSettings(SignatureType: SignatureSettings.SignatureTypeEnum.SUPPLIED, Base64Secret: HashingSecret),
+                ContentRegistrationChainTypes: new List<ChainSettings.ContentRegistrationChainTypesEnum> {
                     ChainSettings.ContentRegistrationChainTypesEnum.PERHASHPROOFCHAIN,
                     ChainSettings.ContentRegistrationChainTypesEnum.SINGLEPROOFCHAIN
-                });
-           
+                }                
+            );
+
 
             var createConfiguration = new CreateConfigurationRequest(Name: UnitTestConfigName,
                 InitialSettings: settings,
                 Context: TestContextMultichain, AccessMode: CreateConfigurationRequest.AccessModeEnum.PRIVATE);
 
             var configurationResponse = _configurationApi.CreateConfiguration(createConfiguration);
-            var storedSettings = configurationResponse.StoredSettings;
-            Assert.NotNull(storedSettings);
-            Assert.NotNull(storedSettings.Context);
-            Assert.NotNull(storedSettings.ChainSettings);
-            Assert.NotNull(storedSettings.SingleProofChain);
-            Assert.NotNull(storedSettings.SettingsChain);
-            Assert.NotNull(storedSettings.ChainConfiguration);
-            Assert.NotNull(storedSettings.ChainSettings.SingleProofChain);
-            Assert.NotNull(storedSettings.ChainSettings.HashAlgorithm);
-            SettingsChainId = storedSettings.SettingsChain.ChainId;
-            ProofChainId = storedSettings.SingleProofChain.ChainId;
-            return storedSettings;
+            var configuration = configurationResponse.Configuration;
+            Assert.NotNull(configuration);
+            Assert.NotNull(configuration.Context);
+            Assert.NotNull(configuration.ChainSettings);
+            Assert.NotNull(configuration.SingleProofChain);
+            Assert.NotNull(configuration.Id);
+            Assert.NotNull(configuration.Name);
+            Assert.NotNull(configuration.ChainSettings.SingleProofChain);
+            Assert.NotNull(configuration.ChainSettings.HashAlgorithm);
+            ProofChainId = configuration.SingleProofChain.ChainId;
+            return configuration;
         }
 
         [SetUp]
-        public void CreateConfigurationApi()
-        {
+        public void CreateConfigurationApi() {
             _configurationApi = new ConfigurationApi();
             ConfigureApi(_configurationApi.Configuration);
         }
 
-        protected void ConfigureApi(Configuration configuration)
-        {
+        protected void ConfigureApi(Client.Configuration configuration) {
             configuration.AccessToken = FixedAccessToken;
             configuration.Timeout = 40000;
             var gatewayUrl = Environment.GetEnvironmentVariable("tests.dotnet.bcproof.gateway-url");
-            if (!string.IsNullOrEmpty(gatewayUrl))
-            {
+            if (!string.IsNullOrEmpty(gatewayUrl)) {
                 configuration.ApiClient.RestClient.BaseUrl = new Uri(gatewayUrl);
             }
         }
