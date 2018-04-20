@@ -28,7 +28,7 @@ namespace Sphereon.SDK.Blockchain.Proof.Client
         /// Version of the package.
         /// </summary>
         /// <value>Version of the package.</value>
-        public const string Version = "0.9.2";
+        public const string Version = "0.10.0";
 
         /// <summary>
         /// Identifier for ISO 8601 DateTime Format
@@ -113,7 +113,7 @@ namespace Sphereon.SDK.Blockchain.Proof.Client
         /// </summary>
         public Configuration()
         {
-            UserAgent = "Swagger-Codegen/0.9.2/csharp";
+            UserAgent = "Swagger-Codegen/0.10.0/csharp";
             BasePath = "https://gw.api.cloud.sphereon.com/blockchain/proof/0.10";
             DefaultHeader = new Dictionary<string, string>();
             ApiKey = new Dictionary<string, string>();
@@ -186,7 +186,7 @@ namespace Sphereon.SDK.Blockchain.Proof.Client
             string tempFolderPath = null,
             string dateTimeFormat = null,
             int timeout = 100000,
-            string userAgent = "Swagger-Codegen/0.9.2/csharp"
+            string userAgent = "Swagger-Codegen/0.10.0/csharp"
             // ReSharper restore UnusedParameter.Local
             )
         {
@@ -421,7 +421,7 @@ namespace Sphereon.SDK.Blockchain.Proof.Client
             report += "    OS: " + System.Environment.OSVersion + "\n";
             report += "    .NET Framework Version: " + System.Environment.Version  + "\n";
             report += "    Version of the API: 0.10\n";
-            report += "    SDK Package Version: 0.9.2\n";
+            report += "    SDK Package Version: 0.10.0\n";
 
             return report;
         }
