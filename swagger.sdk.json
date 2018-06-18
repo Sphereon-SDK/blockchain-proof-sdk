@@ -748,10 +748,10 @@
           "description": "This is the signature state.",
           "type": "string",
           "enum": [
-            "not found",
-            "unsigned",
-            "invalid",
-            "verified"
+            "NOT_FOUND",
+            "UNSIGNED",
+            "INVALID",
+            "VERIFIED"
           ]
         },
         "hash": {
@@ -831,10 +831,10 @@
           "description": "This is the signature state.",
           "type": "string",
           "enum": [
-            "not found",
-            "unsigned",
-            "invalid",
-            "verified"
+            "NOT_FOUND",
+            "UNSIGNED",
+            "INVALID",
+            "VERIFIED"
           ]
         },
         "signatureStateMessage": {

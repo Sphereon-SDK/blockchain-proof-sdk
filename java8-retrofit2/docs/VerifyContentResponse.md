@@ -50,10 +50,10 @@ REGISTERED | &quot;REGISTERED&quot;
 ## Enum: SignatureStateEnum
 Name | Value
 ---- | -----
-NOT_FOUND | &quot;not found&quot;
-UNSIGNED | &quot;unsigned&quot;
-INVALID | &quot;invalid&quot;
-VERIFIED | &quot;verified&quot;
+NOT_FOUND | &quot;NOT_FOUND&quot;
+UNSIGNED | &quot;UNSIGNED&quot;
+INVALID | &quot;INVALID&quot;
+VERIFIED | &quot;VERIFIED&quot;
 
 
 
