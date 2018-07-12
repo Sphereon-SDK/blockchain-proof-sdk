@@ -13,6 +13,7 @@
 		<sdk-package-javascript>SphereonSDKBlockchainProof</sdk-package-javascript>
 		<sdk-package-csharp>Sphereon.SDK.Blockchain.Proof</sdk-package-csharp>
 		<sdk-package-version>0.9.2</sdk-package-version>
+		<sdk-package-version_java>v0_9</sdk-package-version_java>
 
 		<swagger-coden-maven-plugin.version>2.2.3</swagger-coden-maven-plugin.version>
 		<swagger-coden-verbose>false</swagger-coden-verbose>
@@ -106,6 +107,46 @@
 									<apiPackage>${sdk-package}.api</apiPackage>
 									<modelPackage>${sdk-package}.model</modelPackage>
 									<invokerPackage>${sdk-package}.handler</invokerPackage>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+
+		<profile>
+			<id>java8-okhttp-gson_versioned</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>io.swagger</groupId>
+						<artifactId>swagger-codegen-maven-plugin</artifactId>
+						<version>${swagger-coden-maven-plugin.version}</version>
+						<executions>
+							<execution>
+								<goals>
+									<goal>generate</goal>
+								</goals>
+								<configuration>
+									<inputSpec>swagger.sdk.json</inputSpec>
+									<language>java</language>
+									<templateDirectory>
+										${basedir}/src/main/mustacheTemplates/okhttp-gson
+									</templateDirectory>
+									<configOptions>
+										<dateLibrary>java8</dateLibrary>
+									</configOptions>
+									<library>okhttp-gson</library>
+									<verbose>${swagger-coden-verbose}</verbose>
+									<output>${project.basedir}/java8-okhttp-gson-versioned</output>
+									<groupId>com.sphereon.sdk</groupId>
+									<artifactId>blockchain-proof-sdk-java8-okhttp-gson-${sdk-package-version_java}</artifactId>
+									<artifactVersion>${project.version}</artifactVersion>
+									<addCompileSourceRoot>true</addCompileSourceRoot>
+									<apiPackage>${sdk-package}.${sdk-package-version_java}.api</apiPackage>
+									<modelPackage>${sdk-package}.${sdk-package-version_java}.model</modelPackage>
+									<invokerPackage>${sdk-package}.${sdk-package-version_java}.handler</invokerPackage>
 								</configuration>
 							</execution>
 						</executions>
