@@ -7,6 +7,8 @@ csharp-net45/src/Sphereon.SDK.Blockchain.Proof
 javascript/src
 html-docs/index.html
 node_modules/
+typescript-angular2/
+docs/
 
 # Visual Studio
 .vs/
