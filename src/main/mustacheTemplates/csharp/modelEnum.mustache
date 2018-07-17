@@ -11,7 +11,7 @@
         /// <summary>
         /// Enum {{name}} for {{{value}}}
         /// </summary>
-        [EnumMember(Value = {{#isInteger}}"{{/isInteger}}{{#isDouble}}"{{/isDouble}}{{{value}}}{{#isInteger}}"{{/isInteger}}{{#isDouble}}"{{/isDouble}})]
+        [EnumMember(Value = {{#isString}}"{{/isString}}{{#isInteger}}"{{/isInteger}}{{#isDouble}}"{{/isDouble}}{{{value}}}{{#isString}}"{{/isString}}{{#isInteger}}"{{/isInteger}}{{#isDouble}}"{{/isDouble}})]
         {{name}}{{#isInteger}} = {{{value}}}{{/isInteger}}{{^-last}},
         {{/-last}}{{/enumVars}}{{/allowableValues}}
     }
