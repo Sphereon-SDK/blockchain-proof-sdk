@@ -33,7 +33,7 @@
 		</snapshotRepository>
 	</distributionManagement>
 	<scm>
-		<connection>scm:git:git@github.com:Sphereon-SDK/blockhcain-proof-sdk.git</connection>
+		<connection>scm:git:git@github.com:Sphereon-SDK/blockchain-proof-sdk.git</connection>
 		<developerConnection>scm:git:git@github.com:Sphereon-SDK/blockchain-proof-sdk.git</developerConnection>
 		<url>https://github.com/Sphereon-SDK/blockchain-proof</url>
 	</scm>
