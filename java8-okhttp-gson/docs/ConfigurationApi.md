@@ -1,6 +1,6 @@
 # ConfigurationApi
 
-All URIs are relative to *https://gw.api.cloud.sphereon.com/blockchain/proof/0.9*
+All URIs are relative to *https://gw.api.cloud.sphereon.com/blockchain/proof/0.10*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -85,7 +85,7 @@ OAuth oauth2schema = (OAuth) defaultClient.getAuthentication("oauth2schema");
 oauth2schema.setAccessToken("YOUR ACCESS TOKEN");
 
 ConfigurationApi apiInstance = new ConfigurationApi();
-String configName = "configName_example"; // String | The configuration name this operation
+String configName = "configName_example"; // String | The configuration name for this operation
 try {
     ConfigurationResponse result = apiInstance.getConfiguration(configName);
     System.out.println(result);
@@ -99,7 +99,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **configName** | **String**| The configuration name this operation |
+ **configName** | **String**| The configuration name for this operation |
 
 ### Return type
 

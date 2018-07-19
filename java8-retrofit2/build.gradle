@@ -2,7 +2,7 @@ apply plugin: 'idea'
 apply plugin: 'eclipse'
 
 group = 'com.sphereon.sdk'
-version = '0.9.0'
+version = '0.10.0'
 
 buildscript {
     repositories {
@@ -98,6 +98,7 @@ ext {
     retrofit_version = "2.3.0"
     swagger_annotations_version = "1.5.15"
     junit_version = "4.12"
+    json_fire_version = "1.8.0"
 }
 
 dependencies {
@@ -106,6 +107,7 @@ dependencies {
     compile "com.squareup.retrofit2:converter-gson:$retrofit_version"
     compile "io.swagger:swagger-annotations:$swagger_annotations_version"
     compile "org.apache.oltu.oauth2:org.apache.oltu.oauth2.client:$oltu_version"
+    compile "io.gsonfire:gson-fire:$json_fire_version"
 
     testCompile "junit:junit:$junit_version"
 }

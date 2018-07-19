@@ -3,6 +3,6 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**storedSettings** | [**StoredSettings**](StoredSettings.md) |  | 
+**configuration** | [**Configuration**](Configuration.md) |  | 
 
 

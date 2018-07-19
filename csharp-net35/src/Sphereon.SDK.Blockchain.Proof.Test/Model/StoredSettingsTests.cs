@@ -1,7 +1,7 @@
 /* 
  * Blockchain Proof
  *
- * <b>With the Blockchain Proof API it is easy to prove or disprove existence of (binary) data at a certain point in time. Behind the scenes it stores entries using the Factom (bitcoin), Multichain or Ethereum blockchain by means of our generic blockchain API.</b>    The flow is generally as follows:  1. Make sure a configuration is present  2. Register content by uploading a file, some content, or providing a Stream Location from the Storage API. When you upload content you have to tell the API whether the data has already been hashed or not. If not, or when uploading a file or stream location, the API will take care of the hashing  3. Verify content by uploading a file, some content, or providing a Stream Location from the Storage API. When you upload content you have to tell the API whether the data has already been hashed or not. If not, or when uploading a file or stream location, the API will take care of the hashing. You will get back whether the content has been registered previously or not      <b>Interactive testing: </b>A web based test console is available in the <a href=\"https://store.sphereon.com\">Sphereon API Store</a>
+ * With the Blockchain Proof API it is easy to prove or disprove existence of data at a certain point in time. Behind the scenes it stores entries using the Factom (bitcoin), Multichain or Ethereum blockchain by means of our generic blockchain API.    The flow is generally as follows:  1. Make sure a configuration is present  2. Register content by uploading a file, some content, or providing a Stream Location from the Storage API. When you upload content you have to tell the API whether the data has already been hashed or not. If not, or when uploading a file or stream location, the API will take care of the hashing  3. Verify content by uploading a file, some content, or providing a Stream Location from the Storage API. When you upload content you have to tell the API whether the data has already been hashed or not. If not, or when uploading a file or stream location, the API will take care of the hashing. You will get back whether the content has been registered previously or not    Full API Documentation: https://docs.sphereon.com/api/blockchain-proof/0.9/html  Interactive testing: A web based test console is available in the Sphereon API Store at https://store.sphereon.com
  *
  * OpenAPI spec version: 0.9
  * Contact: dev@sphereon.com
@@ -65,6 +65,14 @@ namespace Sphereon.SDK.Blockchain.Proof.Test
         }
 
         /// <summary>
+        /// Test the property 'SingleProofChain'
+        /// </summary>
+        [Test]
+        public void SingleProofChainTest()
+        {
+            // TODO unit test for the property 'SingleProofChain'
+        }
+        /// <summary>
         /// Test the property 'SettingsChain'
         /// </summary>
         [Test]
@@ -97,6 +105,14 @@ namespace Sphereon.SDK.Blockchain.Proof.Test
             // TODO unit test for the property 'ChainConfiguration'
         }
         /// <summary>
+        /// Test the property 'Id'
+        /// </summary>
+        [Test]
+        public void IdTest()
+        {
+            // TODO unit test for the property 'Id'
+        }
+        /// <summary>
         /// Test the property 'ValidFrom'
         /// </summary>
         [Test]
@@ -111,14 +127,6 @@ namespace Sphereon.SDK.Blockchain.Proof.Test
         public void MetaDataChainTest()
         {
             // TODO unit test for the property 'MetaDataChain'
-        }
-        /// <summary>
-        /// Test the property 'ProofChain'
-        /// </summary>
-        [Test]
-        public void ProofChainTest()
-        {
-            // TODO unit test for the property 'ProofChain'
         }
 
     }

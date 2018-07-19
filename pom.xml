@@ -4,7 +4,7 @@
 	<groupId>com.sphereon.sdk</groupId>
 	<artifactId>blockchain-proof-sdk-generator</artifactId>
 	<packaging>jar</packaging>
-	<version>0.9.0</version>
+	<version>0.10.0</version>
 	<name>Blockchain Proof API SDK Generator</name>
 
 	<properties>
@@ -12,14 +12,31 @@
 		<sdk-package>com.sphereon.sdk.blockchain.proof</sdk-package>
 		<sdk-package-javascript>SphereonSDKBlockchainProof</sdk-package-javascript>
 		<sdk-package-csharp>Sphereon.SDK.Blockchain.Proof</sdk-package-csharp>
-		<sdk-package-version>0.9.0</sdk-package-version>
+		<sdk-package-version>0.10.0</sdk-package-version>
+		<sdk-package-version_java>v0_10_0</sdk-package-version_java>
 
-		<swagger-coden-maven-plugin.version>2.2.3</swagger-coden-maven-plugin.version>
+		<swagger-coden-maven-plugin.version>2.3.1</swagger-coden-maven-plugin.version>
 		<swagger-coden-verbose>false</swagger-coden-verbose>
 		<project.encoding>UTF-8</project.encoding>
 		<maven-release-plugin.version>2.5.3</maven-release-plugin.version>
 		<maven-scm-provider-gitexe.version>1.9.5</maven-scm-provider-gitexe.version>
 	</properties>
+
+	<distributionManagement>
+		<repository>
+			<id>sphereon-sdk-releases</id>
+			<url>http://nexus.qa.sphereon.com/nexus/content/repositories/sphereon-sdk-releases</url>
+		</repository>
+		<snapshotRepository>
+			<id>sphereon-sdk-snapshots</id>
+			<url>http://nexus.qa.sphereon.com/nexus/content/repositories/sphereon-sdk-snapshots</url>
+		</snapshotRepository>
+	</distributionManagement>
+	<scm>
+		<connection>scm:git:git@github.com:Sphereon-SDK/blockhcain-proof-sdk.git</connection>
+		<developerConnection>scm:git:git@github.com:Sphereon-SDK/blockchain-proof-sdk.git</developerConnection>
+		<url>https://github.com/Sphereon-SDK/blockchain-proof</url>
+	</scm>
 
 	<profiles>
 		<profile>
@@ -90,6 +107,46 @@
 									<apiPackage>${sdk-package}.api</apiPackage>
 									<modelPackage>${sdk-package}.model</modelPackage>
 									<invokerPackage>${sdk-package}.handler</invokerPackage>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+
+		<profile>
+			<id>java8-okhttp-gson_versioned</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>io.swagger</groupId>
+						<artifactId>swagger-codegen-maven-plugin</artifactId>
+						<version>${swagger-coden-maven-plugin.version}</version>
+						<executions>
+							<execution>
+								<goals>
+									<goal>generate</goal>
+								</goals>
+								<configuration>
+									<inputSpec>swagger.sdk.json</inputSpec>
+									<language>java</language>
+									<templateDirectory>
+										${basedir}/src/main/mustacheTemplates/okhttp-gson
+									</templateDirectory>
+									<configOptions>
+										<dateLibrary>java8</dateLibrary>
+									</configOptions>
+									<library>okhttp-gson</library>
+									<verbose>${swagger-coden-verbose}</verbose>
+									<output>${project.basedir}/java8-okhttp-gson-versioned</output>
+									<groupId>com.sphereon.sdk</groupId>
+									<artifactId>blockchain-proof-sdk-java8-okhttp-gson-versioned</artifactId>
+									<artifactVersion>${project.version}</artifactVersion>
+									<addCompileSourceRoot>true</addCompileSourceRoot>
+									<apiPackage>${sdk-package}.${sdk-package-version_java}.api</apiPackage>
+									<modelPackage>${sdk-package}.${sdk-package-version_java}.model</modelPackage>
+									<invokerPackage>${sdk-package}.${sdk-package-version_java}.handler</invokerPackage>
 								</configuration>
 							</execution>
 						</executions>
@@ -208,6 +265,43 @@
 				</plugins>
 			</build>
 		</profile>
+		
+		<profile>
+			<id>typescript-angular</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>io.swagger</groupId>
+						<artifactId>swagger-codegen-maven-plugin</artifactId>
+						<version>${swagger-coden-maven-plugin.version}</version>
+						<executions>
+							<execution>
+								<goals>
+									<goal>generate</goal>
+								</goals>
+								<configuration>
+									<inputSpec>swagger.sdk.json</inputSpec>
+									<language>typescript-angular</language>
+									<configOptions>
+										<dateLibrary>java8</dateLibrary>
+										<ngVersion>5.1.1</ngVersion>
+									</configOptions>
+									<verbose>${swagger-coden-verbose}</verbose>
+									<output>${project.basedir}/typescript-angular2/sdk</output>
+									<groupId>com.sphereon.sdk</groupId>
+									<artifactId>blockchain-proof-sdk-angular2</artifactId>
+									<artifactVersion>${project.version}</artifactVersion>
+									<addCompileSourceRoot>true</addCompileSourceRoot>
+									<apiPackage>api</apiPackage>
+									<modelPackage>model</modelPackage>
+									<invokerPackage>${sdk-package-javascript}</invokerPackage>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
 
 		<profile>
 			<id>csharp-net45</id>
@@ -272,6 +366,9 @@
 								<configuration>
 									<inputSpec>swagger.sdk.json</inputSpec>
 									<language>csharp</language>
+									<templateDirectory>
+										${basedir}/src/main/mustacheTemplates/csharp
+									</templateDirectory>
 									<configOptions>
 										<packageCompany>${company-name}</packageCompany>
 										<apiPackage>${sdk-package-csharp}.Api</apiPackage>
