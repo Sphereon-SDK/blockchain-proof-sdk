@@ -636,7 +636,7 @@
       "required": ["signatureType"],
       "properties": {
         "base64Secret": {
-          "description": "An alternate base64Secret key that overrides the value in your configuration in base64. Used for generating a signature with a base64Secret",
+          "description": "An alternate Secret key that overrides the value in your configuration in base64. Used for generating a signature with a base64Secret",
           "type": "string"
         },
         "keyConfig": {
@@ -748,10 +748,10 @@
           "description": "This is the signature state.",
           "type": "string",
           "enum": [
-            "not found",
-            "unsigned",
-            "invalid",
-            "verified"
+            "NOT_FOUND",
+            "UNSIGNED",
+            "INVALID",
+            "VERIFIED"
           ]
         },
         "hash": {
@@ -785,6 +785,10 @@
             "SERVER",
             "CLIENT"
           ]
+        },
+        "signatureSettings": {
+          "description": "Optional signature settings like signature type",
+          "$ref": "#/definitions/SignatureSettings"
         },
         "content": {
           "format": "byte",
@@ -831,10 +835,10 @@
           "description": "This is the signature state.",
           "type": "string",
           "enum": [
-            "not found",
-            "unsigned",
-            "invalid",
-            "verified"
+            "NOT_FOUND",
+            "UNSIGNED",
+            "INVALID",
+            "VERIFIED"
           ]
         },
         "signatureStateMessage": {

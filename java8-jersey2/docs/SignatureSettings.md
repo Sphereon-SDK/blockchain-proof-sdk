@@ -4,7 +4,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**base64Secret** | **String** | An alternate base64Secret key that overrides the value in your configuration in base64. Used for generating a signature with a base64Secret |  [optional]
+**base64Secret** | **String** | An alternate Secret key that overrides the value in your configuration in base64. Used for generating a signature with a base64Secret |  [optional]
 **keyConfig** | **String** | Crypto keys config name when KEY_NAME_ONLY is supplied for key qualification |  [optional]
 **suppliedSignature** | **String** | Only use this if you calculate your own signature. Otherwise always leave this blank! We will use the signature as is for registration/verification |  [optional]
 **signatureType** | [**SignatureTypeEnum**](#SignatureTypeEnum) | How to calculate the signature during registration and verification. Defaults to the configured value if omitted | 

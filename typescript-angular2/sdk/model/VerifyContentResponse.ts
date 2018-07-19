@@ -82,11 +82,11 @@ export namespace VerifyContentResponse {
         PENDING: 'PENDING' as RegistrationStateEnum,
         REGISTERED: 'REGISTERED' as RegistrationStateEnum
     }
-    export type SignatureStateEnum = 'not found' | 'unsigned' | 'invalid' | 'verified';
+    export type SignatureStateEnum = 'NOT_FOUND' | 'UNSIGNED' | 'INVALID' | 'VERIFIED';
     export const SignatureStateEnum = {
-        NotFound: 'not found' as SignatureStateEnum,
-        Unsigned: 'unsigned' as SignatureStateEnum,
-        Invalid: 'invalid' as SignatureStateEnum,
-        Verified: 'verified' as SignatureStateEnum
+        NOTFOUND: 'NOT_FOUND' as SignatureStateEnum,
+        UNSIGNED: 'UNSIGNED' as SignatureStateEnum,
+        INVALID: 'INVALID' as SignatureStateEnum,
+        VERIFIED: 'VERIFIED' as SignatureStateEnum
     }
 }

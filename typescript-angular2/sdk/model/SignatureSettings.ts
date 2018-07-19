@@ -16,7 +16,7 @@
  */
 export interface SignatureSettings {
     /**
-     * An alternate base64Secret key that overrides the value in your configuration in base64. Used for generating a signature with a base64Secret
+     * An alternate Secret key that overrides the value in your configuration in base64. Used for generating a signature with a base64Secret
      */
     base64Secret?: string;
     /**

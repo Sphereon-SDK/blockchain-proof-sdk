@@ -61,13 +61,13 @@ Name | Type | Description | Notes
 ## Enum: SignatureStateEnum
 
 
-* `not found` (value: `"not found"`)
+* `NOT_FOUND` (value: `"NOT_FOUND"`)
 
-* `unsigned` (value: `"unsigned"`)
+* `UNSIGNED` (value: `"UNSIGNED"`)
 
-* `invalid` (value: `"invalid"`)
+* `INVALID` (value: `"INVALID"`)
 
-* `verified` (value: `"verified"`)
+* `VERIFIED` (value: `"VERIFIED"`)
 
 
 

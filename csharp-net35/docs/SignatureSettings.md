@@ -3,7 +3,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Base64Secret** | **string** | An alternate base64Secret key that overrides the value in your configuration in base64. Used for generating a signature with a base64Secret | [optional] 
+**Base64Secret** | **string** | An alternate Secret key that overrides the value in your configuration in base64. Used for generating a signature with a base64Secret | [optional] 
 **KeyConfig** | **string** | Crypto keys config name when KEY_NAME_ONLY is supplied for key qualification | [optional] 
 **SuppliedSignature** | **string** | Only use this if you calculate your own signature. Otherwise always leave this blank! We will use the signature as is for registration/verification | [optional] 
 **SignatureType** | **string** | How to calculate the signature during registration and verification. Defaults to the configured value if omitted | 

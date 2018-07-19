@@ -6,20 +6,15 @@
   <packaging>jar</packaging>
   <name>blockchain-proof-sdk-java8-okhttp-gson</name>
   <version>0.10.0</version>
-  <url>https://github.com/swagger-api/swagger-codegen</url>
-  <description>Swagger Java</description>
-  <scm>
-    <connection>scm:git:git@github.com:swagger-api/swagger-codegen.git</connection>
-    <developerConnection>scm:git:git@github.com:swagger-api/swagger-codegen.git</developerConnection>
-    <url>https://github.com/swagger-api/swagger-codegen</url>
-  </scm>
+  <url>https://sphereon.com</url>
+  <description>blockchain-proof-sdk-java8-okhttp-gson</description>
   <prerequisites>
     <maven>2.2.0</maven>
   </prerequisites>
 
   <licenses>
     <license>
-      <name>Unlicense</name>
+      <name>Apache2</name>
       <url>http://www.apache.org/licenses/LICENSE-2.0</url>
       <distribution>repo</distribution>
     </license>
@@ -27,12 +22,27 @@
 
   <developers>
     <developer>
-      <name>Swagger</name>
-      <email>apiteam@swagger.io</email>
-      <organization>Swagger</organization>
-      <organizationUrl>http://swagger.io</organizationUrl>
+      <name>Sphereon BV</name>
+      <email>dev@sphereon.com</email>
+      <organization>Sphereon BV</organization>
+      <organizationUrl>https://sphereon.com</organizationUrl>
     </developer>
   </developers>
+  <distributionManagement>
+    <repository>
+      <id>sphereon-sdk-releases</id>
+      <url>http://nexus.qa.sphereon.com/nexus/content/repositories/sphereon-sdk-releases</url>
+    </repository>
+    <snapshotRepository>
+      <id>sphereon-sdk-snapshots</id>
+      <url>http://nexus.qa.sphereon.com/nexus/content/repositories/sphereon-sdk-snapshots</url>
+    </snapshotRepository>
+  </distributionManagement>
+  <scm>
+    <connection>scm:git:git@github.com:Sphereon-SDK/blockhcain-proof-sdk.git</connection>
+    <developerConnection>scm:git:git@github.com:Sphereon-SDK/blockchain-proof-sdk.git</developerConnection>
+    <url>https://github.com/Sphereon-SDK/blockchain-proof</url>
+  </scm>
 
   <build>
     <plugins>
@@ -141,6 +151,34 @@
           </execution>
         </executions>
       </plugin>
+
+      <plugin>
+        <artifactId>maven-release-plugin</artifactId>
+        <version>${maven-release-plugin.version}</version>
+        <configuration>
+          <autoVersionSubmodules>true</autoVersionSubmodules>
+          <!-- Keep changes in the local repo, push will be done afterwards -->
+          <pushChanges>false</pushChanges>
+          <localCheckout>true</localCheckout>
+          <!-- Use a better name for the tag -->
+          <tagNameFormat>v@{project.version}</tagNameFormat>
+        </configuration>
+        <dependencies>
+          <dependency>
+            <groupId>org.apache.maven.scm</groupId>
+            <artifactId>maven-scm-provider-gitexe</artifactId>
+            <version>${maven-scm-provider-gitexe.version}</version>
+          </dependency>
+        </dependencies>
+      </plugin>
+      <plugin>
+        <groupId>com.amashchenko.maven.plugin</groupId>
+        <artifactId>gitflow-maven-plugin</artifactId>
+        <version>1.5.0</version>
+        <configuration>
+          <!-- optional configuration -->
+        </configuration>
+      </plugin>
     </plugins>
   </build>
 
@@ -221,6 +259,8 @@
     <maven-plugin-version>1.0.0</maven-plugin-version>
     <junit-version>4.12</junit-version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <authentication-lib.version>0.1.1-SNAPSHOT</authentication-lib.version>
+    <authentication-lib.version>0.1.2</authentication-lib.version>
+    <maven-release-plugin.version>2.5.3</maven-release-plugin.version>
+    <maven-scm-provider-gitexe.version>1.9.5</maven-scm-provider-gitexe.version>
   </properties>
 </project>

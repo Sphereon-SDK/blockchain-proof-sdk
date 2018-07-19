@@ -9,6 +9,7 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+import { SignatureSettings } from './signatureSettings';
 
 
 /**
@@ -19,6 +20,10 @@ export interface ContentRequest {
      * When CLIENT is supplied the content should already have been hashed by you. When SERVER is supplied we will hash the content. Please note that we do not validate the hash when you supply it
      */
     hashProvider: ContentRequest.HashProviderEnum;
+    /**
+     * Optional signature settings like signature type
+     */
+    signatureSettings?: SignatureSettings;
     /**
      * The content to register in base64.
      */

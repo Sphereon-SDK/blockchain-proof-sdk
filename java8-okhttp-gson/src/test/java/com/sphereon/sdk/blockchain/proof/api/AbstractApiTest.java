@@ -11,6 +11,7 @@ import com.sphereon.sdk.blockchain.proof.model.ChainSettings;
 import com.sphereon.sdk.blockchain.proof.model.ConfigurationResponse;
 import com.sphereon.sdk.blockchain.proof.model.CreateConfigurationRequest;
 import com.sphereon.sdk.blockchain.proof.model.ModelConfiguration;
+import com.sphereon.sdk.blockchain.proof.model.SignatureSettings;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Assert;
 import org.junit.Before;
@@ -59,9 +60,11 @@ public abstract class AbstractApiTest {
 
 
     protected ModelConfiguration createProofAndSettingsChain() throws ApiException {
+        SignatureSettings signatureSettings = new SignatureSettings().signatureType(SignatureSettings.SignatureTypeEnum.SECRET).base64Secret("secret");
         ChainSettings settings = new ChainSettings();
         settings.setVersion(ChainSettings.VersionEnum.NUMBER_1);
         settings.setHashAlgorithm(ChainSettings.HashAlgorithmEnum._256);
+        settings.setSignatureSettings(signatureSettings);
         settings.setContentRegistrationChainTypes(Arrays.asList(
             ChainSettings.ContentRegistrationChainTypesEnum.PER_HASH_PROOF_CHAIN,
             ChainSettings.ContentRegistrationChainTypesEnum.SINGLE_PROOF_CHAIN));
