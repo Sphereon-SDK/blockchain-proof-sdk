@@ -33,7 +33,7 @@
 		</snapshotRepository>
 	</distributionManagement>
 	<scm>
-		<connection>scm:git:git@github.com:Sphereon-SDK/blockhcain-proof-sdk.git</connection>
+		<connection>scm:git:git@github.com:Sphereon-SDK/blockchain-proof-sdk.git</connection>
 		<developerConnection>scm:git:git@github.com:Sphereon-SDK/blockchain-proof-sdk.git</developerConnection>
 		<url>https://github.com/Sphereon-SDK/blockchain-proof</url>
 	</scm>
@@ -441,7 +441,7 @@
 			<plugin>
 				<groupId>com.amashchenko.maven.plugin</groupId>
 				<artifactId>gitflow-maven-plugin</artifactId>
-				<version>1.5.0</version>
+				<version>1.9.0</version>
 				<configuration>
 					<!-- optional configuration -->
 				</configuration>
