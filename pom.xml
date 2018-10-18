@@ -156,44 +156,6 @@
 		</profile>
 
 		<profile>
-			<id>java8-jersey2</id>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>io.swagger</groupId>
-						<artifactId>swagger-codegen-maven-plugin</artifactId>
-						<version>${swagger-coden-maven-plugin.version}</version>
-						<executions>
-							<execution>
-								<goals>
-									<goal>generate</goal>
-								</goals>
-								<configuration>
-									<inputSpec>swagger.sdk.json</inputSpec>
-									<language>java</language>
-									<configOptions>
-										<dateLibrary>java8</dateLibrary>
-									</configOptions>
-									<library>jersey2</library>
-									<verbose>${swagger-coden-verbose}</verbose>
-									<output>${project.basedir}/java8-jersey2</output>
-									<groupId>com.sphereon.sdk</groupId>
-									<artifactId>blockchain-proof-sdk-java8-jersey2</artifactId>
-									<artifactVersion>${project.version}</artifactVersion>
-									<addCompileSourceRoot>true</addCompileSourceRoot>
-									<apiPackage>${sdk-package}.api</apiPackage>
-									<modelPackage>${sdk-package}.model</modelPackage>
-									<invokerPackage>${sdk-package}.handler</invokerPackage>
-								</configuration>
-							</execution>
-						</executions>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-
-
-		<profile>
 			<id>java8-retrofit2</id>
 			<build>
 				<plugins>
