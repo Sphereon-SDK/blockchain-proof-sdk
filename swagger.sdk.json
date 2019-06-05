@@ -441,36 +441,77 @@
         "consumes": ["application/json;charset=UTF-8"]
       }
     },
-    "/config/{configName}": {"get": {
-      "summary": "Get configuration",
-      "security": [{"oauth2schema": ["global"]}],
-      "produces": ["application/json;charset=UTF-8"],
-      "description": "Get the configuration for registration/verification",
-      "operationId": "getConfiguration",
-      "responses": {
-        "200": {
-          "schema": {"$ref": "#/definitions/ConfigurationResponse"},
-          "description": "The configuration"
+    "/config/{configName}": {
+      "post": {
+        "summary": "Partially update a configuration",
+        "security": [{"oauth2schema": ["global"]}],
+        "produces": ["application/json;charset=UTF-8"],
+        "description": "Update a configuration for registration/verification. Does not allow changing the context, access mode or context name. If, and only if, content-extraction-settings are provided, they will be updated. If, and only if, initial-settings are provided, they will be updated.",
+        "operationId": "updateConfiguration",
+        "responses": {
+          "200": {
+            "schema": {"$ref": "#/definitions/ConfigurationResponse"},
+            "description": "The configuration"
+          },
+          "400": {
+            "schema": {"$ref": "#/definitions/ErrorResponse"},
+            "description": "Invalid request"
+          },
+          "404": {
+            "schema": {"$ref": "#/definitions/ErrorResponse"},
+            "description": "Configuration not found"
+          }
         },
-        "400": {
-          "schema": {"$ref": "#/definitions/ErrorResponse"},
-          "description": "Invalid request"
-        },
-        "404": {
-          "schema": {"$ref": "#/definitions/ErrorResponse"},
-          "description": "Configuration not found"
-        }
+        "parameters": [
+          {
+            "in": "path",
+            "name": "configName",
+            "description": "The configuration name for this operation",
+            "type": "string",
+            "required": true
+          },
+          {
+            "schema": {"$ref": "#/definitions/UpdateConfigurationRequest"},
+            "in": "body",
+            "name": "request",
+            "description": "Update an existing Proof of Existence configuration using the provided settings. The context points to a context of the Easy Blockchain API. When you have no own context, simply use 'multichain' without the quotes as context. You will be using our multichain ledger then, which is recommended during development/testing",
+            "required": true
+          }
+        ],
+        "tags": ["Configuration"],
+        "consumes": ["application/json"]
       },
-      "parameters": [{
-        "in": "path",
-        "name": "configName",
-        "description": "The configuration name for this operation",
-        "type": "string",
-        "required": true
-      }],
-      "tags": ["Configuration"],
-      "consumes": ["application/json"]
-    }}
+      "get": {
+        "summary": "Get configuration",
+        "security": [{"oauth2schema": ["global"]}],
+        "produces": ["application/json;charset=UTF-8"],
+        "description": "Get the configuration for registration/verification",
+        "operationId": "getConfiguration",
+        "responses": {
+          "200": {
+            "schema": {"$ref": "#/definitions/ConfigurationResponse"},
+            "description": "The configuration"
+          },
+          "400": {
+            "schema": {"$ref": "#/definitions/ErrorResponse"},
+            "description": "Invalid request"
+          },
+          "404": {
+            "schema": {"$ref": "#/definitions/ErrorResponse"},
+            "description": "Configuration not found"
+          }
+        },
+        "parameters": [{
+          "in": "path",
+          "name": "configName",
+          "description": "The configuration name for this operation",
+          "type": "string",
+          "required": true
+        }],
+        "tags": ["Configuration"],
+        "consumes": ["application/json"]
+      }
+    }
   },
   "host": "gw.api.cloud.sphereon.com",
   "schemes": ["https"],
@@ -621,27 +662,14 @@
       "description": "Location record of data stream",
       "type": "object",
       "properties": {
-        "folderPath": {
-          "description": "The path of the folder in the container (if any). Please note that a folder can be virtual depending on the backend",
-          "type": "string"
-        },
-        "filename": {
-          "description": "The current filename",
-          "type": "string"
-        },
+        "folderPath": {"type": "string"},
+        "filename": {"type": "string"},
         "id": {
-          "description": "The auto generated ID for this location",
           "readOnly": true,
           "type": "string"
         },
-        "containerId": {
-          "description": "The container Id",
-          "type": "string"
-        },
-        "originalFilename": {
-          "description": "The original filename. Handy for later clientside naming",
-          "type": "string"
-        }
+        "containerId": {"type": "string"},
+        "originalFilename": {"type": "string"}
       }
     },
     "ContentExtractionSettings": {
@@ -717,6 +745,17 @@
         "type": "array",
         "items": {"$ref": "#/definitions/Error"}
       }}
+    },
+    "UpdateConfigurationRequest": {
+      "description": "Partially update a context configuration",
+      "type": "object",
+      "properties": {
+        "initialSettings": {
+          "description": "The initial context settings.",
+          "$ref": "#/definitions/ChainSettings"
+        },
+        "contentExtractionSettings": {"$ref": "#/definitions/ContentExtractionSettings"}
+      }
     },
     "VerifyContentResponse": {
       "description": "Verify Content response",
@@ -1017,6 +1056,10 @@
     {
       "name": "Registration",
       "description": "Registration related API's"
+    },
+    {
+      "name": "configuration-controller",
+      "description": "Configuration Controller"
     },
     {
       "name": "existence-controller",
