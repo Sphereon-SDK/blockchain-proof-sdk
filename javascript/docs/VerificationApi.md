@@ -1,6 +1,6 @@
 # BlockchainProof.VerificationApi
 
-All URIs are relative to *https://gw.api.cloud.sphereon.com/blockchain/proof/0.9*
+All URIs are relative to *https://gw.api.cloud.sphereon.com/blockchain/proof/0.10*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -33,7 +33,10 @@ var configName = "configName_example"; // String | The configName for this opera
 var existence = new BlockchainProof.ContentRequest(); // ContentRequest | Verify content using the current settings
 
 var opts = { 
-  'secret': "secret_example" // String | An alternate secret key in base 64 format that overrides the value in your configuration.
+  'requestId': "requestId_example", // String | Optional request id
+  'base64Secret': "base64Secret_example", // String | An alternate secret key in base64 format that overrides the value in your configuration.
+  'suppliedSignature': "suppliedSignature_example", // String | An alternate supplied Signature in base64 format that overrides the signature generation.
+  'keyId': "keyId_example" // String | An alternate crypto keys API id that will be used for signature generation.
 };
 
 var callback = function(error, data, response) {
@@ -52,7 +55,10 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **configName** | **String**| The configName for this operation | 
  **existence** | [**ContentRequest**](ContentRequest.md)| Verify content using the current settings | 
- **secret** | **String**| An alternate secret key in base 64 format that overrides the value in your configuration. | [optional] 
+ **requestId** | **String**| Optional request id | [optional] 
+ **base64Secret** | **String**| An alternate secret key in base64 format that overrides the value in your configuration. | [optional] 
+ **suppliedSignature** | **String**| An alternate supplied Signature in base64 format that overrides the signature generation. | [optional] 
+ **keyId** | **String**| An alternate crypto keys API id that will be used for signature generation. | [optional] 
 
 ### Return type
 
@@ -92,7 +98,9 @@ var streamLocation = new BlockchainProof.StreamLocation(); // StreamLocation | T
 
 var opts = { 
   'requestId': "requestId_example", // String | Optional request id
-  'secret': "secret_example" // String | An alternate secret key in base 64 format that overrides the value in your configuration.
+  'base64Secret': "base64Secret_example", // String | An alternate secret key in base64 format that overrides the value in your configuration.
+  'suppliedSignature': "suppliedSignature_example", // String | An alternate supplied Signature in base64 format that overrides the signature generation.
+  'keyId': "keyId_example" // String | An alternate crypto keys API id that will be used for signature generation.
 };
 
 var callback = function(error, data, response) {
@@ -112,7 +120,9 @@ Name | Type | Description  | Notes
  **configName** | **String**| The context for this operation | 
  **streamLocation** | [**StreamLocation**](StreamLocation.md)| The stream location on storage | 
  **requestId** | **String**| Optional request id | [optional] 
- **secret** | **String**| An alternate secret key in base 64 format that overrides the value in your configuration. | [optional] 
+ **base64Secret** | **String**| An alternate secret key in base64 format that overrides the value in your configuration. | [optional] 
+ **suppliedSignature** | **String**| An alternate supplied Signature in base64 format that overrides the signature generation. | [optional] 
+ **keyId** | **String**| An alternate crypto keys API id that will be used for signature generation. | [optional] 
 
 ### Return type
 
@@ -152,7 +162,10 @@ var stream = "/path/to/file.txt"; // File | The binary data (not hashed). Hashin
 
 var opts = { 
   'fileName': "fileName_example", // String | Optional input file name. Needed when using bytestreams instead of filestreams
-  'secret': "secret_example" // String | An alternate secret key in base 64 format that overrides the value in your configuration.
+  'requestId': "requestId_example", // String | Optional request id
+  'base64Secret': "base64Secret_example", // String | An alternate secret key in base64 format that overrides the value in your configuration.
+  'suppliedSignature': "suppliedSignature_example", // String | An alternate supplied Signature in base64 format that overrides the signature generation.
+  'keyId': "keyId_example" // String | An alternate crypto keys API id that will be used for signature generation.
 };
 
 var callback = function(error, data, response) {
@@ -172,7 +185,10 @@ Name | Type | Description  | Notes
  **configName** | **String**| The configuration name this operation | 
  **stream** | **File**| The binary data (not hashed). Hashing will be done on the server side. The binary data will not be stored | 
  **fileName** | **String**| Optional input file name. Needed when using bytestreams instead of filestreams | [optional] 
- **secret** | **String**| An alternate secret key in base 64 format that overrides the value in your configuration. | [optional] 
+ **requestId** | **String**| Optional request id | [optional] 
+ **base64Secret** | **String**| An alternate secret key in base64 format that overrides the value in your configuration. | [optional] 
+ **suppliedSignature** | **String**| An alternate supplied Signature in base64 format that overrides the signature generation. | [optional] 
+ **keyId** | **String**| An alternate crypto keys API id that will be used for signature generation. | [optional] 
 
 ### Return type
 

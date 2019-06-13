@@ -10,28 +10,30 @@ import com.sphereon.sdk.blockchain.proof.handler.ApiException;
 import com.sphereon.sdk.blockchain.proof.model.ChainSettings;
 import com.sphereon.sdk.blockchain.proof.model.ConfigurationResponse;
 import com.sphereon.sdk.blockchain.proof.model.CreateConfigurationRequest;
-import com.sphereon.sdk.blockchain.proof.model.StoredSettings;
+import com.sphereon.sdk.blockchain.proof.model.ModelConfiguration;
+import com.sphereon.sdk.blockchain.proof.model.SignatureSettings;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Assert;
 import org.junit.Before;
 
 import java.io.File;
 import java.util.Arrays;
+import java.util.Base64;
 import java.util.concurrent.TimeUnit;
 
 public abstract class AbstractApiTest {
-    public static final String APPLICATION_NAME = "tests.blockchain-proof";
+    public static final String APPLICATION_NAME = "test";
     public static final String TEST_CONFIG_BASENAME = "sphereoncstest";
     public static final String TEST_CONTEXT_MULTICHAIN = "multichain";
     public static final long TOKEN_VALIDITY_SECONDS = 5400;
     public static final int CONNECTION_TIMEOUT = 40000;
 
-    private static byte[] hashingSecret = "SphereonTestSecret".getBytes();
+    protected static String hashingSecret = Base64.getEncoder().encodeToString("SphereonTestSecret".getBytes());
 
     public static String unitTestConfigName;
     public static byte[] registeredContent;
     public static File registeredContentFileForStream;
-    public static String settingsChainId;
+    public static String configId;
     public static String proofChainId;
     public static ConfigurationApi configurationApi;
 
@@ -57,11 +59,12 @@ public abstract class AbstractApiTest {
     }
 
 
-    protected StoredSettings createProofAndSettingsChain() throws ApiException {
+    protected ModelConfiguration createProofAndSettingsChain() throws ApiException {
+        SignatureSettings signatureSettings = new SignatureSettings().signatureType(SignatureSettings.SignatureTypeEnum.SECRET).base64Secret("secret");
         ChainSettings settings = new ChainSettings();
         settings.setVersion(ChainSettings.VersionEnum.NUMBER_1);
-        settings.setSecret(hashingSecret);
         settings.setHashAlgorithm(ChainSettings.HashAlgorithmEnum._256);
+        settings.setSignatureSettings(signatureSettings);
         settings.setContentRegistrationChainTypes(Arrays.asList(
             ChainSettings.ContentRegistrationChainTypesEnum.PER_HASH_PROOF_CHAIN,
             ChainSettings.ContentRegistrationChainTypesEnum.SINGLE_PROOF_CHAIN));
@@ -73,18 +76,16 @@ public abstract class AbstractApiTest {
         createConfiguration.setAccessMode(CreateConfigurationRequest.AccessModeEnum.PRIVATE);
 
         ConfigurationResponse configurationResponse = configurationApi.createConfiguration(createConfiguration);
-        StoredSettings storedSettings = configurationResponse.getStoredSettings();
-        Assert.assertNotNull(storedSettings);
-        Assert.assertNotNull(storedSettings.getContext());
-        Assert.assertNotNull(storedSettings.getChainSettings());
-        Assert.assertNotNull(storedSettings.getSingleProofChain());
-        Assert.assertNotNull(storedSettings.getSettingsChain());
-        Assert.assertNotNull(storedSettings.getChainConfiguration());
-        Assert.assertNotNull(storedSettings.getChainSettings().getSingleProofChain());
-        Assert.assertNotNull(storedSettings.getChainSettings().getHashAlgorithm());
-        settingsChainId = storedSettings.getSettingsChain().getChainId();
-        proofChainId = storedSettings.getSingleProofChain().getChainId();
-        return storedSettings;
+        ModelConfiguration configuration = configurationResponse.getConfiguration();
+        Assert.assertNotNull(configuration);
+        Assert.assertNotNull(configuration.getContext());
+        Assert.assertNotNull(configuration.getChainSettings());
+        Assert.assertNotNull(configuration.getSingleProofChain());
+        Assert.assertNotNull(configuration.getChainSettings().getSingleProofChain());
+        Assert.assertNotNull(configuration.getChainSettings().getHashAlgorithm());
+        configId = configuration.getId();
+        proofChainId = configuration.getSingleProofChain().getChainId();
+        return configuration;
     }
 
 
@@ -104,6 +105,7 @@ public abstract class AbstractApiTest {
         TokenRequest tokenRequest = authenticationApi.requestToken()
                                         .withValidityPeriod(TOKEN_VALIDITY_SECONDS)
                                         .build();
-        apiClient.setAccessToken(tokenRequest.execute().getAccessToken());
+        final String accessToken = tokenRequest.execute().getAccessToken();
+        apiClient.setAccessToken(accessToken);
     }
 }

@@ -15,17 +15,11 @@ package com.sphereon.sdk.blockchain.proof.api;
 
 import com.sphereon.sdk.blockchain.proof.handler.ApiException;
 import com.sphereon.sdk.blockchain.proof.model.ContentRequest;
-import com.sphereon.sdk.blockchain.proof.model.ErrorResponse;
-import java.io.File;
 import com.sphereon.sdk.blockchain.proof.model.StreamLocation;
-import com.sphereon.sdk.blockchain.proof.model.VerifyContentResponse;
-import org.junit.Test;
 import org.junit.Ignore;
+import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.io.File;
 
 /**
  * API tests for VerificationApi
@@ -35,32 +29,30 @@ public class VerificationApiTest {
 
     private final VerificationApi api = new VerificationApi();
 
-    
+
     /**
      * Verify content
-     *
+     * <p>
      * Verify content. Please provide the content in the request. You also have to provide whether you have hashed the content yourself, or whether is should be done on the server side
      *
-     * @throws ApiException
-     *          if the Api call fails
+     * @throws ApiException if the Api call fails
      */
     @Test
     public void verifyUsingContentTest() throws ApiException {
         String configName = null;
         ContentRequest existence = null;
         String secret = null;
-        VerifyContentResponse response = api.verifyUsingContent(configName, existence, secret);
 
         // TODO: test validations
     }
-    
+
+
     /**
      * Verify hash using the Storage API
-     *
+     * <p>
      * Verify a hash of file/blob by supplying a Stream location of the Storage API. This Stream Location maps to a location of a file/blob on some remote cloud storage. Hashing will be done on the server side Please note that the binary data itself will not be stored, only the hash. Use the registerUsingContent endpoint if you&#39;d like to store content
      *
-     * @throws ApiException
-     *          if the Api call fails
+     * @throws ApiException if the Api call fails
      */
     @Test
     public void verifyUsingLocationTest() throws ApiException {
@@ -68,18 +60,17 @@ public class VerificationApiTest {
         StreamLocation streamLocation = null;
         String requestId = null;
         String secret = null;
-        VerifyContentResponse response = api.verifyUsingLocation(configName, streamLocation, requestId, secret);
 
         // TODO: test validations
     }
-    
+
+
     /**
      * Verify bytestream/file hash
-     *
+     * <p>
      * Verify a hash of content by supplying a file or some other binary data. Hashing will be done on the server side. Please note that the binary data itself will not be stored, only the hash. Use the registerUsingContent endpoint if you&#39;d like to store content
      *
-     * @throws ApiException
-     *          if the Api call fails
+     * @throws ApiException if the Api call fails
      */
     @Test
     public void verifyUsingStreamTest() throws ApiException {
@@ -87,9 +78,8 @@ public class VerificationApiTest {
         File stream = null;
         String fileName = null;
         String secret = null;
-        VerifyContentResponse response = api.verifyUsingStream(configName, stream, fileName, secret);
 
         // TODO: test validations
     }
-    
+
 }

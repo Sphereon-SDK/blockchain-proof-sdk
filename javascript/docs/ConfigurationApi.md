@@ -1,6 +1,6 @@
 # BlockchainProof.ConfigurationApi
 
-All URIs are relative to *https://gw.api.cloud.sphereon.com/blockchain/proof/0.9*
+All URIs are relative to *https://gw.api.cloud.sphereon.com/blockchain/proof/0.10*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -78,7 +78,7 @@ oauth2schema.accessToken = 'YOUR ACCESS TOKEN';
 
 var apiInstance = new BlockchainProof.ConfigurationApi();
 
-var configName = "configName_example"; // String | The configuration name this operation
+var configName = "configName_example"; // String | The configuration name for this operation
 
 
 var callback = function(error, data, response) {
@@ -95,7 +95,7 @@ apiInstance.getConfiguration(configName, callback);
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **configName** | **String**| The configuration name this operation | 
+ **configName** | **String**| The configuration name for this operation | 
 
 ### Return type
 

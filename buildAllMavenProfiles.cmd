@@ -21,5 +21,5 @@ start mvn -Pjava8-retrofit2 clean install
 start mvn -Pcsharp-net45 clean install
 start mvn -Pcsharp-net35 clean install
 start mvn -Pjavascript clean install
-start mvn -Ptypescript-angular2 clean install
+start mvn -Ptypescript-angular clean install
 start mvn -Phtml-docs clean install

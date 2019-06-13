@@ -51,7 +51,7 @@ namespace Sphereon.SDK.Blockchain.Proof.Test.Api {
         /// </summary>
         [Test, Order(10)]
         public void CreateConfigurationTest() {
-            CreateProofAndSettingsChain();
+            CreateConfiguration();
         }
 
         /// <summary>
@@ -61,16 +61,15 @@ namespace Sphereon.SDK.Blockchain.Proof.Test.Api {
         public void GetConfigurationTest() {
             var configurationResponse = _configurationApi.GetConfiguration(UnitTestConfigName);
             Assert.NotNull(configurationResponse);
-            var storedSettings = configurationResponse.StoredSettings;
+            var storedSettings = configurationResponse.Configuration;
             Assert.NotNull(storedSettings);
             Assert.NotNull(storedSettings.Context);
             Assert.NotNull(storedSettings.ChainSettings);
             Assert.NotNull(storedSettings.SingleProofChain);
-            Assert.NotNull(storedSettings.SettingsChain);
-            Assert.NotNull(storedSettings.ChainConfiguration);
+            Assert.NotNull(storedSettings.Id);
+            Assert.NotNull(storedSettings.Name);
             Assert.NotNull(storedSettings.ChainSettings.SingleProofChain);
             Assert.NotNull(storedSettings.ChainSettings.HashAlgorithm);
-            Assert.IsTrue(storedSettings.SettingsChain.ChainId == SettingsChainId);
             Assert.IsTrue(storedSettings.SingleProofChain.ChainId == ProofChainId);
         }
 
@@ -83,15 +82,13 @@ namespace Sphereon.SDK.Blockchain.Proof.Test.Api {
             var requestId = Guid.NewGuid().ToString();
             RegisteredContent = Encoding.Default.GetBytes("test-" + requestId);
             var contentRequest = new ContentRequest(Content: RegisteredContent,
-                HashProvider: ContentRequest.HashProviderEnum.SERVER,
-                RequestId: requestId
-            );
-            var response = _registrationApi.RegisterUsingContent(UnitTestConfigName, contentRequest);
+                HashProvider: ContentRequest.HashProviderEnum.SERVER);
+            var response = _registrationApi.RegisterUsingContent(UnitTestConfigName, contentRequest, requestId);
             Assert.IsInstanceOf<RegisterContentResponse>(response, "response is RegisterContentResponse");
             Assert.NotNull(response);
             Assert.NotNull(response.SingleProofChain);
             Assert.NotNull(response.PerHashProofChain);
-            Assert.AreEqual(contentRequest.RequestId, response.RequestId);
+            Assert.AreEqual(requestId, response.RequestId);
         }
 
         /// <summary>
@@ -128,17 +125,16 @@ namespace Sphereon.SDK.Blockchain.Proof.Test.Api {
         [Test, Order(60)]
         public void VerifyUsingContentTest() {
             Thread.Sleep(15000); // Should be enough for multichain registration
-            var contentRequest = new ContentRequest(RequestId: "anything",
-                HashProvider: ContentRequest.HashProviderEnum.SERVER,
+            var contentRequest = new ContentRequest(HashProvider: ContentRequest.HashProviderEnum.SERVER,
                 Content: RegisteredContent);
-            var response = _verificationApi.VerifyUsingContent(UnitTestConfigName, contentRequest);
+            var response = _verificationApi.VerifyUsingContent(UnitTestConfigName, contentRequest, "anything");
             Assert.IsInstanceOf<VerifyContentResponse>(response, "response is VerifyContentResponse");
             Assert.NotNull(response);
             Assert.True(response.RegistrationState == VerifyContentResponse.RegistrationStateEnum.REGISTERED
                         || response.RegistrationState == VerifyContentResponse.RegistrationStateEnum.PENDING);
             Assert.NotNull(response.SingleProofChain);
             Assert.NotNull(response.PerHashProofChain);
-            Assert.AreEqual(contentRequest.RequestId, response.RequestId);
+            Assert.AreEqual("anything", response.RequestId);
         }
 
         /// <summary>
