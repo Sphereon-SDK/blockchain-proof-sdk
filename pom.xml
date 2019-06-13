@@ -116,7 +116,7 @@
 		</profile>
 
 		<profile>
-			<id>java8-okhttp-gson_versioned</id>
+			<id>java8-jersey2</id>
 			<build>
 				<plugins>
 					<plugin>
@@ -131,17 +131,14 @@
 								<configuration>
 									<inputSpec>swagger.sdk.json</inputSpec>
 									<language>java</language>
-									<templateDirectory>
-										${basedir}/src/main/mustacheTemplates/okhttp-gson
-									</templateDirectory>
 									<configOptions>
 										<dateLibrary>java8</dateLibrary>
 									</configOptions>
-									<library>okhttp-gson</library>
+									<library>jersey2</library>
 									<verbose>${swagger-coden-verbose}</verbose>
-									<output>${project.basedir}/java8-okhttp-gson-versioned</output>
+									<output>${project.basedir}/java8-jersey2</output>
 									<groupId>com.sphereon.sdk</groupId>
-									<artifactId>blockchain-proof-sdk-java8-okhttp-gson-versioned</artifactId>
+									<artifactId>blockchain-proof-sdk-java8-jersey2</artifactId>
 									<artifactVersion>${project.version}</artifactVersion>
 									<addCompileSourceRoot>true</addCompileSourceRoot>
 									<apiPackage>${sdk-package}.${sdk-package-version_java}.api</apiPackage>

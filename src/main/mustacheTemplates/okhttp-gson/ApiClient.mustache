@@ -1033,8 +1033,8 @@ public class ApiClient {
                 try {
                     callback.onSuccess(result, response.code(), response.headers().toMultimap());
                 } catch (Throwable t) {
-                    callback.onFailure(new ApiException("An error occurred in the onSuccess callback: " + t.getMessage(),
-                        t, response.code(), response.headers().toMultimap(), response.body().string()), response.code(), response.headers().toMultimap());
+                    RuntimeException rte = new RuntimeException("An error occurred in the onSuccess callback: " + t.getMessage(), t);
+                    callback.onFailure(new ApiException(rte), response.code(), response.headers().toMultimap());
                     return;
                 }
             }
