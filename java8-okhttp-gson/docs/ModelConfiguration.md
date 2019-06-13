@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **chainSettings** | [**ChainSettings**](ChainSettings.md) |  | 
 **context** | **String** |  | 
 **name** | **String** |  | 
+**contentExtractionSettings** | [**ContentExtractionSettings**](ContentExtractionSettings.md) |  |  [optional]
 **id** | **String** |  | 
 **validFrom** | [**OffsetDateTime**](OffsetDateTime.md) |  | 
 **accessMode** | [**AccessModeEnum**](#AccessModeEnum) |  | 
